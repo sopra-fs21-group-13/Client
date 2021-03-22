@@ -7,7 +7,6 @@ import { Spinner } from '../../views/design/Spinner';
 import { Button } from '../../views/design/Button';
 import { withRouter } from 'react-router-dom';
 
-//TEST 22.03.21
 
 const Container = styled(BaseContainer)`
   color: white;
