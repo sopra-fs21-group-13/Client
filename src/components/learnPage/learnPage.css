@@ -35,7 +35,7 @@
 
 .name-grid{
     display:grid;
-    grid-template-columns: 500px 500px;
+    grid-template-columns: 500px 33px 500px;
 }
 
 .set-name{
@@ -44,16 +44,30 @@
 }
 
 .creator-name{
-    background-color: white;
-    width: 200px;
+    width: 300px;
     height: 30px;
     align-items: center;
-    text-align: center;
-    justify-content: center;
+    align-self: center;
+    justify-content: left;
     position: relative;
     display: grid;
     font-size: 20px;
-    top:20px;
+    top: 1px;
+}
+
+.profile-picture{
+    display: flex;
+    align-self: center;
+    height:30px;
+    width:30px;
+}
+
+.profile-picture-image{
+    position: relative;
+    height: 30px;
+    width: 30px;
+    user-select: none;
+    
 }
 
 .button-container{
@@ -96,12 +110,53 @@
     position:relative;
     right:6px;
     bottom:1px;
+    user-select: none;
 }
 
 .left-button:hover,
 .right-button:hover{
     --translate-y: -1.5px;
     cursor: pointer;
+}
+
+.back-button-container{
+    background-color: white;
+    display: flex;
+    height: 60px;
+}
+
+.back-button{
+    display: flex;
+    position: relative;
+    top: 20px;
+    left: 10px;
+    height: 50px;
+    width: 50px;
+    border-radius: 12%;
+    border: none;
+    background-color: white;
+    transform: translateY(var(--translate-y,0));
+    box-shadow: 0 0 1px 1px rgba(43, 42, 42, 0.2);
+}
+
+.back-button:hover{
+    --translate-y: -1.5px;
+    cursor: pointer;
+}
+
+.back-button-image{
+    height:50px;
+    width:50px;
+    position: relative;
+    bottom: 1px;
+    right: 6px;
+    user-select: none;
+}
+
+.likes-image{
+    position: relative;
+    top: 7px;
+    user-select: none;
 }
 
 

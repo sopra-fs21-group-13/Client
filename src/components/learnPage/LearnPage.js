@@ -7,6 +7,9 @@ import LeftArrowButton from './LeftArrowButton.png';
 import RightArrowButton from './RightArrowButton.png';
 import LeftArrowButton_disabled from './LeftArrowButton_disabled.png';
 import RightArrowButton_disabled from './RightArrowButton_disabled.png';
+import ProfilePicture from './ProfilePicture.png';
+import Likes from './Likes.png';
+import BackButton from './BackButton.png';
 import Card from '../shared/models/Card';
 import { withRouter } from 'react-router-dom';
 import './learnPage.css'
@@ -159,7 +162,17 @@ class LearnPage extends React.Component {
         return(
             <div>
             <Header>Header</Header>
+            
             <InfoContainer>
+                {//back to Dashboard button
+                }
+                <div class = "back-button-container">
+                    <button class = "back-button">
+                    <img 
+                    class = "back-button-image"
+                    src = {BackButton} />
+                    </button>
+                </div>
                 <Info>
                     {
                         //This is the info block that shows the information about the set that is being learned. check learnPage.css for the css styling. I opted for the external css file
@@ -175,7 +188,13 @@ class LearnPage extends React.Component {
                                 <div class = "set-name">
                                     {this.state.set[0]}
                                 </div>
+                                <div class = "profile-picture">
+                                    <img 
+                                    class = "profile-picture-image"
+                                    src = {ProfilePicture}/>
+                                </div>
                                 <div class = "creator-name">
+                                    
                                     {this.state.set[2]}
                                 </div>
                             </div>
@@ -192,7 +211,10 @@ class LearnPage extends React.Component {
                         }
                         </div>
                         <div class = "info-block info-block-3">
-                            likes: 
+                            <img
+                            class = "likes-image"
+                            src = {Likes}
+                            />
                         {!this.state.set ? (
             
                         <div>Name</div>
