@@ -180,8 +180,6 @@ class LearnPage extends React.Component {
         
     }
 
-    
-
 
     //Here we check which image to use for the arrow buttons. 
     LeftArrowState = () => this.state.leftButtonDisabled ? LeftArrowButton_disabled : LeftArrowButton;
@@ -219,6 +217,7 @@ class LearnPage extends React.Component {
         }
     }
 
+    //check above for explanation (checkStarChange_right)
     checkStarChange_left(){
         const flashcards_starred = []
         var index = this.state.flashcards_starred.indexOf(this.state.currentFlashcard);
@@ -237,6 +236,27 @@ class LearnPage extends React.Component {
                 this.setState({leftButtonDisabled: true});
             }
         }
+    }
+
+    //swaps answers and questions for all cards
+    switchAnswerQuestion(){
+        const len = this.state.all_flashcards.length;
+        const reversed = []
+        const reversed_starred = []
+
+        for(var i = 0; i<len; i++){
+            var rem = this.state.all_flashcards[i];
+            var rem_question = rem.question;
+            rem.question = rem.answer;
+            rem.answer = rem_question;
+            
+            reversed.push(rem);
+            if (this.state.markedCards.includes(rem.id)){
+                reversed_starred.push(rem);
+            }
+        }
+        this.setState({all_flashcards:reversed});
+        this.setState({flashcards_starred:reversed_starred});
     }
 
     render(){
@@ -374,6 +394,7 @@ class LearnPage extends React.Component {
                             </button>
                             <button class = "exchange-sides-button">
                                 <img class = "exchange-sides-image"
+                                    onClick = {() => {this.switchAnswerQuestion()}}
                                     src = {ExchangeSides} />
                             </button>
                             <button class = "star-everything-button">
