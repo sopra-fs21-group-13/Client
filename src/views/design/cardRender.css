@@ -16,16 +16,14 @@
     cursor: pointer;
     transition: 150ms;
     transform-style: preserve-3d;
-    transform: perspective(1000px) rotateY(var(--rotate-y, 0))
-    translateY(var(--translate-y,0));
+    transform: perspective(1000px) rotateY(var(--rotate-y, 0));
     color: #4F4D4D;
     font-family: 'Roboto', sans-serif;
     user-select: none;
 }
 
 .card:hover {
-    box-shadow: 0 0 5px 2px rgba(0,0,0,.6);
-    --translate-y: -2px;
+    box-shadow: 0 0 5px 2px rgba(0,0,0,.5);
 }
 
 .card.flip{
@@ -46,8 +44,8 @@
     transform: rotateY(180deg);
 }
 
-.card .id_back,
-.card .id_front{
+.card .id-back,
+.card .id-front{
     position: absolute;
     backface-visibility: hidden;
     color:#a8a6a6;
@@ -55,11 +53,85 @@
     bottom: 380px;
 }
 
-.card .id_front{
+.card .id-front{
     transform: rotateY(0deg);
 }
-.card .id_back{
+.card .id-back{
     transform: rotateY(180deg);
 }
+
+.star-container{
+    display: flex;
+    position: relative;
+    justify-content: right;
+    background-color: rgba(255, 255, 255, 0);
+    width: 700px;
+    height:10px;
+    transform-style: preserve-3d;
+    transition: 150ms;
+    transform: perspective(1500px) rotateY(var(--rotate-y, 0));
+}
+
+.star-container.flip-star{
+    --rotate-y: 180deg;
+}
+
+
+.star-front{
+    display: flex;
+    justify-content: center;
+    height: 20px;
+    width: 20px;
+    margin: 5px;
+    border: none;
+    position: absolute;
+    bottom:395px;
+    right: 15px;
+    backface-visibility: hidden;
+    background-color:rgba(255, 255, 255, 0);
+}
+
+.star-back{
+    display: flex;
+    justify-content: center;
+    height: 20px;
+    width: 20px;
+    margin: 5px;
+    border: none;
+    position: absolute;
+    bottom:395px;
+    right: 655px;
+    backface-visibility: hidden;
+    background-color:rgba(255, 255, 255, 0);
+}
+
+.star-back:hover,
+.star-front:hover{
+    cursor: pointer;
+}
+
+.star-front{
+    transform: rotateY(0deg);
+}
+
+.star-back{
+    transform: rotateY(180deg);
+}
+
+.star-back-image,
+.star-front-image{
+    height:31px;
+    position: relative;
+    bottom:8.1px;
+    left: 0.1px;
+    user-select: none;
+}
+
+
+
+
+
+
+
 
 

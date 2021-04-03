@@ -207,15 +207,16 @@
 .exchange-sides-image,
 .only-starred-image,
 .star-everything-image,
-.shuffle-image{
+.shuffle-image
+.star_image{
     user-select: none;
 }
 
 .exchange-sides-image:hover,
 .only-starred-image:hover,
 .star-everything-image:hover,
-.shuffle-image:hover{
-    
+.shuffle-image:hover
+{
     cursor: pointer;
 }
 
@@ -242,6 +243,10 @@
     position: relative;
     bottom:2px;
 }
+
+
+
+
 
 
 

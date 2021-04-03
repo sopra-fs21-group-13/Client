@@ -120,7 +120,7 @@ class LearnPage extends React.Component {
             studyStarred: false,
             lastCard: 1,
             markedCards: [
-                1, 2
+                1
             ]
         };
         
@@ -180,6 +180,8 @@ class LearnPage extends React.Component {
         
     }
 
+    
+
 
     //Here we check which image to use for the arrow buttons. 
     LeftArrowState = () => this.state.leftButtonDisabled ? LeftArrowButton_disabled : LeftArrowButton;
@@ -187,9 +189,55 @@ class LearnPage extends React.Component {
     ShuffleCardState = () => this.state.cardsShuffled ? ShuffleCardsActive : ShuffleCards;
     StudyStarredState = () => this.state.studyStarred ? StudyOnlyStarredActive : StudyOnlyStarred;
 
-    //Function to check if CardRender should display starred cards or all cards
+    //Function to check if CardRender should display only starred cards or all cards
+
     DisplayCards = () => this.state.studyStarred ? this.state.flashcards_starred : this.state.all_flashcards;
-    
+
+    //This check handles that the set can dinamically change when you un-star a card in "show only starred" mode.
+    //It basically creates a new set with the updated starred cards and exchanges the one that is shown when 
+    //pressing right. (same applies to the similar function for the left button)
+    checkStarChange_right(){
+        const flashcards_starred = []
+        var index = this.state.flashcards_starred.indexOf(this.state.currentFlashcard);
+
+        if(this.state.studyStarred){
+            for(var i = 0; i < this.state.flashcards_starred.length; i++){
+                if(this.state.markedCards.includes(this.state.flashcards_starred[i].id)){
+                    flashcards_starred.push(this.state.flashcards_starred[i]);
+                }
+            }
+            if(flashcards_starred.length == this.state.flashcards_starred.length){
+                index ++;
+            }
+            if(flashcards_starred == 1){
+                this.setState({rightButtonDisabled :true});
+            }
+            this.setState({currentFlashcard: flashcards_starred[index], flashcards_starred: flashcards_starred});
+            if(index == 0){
+                this.setState({leftButtonDisabled: true});
+            }
+        }
+    }
+
+    checkStarChange_left(){
+        const flashcards_starred = []
+        var index = this.state.flashcards_starred.indexOf(this.state.currentFlashcard);
+
+        if(this.state.studyStarred){
+            for(var i = 0; i < this.state.flashcards_starred.length; i++){
+                if(this.state.markedCards.includes(this.state.flashcards_starred[i].id)){
+                    flashcards_starred.push(this.state.flashcards_starred[i]);
+                }
+            }
+            if(flashcards_starred.length == 1){
+                this.setState({rightButtonDisabled: true});
+            }
+            this.setState({currentFlashcard: flashcards_starred[index-1], flashcards_starred: flashcards_starred});
+            if(index == 0){
+                this.setState({leftButtonDisabled: true});
+            }
+        }
+    }
 
     render(){
         //these are the states of "disabled" for the arrow buttons. They are accessed by the img src.
@@ -201,6 +249,9 @@ class LearnPage extends React.Component {
 
         //This is the actual set of flashcards that is being displayed. 
         const Flashcards = this.DisplayCards();
+
+        
+
         return(
             <div>
             <Header>Header</Header>
@@ -280,19 +331,32 @@ class LearnPage extends React.Component {
                         <div class = "settings-container">
                             <button class = "only-starred-button"
                                 onClick = {() => {
-                                    {if(!this.state.studyStarred){
-                                        this.setState({studyStarred: true, currentFlashcard: this.state.flashcards_starred[0],
+                                    {//checks if the starred flashcards changed
+                                    }
+                                    const flashcards_starred = [];
+                                    for(var i = 0; i < Flashcards.length; i++){
+                                        if(this.state.markedCards.includes(Flashcards[i].id)){
+                                            flashcards_starred.push(Flashcards[i]);
+                                        }
+                                        
+                                    }
+                                    this.setState({flashcards_starred: flashcards_starred});
+                                    {
+                                        //changes between only starred and all flashcards
+                                    }
+                                    if(!this.state.studyStarred){
+                                        this.setState({studyStarred: true, currentFlashcard: flashcards_starred[0],
                                         leftButtonDisabled: true, rightButtonDisabled: false})
-                                        if(Flashcards.length == 1){
+                                        if(flashcards_starred.length == 1){
                                             this.setState({rightButtonDisabled :true});
                                         }
                                     }else{
                                         this.setState({studyStarred: false, currentFlashcard: this.state.all_flashcards[0],
                                         leftButtonDisabled: true, rightButtonDisabled: false})
-                                        if(Flashcards.length == 1){
+                                        if(this.state.all_flashcards.length == 1){
                                             this.setState({rightButtonDisabled :true});
                                         }
-                                    }}
+                                    }
                                 }} 
                             >
                                 <img class = "only-starred-image"
@@ -319,7 +383,8 @@ class LearnPage extends React.Component {
                         </div>
                         { //the cardRender component actually renders the flashcard. It takes the currentFlashcard as an input, so that it can be changed dinamically by the arrow Keys.
                         }
-                        <CardRender 
+                        <CardRender
+                        markedCards = {this.state.markedCards}
                         flashcard = {this.state.currentFlashcard}
                         current_place = {Flashcards.indexOf(this.state.currentFlashcard)}
                         set_length = {Flashcards.length}
@@ -334,12 +399,15 @@ class LearnPage extends React.Component {
                                     //This function changes the visible card. The currentFlashcard state decides which card is shown. It show the next card by incrementing the id
                                     //and also checks if one of the arrow buttons should be disabled because of overflow.
                                     onClick={() => {
+                                        if(!this.state.studyStarred){
+                                            this.setState({currentFlashcard: Flashcards[Flashcards.indexOf(this.state.currentFlashcard) - 1]});  
+                                            }
                                         this.setState({rightButtonDisabled: false});
+                                        this.checkStarChange_left();
                                         {if(Flashcards.indexOf(this.state.currentFlashcard) - 1 == 0){
                                             this.setState({leftButtonDisabled: true});
                                         }}
-                                        this.setState({currentFlashcard: Flashcards[Flashcards.indexOf(this.state.currentFlashcard) - 1]});  
-                                }} >
+                                    }} >
                                     {//the actual image of the button. It references the constant from above in the render function that decides through the LeftArrowState() function if it should
                                     //be disabled or not
                                     }
@@ -355,11 +423,15 @@ class LearnPage extends React.Component {
                                     <button class = "right-button"
                                     disabled={this.state.rightButtonDisabled}
                                     onClick={() => {
-                                        this.setState({leftButtonDisabled: false});
+                                        if(!this.state.studyStarred){
+                                        this.setState({currentFlashcard: Flashcards[Flashcards.indexOf(this.state.currentFlashcard) + 1]});
+                                        }
+                                        this.setState({leftButtonDisabled: false})
+                                        this.checkStarChange_right();
                                         {if(Flashcards.indexOf(this.state.currentFlashcard) >= Flashcards.length-2){
                                             this.setState({rightButtonDisabled: true});
                                         }}
-                                        this.setState({currentFlashcard: Flashcards[Flashcards.indexOf(this.state.currentFlashcard) + 1]});
+                                        
                                     }}><img 
                                     class = "right-arrow-image"
                                     src = {RightButton}/></button>
