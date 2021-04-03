@@ -93,6 +93,8 @@ class LearnPage extends React.Component {
           set: null,
           all_flashcards: null,
           flashcards_starred: null,
+          all_flashcards_rem: null,
+          flashcards_starred_rem: null,
           currentFlashcard: null,
           leftButtonDisabled: null,
           rightButtonDisabled: null,
@@ -259,15 +261,103 @@ class LearnPage extends React.Component {
         this.setState({flashcards_starred:reversed_starred});
     }
 
+    //Fisher-yates algorithm used to shuffle the cards
+    //two new sets are created to remember the order of the original set / starred set.
+    //TODO: bug -> after shuffling, when switching to starred, then unshuffling, then switching back, original set stays shuffled!
+    shuffleCards(){
+        if(!this.state.cardsShuffled){
+        this.setState({flashcards_starred_rem: this.state.flashcards_starred});
+        this.setState({all_flashcards_rem: this.state.all_flashcards});
+
+        const shuffled = []
+        const shuffled_starred = []
+        for(var i = 0; i < this.state.all_flashcards.length; i++){
+            shuffled.push(this.state.all_flashcards[i])
+        }
+
+        for(var i = 0; i < this.state.flashcards_starred.length; i++){
+            shuffled_starred.push(this.state.flashcards_starred[i]);
+        }
+
+
+        for (var i = shuffled.length - 1; i>0; i--){
+            const k = Math.floor(Math.random() * (shuffled.length));
+            const rem = shuffled[i];
+            shuffled[i] = shuffled[k];
+            shuffled[k] = rem;
+        }
+
+        for (var i = shuffled_starred.length - 1; i>0; i--){
+            const k = Math.floor(Math.random() * (shuffled_starred.length));
+            const rem = shuffled_starred[i];
+            shuffled_starred[i] = shuffled_starred[k];
+            shuffled_starred[k] = rem;
+        }
+
+        //depending on if only starred are shown or not the shown Flashcard is changed to index 0 of the shuffled sets.
+        if(this.state.studyStarred){
+            this.setState({currentFlashcard: shuffled_starred[0]})
+        }
+        else{
+            this.setState({currentFlashcard: shuffled[0]})
+        }
+
+        this.setState({all_flashcards: shuffled, flashcards_starred: shuffled_starred});
+        this.setState({rightButtonDisabled: false, leftButtonDisabled: true})
+        //check if the arrow buttons are disabled or not. Left should always be here, as we start from index 0.
+        if(shuffled_starred.length == 1  && this.state.studyStarred){
+            this.setState({rightButtonDisabled: true})
+        }
+        if(this.state.all_flashcards.length == 1 && !this.state.studyStarred){
+            this.setState({rightButtonDisabled: true})
+        }
+    }else{
+        this.unshuffleCards();
+    }
+
+    }
+
+    //here we need to check if any cards were removed or added to the starred set
+    unshuffleCards(){
+        const flashcards_starred = [];
+
+        for(var i = 0; i < this.state.flashcards_starred_rem.length; i++){
+            if(this.state.markedCards.includes(this.state.flashcards_starred_rem[i].id)){
+                flashcards_starred.push(this.state.flashcards_starred_rem[i]);
+            }
+        }
+        
+        if(this.state.studyStarred){
+        this.setState({currentFlashcard: flashcards_starred[0]})}
+        else{
+            this.setState({currentFlashcard: this.state.all_flashcards_rem[0]});
+            }
+        
+        this.setState({rightButtonDisabled: false, leftButtonDisabled: true, all_flashcards:this.state.all_flashcards_rem,
+            flashcards_starred: flashcards_starred})
+
+        if(flashcards_starred.length == 1 && this.state.studyStarred){
+            this.setState({rightButtonDisabled: true})
+        }
+
+        if(this.state.all_flashcards.length == 1 && !this.state.studyStarred){
+            this.setState({rightButtonDisabled: true})
+        }
+    }
+
+        
+        
+        
+
     render(){
-        //these are the states of "disabled" for the arrow buttons. They are accessed by the img src.
-        //The img src can change dinamically because of these constants. 
+        //these are the states of "disabled" for the arrow buttons. They are accessed by the img src bellow.
+        //The img sources can change dinamically because of these constants. 
         const LeftButton = this.LeftArrowState();
         const RightButton = this.RightArrowState();
         const ShuffleCardState = this.ShuffleCardState();
         const StudyStarredState = this.StudyStarredState();
 
-        //This is the actual set of flashcards that is being displayed. 
+        //This is the actual set of flashcards that is being displayed. It changes between the starred cards and all cards
         const Flashcards = this.DisplayCards();
 
         
@@ -390,6 +480,7 @@ class LearnPage extends React.Component {
                                     
                                 }} >
                                 <img class = "shuffle-image"
+                                    onClick = {() => {this.shuffleCards()}}
                                     src = {ShuffleCardState} />
                             </button>
                             <button class = "exchange-sides-button">
