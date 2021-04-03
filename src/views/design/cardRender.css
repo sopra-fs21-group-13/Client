@@ -18,7 +18,6 @@
     transform-style: preserve-3d;
     transform: perspective(1000px) rotateY(var(--rotate-y, 0))
     translateY(var(--translate-y,0));
-    bottom:50px;
     color: #4F4D4D;
     font-family: 'Roboto', sans-serif;
     user-select: none;
@@ -44,6 +43,22 @@
     transform: rotateY(0deg);
 }
 .card .back{
+    transform: rotateY(180deg);
+}
+
+.card .id_back,
+.card .id_front{
+    position: absolute;
+    backface-visibility: hidden;
+    color:#a8a6a6;
+    font-size: 25px;
+    bottom: 380px;
+}
+
+.card .id_front{
+    transform: rotateY(0deg);
+}
+.card .id_back{
     transform: rotateY(180deg);
 }
 

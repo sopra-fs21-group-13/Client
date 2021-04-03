@@ -6,7 +6,7 @@ import './cardRender.css'
  */
 
 //styling is handled in the cardRender.css file
-export default function CardRender({flashcard}) {
+export default function CardRender({flashcard, set_length, current_place}) {
     const [flip, setFlip] = useState(false);
 
 
@@ -14,7 +14,13 @@ export default function CardRender({flashcard}) {
         <div
             className={`card ${flip ? 'flip' : ''}`}
             onClick={() => setFlip(!flip)}
-        >
+        >   
+            <div className = "id_front"> 
+                {current_place + 1} / {set_length}
+            </div>
+            <div className = "id_back"> 
+                {current_place + 1} / {set_length}
+            </div>
             <div className='front'>
                 {flashcard.question}
             </div>

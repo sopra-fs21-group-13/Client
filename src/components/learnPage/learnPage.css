@@ -4,11 +4,11 @@
 
 .info-grid{
     display:grid;
-    background-color: white;
     grid-template-columns:900px;
     grid-template-rows: 70px 70px 30px;
     font-family: 'Roboto', sans-serif;
     color: #4F4D4D;
+    top:30px;
 }
 
 .info-block {
@@ -96,19 +96,20 @@
 
 .left-button,
 .right-button{
+    position: relative;
     border: none;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0);;
     border-radius: 100%;
     height:63px;
     width: 63px;
-    box-shadow: 0 0 1.5px 1.5px rgba(43, 42, 42, 0.2);
     transform: translateY(var(--translate-y,0));
+
 }
 
 .right-arrow-image,
 .left-arrow-image{
     position:relative;
-    right:6px;
+    right:7px;
     bottom:1px;
     user-select: none;
 }
@@ -128,13 +129,13 @@
 .back-button{
     display: flex;
     position: relative;
-    top: 20px;
+    top: 16px;
     left: 10px;
     height: 50px;
     width: 50px;
     border-radius: 12%;
     border: none;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0);;
     transform: translateY(var(--translate-y,0));
     box-shadow: 0 0 1px 1px rgba(43, 42, 42, 0.2);
 }
@@ -149,7 +150,7 @@
     width:50px;
     position: relative;
     bottom: 1px;
-    right: 6px;
+    right: 8px;
     user-select: none;
 }
 
@@ -157,6 +158,89 @@
     position: relative;
     top: 7px;
     user-select: none;
+}
+
+
+.learn-area{
+    position: relative;
+    display:grid;
+    grid-template-rows: 60px 440px 140px;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings-container{
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    height:50px;
+    width: 700px;
+}
+
+.exchange-sides-button,
+.only-starred-button,
+.star-everything-button,
+.shuffle-button{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    height:35px;
+    width: 40px;
+    margin: 5px;
+    border: none;
+    background-color:rgba(255, 255, 255, 0);
+    transform: translateY(var(--translate-y,0));
+}
+
+.only-starred-button{
+    right:3px;
+}
+
+.exchange-sides-button:hover,
+.only-starred-button:hover,
+.star-everything-button:hover,
+.shuffle-button:hover{
+    --translate-y: -2px;
+}
+
+.exchange-sides-image,
+.only-starred-image,
+.star-everything-image,
+.shuffle-image{
+    user-select: none;
+}
+
+.exchange-sides-image:hover,
+.only-starred-image:hover,
+.star-everything-image:hover,
+.shuffle-image:hover{
+    
+    cursor: pointer;
+}
+
+.only-starred-image{
+    height:35px;
+    position:relative;
+    bottom:4px;
+}
+
+.shuffle-image{
+    height:28px;
+    position: relative;
+    top:2px;
+}
+
+.exchange-sides-image{
+    height:30px;
+    position: relative;
+    top:2px;
+}
+
+.star-everything-image{
+    height:31px;
+    position: relative;
+    bottom:2px;
 }
 
 
