@@ -114,6 +114,7 @@ class LearnPage extends React.Component {
             32
         ]
 
+        //This should get saved inside the user for every set. This is just a temporary representation, it can change.
         const userSettings = {
             cardsShuffled: false,
             studyStarred: false,
@@ -158,7 +159,8 @@ class LearnPage extends React.Component {
 
         this.setState({flashcards_starred: flashcards_starred});
 
-        //checks if the user was studying only the starred cards or not
+        //checks if the user was studying only the starred cards or not to disable the button to the right and also
+        //to set the right current card (remembered from the last session through the "lastCard" attribute in the userSettings)
         if(userSettings.studyStarred){
             this.setState({currentFlashcard: flashcards_starred[userSettings.lastCard-1]});
             if (userSettings.lastCard == flashcards_starred.length){
@@ -171,14 +173,10 @@ class LearnPage extends React.Component {
             }
         }
 
-        
-
+        //checks if the left button should be disabled to prevent overflow
         if (userSettings.lastCard == 1){
             this.setState({leftButtonDisabled: true});
         }
-
-        
-        
         
     }
 
@@ -201,7 +199,7 @@ class LearnPage extends React.Component {
         const ShuffleCardState = this.ShuffleCardState();
         const StudyStarredState = this.StudyStarredState();
 
-        //This is the actual flashcard set that is being learned. 
+        //This is the actual set of flashcards that is being displayed. 
         const Flashcards = this.DisplayCards();
         return(
             <div>
@@ -283,9 +281,17 @@ class LearnPage extends React.Component {
                             <button class = "only-starred-button"
                                 onClick = {() => {
                                     {if(!this.state.studyStarred){
-                                        this.setState({studyStarred: true, currentFlashcard: this.state.flashcards_starred[0]})
+                                        this.setState({studyStarred: true, currentFlashcard: this.state.flashcards_starred[0],
+                                        leftButtonDisabled: true, rightButtonDisabled: false})
+                                        if(Flashcards.length == 1){
+                                            this.setState({rightButtonDisabled :true});
+                                        }
                                     }else{
-                                        this.setState({studyStarred: false, currentFlashcard: this.state.all_flashcards[0]})
+                                        this.setState({studyStarred: false, currentFlashcard: this.state.all_flashcards[0],
+                                        leftButtonDisabled: true, rightButtonDisabled: false})
+                                        if(Flashcards.length == 1){
+                                            this.setState({rightButtonDisabled :true});
+                                        }
                                     }}
                                 }} 
                             >
