@@ -146,7 +146,7 @@ class LearnPage extends React.Component {
         //and then reenter it here inside a variable for saving the current state
         //(which card was last shown when closing the application etc)
 
-        this.setState({all_flashcards: response, set: example_set, 
+        this.setState({all_flashcards: response, all_flashcards_rem: response, set: example_set, 
             rightButtonDisabled: false, cardsShuffled: userSettings.cardsShuffled, studyStarred: userSettings.studyStarred,
             markedCards: userSettings.markedCards});
         
@@ -159,7 +159,7 @@ class LearnPage extends React.Component {
             }
         }
 
-        this.setState({flashcards_starred: flashcards_starred});
+        this.setState({flashcards_starred: flashcards_starred, flashcards_starred_rem: flashcards_starred});
 
         //checks if the user was studying only the starred cards or not to disable the button to the right and also
         //to set the right current card (remembered from the last session through the "lastCard" attribute in the userSettings)
@@ -263,7 +263,6 @@ class LearnPage extends React.Component {
 
     //Fisher-yates algorithm used to shuffle the cards
     //two new sets are created to remember the order of the original set / starred set.
-    //TODO: bug -> after shuffling, when switching to starred, then unshuffling, then switching back, original set stays shuffled!
     shuffleCards(){
         if(!this.state.cardsShuffled){
         this.setState({flashcards_starred_rem: this.state.flashcards_starred});
@@ -343,6 +342,54 @@ class LearnPage extends React.Component {
         if(this.state.all_flashcards.length == 1 && !this.state.studyStarred){
             this.setState({rightButtonDisabled: true})
         }
+    }
+
+
+    //TODO: still does some weird stuff when cards are shuffled
+    starAllCards(){
+
+        for(var i = 0; i < this.state.all_flashcards.length; i++){
+            if(!this.state.markedCards.includes(this.state.all_flashcards[i].id)){
+                this.state.markedCards.push(this.state.all_flashcards[i].id)};
+        }
+
+        const flashcards_starred = [];
+        const flashcards_starred_rem = [];
+
+        for(var i = 0; i < this.state.all_flashcards.length; i++){
+            flashcards_starred.push(this.state.all_flashcards[i]);
+        }
+        //this is necessary so that this works also for shuffled cards.
+        for(var i = 0; i < this.state.all_flashcards_rem.length; i++){
+            flashcards_starred_rem.push(this.state.all_flashcards_rem[i]);
+        }
+
+        //this is so that the page can refresh and the star is shown even if the shown card was unstarred before.
+        const card_update = {id: null, question: null, answer: null};
+        var index = 0;
+        index = flashcards_starred.indexOf(this.state.currentFlashcard)
+        
+        card_update.id = this.state.currentFlashcard.id;
+        card_update.question = this.state.currentFlashcard.question;
+        card_update.answer = this.state.currentFlashcard.answer;
+
+        flashcards_starred[index] = card_update;
+
+        this.setState({currentFlashcard: card_update});
+
+        this.setState({flashcards_starred: flashcards_starred, all_flashcards: flashcards_starred, 
+            all_flashcards_rem: flashcards_starred_rem, flashcards_starred_rem:flashcards_starred_rem});
+
+        if(index==0){
+            this.setState({leftButtonDisabled:true})
+        }
+        if(flashcards_starred.length == 1){
+            this.setState({rightButtonDisabled: true})
+        }
+        if(index == flashcards_starred.length - 1){
+            this.setState({rightButtonDisabled: true})
+        }
+        
     }
 
         
@@ -461,6 +508,7 @@ class LearnPage extends React.Component {
                                             this.setState({rightButtonDisabled :true});
                                         }
                                     }else{
+                                        
                                         this.setState({studyStarred: false, currentFlashcard: this.state.all_flashcards[0],
                                         leftButtonDisabled: true, rightButtonDisabled: false})
                                         if(this.state.all_flashcards.length == 1){
@@ -490,6 +538,7 @@ class LearnPage extends React.Component {
                             </button>
                             <button class = "star-everything-button">
                                 <img class = "star-everything-image"
+                                    onClick = {() => {this.starAllCards()}}
                                     src = {MarkEverything} />
                             </button>
                         </div>

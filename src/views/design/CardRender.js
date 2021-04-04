@@ -8,18 +8,21 @@ import StarActive from './StarActive.png';
  */
 
 //styling is handled in the cardRender.css file
-export default function CardRender({flashcard, set_length, current_place, markedCards, updateTrigger}) {
+export default function CardRender({flashcard, set_length, current_place, markedCards}) {
     //dummy prop to update CardRender
-    var updated = updateTrigger;
     var starred = false;
+
+    
+    const [flip, setFlip] = useState(false);
+    const [star_active, setStar] = useState(starred);
 
     if(markedCards.includes(flashcard.id)){
         starred = true;
     }
-    const [flip, setFlip] = useState(false);
-    const [star_active, setStar] = useState(starred);
 
-    const starState = star_active ? StarActive : Star;
+    const starState = starred ? StarActive : Star;
+
+    
 
 
     //stars the card and pushes its id into the markedCards array. (which is a reference to the state in LearnPage.js)
