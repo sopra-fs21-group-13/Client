@@ -5,6 +5,9 @@ import { api, handleError } from '../../helpers/api';
 import User from '../shared/models/User';
 import { withRouter } from 'react-router-dom';
 import { Button } from '../../views/design/Button';
+import SocialButton from './Socialbutton';
+
+
 
 const FormContainer = styled.div`
   margin-top: 2em;
@@ -90,7 +93,7 @@ class Login extends React.Component {
         username: this.state.username,
         name: this.state.name
       });
-      const response = await api.post('/users', requestBody);
+      const response = await api.post('/users/login', requestBody);
 
       // Get the returned user and update a new object.
       const user = new User(response.data);
@@ -115,7 +118,24 @@ class Login extends React.Component {
     // this.setState({'username': value});
     this.setState({ [key]: value });
   }
+   handleSocialLogin = (user) => {
+    console.log(user)
+    let requestBody = {username: user._profile.email, name:`${user._profile.firstName} ${user._profile.lastName}`,
+    token:user._token.accessToken 
+    }; 
+    
+    api.post('/users/socialLogin', requestBody).then(Data=>{
+      localStorage.setItem('token', user._token.accessToken);
+      this.props.history.push(`/game`);
 
+    }).catch(err=>{
+      console.log(err);
+    })
+  }
+  
+   handleSocialLoginFailure = (err) => {
+    console.error(err)
+  }
   /**
    * componentDidMount() is invoked immediately after a component is mounted (inserted into the tree).
    * Initialization that requires DOM nodes should go here.
@@ -155,6 +175,16 @@ class Login extends React.Component {
                 Login
               </Button>
             </ButtonContainer>
+            <br></br>
+              <SocialButton
+              provider='google'
+              appId='1068306205440-f2i0rndpgpj7nl9e06pjvf1kjo9eklol.apps.googleusercontent.com'
+              onLoginSuccess={this.handleSocialLogin}
+              onLoginFailure={this.handleSocialLoginFailure}
+              style={{cursor:"pointer"}}
+              >
+              Login with Google
+              </SocialButton>
           </Form>
         </FormContainer>
       </BaseContainer>
