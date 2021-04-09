@@ -120,7 +120,7 @@ class Login extends React.Component {
   }
    handleSocialLogin = (user) => {
     console.log(user)
-    let requestBody = {username: user._profile.email, name:`${user._profile.firstName} ${user._profile.lastName}`,
+    let requestBody = {email: user._profile.email, name:`${user._profile.firstName} ${user._profile.lastName}`,
     token:user._token.accessToken 
     }; 
     
