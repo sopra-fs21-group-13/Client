@@ -1,0 +1,160 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+
+
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    
+}
+
+header{
+    color:white;
+    background-color:#70F0A9;
+    top: 0px;
+    position: sticky;
+    height: 60px;
+    padding: 15px;
+    z-index: 11; /*to keep header on upper layer*/
+
+}
+
+.sidenav {
+    height: calc(100vh-160px);
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 60px;
+    left: 0;
+    background-color: white;
+    overflow-x: hidden;
+  }
+  
+  .sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+  }
+  
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+
+.logoImage{
+   
+    height: 30px;
+
+}
+
+.menu{
+    grid-row-start: 2;
+    grid-row-end: 2;
+    background-color:white;
+}
+
+.menuItem{
+    height: 50px;
+    text-align: center;
+    line-height: 50px; /*to make it on vertically middle*/
+}
+
+.checkedMenuItem{
+    height: 50px;
+    text-align: center;
+    background-color:whitesmoke;
+    line-height: 50px;
+}
+
+#allSets{
+    display: grid;
+    grid-column-start: 2;
+    grid-column-end: 4;
+    background-color:white;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 30px;
+    margin: 0 50px;
+}
+
+h1{
+    margin-left: 50px;
+    
+}
+
+#board{
+    grid-column-start: 2;
+    grid-column-end: 4;
+    background-color:white;
+    padding: 20px 0 0 160px;
+}
+
+#allSets > div {
+}
+
+.oneSetWrapper{
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.oneSet{
+    border: solid 1px whitesmoke;
+    background-color: white;
+    box-shadow: 0px 2px 2px  rgba(0,0,0,0.2);
+    /*
+    -moz-box-shadow: 10px -10px 5px  rgba(0,0,0,0.1);
+    -webkit-box-shadow: 10px -10px 5px  rgba(0,0,0,0.1);
+    -o-box-shadow: 10px -10px 5px  rgba(0,0,0,0.1);
+    */
+    border-radius:10px;
+    position: relative;
+    overflow: hidden;  
+    margin-bottom: 5px;
+
+}
+
+.setTitle{
+    height: 40px;
+    line-height:40px;
+    text-align: center;
+}
+
+.iconClear{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    color: red;
+    margin: 2px;
+}
+
+.iconEdit{
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    color:white;
+    margin: 2px;
+}
+
+
+.oneSetImage > img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+
+}
+
+footer{
+    height: 100px;
+    position: relative;
+    text-align: center;
+    color:white;
+    background-color:#70F0A9;
+    bottom:0px;
+}
+
+.opac{
+    opacity:0.5;
+}
