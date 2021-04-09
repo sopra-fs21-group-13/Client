@@ -175,7 +175,7 @@ class Login extends React.Component {
                 Login
               </Button>
             </ButtonContainer>
-            <br></br>
+              <br></br>
               <SocialButton
               provider='google'
               appId='1068306205440-f2i0rndpgpj7nl9e06pjvf1kjo9eklol.apps.googleusercontent.com'
