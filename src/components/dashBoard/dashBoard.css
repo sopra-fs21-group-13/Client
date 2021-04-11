@@ -9,6 +9,7 @@
     
 }
 
+/*
 header{
     color:white;
     background-color:#70F0A9;
@@ -16,9 +17,10 @@ header{
     position: sticky;
     height: 60px;
     padding: 15px;
-    z-index: 11; /*to keep header on upper layer*/
+    z-index: 11; //to keep header on upper layer
 
 }
+*/
 
 .sidenav {
     height: calc(100vh-160px);

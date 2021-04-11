@@ -1,6 +1,4 @@
 import React, {useState} from 'react'
-import styled from 'styled-components';
-import { BaseContainer } from '../../helpers/layout';
 import flashy_h_white from '../shared/images/flashy_h-white.svg';
 import { withRouter } from 'react-router-dom';
 import ClearIcon from '@material-ui/icons/Clear';
@@ -52,7 +50,7 @@ class DashBoard extends React.Component {
         }]
         
     constructor() {
-      super(); //이건 뭣임..?
+      super(); 
       this.state = {
           which_menu: "dashBoard",
           setList: this.response
@@ -104,11 +102,17 @@ class DashBoard extends React.Component {
         return(
             <div>
                 
+                {
+                    //header is now a component
+                }
+                
+                {/*
                 <header>
                         <img 
                         class = "logoImage"
                         src = {flashy_h_white}/>
                 </header>
+                */}
 
                 <div class="sidenav"> 
                     <div class="checkedMenuItem">
