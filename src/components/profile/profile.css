@@ -1,0 +1,96 @@
+/*these can be implemented in sidebar component*/
+.menuItem{
+    height: 50px;
+    text-align: center;
+    line-height: 50px; /*to make it on vertically middle*/
+}
+
+.checkedMenuItem{
+    height: 50px;
+    text-align: center;
+    background-color:whitesmoke;
+    line-height: 50px;
+}
+
+.sidenav {
+    height: calc(100vh-160px);
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 60px;
+    left: 0;
+    background-color: white;
+    overflow-x: hidden;
+  }
+  
+  .sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+  }
+  
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+
+  .profileCard{
+    border: solid 1px whitesmoke;
+    background-color: white;
+    box-shadow: 0px 2px 2px  rgba(0,0,0,0.2);
+    border-radius:10px;
+    position: relative;
+    overflow: hidden;  
+    text-align: center;
+    width: 60%;
+    margin:auto;
+    padding: 30px;
+    
+  }
+  .profileCard > *{
+    margin: auto;
+    line-height: 2;
+  }
+
+  .photoFrame{
+    height: 146px;
+    width: 146px;
+    border-radius: 73px;
+    overflow: hidden;  
+    left: 50%;
+  
+  }
+
+  
+
+  .photoFrame > img{
+    height: 146px;
+    min-width: 100%;
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+  }
+.profile_username{
+  font-weight: 800;
+}
+
+.likes_wins >span{
+  vertical-align: middle;
+}
+
+.thumbIcon{
+  color:darkblue;
+}
+.winIcon{
+  color:orange;
+}
+
+.formContainer{
+  }
+
+.editUserForm{
+  display:block;
+  margin:auto;
+  width: 50px;
+}

@@ -6,7 +6,7 @@ import { LoginGuard } from "../routeProtectors/LoginGuard";
 import Login from "../../login/Login";
 import LearnPage from "../../learnPage/LearnPage";
 import DashBoard from "../../dashBoard/DashBoard";
-
+import Profile from "../../profile/Profile";
 /**
  * Main router of your application.
  * In the following class, different routes are rendered. In our case, there is a Login Route with matches the path "/login"
@@ -22,11 +22,11 @@ class AppRouter extends React.Component {
       <BrowserRouter>
         <Switch>
           <div>
-          <Route
-              path="/learnPage"
-              render={() => (
-                <LearnPage />
-              )}
+            <Route
+                path="/learnPage"
+                render={() => (
+                  <LearnPage />
+                )}
             />
 
             <Route
@@ -51,6 +51,13 @@ class AppRouter extends React.Component {
               exact
               render={() => (
                   <DashBoard />                
+              )}
+            />
+            <Route
+              path="/profile"
+              exact
+              render={() => (
+                  <Profile />                
               )}
             />
             <Route path="/" exact render={() => <Redirect to={"/learnPage"} />} />

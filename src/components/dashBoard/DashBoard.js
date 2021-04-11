@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import flashy_h_white from '../shared/images/flashy_h-white.svg';
 import { withRouter } from 'react-router-dom';
 import ClearIcon from '@material-ui/icons/Clear';
 import EditIcon from '@material-ui/icons/Edit';
@@ -105,7 +104,7 @@ class DashBoard extends React.Component {
                 {
                     //header is now a component
                 }
-                
+
                 {/*
                 <header>
                         <img 
