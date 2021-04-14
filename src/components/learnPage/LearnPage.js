@@ -26,14 +26,6 @@ const Container = styled(BaseContainer)`
     text-align: center;
 `;
 
-const Header = styled.div`
-    position: sticky;
-    height: 60px;
-    text-align: center;
-    color:white;
-    background-color:#70F0A9;
-    top: 0px;
-`
 
 const MainContainer = styled.div`
     display: flex;
@@ -122,9 +114,11 @@ class LearnPage extends React.Component {
             studyStarred: false,
             lastCard: 1,
             markedCards: [
-                1
+                1,2
             ]
         };
+
+        //TODO: implement "save order" list with ids
         
         //This is a placeholder response from the backend for a GET request.
         const response = [
@@ -140,7 +134,7 @@ class LearnPage extends React.Component {
                 id:2,
                 answer: "Mathe",
                 question: "Math"
-            }]
+            }];
 
         //Here we could save the currentFlashcard id inside the user
         //and then reenter it here inside a variable for saving the current state
@@ -392,6 +386,37 @@ class LearnPage extends React.Component {
         
     }
 
+    unstarAllCards(){
+        this.state.markedCards = [];
+        if(this.state.studyStarred){
+            //update visible card so that it doesn't show 0/0.
+            const card_update = {id: null, question: null, answer: null};
+            
+            card_update.id = this.state.all_flashcards[0].id;
+            card_update.question = this.state.all_flashcards[0].question;
+            card_update.answer = this.state.all_flashcards[0].answer;
+
+            this.state.all_flashcards[0] = card_update;
+
+            this.setState({studyStarred: false, currentFlashcard: card_update});}
+        else{
+            //update visible card so that the star vanishes.
+            const card_update = {id: null, question: null, answer: null};
+            var index = 0;
+            index = this.state.all_flashcards.indexOf(this.state.currentFlashcard)
+            
+            card_update.id = this.state.currentFlashcard.id;
+            card_update.question = this.state.currentFlashcard.question;
+            card_update.answer = this.state.currentFlashcard.answer;
+
+            this.state.all_flashcards[index] = card_update;
+
+            this.setState({currentFlashcard: card_update});
+        }
+        
+        this.state.flashcards_starred = [];
+    }
+
         
         
         
@@ -411,7 +436,6 @@ class LearnPage extends React.Component {
 
         return(
             <div>
-            <Header>Header</Header>
             
             <InfoContainer>
                 {//back to Dashboard button
@@ -487,6 +511,7 @@ class LearnPage extends React.Component {
                     <div class = "learn-area">
                         <div class = "settings-container">
                             <button class = "only-starred-button"
+                                disabled = {(this.state.markedCards.length==0)}
                                 onClick = {() => {
                                     {//checks if the starred flashcards changed
                                     }
@@ -538,7 +563,9 @@ class LearnPage extends React.Component {
                             </button>
                             <button class = "star-everything-button">
                                 <img class = "star-everything-image"
-                                    onClick = {() => {this.starAllCards()}}
+                                    onClick = {() => {
+                                        if(this.state.all_flashcards.length == this.state.flashcards_starred.length){this.unstarAllCards()}
+                                        else{this.starAllCards()}}}
                                     src = {MarkEverything} />
                             </button>
                         </div>
