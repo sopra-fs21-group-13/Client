@@ -1,4 +1,6 @@
 import './modal.css';
+import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
+import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 
 export const users = [
     {
@@ -40,11 +42,10 @@ export const Modal = ({ handleClose, show, children }) => {
             </div>
 
             {users.map(user => (
-            <div id="modal_content">
-                
-                 <div class="userCard">
-                     
-                        <div class="userInfo">
+            <div id="modal_content">       
+                 
+                     <div class="userCard">
+                        
 
                             <div class="userBasic">
                                 <div class="photoFrame">
@@ -54,17 +55,27 @@ export const Modal = ({ handleClose, show, children }) => {
                                     {user.username}
                                 </p>
                             </div>
-                        </div>
 
-                </div>
-                <div class="invitationButton">
-                </div>    
+                            <div class="userMore">
+                            <p class="likes_wins">
+                                <span class="thumbIcon"><ThumbUpAltOutlinedIcon/></span> {user.likes} <span class="winIcon"><EmojiEventsIcon/></span> {user.wins}
+                            </p>
+                            <p>
+                                {user.info}
+                             </p>   
+                            </div>
+                        
+                            <div class="invitationButton"> INVITE </div> 
+                     </div>
+                     
+
+                   
                 
                  {/* {children}*/}
             </div>
             ))}
             
-        <button type="button" onClick={handleClose}>
+        <button class="closeModal" type="button" onClick={handleClose} >
           Close
         </button>
       </section>

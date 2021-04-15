@@ -38,14 +38,28 @@
     display: none;
   }
 
-  .userInfo{
-    margin: 30px;
-    
-  }
+ 
   .userBasic{
       width:150px;
       text-align:center;
+
+      grid-column-start:1;
+      grid-column-end: 2;
   }
+    .userMore{
+        grid-column-start:2;
+        grid-column-end: 3;
+
+    }
+    .invitationButton{
+        grid-column-start:3;
+        grid-column-end: 4;
+        background-color:#70F0A9;
+        border-radius: 10px;
+        text-align: center;
+        color: white;
+        line-height: 178px;
+    }
   .profile_username{
       margin: 5px;
   }
@@ -70,6 +84,10 @@
   }
 
   .userCard{
+
+    display: grid;
+    grid-template-columns: 146px 1fr 100px;
+
     border: solid 1px whitesmoke;
     background-color: white;
     box-shadow: 0px 2px 2px  rgba(0,0,0,0.2);
@@ -78,5 +96,20 @@
     overflow: hidden;  
     width: 100%-60px;
     text-align: center;
+    padding: 30px
     
+  }
+
+  .closeModal{
+    border: solid 2px #70F0A9;
+    background-color: white;
+    color: #70F0A9;
+    padding: 10px 30px;
+    text-align:right;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
   }
