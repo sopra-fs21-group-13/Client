@@ -76,14 +76,12 @@ class Profile extends React.Component {
                     <div class="formContainer">
                         <form class="editUserForm">
                         <label>
-                            Name:
-                            <input type="text" name="name" />
+                            Name  <input type="text" name="name" />
                         </label>
                         <label>
-                            Info:
-                            <input type="text" name="info" />
+                            Info  <input type="text" name="info" />
                         </label>
-                        <input type="submit" value="Submit" />
+                        <input type="submit" value="Save changes" />
                         </form>
                     </div>
 
