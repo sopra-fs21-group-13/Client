@@ -39,7 +39,9 @@ class Profile extends React.Component {
             <div>
 
                 <div class="sidenav"> 
-                    <div class="menuItem">
+                <div class="menuItem" onClick={() => {
+                        this.props.history.push("dashboard");
+                    }}>
                         Dashboard
                     </div>
                     <div class="checkedMenuItem">

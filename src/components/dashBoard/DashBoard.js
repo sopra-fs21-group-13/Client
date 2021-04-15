@@ -6,7 +6,19 @@ import {Button} from '../../views/design/Button.js';
 import './dashBoard.css'
 
 
+
 class DashBoard extends React.Component {
+
+    constructor() {
+        super(); 
+        this.state = {
+            which_menu: "dashBoard",
+            setList: this.response,
+           
+        };
+        
+      }
+  
     response = [
         {
             id:0,
@@ -46,16 +58,11 @@ class DashBoard extends React.Component {
             owner:"snowy",
             liked:21,
             photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"
-        }]
+        }
+    ]
         
-    constructor() {
-      super(); 
-      this.state = {
-          which_menu: "dashBoard",
-          setList: this.response
-      };
-    }
-
+        
+    
     async componentDidMount(){
         //This probably won't be implemented with an array. This is placeholder information for the set info.
         //매 순간 업데이트돼야하는 친구들.
@@ -70,56 +77,22 @@ class DashBoard extends React.Component {
         - TypeOfFlashcardSet: TypeOfFlashcardSet
         - Playback: Playback
         */
-        const example_set1 = [
-            "Business English",
-            "This set is for people that want to learn some business english. Study well, live well.",
-            "FlashyBoss2003",
-            32
-        ]
-        const example_set2 = [
-            "TOEFL 80+",
-            "This set is for people that want to learn some business english. Study well, live well.",
-            "hahaha",
-            32
-        ]
-        const example_set3 = [
-            "TOEFL 100+",
-            "Aim higher",
-            "veryNice",
-            32
-        ]
-
-        //This is a placeholder response from the backend for a GET request. 
-        //; List of sets that the user own
         
-        
+       
     
     }  
-        
+    
 
     render(){
         return(
             <div>
-                
-                {
-                    //header is now a component
-                }
-
-                {/*
-                <header>
-                        <img 
-                        class = "logoImage"
-                        src = {flashy_h_white}/>
-                </header>
-                */}
-
                 <div class="sidenav"> 
                     <div class="checkedMenuItem">
                         Dashboard
                     </div>
 
                     <div class="menuItem" onClick={() => {
-                        this.register();
+                        this.props.history.push("profile");
                     }}>
                         Profile
                     </div>
@@ -149,10 +122,13 @@ class DashBoard extends React.Component {
                                         {res.title}
                                     </div>
                                 </div>
-                                <Button width="45%" background="#FFF" >
+                                <Button width="45%" background="#FFF" onClick={() => {
+                                    this.props.history.push("learnpage");
+                                }} >
                                     Learn
                                 </Button>
-                                <Button yellow={true} width="45%" >
+                                <Button yellow={true} width="45%"  >
+                                
                                     Play
                                 </Button>
                             </div>
@@ -166,6 +142,11 @@ class DashBoard extends React.Component {
                             </div>
                         ))}
                         */}
+
+
+
+                        {//card to add create a set
+                        }
                         <div class="oneSetWrapper">
                                 <div class="oneSet opac">
         
@@ -180,7 +161,7 @@ class DashBoard extends React.Component {
                                 <Button yellow={true} width="35px" >
                                     +
                                 </Button>
-                            </div>
+                        </div>
                         
                     </div>
                     <div class = "findSets">

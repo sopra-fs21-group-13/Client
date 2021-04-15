@@ -10,7 +10,8 @@ class Header extends React.Component {
                 <header>
                         <img 
                         class = "logoImage"
-                        src = {flashy_h_white}/>
+                        src = {flashy_h_white}
+                        />
                 </header>
  
             </div>
