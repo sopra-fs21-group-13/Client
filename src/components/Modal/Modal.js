@@ -7,7 +7,33 @@ export const Modal = ({ handleClose, show, children }) => {
   return (
     <div className={showHideClassName}>
       <section className="modal-main">
-        {children}
+            <div id="modal_title">
+                Available Users
+            </div>
+
+            <div id="modal_content">
+                 {children}
+                 {children}
+                 {children}
+                 {children}
+                 {children}
+                 {children}
+                 {children}
+                 {children}
+                 {children}            
+                 {children}
+                 {children}
+                 {children}
+                 {children}
+                 {children}
+                 {children}
+                 {children}
+                 {children}
+                 {children}
+                 {children}            
+                 {children}
+            </div>
+            
         <button type="button" onClick={handleClose}>
           Close
         </button>

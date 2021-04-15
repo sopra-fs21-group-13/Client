@@ -72,6 +72,7 @@ class DashBoard extends React.Component {
             photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"
         }
     ]
+
         
         
     
