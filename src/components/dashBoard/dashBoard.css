@@ -31,6 +31,7 @@ header{
     left: 0;
     background-color: white;
     overflow-x: hidden;
+    
   }
   
   .sidenav a {
@@ -89,7 +90,8 @@ h1{
     grid-column-start: 2;
     grid-column-end: 4;
     background-color:white;
-    padding: 20px 0 0 160px;
+    padding: 20px 0 50px 160px;
+   /* margin: 0 0 50px 0;*/
 }
 
 #allSets > div {
@@ -154,4 +156,15 @@ footer{
 
 .opac{
     opacity:0.5;
+}
+
+.findSets{
+    margin: auto;
+    width:fit-content;
+    height: 30px;
+    line-height: 30px;
+    background-color: skyblue;
+    text-align: center;
+    border-radius:10px;
+    color: white;
 }
