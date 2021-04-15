@@ -11,7 +11,7 @@
   .modal-main {
     position: fixed;
     background: white;
-    width: 80%;
+    width: 60%;
     height: auto;
     top:50%;
     max-height: 80%;
@@ -21,6 +21,13 @@
     padding: 0 0 15px 0;
     overflow: auto;
     z-index: 13;
+    
+  }
+
+  .modal_content{
+    background: white;
+    overflow:scroll;
+    z-index: 13;
   }
   
   .display-block {
@@ -29,6 +36,18 @@
   
   .display-none {
     display: none;
+  }
+
+  .userInfo{
+    margin: 30px;
+    
+  }
+  .userBasic{
+      width:150px;
+      text-align:center;
+  }
+  .profile_username{
+      margin: 5px;
   }
 
   #modal_title{
@@ -42,8 +61,22 @@
     padding: 15px;
     border-radius: 10px 10px 0 0;
     text-align: left;
+    z-index: 20;
+
   }
 
   div.modal_content{
    
+  }
+
+  .userCard{
+    border: solid 1px whitesmoke;
+    background-color: white;
+    box-shadow: 0px 2px 2px  rgba(0,0,0,0.2);
+    border-radius:10px;
+    margin: 30px;
+    overflow: hidden;  
+    width: 100%-60px;
+    text-align: center;
+    
   }

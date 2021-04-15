@@ -1,9 +1,37 @@
 import './modal.css';
 
+export const users = [
+    {
+        username:"realUnicorn",
+        info: "I study rainbow science",
+        likes: 205,
+        wins: 30,
+        photo:"https://images-na.ssl-images-amazon.com/images/I/51mBDeh7PcL.jpg"
+    },
+    {
+        username:"Squirrel",
+        info: "Where are more nuts??",
+        likes: 23,
+        wins: 31,
+        photo:"https://i.pinimg.com/originals/ea/53/fd/ea53fdd77bfcf158b3015ed93ab39d8a.jpg"
+    },
+    {
+        username:"Kitty",
+        info: "I want to be alone",
+        likes: 1000,
+        wins: 1,
+        photo:"https://www.meme-arsenal.com/memes/f04ebf47a09312cbedfca22256c5722d.jpg"
+}]
+
+
 //export const /*erase if not working*/ 
 export const Modal = ({ handleClose, show, children }) => {
   const showHideClassName = show ? "modal display-block" : "modal display-none";
+  
 
+  /*where to put?*/
+
+    
   return (
     <div className={showHideClassName}>
       <section className="modal-main">
@@ -11,28 +39,30 @@ export const Modal = ({ handleClose, show, children }) => {
                 Available Users
             </div>
 
+            {users.map(user => (
             <div id="modal_content">
-                 {children}
-                 {children}
-                 {children}
-                 {children}
-                 {children}
-                 {children}
-                 {children}
-                 {children}
-                 {children}            
-                 {children}
-                 {children}
-                 {children}
-                 {children}
-                 {children}
-                 {children}
-                 {children}
-                 {children}
-                 {children}
-                 {children}            
-                 {children}
+                
+                 <div class="userCard">
+                     
+                        <div class="userInfo">
+
+                            <div class="userBasic">
+                                <div class="photoFrame">
+                                    <img src={user.photo} />                            
+                                </div>
+                                <p class="profile_username">
+                                    {user.username}
+                                </p>
+                            </div>
+                        </div>
+
+                </div>
+                <div class="invitationButton">
+                </div>    
+                
+                 {/* {children}*/}
             </div>
+            ))}
             
         <button type="button" onClick={handleClose}>
           Close

@@ -2,9 +2,9 @@ header{
     color:white;
     background-color:#70F0A9;
     top: 0px;
-    /*position: sticky;*/
+    position: sticky;
     height: 60px;
     padding: 15px;
-    z-index: 11; /*to keep header on upper layer*/
+    z-index: -1; /*to keep header on upper layer*/
 
 }
