@@ -5,7 +5,7 @@ import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 export const users = [
     {
         username:"realUnicorn",
-        info: "I study rainbow science",
+        info: "Rainbows are mine",
         likes: 205,
         wins: 30,
         photo:"https://images-na.ssl-images-amazon.com/images/I/51mBDeh7PcL.jpg"
