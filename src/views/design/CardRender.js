@@ -9,7 +9,6 @@ import StarActive from './StarActive.png';
 
 //styling is handled in the cardRender.css file
 export default function CardRender({flashcard, set_length, current_place, markedCards}) {
-    //dummy prop to update CardRender
     var starred = false;
 
     
@@ -32,7 +31,7 @@ export default function CardRender({flashcard, set_length, current_place, marked
         if(!starred){
         markedCards.push(flashcard.id);}
         else{
-        delete markedCards[markedCards.indexOf(flashcard.id)];
+        markedCards.splice(markedCards.indexOf(flashcard.id),1);
         }
     }
 

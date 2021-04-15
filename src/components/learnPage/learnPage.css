@@ -201,7 +201,22 @@
 .only-starred-button:hover,
 .star-everything-button:hover,
 .shuffle-button:hover{
+    cursor: pointer;
     --translate-y: -2px;
+}
+
+.exchange-sides-button:active,
+.star-everything-button:active{
+    opacity: 0.8
+}
+
+.exchange-sides-button:disabled,
+.only-starred-button:disabled,
+.star-everything-button:disabled,
+.shuffle-button:disabled{
+    opacity: 0.4;
+    cursor:default;
+    --translate-y: -0px;
 }
 
 .exchange-sides-image,
@@ -212,13 +227,7 @@
     user-select: none;
 }
 
-.exchange-sides-image:hover,
-.only-starred-image:hover,
-.star-everything-image:hover,
-.shuffle-image:hover
-{
-    cursor: pointer;
-}
+
 
 .only-starred-image{
     height:35px;

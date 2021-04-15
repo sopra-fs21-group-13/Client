@@ -108,18 +108,21 @@ class LearnPage extends React.Component {
             32
         ]
 
+        
+        //TODO: implement "save order" list with ids
         //This should get saved inside the user for every set. This is just a temporary representation, it can change.
         const userSettings = {
-            cardsShuffled: false,
+            cardsShuffled: true,
             studyStarred: false,
             lastCard: 1,
             markedCards: [
                 1,2
+            ],
+            savedOrder: [
+                2,0,1
             ]
         };
 
-        //TODO: implement "save order" list with ids
-        
         //This is a placeholder response from the backend for a GET request.
         const response = [
                 {id: 0,
@@ -139,10 +142,23 @@ class LearnPage extends React.Component {
         //Here we could save the currentFlashcard id inside the user
         //and then reenter it here inside a variable for saving the current state
         //(which card was last shown when closing the application etc)
+        
+        const ordered_response = [];
 
-        this.setState({all_flashcards: response, all_flashcards_rem: response, set: example_set, 
-            rightButtonDisabled: false, cardsShuffled: userSettings.cardsShuffled, studyStarred: userSettings.studyStarred,
-            markedCards: userSettings.markedCards});
+        for (var i = 0; i<response.length; i++){
+            ordered_response.push(response[userSettings.savedOrder[i]]);
+        }
+
+        //TODO: should only happen when shuffled
+        if(userSettings.cardsShuffled){
+            this.setState({all_flashcards: ordered_response, all_flashcards_rem: response, set: example_set, 
+                rightButtonDisabled: false, cardsShuffled: userSettings.cardsShuffled, studyStarred: userSettings.studyStarred,
+                markedCards: userSettings.markedCards});
+        }else{
+            this.setState({all_flashcards: response, all_flashcards_rem: response, set: example_set, 
+                rightButtonDisabled: false, cardsShuffled: userSettings.cardsShuffled, studyStarred: userSettings.studyStarred,
+                markedCards: userSettings.markedCards});
+        }
         
 
         const flashcards_starred = [];
@@ -163,9 +179,16 @@ class LearnPage extends React.Component {
                 this.setState({rightButtonDisabled: true});
             }
         }else{
-            this.setState({currentFlashcard: response[userSettings.lastCard-1]});
-            if (userSettings.lastCard == response.length){
-                this.setState({rightButtonDisabled: true});
+            if(userSettings.cardsShuffled){
+                this.setState({currentFlashcard: ordered_response[userSettings.lastCard-1]});
+                if (userSettings.lastCard == ordered_response.length){
+                    this.setState({rightButtonDisabled: true});
+                }
+            }else{
+                this.setState({currentFlashcard: response[userSettings.lastCard-1]});
+                if (userSettings.lastCard == response.length){
+                    this.setState({rightButtonDisabled: true});
+                }
             }
         }
 
@@ -389,7 +412,8 @@ class LearnPage extends React.Component {
     unstarAllCards(){
         this.state.markedCards = [];
         if(this.state.studyStarred){
-            //update visible card so that it doesn't show 0/0.
+            //update visible card so that it doesn't show 0/0. 
+            //This is not necessary anymore, as button gets disabled when studying only starred cards. 
             const card_update = {id: null, question: null, answer: null};
             
             card_update.id = this.state.all_flashcards[0].id;
@@ -522,10 +546,32 @@ class LearnPage extends React.Component {
                                         }
                                         
                                     }
-                                    this.setState({flashcards_starred: flashcards_starred});
-                                    {
-                                        //changes between only starred and all flashcards
+                                    //here to prevent the flashcard order from resetting when shuffled.
+                                    if(this.state.flashcards_starred.length != flashcards_starred && this.state.cardsShuffled){
+                                            let difference = flashcards_starred.filter(x=>!this.state.flashcards_starred.includes(x));
+                                            const flashcards_starred_shuffled = [...this.state.flashcards_starred];
+                                            for(var j = 0; j < difference.length; i++){
+                                                flashcards_starred_shuffled.push(difference[j]);
+                                            }
+
+                                            this.setState({flashcards_starred: flashcards_starred_shuffled})
+                                            //changes between only starred and all flashcards
+                                            if(!this.state.studyStarred){
+                                                this.setState({studyStarred: true, currentFlashcard: flashcards_starred_shuffled[0],
+                                                leftButtonDisabled: true, rightButtonDisabled: false})
+                                                if(flashcards_starred_shuffled.length == 1){
+                                                    this.setState({rightButtonDisabled :true});
+                                                }
+                                            }else{
+                                                this.setState({studyStarred: false, currentFlashcard: this.state.all_flashcards[0],
+                                                leftButtonDisabled: true, rightButtonDisabled: false})
+                                                if(this.state.all_flashcards.length == 1){
+                                                    this.setState({rightButtonDisabled :true});
+                                                }
                                     }
+                                    }else{
+                                    this.setState({flashcards_starred: flashcards_starred})
+                                    //changes between only starred and all flashcards
                                     if(!this.state.studyStarred){
                                         this.setState({studyStarred: true, currentFlashcard: flashcards_starred[0],
                                         leftButtonDisabled: true, rightButtonDisabled: false})
@@ -539,6 +585,7 @@ class LearnPage extends React.Component {
                                         if(this.state.all_flashcards.length == 1){
                                             this.setState({rightButtonDisabled :true});
                                         }
+                                    }
                                     }
                                 }} 
                             >
@@ -561,8 +608,10 @@ class LearnPage extends React.Component {
                                     onClick = {() => {this.switchAnswerQuestion()}}
                                     src = {ExchangeSides} />
                             </button>
-                            <button class = "star-everything-button">
+                            <button class = "star-everything-button"
+                                disabled = {this.state.studyStarred}>
                                 <img class = "star-everything-image"
+                                    
                                     onClick = {() => {
                                         if(this.state.all_flashcards.length == this.state.flashcards_starred.length){this.unstarAllCards()}
                                         else{this.starAllCards()}}}
