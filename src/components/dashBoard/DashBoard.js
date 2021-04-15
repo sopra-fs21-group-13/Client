@@ -5,6 +5,9 @@ import EditIcon from '@material-ui/icons/Edit';
 import {Button} from '../../views/design/Button.js';
 import './dashBoard.css'
 
+//realted to modal
+import {Modal} from '../Modal/Modal.js';
+
 
 
 class DashBoard extends React.Component {
@@ -14,10 +17,19 @@ class DashBoard extends React.Component {
         this.state = {
             which_menu: "dashBoard",
             setList: this.response,
-           
+            show: false //for avilable Users modal
         };
-        
-      }
+        this.showModal = this.showModal.bind(this);
+        this.hideModal=this.hideModal.bind(this);
+    }
+
+    showModal=()=>{
+        this.setState({show: true});
+    };
+    hideModal=()=>{
+        this.setState({show: false});
+    };
+      
   
     response = [
         {
@@ -122,15 +134,24 @@ class DashBoard extends React.Component {
                                         {res.title}
                                     </div>
                                 </div>
+
+                                {/*learn button*/}
                                 <Button width="45%" background="#FFF" onClick={() => {
                                     this.props.history.push("learnpage");
                                 }} >
                                     Learn
                                 </Button>
-                                <Button yellow={true} width="45%"  >
-                                
+
+                                {/*Play button: show modal*/}
+                                <Modal show={this.state.show} handleClose={this.hideModal}>
+                                    <p>Modal</p>
+                                </Modal>
+
+                                <Button yellow={true} width="45%" onClick={this.showModal}>
                                     Play
                                 </Button>
+                            
+
                             </div>
                         ))}
                        
