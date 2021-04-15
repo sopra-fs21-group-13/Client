@@ -117,10 +117,7 @@ class DashBoard extends React.Component {
                     <div class="checkedMenuItem">
                         Dashboard
                     </div>
-
-                    <div class="menuItem" onClick={() => {
-                        this.register();
-                    }}>
+                    <div class="menuItem">
                         Profile
                     </div>
                 </div>
@@ -182,9 +179,6 @@ class DashBoard extends React.Component {
                                 </Button>
                             </div>
                         
-                    </div>
-                    <div class = "findSets">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Want new sets to join? &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>
 
                 </div>

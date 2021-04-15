@@ -106,6 +106,8 @@ class LearnPage extends React.Component {
 
     async componentDidMount(){
 
+        const flashcard1 = new Card({id: 1, question: "Area", answer: "Fläche"});
+
         //This probably won't be implemented with an array. This is placeholder information for the set info.
         const example_set = [
             "Business English",
@@ -144,7 +146,6 @@ class LearnPage extends React.Component {
         //and then reenter it here inside a variable for saving the current state
         //(which card was last shown when closing the application etc)
 
-        //change states as input.
         this.setState({all_flashcards: response, all_flashcards_rem: response, set: example_set, 
             rightButtonDisabled: false, cardsShuffled: userSettings.cardsShuffled, studyStarred: userSettings.studyStarred,
             markedCards: userSettings.markedCards});
