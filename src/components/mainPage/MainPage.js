@@ -61,7 +61,7 @@ class MainPage extends React.Component {
                 </button>
 
                 <div id="fishingBox">
-                    <div class="ment"> Start with public sets and classes for you! </div>
+                    <div class="ment"> Start with public sets for you! </div>
                     <div class="fakeSets">
                         <div class="oneSet">      
                             <div class="oneSetImage">
