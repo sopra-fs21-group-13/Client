@@ -3,10 +3,10 @@ import { withRouter } from 'react-router-dom';
 import ClearIcon from '@material-ui/icons/Clear';
 import EditIcon from '@material-ui/icons/Edit';
 import {Button} from '../../views/design/Button.js';
-import './dashBoard.css'
+import './dashBoard.css';
 
 //realted to modal
-import {Modal} from '../modal/Modal.js';
+import {Modal} from '../Modal/Modal.js';
 
 
 
