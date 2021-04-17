@@ -13,7 +13,7 @@ import {Modal} from '../modal/Modal.js';
 class DashBoard extends React.Component {
 
     constructor() {
-        super(); 
+        super();
         this.state = {
             which_menu: "dashBoard",
             setList: this.response,
@@ -94,6 +94,17 @@ class DashBoard extends React.Component {
        
     
     }  
+
+    //deletes a set from the setList and also from the view.
+    deleteSet(index){
+        const updatedList = [];
+        for(var i = 0; i < this.state.setList.length; i++){
+            updatedList.push(this.state.setList[i])
+        }
+        updatedList.splice(index, 1);
+
+        this.setState({setList: updatedList});
+    }
     
 
     render(){
@@ -118,12 +129,18 @@ class DashBoard extends React.Component {
                     
                     <div id="allSets"> 
                        
-                        {this.response.map(res => (
+                        {this.state.setList.map(res => (
                             <div class="oneSetWrapper">
                                 <div class="oneSet">
-                                    <div class="iconClear">
-                                        <ClearIcon/>
-                                    </div>
+                                    <button class="iconClear"
+                                    onClick = {() =>{
+                                        this.deleteSet(this.state.setList.indexOf(res));
+                                    }
+                                    }>
+                                        <div class = "iconClearBox">
+                                            <ClearIcon/>
+                                        </div>
+                                    </button>
                                     <div class="iconEdit">
                                         <EditIcon/>
                                     </div>
