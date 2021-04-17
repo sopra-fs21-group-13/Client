@@ -5,7 +5,7 @@ import './mainPage.css'
 import {Button} from '../../views/design/Button.js';
 
 //realted to modal
-import {Modal} from '../modal/Modal.js';
+import {Modal} from '../Modal/Modal.js';
 
 
 
