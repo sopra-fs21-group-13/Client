@@ -6,7 +6,7 @@ import {Button} from '../../views/design/Button.js';
 import './dashBoard.css'
 
 //realted to modal
-import {Modal} from '../Modal/Modal.js';
+import {Modal} from '../modal/Modal.js';
 
 
 
