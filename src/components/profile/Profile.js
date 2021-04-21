@@ -7,6 +7,7 @@ import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 
 import {Button} from '../../views/design/Button.js';
 import './profile.css'
+import SideNav from '../shared/sideNav/SideNav';
 
 
 class Profile extends React.Component {
@@ -38,16 +39,7 @@ class Profile extends React.Component {
         return(
             <div>
 
-                <div class="sidenav"> 
-                <div class="menuItem" onClick={() => {
-                        this.props.history.push("dashboard");
-                    }}>
-                        Dashboard
-                    </div>
-                    <div class="checkedMenuItem">
-                        Profile
-                    </div>
-                </div>
+                <SideNav checked={2}/>
 
 
                 <div id="board"> 

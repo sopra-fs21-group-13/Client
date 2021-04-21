@@ -4,6 +4,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import EditIcon from '@material-ui/icons/Edit';
 import {Button} from '../../views/design/Button.js';
 import './dashBoard.css';
+import SideNav from '../shared/sideNav/SideNav';
 
 //realted to modal
 import {Modal} from '../Modal/Modal.js';
@@ -110,6 +111,11 @@ class DashBoard extends React.Component {
     render(){
         return(
             <div>
+                <SideNav checked={1}/>
+                
+
+                {/*     replaced with sideNav component
+
                 <div class="sidenav"> 
                     <div class="checkedMenuItem">
                         Dashboard
@@ -121,6 +127,7 @@ class DashBoard extends React.Component {
                         Profile
                     </div>
                 </div>
+                */}
 
 
                 <div id="board"> 

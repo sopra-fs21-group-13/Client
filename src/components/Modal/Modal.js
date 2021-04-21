@@ -78,6 +78,7 @@ export const Modal = ({ handleClose, show, children }) => {
         <button class="closeModal" type="button" onClick={handleClose} >
           Close
         </button>
+        
       </section>
     </div>
   );
