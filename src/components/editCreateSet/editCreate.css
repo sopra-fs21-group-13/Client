@@ -1,0 +1,43 @@
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: gainsboro;
+  }
+  
+  .separator::before,
+  .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid gainsboro;
+  }
+  
+  .separator:not(:empty)::before {
+    margin-right: .25em;
+  }
+  
+  .separator:not(:empty)::after {
+    margin-left: .25em;
+  }
+
+  #basic_info{
+    display: grid;
+    grid-template-columns: 1fr 200px;
+  }
+
+.thinButton{
+    
+    background-color:#70F0A9;
+
+    color: white;
+   
+    font-weight: bold;
+    
+   
+    border: none;
+    cursor: pointer;
+    border-radius: 60px;
+    text-align: center;
+    width: 200px;
+    height: 30px;
+  }

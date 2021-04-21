@@ -8,6 +8,7 @@ import LearnPage from "../../learnPage/LearnPage";
 import DashBoard from "../../dashBoard/DashBoard";
 import Profile from "../../profile/Profile";
 import MainPage from "../../mainPage/MainPage";
+import EditCreateSet from "../../editCreateSet/EditCreateSet";
 /**
  * Main router of your application.
  * In the following class, different routes are rendered. In our case, there is a Login Route with matches the path "/login"
@@ -66,6 +67,13 @@ class AppRouter extends React.Component {
               exact
               render={() => (
                   <MainPage />                
+              )}
+            />
+            <Route
+              path="/edit"
+              exact
+              render={() => (
+                  <EditCreateSet />                
               )}
             />
             <Route path="/" exact render={() => <Redirect to={"/learnPage"} />} />
