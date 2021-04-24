@@ -5,6 +5,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import {Button} from '../../views/design/Button.js';
 import './dashBoard.css';
 import SideNav from '../shared/sideNav/SideNav';
+import {api} from "../../helpers/api"
 
 //realted to modal
 import {Modal} from '../Modal/Modal.js';
@@ -37,14 +38,14 @@ class DashBoard extends React.Component {
             id:0,
             title: "Business English",
             explain: "This set is for people that want to learn some business english. Study well, live well",
-            owner:"yeah",
+            userId:1,
             liked:102,
             photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"
         },{
             id:5,
             title: "TOEFL 80+",
             explain: "This set is for people that want to learn some business english. Study well, live well.",
-            owner:"hahaha",
+            userId:2,
             liked:32,
             photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"
         },
@@ -52,7 +53,7 @@ class DashBoard extends React.Component {
             id:6,
             title: "TOEFL 100+",
             explain: "Aim higher",
-            owner:"snowy",
+            userId:3,
             liked:21,
             photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"
         },
@@ -60,7 +61,7 @@ class DashBoard extends React.Component {
             id:6,
             title: "TOEFL 100+",
             explain: "Aim higher",
-            owner:"snowy",
+            userId:4,
             liked:21,
             photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"
         },
@@ -68,7 +69,7 @@ class DashBoard extends React.Component {
             id:6,
             title: "TOEFL 100+",
             explain: "Aim higher",
-            owner:"snowy",
+            userId:5,
             liked:21,
             photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"
         }
@@ -91,6 +92,15 @@ class DashBoard extends React.Component {
         - TypeOfFlashcardSet: TypeOfFlashcardSet
         - Playback: Playback
         */
+
+        // call the pai here to load the data from the backend localhost:8080/sets
+        api.get("/sets").then(data=>{
+          //  console.log(data);
+         // this.state.setList=data["data"];
+         this.setState({...this.state,setList:data["data"]})
+        }).catch(err=>{
+            console.log(err);
+        })
         
        
     
@@ -140,8 +150,8 @@ class DashBoard extends React.Component {
                     
                     <div id="allSets"> 
                        
-                        {this.state.setList.map(res => (
-                            <div class="oneSetWrapper">
+                        {this.state.setList.map((res ,i)=> (
+                            <div class="oneSetWrapper" key={i}>
                                 <div class="oneSet">
                                     <button class="iconClear"
                                     onClick = {() =>{
