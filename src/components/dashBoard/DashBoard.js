@@ -109,6 +109,7 @@ class DashBoard extends React.Component {
 
     goToEditPage(){
         //TODO: Route to edit page
+        this.props.history.push("edit");
     }
 
     
