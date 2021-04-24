@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, useCallback} from 'react'
+import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 
 //icons from google..
@@ -10,6 +11,85 @@ import './profile.css'
 import SideNav from '../shared/sideNav/SideNav';
 
 
+
+export default function Profile(){
+
+    //I changed it to a functional component. Can be reverted anytime. Old code is below!
+
+    const response = 
+        {
+            username:"Unicorn",
+            info: "I like rainbows!",
+            likes: 205,
+            wins: 30,
+            photo: "https://images.unsplash.com/photo-1542103749-8ef59b94f47e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80"
+        }
+
+
+        return(
+
+            <div>
+
+                <SideNav checked={2}/>
+
+
+                <div id="board"> 
+                    <h1> Manage your profile here </h1>
+                        
+                    {
+                    <div className ="profileCard"> 
+                        
+                        
+                        <div className ="photoFrame">
+                            <img src={response.photo} />                            
+                        </div>
+                            
+                            
+                        <p className ="profile_username">
+                            {response.username}
+                        </p>
+
+                        <p className ="likes_wins">
+                            <span class="thumbIcon"><ThumbUpAltOutlinedIcon/></span> {response.likes} <span class="winIcon"><EmojiEventsIcon/></span> {response.wins}
+                        </p>
+                        <p>
+                            {response.info}
+
+                        </p>   
+                    </div>
+                    }
+                    <div class="formContainer">
+                        <form class="editUserForm">
+                        <label>
+                            <span>
+                            <span>Change Username</span>
+                            <input placeholder="e.g. Billy Gonzales"/>
+                                
+                            </span>
+                        </label>
+                        <label>
+                            <span>
+                            <span>Change Info</span>
+                            <input placeholder="e.g. I like flowers"/>
+                                
+                            </span>
+                        </label>
+                        <input
+                        class = "submitButton"
+                        type="submit" value="Save changes" />
+                        </form>
+                    </div>
+
+                </div>
+                
+                <footer>Footer</footer>
+            </div>
+        );
+    
+}
+
+
+/*
 class Profile extends React.Component {
     response = [
         {
@@ -96,4 +176,4 @@ class Profile extends React.Component {
         );
     }
 }
-export default withRouter(Profile);
+export default withRouter(Profile);*/

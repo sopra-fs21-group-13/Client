@@ -7,6 +7,7 @@ import Login from "../../login/Login";
 import LearnPage from "../../learnPage/LearnPage";
 import DashBoard from "../../dashBoard/DashBoard";
 import Profile from "../../profile/Profile";
+import PublicProfile from "../../profile/PublicProfile";
 import MainPage from "../../mainPage/MainPage";
 import EditCreateSet from "../../editCreateSet/EditCreateSet";
 /**
@@ -62,6 +63,14 @@ class AppRouter extends React.Component {
                   <Profile />                
               )}
             />
+
+            <Route
+              path="/publicProfile"
+              exact
+              render={() => (
+                  <PublicProfile />                
+              )}
+            />
             <Route
               path="/main"
               exact
@@ -76,7 +85,7 @@ class AppRouter extends React.Component {
                   <EditCreateSet />                
               )}
             />
-            
+
             <Route path="/" exact render={() => <Redirect to={"/dashboard"} />} />
 
           </div>
