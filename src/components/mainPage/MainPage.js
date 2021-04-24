@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { withRouter } from 'react-router-dom';
+import Header from "../header/header.js";
 
 import './mainPage.css'
 import {Button} from '../../views/design/Button.js';
@@ -19,6 +20,7 @@ class MainPage extends React.Component {
             setList: this.response,
             show: false //for avilable Users modal
             */
+           show: false
         };
         
         this.showModal = this.showModal.bind(this);
@@ -33,21 +35,18 @@ class MainPage extends React.Component {
         this.setState({show: false});
     };
       
-  
-
-
-        
-        
-    
     async componentDidMount(){
 
-    
     }  
     
 
     render(){
+        const modalBehavior = this.state.show ? this.hideModal : this.showModal;
         return(
             <div>
+                <Header
+                    buttonBehavior = {modalBehavior}
+                />
                 <div class="imgFrame">
                     <img 
                     class="mainImg"
@@ -104,7 +103,10 @@ class MainPage extends React.Component {
                     </div>
 
                 </div>
-
+                
+                <Modal show={this.state.show} handleClose={this.hideModal} currentWindow="mainLogin">
+                                    <p>Modal</p>
+                </Modal>
                 
                 
                 

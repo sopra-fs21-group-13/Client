@@ -9,6 +9,7 @@ import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 import {Button} from '../../views/design/Button.js';
 import './profile.css'
 import SideNav from '../shared/sideNav/SideNav';
+import Header from "../header/header.js";
 
 
 
@@ -29,7 +30,7 @@ export default function Profile(){
         return(
 
             <div>
-
+                <Header/>
                 <SideNav checked={2}/>
 
 

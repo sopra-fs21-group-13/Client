@@ -1,6 +1,7 @@
 import './modal.css';
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
+import React, {useState, useEffect} from "react";
 
 export const users = [
     {
@@ -27,59 +28,99 @@ export const users = [
 
 
 //export const /*erase if not working*/ 
-export const Modal = ({ handleClose, show, children }) => {
+export const Modal = ({ handleClose, show, children, currentWindow}) => {
   const showHideClassName = show ? "modal display-block" : "modal display-none";
-  
+
 
   /*where to put?*/
 
-    
-  return (
-    <div className={showHideClassName}>
-      <section className="modal-main">
-            <div id="modal_title">
-                Available Users
-            </div>
+    if(currentWindow == "dashboard"){
+        return (
+            <div
+            className={showHideClassName}>
+                <div className = "outside"
+                onClick = {() => {
+                    handleClose()
+                }}>
 
-            {users.map(user => (
-            <div id="modal_content">       
-                 
-                     <div class="userCard">
+                </div>
+            <section className="modal-main">
+                    <div id="modal_title">
+                        Available Users
+                    </div>
+
+                    {users.map(user => (
+                    <div id="modal_content">       
                         
+                            <div class="userCard">
+                                
 
-                            <div class="userBasic">
-                                <div class="photoFrame">
-                                    <img src={user.photo} />                            
-                                </div>
-                                <p class="profile_username">
-                                    {user.username}
-                                </p>
-                            </div>
+                                    <div class="userBasic">
+                                        <div class="photoFrame">
+                                            <img src={user.photo} />                            
+                                        </div>
+                                        <p class="profile_username">
+                                            {user.username}
+                                        </p>
+                                    </div>
 
-                            <div class="userMore">
-                            <p class="likes_wins">
-                                <span class="thumbIcon"><ThumbUpAltOutlinedIcon/></span> {user.likes} <span class="winIcon"><EmojiEventsIcon/></span> {user.wins}
-                            </p>
-                            <p>
-                                {user.info}
-                             </p>   
+                                    <div class="userMore">
+                                    <p class="likes_wins">
+                                        <span class="thumbIcon"><ThumbUpAltOutlinedIcon/></span> {user.likes} <span class="winIcon"><EmojiEventsIcon/></span> {user.wins}
+                                    </p>
+                                    <p>
+                                        {user.info}
+                                    </p>   
+                                    </div>
+                                
+                                    <div class="invitationButton"> INVITE </div> 
                             </div>
+                            
+
                         
-                            <div class="invitationButton"> INVITE </div> 
-                     </div>
-                     
-
-                   
+                        
+                        {/* {children}*/}
+                    </div>
+                    ))}
+                    
+                <button class="closeModal" type="button" onClick={handleClose} >
+                Close
+                </button>
                 
-                 {/* {children}*/}
+            </section>
             </div>
-            ))}
-            
-        <button class="closeModal" type="button" onClick={handleClose} >
-          Close
-        </button>
-        
-      </section>
-    </div>
-  );
+        );
+    }else if(currentWindow == "mainLogin"){
+        //This is the modal shown when pressing on register / login on the main page
+        return (
+            <div className={showHideClassName}>
+                <div className = "outside"
+                onClick = {() => {
+                    handleClose()
+                }}>
+
+                </div>
+              <section className="modal-main">
+                    <div id="modal_title">
+                        Login
+                    </div>
+
+                    <div className = "contents">
+                    <input className = "input-field"
+                        placeholder = "username">
+
+                    </input>
+                    <input className = "input-field"
+                        placeholder = "password">
+                        
+                    </input>
+                    <button className = "input-button">
+                        login
+                    </button>
+                    </div>
+                
+              </section>
+            </div>
+          );
+    }
 };
