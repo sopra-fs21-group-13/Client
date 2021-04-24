@@ -83,20 +83,6 @@ class DashBoard extends React.Component {
         
     
     async componentDidMount(){
-        //This probably won't be implemented with an array. This is placeholder information for the set info.
-        //매 순간 업데이트돼야하는 친구들.
-        /*
-        1. sets that are editted
-        2. sets that were deleted should be away from the page
-        3. location of 'set to be added'
-
-        - StackId: Long
-        - StackName: String
-        - OwnerOfFlashCards: User
-        - TypeOfFlashcardSet: TypeOfFlashcardSet
-        - Playback: Playback
-        */
-
         // call the pai here to load the data from the backend localhost:8080/sets
         api.get("/sets").then(data=>{
           //  console.log(data);

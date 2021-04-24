@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import SideNav from '../shared/sideNav/SideNav';
 import './editCreate.css';
+import Header from "../header/header.js";
+
+//icon
+import DeleteIcon from '@material-ui/icons/Delete';
+import { DeleteForever } from '@material-ui/icons';
 
 
 
@@ -16,7 +21,7 @@ function EditCreateSet(props){
     ]
 
     //example input quizes
-    const response = [
+    const quizes = [
         {id: 0,
         answer: "Fläche",
         question: "Area"
@@ -59,11 +64,12 @@ function EditCreateSet(props){
     return(
         <div>
             <SideNav checked={1}/>
+            <Header/>
 
             <div id="board"> 
                 <h1>Edit My Set</h1>
             
-                <div class="separator">Basic Info</div>
+                <div class="separator">Basic Info</div> 
                 <div id="basic_info">
                     
 
@@ -95,17 +101,17 @@ function EditCreateSet(props){
 
                     <div class= "add_set_img">
                         <label htmlFor="upload-button">
-                        {image.preview ? (
-                        <img src={image.preview} alt="dummy" width="300" height="280" />
-                        ) : (
-                        <>
-                            <span className="fa-stack fa-2x mt-3 mb-2">
-                            <i className="fas fa-circle fa-stack-2x" />
-                            <i className="fas fa-store fa-stack-1x fa-inverse" />
-                            </span>
-                            <h5 className="text-center">Upload your photo</h5>
-                        </>
-                        )}
+                            {image.preview ? (
+                            <img src={image.preview} alt="dummy" width="300" height="280" />
+                            ) : (
+                            <>
+                                <span className="fa-stack fa-2x mt-3 mb-2">
+                                <i className="fas fa-circle fa-stack-2x" />
+                                <i className="fas fa-store fa-stack-1x fa-inverse" />
+                                </span>
+                                <h5 className="text-center">Upload your photo</h5>
+                            </>
+                            )}
                         </label>
                         <input
                             type="file"
@@ -120,12 +126,54 @@ function EditCreateSet(props){
 
                 </div>
 
-                <div class="separator">Contents</div>
+                <div class="separator">Contents</div> 
+
                 <div id="contents">
+                    {quizes.map(quiz => (
+                        <div class="qna">
+                            <div class="q_id"> 
+                                {quiz.id+1} 
+                            </div>
+                            
+                                                
+                    
+                            <div class="qna_card">
+                                
+                                <div class="q_title">Question</div>
+                                <div class="q_content">
+                                    <input type="text" name="question_text" value={quiz.question}/>
+                                </div>
+                                <div class="a_title">Answer</div>
+                                <div class="a_content">
+                                    <input type="text" name="question_text" value={quiz.answer}/>
+                                </div>
+
+                            </div>
+                            <div class="throw_card">
+                                Throw this card away
+                                <DeleteForever color="secondary"/>
+                            </div>
+                        </div>
+                    
+                    ))}
+
+                    <div class="new_qna">
+                        <div class="add_qna_btn">
+                            + Add Card
+                        </div>
+                     
+
+                        
+                    </div>
                     
 
                 </div>
+
+                <button class="thinButton" type="button">
+                    Save changes
+                </button>
             </div>
+            
         </div>
 
 

@@ -4,7 +4,8 @@
     text-align: center;
     color: gainsboro;
   }
-  
+
+
   .separator::before,
   .separator::after {
     content: '';
@@ -40,4 +41,131 @@
     text-align: center;
     width: 200px;
     height: 30px;
+  }
+
+
+  .qna{
+    
+    margin:40px 10px 40px 10px;
+  }
+
+ 
+  .qna_card{
+    width: 900px;
+    height: 250px; 
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 36px 1fr;
+
+    border-radius: 10px;
+    background-color: whitesmoke;
+
+    text-align:center;
+  }
+
+
+  .q_id{
+    float:left;
+    background-color: #70F0A9;
+    width: 36px;
+    height:36px;
+    text-align:center;
+    line-height: 36px;
+
+    border-radius: 36px;
+    margin: 0 10px 0 0;
+
+    color:white;
+    font-weight:bold;
+
+  }
+
+  .q_title{
+    height: 36px;
+
+    /*font*/
+    line-height: 36px;
+    color:white;
+    font-weight: bold;
+
+    background-color: #70F0A9;
+    border-radius: 10px 0 0 0;
+    border-right: solid 3px white;
+
+
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end:2;
+  }
+
+  .q_content{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end:3;
+    border-right: solid 3px white;
+    
+  }
+
+  .a_title{
+    height: 36px;
+
+    /*font*/
+    line-height: 36px;
+    color:white;
+    font-weight: bold;
+
+    background-color: #70F0A9;
+    border-radius: 0 10px 0 0;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end:2;
+
+    border-left: solid 3px white;
+
+  }
+
+  .a_content{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end:3;
+
+    border-left: solid 3px white;
+  }
+
+  .throw_card{
+    height: 20px;
+    width: 950px;
+    line-height: 20px;
+    text-align: right;
+    color:gray;
+  }
+
+  .DeleteForever{
+  }
+
+  .new_qna{
+    
+    margin:40px 10px 40px 10px;
+
+  }
+
+  .add_qna_btn{
+    display:inline-block;
+    height:36px;
+    width: 900px;
+
+    background-color: #70f0aa7a;
+    border-radius: 10px;
+
+    margin:10px 0 0 46px;
+
+    text-align:center;
+    line-height:36px;
+    color:gray;
+    font-weight:bold;
+    
   }
