@@ -109,7 +109,6 @@ class LearnPage extends React.Component {
         ]
 
         
-        //TODO: implement "save order" list with ids
         //This should get saved inside the user for every set. This is just a temporary representation, it can change.
         const userSettings = {
             cardsShuffled: true,
@@ -149,7 +148,6 @@ class LearnPage extends React.Component {
             ordered_response.push(response[userSettings.savedOrder[i]]);
         }
 
-        //TODO: should only happen when shuffled
         if(userSettings.cardsShuffled){
             this.setState({all_flashcards: ordered_response, all_flashcards_rem: response, set: example_set, 
                 rightButtonDisabled: false, cardsShuffled: userSettings.cardsShuffled, studyStarred: userSettings.studyStarred,
@@ -362,7 +360,6 @@ class LearnPage extends React.Component {
     }
 
 
-    //TODO: still does some weird stuff when cards are shuffled
     starAllCards(){
 
         for(var i = 0; i < this.state.all_flashcards.length; i++){
@@ -441,6 +438,10 @@ class LearnPage extends React.Component {
         this.state.flashcards_starred = [];
     }
 
+    goToDashboard(){
+        this.props.history.push(`/dashboard`);
+    }
+
         
         
         
@@ -465,7 +466,11 @@ class LearnPage extends React.Component {
                 {//back to Dashboard button
                 }
                 <div class = "back-button-container">
-                    <button class = "back-button">
+                    <button class = "back-button"
+                    onClick = {() => {
+                        this.goToDashboard();
+                    }}
+                    >
                     <img 
                     class = "back-button-image"
                     src = {BackButton} />

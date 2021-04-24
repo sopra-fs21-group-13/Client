@@ -62,6 +62,11 @@ header{
     height: 50px;
     text-align: center;
     line-height: 50px; /*to make it on vertically middle*/
+    user-select: none;
+}
+
+.menuItem:hover{
+    cursor: pointer;
 }
 
 .checkedMenuItem{
@@ -69,6 +74,8 @@ header{
     text-align: center;
     background-color:whitesmoke;
     line-height: 50px;
+    cursor:default;
+    user-select: none;
 }
 
 #allSets{
@@ -151,11 +158,32 @@ h1{
 
 .iconEdit{
     position: absolute;
+    display: flex;
     top: 0;
-    right: 0;
+    right: 6px;
     z-index: 0;
     color:white;
     margin: 2px;
+    border-radius: 50%;
+    border: none;
+    height: 25px;
+    width: 24px;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.iconEditBox{
+    position: relative;
+    right: 7px;
+    height:20px;
+    width: 20px;
+}
+
+.iconEdit:hover{
+    cursor: pointer;
+}
+
+.iconEdit:active{
+    opacity: 0.6;
 }
 
 

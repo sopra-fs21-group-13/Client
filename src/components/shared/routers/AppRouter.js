@@ -76,7 +76,9 @@ class AppRouter extends React.Component {
                   <EditCreateSet />                
               )}
             />
-            <Route path="/" exact render={() => <Redirect to={"/learnPage"} />} />
+            
+            <Route path="/" exact render={() => <Redirect to={"/dashboard"} />} />
+
           </div>
         </Switch>
       </BrowserRouter>

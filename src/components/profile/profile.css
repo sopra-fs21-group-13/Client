@@ -91,7 +91,18 @@
   }
 
 .editUserForm{
-  display:block;
+  display: grid;
   margin:auto;
   width: 50px;
+  align-items: center;
+  justify-content: center;
+}
+
+.editUserForm: {
+border-bottom: var(--uiFieldBorderWidth) solid var(--uiFieldBorderColorActive);
+transition: opacity .2s ease-out;
+will-change: opacity;
+}
+
+.input{
 }

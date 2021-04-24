@@ -70,12 +70,22 @@ class Profile extends React.Component {
                     <div class="formContainer">
                         <form class="editUserForm">
                         <label>
-                            Name  <input type="text" name="name" />
+                            <span>
+                            <span>Change Username</span>
+                            <input placeholder="e.g. Billy Gonzales"/>
+                                
+                            </span>
                         </label>
                         <label>
-                            Info  <input type="text" name="info" />
+                            <span>
+                            <span>Change Info</span>
+                            <input placeholder="e.g. I like flowers"/>
+                                
+                            </span>
                         </label>
-                        <input type="submit" value="Save changes" />
+                        <input
+                        class = "submitButton"
+                        type="submit" value="Save changes" />
                         </form>
                     </div>
 

@@ -106,6 +106,10 @@ class DashBoard extends React.Component {
 
         this.setState({setList: updatedList});
     }
+
+    goToEditPage(){
+        //TODO: Route to edit page
+    }
     
 
     render(){
@@ -148,9 +152,15 @@ class DashBoard extends React.Component {
                                             <ClearIcon/>
                                         </div>
                                     </button>
-                                    <div class="iconEdit">
-                                        <EditIcon/>
-                                    </div>
+                                    <button class="iconEdit"
+                                    onClick = {() =>{
+                                        this.goToEditPage();
+                                    }}
+                                    >
+                                        <div class = "iconEditBox">
+                                            <EditIcon/>
+                                        </div>
+                                    </button>
                                     <div class="oneSetImage">
                                         <img src={res.photo} />
                         
