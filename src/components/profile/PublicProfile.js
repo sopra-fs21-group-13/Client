@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useCallback} from 'react'
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
+import Header from "../header/header.js";
 
 //icons from google..
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
@@ -13,7 +14,7 @@ import SideNav from '../shared/sideNav/SideNav';
 const Image = styled.img`
 `
 Image.defaultProps = {
-    src: "https://images.unsplash.com/photo-1542103749-8ef59b94f47e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80"
+    src: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"
 }
 
 export default function PublicProfile(){
@@ -74,12 +75,12 @@ export default function PublicProfile(){
         return(
 
             <div>
-
-                <SideNav checked={2}/>
+                <Header/>
+                <SideNav/>
 
 
                 <div id="board"> 
-                    <h1> Manage your profile here </h1>
+                    <h1> User profile </h1>
                         
                     {
                     <div className ="profileCard"> 

@@ -92,6 +92,9 @@
 
   /* used  for the PublicProfile to show the sets*/
 
+#allSets > div {
+}
+
 .editUserForm{
   display: grid;
   margin:auto;

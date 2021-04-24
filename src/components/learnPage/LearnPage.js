@@ -18,6 +18,7 @@ import Likes from './Likes.png';
 import BackButton from './BackButton.png';
 import Card from '../shared/models/Card';
 import { withRouter } from 'react-router-dom';
+import Header from "../header/header.js";
 import './learnPage.css'
 
 
@@ -442,6 +443,10 @@ class LearnPage extends React.Component {
         this.props.history.push(`/dashboard`);
     }
 
+    goToPublicProfile(){
+        this.props.history.push(`/publicProfile`);
+    }
+
         
         
         
@@ -461,7 +466,7 @@ class LearnPage extends React.Component {
 
         return(
             <div>
-            
+            <Header/>
             <InfoContainer>
                 {//back to Dashboard button
                 }
@@ -491,15 +496,21 @@ class LearnPage extends React.Component {
                                 <div class = "set-name">
                                     {this.state.set[0]}
                                 </div>
-                                <div class = "profile-picture">
-                                    <img 
-                                    class = "profile-picture-image"
-                                    src = {ProfilePicture}/>
-                                </div>
-                                <div class = "creator-name">
-                                    
-                                    {this.state.set[2]}
-                                </div>
+                                <button class = "user-profile"
+                                onClick = {() => {
+                                    this.goToPublicProfile()
+                                }}
+                                >
+                                    <div class = "profile-picture">
+                                        <img 
+                                        class = "profile-picture-image"
+                                        src = {ProfilePicture}/>
+                                    </div>
+                                    <div class = "creator-name">
+                                        
+                                        {this.state.set[2]}
+                                    </div>
+                                </button>
                             </div>
                         )
                         }

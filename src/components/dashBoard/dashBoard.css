@@ -22,6 +22,14 @@ header{
 }
 */
 
+.isScrollable{
+    overflow: unset;
+}
+
+.notScrollable{
+    overflow: hidden;
+}
+
 .sidenav {
     height: calc(100vh-160px);
     width: 160px;
@@ -117,7 +125,6 @@ h1{
     position: relative;
     overflow: hidden;  
     margin-bottom: 5px;
-
 }
 
 .setTitle{

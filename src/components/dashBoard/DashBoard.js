@@ -9,6 +9,7 @@ import {api} from "../../helpers/api"
 
 //realted to modal
 import {Modal} from '../Modal/Modal.js';
+import Header from "../header/header.js";
 
 
 
@@ -25,11 +26,14 @@ class DashBoard extends React.Component {
         this.hideModal=this.hideModal.bind(this);
     }
 
+    //these also stop the background scrolling
     showModal=()=>{
         this.setState({show: true});
+        document.body.style.overflow = "hidden"
     };
     hideModal=()=>{
         this.setState({show: false});
+        document.body.style.overflow = "unset"
     };
       
   
@@ -120,11 +124,14 @@ class DashBoard extends React.Component {
     goToEditPage(){
         //TODO: Route to edit page
     }
+
+    
     
 
     render(){
         return(
             <div>
+                <Header/>
                 <SideNav checked={1}/>
                 
 
@@ -145,6 +152,7 @@ class DashBoard extends React.Component {
 
 
                 <div id="board"> 
+                
                 <h1>All Sets You have! </h1>
                     
                     
@@ -188,7 +196,7 @@ class DashBoard extends React.Component {
                                 </Button>
 
                                 {/*Play button: show modal*/}
-                                <Modal show={this.state.show} handleClose={this.hideModal}>
+                                <Modal show={this.state.show} handleClose={this.hideModal} currentWindow="dashboard">
                                     <p>Modal</p>
                                 </Modal>
 

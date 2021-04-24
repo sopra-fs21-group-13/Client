@@ -11,7 +11,7 @@
   .modal-main {
     position: fixed;
     background: white;
-    width: 60%;
+    width: 40%;
     height: auto;
     top:50%;
     max-height: 80%;
@@ -28,6 +28,11 @@
     background: white;
     overflow:scroll;
     z-index: 13;
+  }
+
+  .outside{
+    width: 1900px;
+    height: 1900px;
   }
   
   .display-block {
@@ -112,4 +117,40 @@
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 5px;
+  }
+
+  /* main modal*/
+
+
+  .contents{
+    display:grid;
+    padding: 30px;
+    justify-content: center;
+  }
+
+  .input-field{
+    box-sizing: border-box;
+    width: 300px;
+    border: 1px solid #C2C2C2;
+    box-shadow: 1px 1px 4px #EBEBEB;
+    border-radius: 3px;
+    padding: 7px;
+    outline: none;
+    margin: 5px;
+  }
+
+  .input-button{
+    border: none;
+    padding: 8px 15px 8px 15px;
+    background: #70F0A9;
+    color: #fff;
+    box-shadow: 1px 1px 4px #DADADA;
+    border-radius: 3px;
+    margin: 5px;
+  }
+
+  .input-button:hover{
+    background: #60d494;
+	  color: #fff;
+    cursor: pointer;
   }
