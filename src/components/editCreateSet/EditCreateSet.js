@@ -104,8 +104,6 @@ function EditCreateSet(props){
                                 <div class="img_upload_btn">
                                     +
                                 </div>
-
-
                             </div>
                         </div>
 

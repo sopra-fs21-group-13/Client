@@ -42,13 +42,13 @@
         
   }
   .set_img_frame{
-    margin: 0 auto;
+    margin: auto;
     width: 300px;
     height: 180px;
     background-color: orange;
     border-radius: 10px;
-    margin: 5px;
-    position: relative;
+    
+
   }
 
   .img_upload_btn{
@@ -56,11 +56,15 @@
     height: 30px;
     border-radius:30px;
     background-color: #F0DA65;
+
     text-align:center;
     line-height: 30px;
     color:white;
     font-size: 20px;
     font-weight: bold;
+
+    margin: 145px auto auto 260px;
+    display:inline-block;
   
   }
 
