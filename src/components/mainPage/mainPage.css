@@ -1,11 +1,10 @@
 .imgFrame{
     height: 610px;
     overflow:hidden;
-
-    
     justify-content: center;
     align-items: center;
-    overflow: hidden
+    overflow: hidden;
+    user-select: none;
 }
 
 .imgFrame img{
@@ -20,12 +19,13 @@
     min-width: 100%;
     min-height: 100%;
     max-width: 100%;
-    max-height: 100%
+    max-height: 100%;
+    user-select: none;
 }
 
 .startButton{
     position: absolute;
-    top: 85%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);

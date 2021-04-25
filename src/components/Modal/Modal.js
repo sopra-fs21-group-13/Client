@@ -28,7 +28,7 @@ export const users = [
 
 
 //export const /*erase if not working*/ 
-export const Modal = ({ handleClose, show, children, currentWindow}) => {
+export const Modal = ({ handleClose, show, children, currentWindow, mainPageModalTypeSetter}) => {
   const showHideClassName = show ? "modal display-block" : "modal display-none";
 
 
@@ -117,6 +117,55 @@ export const Modal = ({ handleClose, show, children, currentWindow}) => {
                     <button className = "input-button">
                         login
                     </button>
+
+                    <text className = "register-text"
+                    onClick = {() => {
+                        //switches between register and login modal
+                        mainPageModalTypeSetter();
+                    }}>
+                        Don't have an account yet?
+                    </text>
+                    </div>
+                
+              </section>
+            </div>
+          );
+    } else if(currentWindow == "mainRegister"){
+        //This is the modal shown when pressing on register / login on the main page
+        return (
+            <div className={showHideClassName}>
+                <div className = "outside"
+                onClick = {() => {
+                    handleClose()
+                }}>
+
+                </div>
+              <section className="modal-main">
+                    <div id="modal_title">
+                        Register
+                    </div>
+
+                    <div className = "contents">
+                    <input className = "input-field"
+                        placeholder = "username">
+
+                    </input>
+                    <input className = "input-field"
+                        placeholder = "password">
+                        
+                    </input>
+                    <button className = "input-button">
+                        register
+                    </button>
+
+                    <text className = "register-text"
+                    onClick = {() => {
+                        //switches between register and login modal
+                        mainPageModalTypeSetter();
+                    }}>
+                        Already have an account?
+                    </text>
+
                     </div>
                 
               </section>
