@@ -92,8 +92,6 @@ class DashBoard extends React.Component {
             console.log(err);
         })
         
-       
-    
     }  
 
     //deletes a set from the setList and also from the view.
