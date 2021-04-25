@@ -31,10 +31,13 @@ export default function Profile(){
 
             <div>
                 <Header/>
-                <SideNav checked={2}/>
+        
 
 
                 <div id="board"> 
+                <SideNav checked={2}/>
+
+                    <div id="pureboard">
                     <h1> Manage your profile here </h1>
                         
                     {
@@ -81,6 +84,7 @@ export default function Profile(){
                         </form>
                     </div>
 
+                </div>
                 </div>
                 
                 <footer>Footer</footer>
