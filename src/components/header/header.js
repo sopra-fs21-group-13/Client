@@ -31,7 +31,7 @@ const HeaderComponent = styled.header`
 `
 
 
-function Header({buttonBehavior, setMainModalLogin}){
+function Header({buttonBehavior}){
 
 
     const LoginPopUp = () => {
@@ -49,7 +49,6 @@ function Header({buttonBehavior, setMainModalLogin}){
                     />
                     <Button
                     onClick = {() => {
-                        setMainModalLogin();
                         buttonBehavior();
                     }}
                     >
