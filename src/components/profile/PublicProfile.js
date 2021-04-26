@@ -2,6 +2,8 @@ import React, {useState, useEffect, useCallback} from 'react'
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import Header from "../header/header.js";
+import Footer from '../footer/Footer.js'
+
 
 //icons from google..
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
@@ -76,13 +78,13 @@ export default function PublicProfile(){
 
             <div>
                 <Header/>
-                <SideNav/>
-
-
+                
                 <div id="board"> 
+                <SideNav/>
+                <div id="pureboard">
                     <h1> User profile </h1>
                         
-                    {
+                    
                     <div className ="profileCard"> 
                         
                         
@@ -103,7 +105,7 @@ export default function PublicProfile(){
 
                         </p>   
                     </div>
-                    }
+
                     <div id="allSets"> 
                         {response.sets.map(res => (
                                     <div class="oneSetWrapper">
@@ -121,10 +123,10 @@ export default function PublicProfile(){
                                     </div>
                                 ))}
                     </div>
-
                 </div>
                 
-                <footer>Footer</footer>
+                </div>
+                <Footer>Footer</Footer>
             </div>
         );
     

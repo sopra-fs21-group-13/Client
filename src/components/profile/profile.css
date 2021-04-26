@@ -57,7 +57,7 @@
   }
   .profileCard > *{
     margin: auto;
-    line-height: 2;
+    line-height: 2;;
   }
 
   .photoFrame{
@@ -99,8 +99,6 @@
 
   /* used  for the PublicProfile to show the sets*/
 
-#allSets > div {
-}
 
 .editUserForm{
   display: grid;
