@@ -10,7 +10,6 @@ import Header from "../header/header.js";
 import Footer from '../footer/Footer.js'
 
 
-
 class AboutUs extends React.Component {
 
     constructor() {
@@ -23,23 +22,16 @@ class AboutUs extends React.Component {
             <div>
                 <grid-container>
                     <main>
+                    <textBox>
                         <h1> What is Flashy? </h1>
                             <h3> Founded in 2008, Stack Overflow’s public platform is used by nearly everyone who codes to learn, share their knowledge, collaborate, and build their careers.
 
-                                 Our products and tools help developers and technologists in life and at work. These products include Stack Overflow for Teams, Stack Overflow Advertising, and Stack Overflow for Talent and Jobs.
-
-                                 Stack Overflow for Teams, our core SaaS collaboration product, is helping thousands of companies around the world as the transition to remote work, address business continuity challenges, and undergo digital transformation.
-
                                  Whether it’s on Stack Overflow or within Stack Overflow for Teams, community is at the center of all that we do. </h3>
-
                         <h1> Who are we? </h1>
                             <h3> Founded in 2008, Stack Overflow’s public platform is used by nearly everyone who codes to learn, share their knowledge, collaborate, and build their careers.
 
-                                 Our products and tools help developers and technologists in life and at work. These products include Stack Overflow for Teams, Stack Overflow Advertising, and Stack Overflow for Talent and Jobs.
-
-                                 Stack Overflow for Teams, our core SaaS collaboration product, is helping thousands of companies around the world as the transition to remote work, address business continuity challenges, and undergo digital transformation.
-
                                  Whether it’s on Stack Overflow or within Stack Overflow for Teams, community is at the center of all that we do. </h3>
+                    </textBox>
                     </main>
                     <section class="nom">
                         <h1> Future Projects </h1>

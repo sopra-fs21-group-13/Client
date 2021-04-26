@@ -51,3 +51,10 @@ flashy {
     background-size: 80%;
     margin-left: 50px;
 }
+
+textBox{
+    position: absolute;
+    right: 800px;
+    left: 50px;
+}
+
