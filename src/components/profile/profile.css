@@ -35,6 +35,12 @@
     color: #f1f1f1;
   }
 
+  #board{
+    display:grid;
+    grid-template-columns:160px 1fr;
+  }
+
+  
   .profileCard{
     border: solid 1px whitesmoke;
     background-color: white;

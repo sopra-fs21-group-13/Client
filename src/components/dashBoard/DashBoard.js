@@ -118,26 +118,10 @@ class DashBoard extends React.Component {
         return(
             <div>
                 <Header/>
-                <SideNav checked={1}/>
-                
-
-                {/*     replaced with sideNav component
-
-                <div class="sidenav"> 
-                    <div class="checkedMenuItem">
-                        Dashboard
-                    </div>
-
-                    <div class="menuItem" onClick={() => {
-                        this.props.history.push("profile");
-                    }}>
-                        Profile
-                    </div>
-                </div>
-                */}
-
-
                 <div id="board"> 
+                <SideNav checked={1}/>
+
+                <div id="pureboard">
                 
                 <h1>All Sets You have! </h1>
                     
@@ -227,8 +211,11 @@ class DashBoard extends React.Component {
                     <div class = "findSets">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Want new sets to join? &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>
+                    </div>
 
                 </div>
+
+    
                 
                 <Footer></Footer>
             </div>

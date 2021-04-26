@@ -3,6 +3,7 @@
     align-items: center;
     text-align: center;
     color: gainsboro;
+  
   }
 
 
@@ -11,19 +12,60 @@
     content: '';
     flex: 1;
     border-bottom: 1px solid gainsboro;
+   
   }
   
   .separator:not(:empty)::before {
     margin-right: .25em;
+  
   }
   
   .separator:not(:empty)::after {
     margin-left: .25em;
+    
   }
 
   #basic_info{
     display: grid;
-    grid-template-columns: 1fr 200px;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  #set_info{
+    grid-column-start:1;
+    grid-column-end:2;
+  }
+
+  #set_img_upload{
+    text-align: center;
+    grid-column-start:2;
+    grid-column-end:3;
+        
+  }
+  .set_img_frame{
+    margin: auto;
+    width: 300px;
+    height: 180px;
+    background-color: orange;
+    border-radius: 10px;
+    
+
+  }
+
+  .img_upload_btn{
+    width:30px;
+    height: 30px;
+    border-radius:30px;
+    background-color: #F0DA65;
+
+    text-align:center;
+    line-height: 30px;
+    color:white;
+    font-size: 20px;
+    font-weight: bold;
+
+    margin: 145px auto auto 260px;
+    display:inline-block;
+  
   }
 
 .thinButton{
@@ -169,3 +211,36 @@
     font-weight:bold;
     
   }
+
+  input[type=text] {
+    background-color: whitesmoke;
+    border: solid whitesmoke;
+    border-radius: 10px;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+
+    color:gray;
+    
+  }
+
+  input[type=submit]{
+    float:right;
+  }
+
+  input[  name="question_text"]{
+    text-align: center;
+
+  }
+
+  #screen{
+    display:grid;
+    grid-template-columns: 160px 1fr;
+    background-color: white;
+  }
+  
+  #pureboard{
+    grid-column-start: 2;
+    grid-column-end: 3;
+}

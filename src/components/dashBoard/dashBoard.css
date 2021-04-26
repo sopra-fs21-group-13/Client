@@ -88,12 +88,14 @@ header{
 
 #allSets{
     display: grid;
-    grid-column-start: 2;
-    grid-column-end: 4;
     background-color:white;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 30px;
     margin: 0 50px;
+}
+#pureboard{
+    grid-column-start: 2;
+    grid-column-end: 3;
 }
 
 h1{
@@ -102,11 +104,12 @@ h1{
 }
 
 #board{
-    grid-column-start: 2;
-    grid-column-end: 4;
+    display:grid;
+    grid-template-columns:160px 1fr;
+
     background-color:white;
-    padding: 20px 0 50px 160px;
-   /* margin: 0 0 50px 0;*/
+   /* padding: 20px 20px 50px 20px;*/
+   
 }
 
 #allSets > div {
