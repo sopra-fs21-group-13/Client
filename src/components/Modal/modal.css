@@ -150,7 +150,11 @@
     margin: 5px;
   }
 
-  .input-button:hover{
+  .input-button:disabled{
+    background: #9fd8b9
+  }
+
+  .input-button:enabled:hover{
     background: #60d494;
 	  color: #fff;
     cursor: pointer;

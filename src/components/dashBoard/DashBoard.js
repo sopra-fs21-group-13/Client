@@ -8,7 +8,7 @@ import SideNav from '../shared/sideNav/SideNav';
 import {api, handleError} from "../../helpers/api"
 
 //realted to modal
-import {Modal} from '../Modal/Modal.js';
+import Modal from '../Modal/Modal.js';
 import Header from "../header/header.js";
 import Footer from '../footer/Footer.js'
 

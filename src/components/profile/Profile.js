@@ -32,8 +32,6 @@ export default function Profile(){
             <div>
                 <Header/>
         
-
-
                 <div id="board"> 
                 <SideNav checked={2}/>
 

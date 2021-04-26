@@ -4,6 +4,8 @@ import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 import React, {useState, useEffect} from "react";
 import { api, handleError } from '../../helpers/api';
 import SocialButton from './Socialbutton';
+import User from '../shared/models/User';
+import { withRouter } from 'react-router-dom';
 
 export const users = [
     {
@@ -30,27 +32,76 @@ export const users = [
 
 
 //export const /*erase if not working*/ 
-export const Modal = ({ handleClose, show, children, currentWindow, mainPageModalTypeSetter}) => {
-  const showHideClassName = show ? "modal display-block" : "modal display-none";
+function Modal({ handleClose, show, children, currentWindow, mainPageModalTypeSetter, ...props }){
 
-  const handleSocialLogin = (user) => {
-    console.log(user)
-    let requestBody = {email: user._profile.email, name:`${user._profile.firstName} ${user._profile.lastName}`,
-    token:user._token.accessToken 
-    }; 
+    const showHideClassName = show ? "modal display-block" : "modal display-none";
+
+    const [username, setUsername] = useState();
+    const [password, setPassword] = useState();
+
+    async function login(){
+        try {
+            const requestBody = JSON.stringify({
+            username: username,
+            password: password
+            });
+            const response = await api.post('/users/login', requestBody);
     
-    api.post('/users/socialLogin', requestBody).then(Data=>{
-      localStorage.setItem('token', user._token.accessToken);
-      this.props.history.push(`/game`);
+            // Get the returned user and update a new object.
+            const user = new User(response.data);
+    
+            // Store the token into the local storage.
+            localStorage.setItem('token', user.token);
+    
+            // Login successfully worked --> navigate to the route /game in the GameRouter
+            this.props.history.push(`/dashboard`);
+        } catch (error) {
+            alert(`Something went wrong during the login: \n${handleError(error)}`);
+        }
+    }
 
-    }).catch(err=>{
-      console.log(err);
-    })
-  }
-  
-   const handleSocialLoginFailure = (err) => {
-    console.error(err)
-  }
+    async function register(){
+        try {
+            const requestBody = JSON.stringify({
+            username: username,
+            password: password
+            });
+            const response = await api.post('/users', requestBody);
+    
+            // Get the returned user and update a new object.
+            const user = new User(response.data);
+    
+            // Store the token into the local storage.
+            localStorage.setItem('token', user.token);
+    
+            // Login successfully worked --> navigate to the route /game in the GameRouter
+            this.props.history.push(`/dashboard`);
+        } catch (error) {
+            alert(`Something went wrong during the login: \n${handleError(error)}`);
+        }
+    }
+
+    //google login
+    const handleSocialLogin = (user) => {
+        console.log(user)
+        let requestBody = {email: user._profile.email, name:`${user._profile.firstName} ${user._profile.lastName}`,
+        token:user._token.accessToken 
+        }; 
+        
+        api.post('/users/socialLogin', requestBody).then(Data=>{
+        localStorage.setItem('token', user._token.accessToken);
+        props.history.push(`/dashboard`);
+
+        }).catch(err=>{
+        console.log(err);
+        })
+    }
+    
+    const handleSocialLoginFailure = (err) => {
+        console.error(err)
+    }
+
+
 
   /*where to put?*/
 
@@ -126,15 +177,28 @@ export const Modal = ({ handleClose, show, children, currentWindow, mainPageModa
                     </div>
 
                     <div className = "contents">
-                    <input className = "input-field"
-                        placeholder = "username">
+                    <input 
+                        className = "input-field"
+                        placeholder = "username"
+                        onChange={e => {
+                            setUsername(e.target.value);
+                        }}>
 
                     </input>
-                    <input className = "input-field"
-                        placeholder = "password">
+                    <input 
+                        className = "input-field"
+                        placeholder = "password"
+                        onChange={e => {
+                            setPassword(e.target.value);
+                            }}>
                         
                     </input>
-                    <button className = "input-button">
+                    <button 
+                    disabled={!username || !password}
+                    onClick = {() => {
+                        login();
+                    }}
+                    className = "input-button">
                         login
                     </button>
 
@@ -176,14 +240,24 @@ export const Modal = ({ handleClose, show, children, currentWindow, mainPageModa
 
                     <div className = "contents">
                     <input className = "input-field"
-                        placeholder = "username">
+                        placeholder = "username"
+                        onChange={e => {
+                            setUsername(e.target.value);
+                        }}>
 
                     </input>
                     <input className = "input-field"
-                        placeholder = "password">
+                        placeholder = "password"
+                        onChange={e => {
+                            setPassword(e.target.value);
+                        }}>
                         
                     </input>
-                    <button className = "input-button">
+                    <button className = "input-button"
+                    disabled={!username || !password}
+                    onClick = {() => {
+                        register();
+                    }}>
                         register
                     </button>
                     <SocialButton
@@ -210,3 +284,5 @@ export const Modal = ({ handleClose, show, children, currentWindow, mainPageModa
           );
     }
 };
+
+export default withRouter(Modal);

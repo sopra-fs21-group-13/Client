@@ -2,12 +2,14 @@ import React, {useState} from 'react'
 import { withRouter } from 'react-router-dom';
 import Header from "../header/header.js";
 
+
 import './mainPage.css'
 import {Button} from '../../views/design/Button.js';
 
 //realted to modal
-import {Modal} from '../Modal/Modal.js';
+import Modal from '../Modal/Modal.js';
 import Footer from '../footer/Footer.js'
+
 
 
 class MainPage extends React.Component {
@@ -48,9 +50,9 @@ class MainPage extends React.Component {
       
     async componentDidMount(){
 
-    }  
-    
+    }
 
+    
 
     render(){
         //handles the modal
@@ -59,6 +61,7 @@ class MainPage extends React.Component {
         const modalType = this.state.modalLogin ? "mainLogin" : "mainRegister";
         //passes the right function to the modal, so that it can change between register and login modal from inside the modal directly
         const modalTypeSetter = this.state.modalLogin ? this.setModalToRegister : this.setModalToLogin;
+
         return(
             <div>
                 <Header
@@ -134,7 +137,7 @@ class MainPage extends React.Component {
                 
                 
                 
-                <Footer>Footer</Footer>
+                <Footer>Footer</Footer> 
             </div>
         );
     }

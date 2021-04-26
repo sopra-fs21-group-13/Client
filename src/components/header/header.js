@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import "./header.css";
 import flashy_h_white from '../shared/images/flashy_h-white.svg';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 const Container = styled.div`
     justify-content: space-between;
@@ -31,7 +32,7 @@ const HeaderComponent = styled.header`
 `
 
 
-function Header({buttonBehavior, setMainModalLogin}){
+function Header({buttonBehavior, setMainModalLogin, ...props}){
 
 
     const LoginPopUp = () => {
@@ -71,7 +72,8 @@ function Header({buttonBehavior, setMainModalLogin}){
                     />
                     <Button
                     onClick = {() => {
-                        LoginPopUp();
+                        localStorage.clear();
+                        props.history.push("/main");
                     }}
                     >
                         logout
@@ -84,6 +86,6 @@ function Header({buttonBehavior, setMainModalLogin}){
     }
    
 
-}
+};
 
-export default Header;
+export default withRouter(Header);
