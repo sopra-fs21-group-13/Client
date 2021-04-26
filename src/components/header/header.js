@@ -39,12 +39,23 @@ function Header({buttonBehavior, setMainModalLogin, ...props}){
 
     }
 
+    function goToDashboard(){
+        props.history.push("dashboard");
+    }
+
+    function goToMain(){
+        props.history.push("main");
+    }
+
     if(localStorage.getItem('token') == null){
     return(
         <div>
             <HeaderComponent>
                 <Container>
                     <img 
+                    onClick = {() => {
+                        goToMain();
+                    }}
                     class = "logoImage"
                     src = {flashy_h_white}
                     />
@@ -67,6 +78,9 @@ function Header({buttonBehavior, setMainModalLogin, ...props}){
             <HeaderComponent>
                 <Container>
                     <img 
+                    onClick = {() => {
+                        goToDashboard();
+                    }}
                     class = "logoImage"
                     src = {flashy_h_white}
                     />
@@ -85,7 +99,6 @@ function Header({buttonBehavior, setMainModalLogin, ...props}){
     );
     }
    
-
 };
 
 export default withRouter(Header);
