@@ -10,6 +10,7 @@ import {api} from "../../helpers/api"
 //realted to modal
 import {Modal} from '../Modal/Modal.js';
 import Header from "../header/header.js";
+import Footer from '../footer/Footer.js'
 
 
 
@@ -229,7 +230,7 @@ class DashBoard extends React.Component {
 
                 </div>
                 
-                <footer>Footer</footer>
+                <Footer></Footer>
             </div>
         );
     }

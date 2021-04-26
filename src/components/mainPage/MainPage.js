@@ -7,7 +7,7 @@ import {Button} from '../../views/design/Button.js';
 
 //realted to modal
 import {Modal} from '../Modal/Modal.js';
-
+import Footer from '../footer/Footer.js'
 
 
 class MainPage extends React.Component {
@@ -134,7 +134,7 @@ class MainPage extends React.Component {
                 
                 
                 
-                <footer>Footer</footer>
+                <Footer>Footer</Footer>
             </div>
         );
     }

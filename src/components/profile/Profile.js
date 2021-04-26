@@ -10,7 +10,7 @@ import {Button} from '../../views/design/Button.js';
 import './profile.css'
 import SideNav from '../shared/sideNav/SideNav';
 import Header from "../header/header.js";
-
+import Footer from "../footer/Footer.js"
 
 
 export default function Profile(){
@@ -83,7 +83,7 @@ export default function Profile(){
 
                 </div>
                 
-                <footer>Footer</footer>
+                <Footer>Footer</Footer>
             </div>
         );
     

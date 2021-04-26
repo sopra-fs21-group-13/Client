@@ -20,7 +20,7 @@ import Card from '../shared/models/Card';
 import { withRouter } from 'react-router-dom';
 import Header from "../header/header.js";
 import './learnPage.css'
-
+import Footer from '../footer/Footer.js'
 
 const Container = styled(BaseContainer)`
     color: black;
@@ -66,18 +66,6 @@ const Info = styled.div`
     left: 50px;
     top:70px;
 `
-
-
-
-const Footer = styled.div`
-    position: relative;
-    height: 100px;
-    text-align: center;
-    color:white;
-    background-color:#70F0A9;
-    bottom:0px;
-`
-
 
 class LearnPage extends React.Component {
     constructor() {
@@ -694,7 +682,7 @@ class LearnPage extends React.Component {
                 )}
                 
             </MainContainer>
-            <Footer>Footer</Footer>
+            <Footer></Footer>
             </div>
         );
     }
