@@ -21,7 +21,9 @@ class DashBoard extends React.Component {
         this.state = {
             which_menu: "dashBoard",
             setList: null,
+            userSettings: null,
             show: false //for avilable Users modal
+
         };
         this.showModal = this.showModal.bind(this);
         this.hideModal=this.hideModal.bind(this);
@@ -124,6 +126,92 @@ class DashBoard extends React.Component {
             alert(`Something went wrong during the set creation: \n${handleError(error)}`);
         }
     }
+
+    //creates a set for testing without pushing to backend
+    addDummySet(){
+
+        //add user settings for the dummy set
+        if(this.state.setList == {} || this.state.userSettings == null){
+            const settings = {
+                6: {
+                    cardsShuffled: false,
+                    studyStarred: false,
+                    lastCard: 1,
+                    markedCards: [
+                    ],
+                    savedOrder: [
+                    ]
+                }
+            }
+
+            this.setState({userSettings: settings});
+        }else{
+            const userSettings = this.state.userSettings;
+            const settings = {
+                    cardsShuffled: false,
+                    studyStarred: false,
+                    lastCard: 1,
+                    markedCards: [
+                    ],
+                    savedOrder: [
+                    ]
+            }
+
+            userSettings[6] = settings;
+            this.setState({userSettings: userSettings});
+        }
+
+
+        //Add sets to state
+        if(this.state.setList == [] || this.state.setList == null){
+            const setList = [
+                {
+                    id:6,
+                    title: "TOEFL 100+",
+                    explain: "Aim higher",
+                    userId:5,
+                    liked:21,
+                    photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg",
+                    cards: [{
+                        id: 0,
+                        question: "Area",
+                        answer: "Fläche"
+                    },
+                    {
+                        id: 1,
+                        question: "Politics",
+                        answer: "Politik"
+                    }
+                ]
+                }
+            ]
+            this.setState({setList:setList});
+    }else{
+        const setList = this.state.setList;
+        const set = {
+                id:6,
+                title: "TOEFL 100+",
+                explain: "Aim higher",
+                userId:5,
+                liked:21,
+                photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg",
+                cards: [{
+                    id: 0,
+                    question: "Area",
+                    answer: "Fläche"
+                },
+                {   
+                    id: 1,
+                    question: "Politics",
+                    answer: "Politik"
+                }
+            ]
+            }
+        setList.push(set);
+        
+        this.setState({setList:this.state.setList});
+    }
+    }
     
 
     render(){
@@ -151,8 +239,12 @@ class DashBoard extends React.Component {
                            
                     </div>
                 </div>
-                <Button yellow={true} width="35px" >
+                <Button 
+                yellow={true} width="35px" >
                     +
+                </Button>
+                <Button yellow={false} width="45%">
+                    add dummy set
                 </Button>
                     </div>
                 </div>
@@ -192,7 +284,7 @@ class DashBoard extends React.Component {
                                 {/*learn button*/}
                                 <Button width="45%" background="#FFF" onClick={() => {
                                     //Pushes the set to the learn page so it can be displayed.
-                                    this.props.history.push({pathname: "learnpage", state: {set: res}});
+                                    this.props.history.push({pathname: "learnpage", state: {set: res.cards, userSettings: this.state.userSettings[res.id]}});
                                 }} >
                                     Learn
                                 </Button>
@@ -205,7 +297,8 @@ class DashBoard extends React.Component {
                                 <Button yellow={true} width="45%" onClick={this.showModal}>
                                     Play
                                 </Button>
-                            
+                                
+                                            
 
                             </div>
 
@@ -239,6 +332,12 @@ class DashBoard extends React.Component {
                                 </div>
                                 <Button yellow={true} width="35px" >
                                     +
+                                </Button>
+                                <Button yellow={false} width="45%" 
+                                onClick = { () => {
+                                    this.addDummySet();
+                                }}>
+                                    add dummy set
                                 </Button>
                         </div>
                         

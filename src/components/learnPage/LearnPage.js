@@ -99,33 +99,10 @@ class LearnPage extends React.Component {
 
         
         //This should get saved inside the user for every set. This is just a temporary representation, it can change.
-        const userSettings = {
-            cardsShuffled: true,
-            studyStarred: false,
-            lastCard: 1,
-            markedCards: [
-                1,2
-            ],
-            savedOrder: [
-                2,0,1
-            ]
-        };
+        const userSettings = this.props.location.state.userSettings;
 
         //This is a placeholder response from the backend for a GET request.
-        const response = [
-                {id: 0,
-                answer: "Fläche",
-                question: "Area"
-            },{
-                id:1,
-                answer: "Unternehmen",
-                question: "Business"
-            },
-            {
-                id:2,
-                answer: "Mathe",
-                question: "Math"
-            }];
+        const response = this.props.location.state.set;
 
         //Here we could save the currentFlashcard id inside the user
         //and then reenter it here inside a variable for saving the current state
