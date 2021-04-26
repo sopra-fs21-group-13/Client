@@ -109,8 +109,11 @@ class DashBoard extends React.Component {
     }
 
     goToEditPage(){
-        //TODO: Route to edit page
         this.props.history.push("edit");
+    }
+
+    goToCreatePage(){
+        this.props.history.push("create");
     }
 
     //helper function for testing
@@ -330,7 +333,10 @@ class DashBoard extends React.Component {
                                            
                                     </div>
                                 </div>
-                                <Button yellow={true} width="35px" >
+                                <Button yellow={true} width="35px" 
+                                onClick = { () => {
+                                    
+                                }}>
                                     +
                                 </Button>
                                 <Button yellow={false} width="45%" 
