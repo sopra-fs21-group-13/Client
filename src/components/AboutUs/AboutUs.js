@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ReactDOM from 'react-dom';
-import styles from '../AboutUs/AboutUs.css';
+import '../AboutUs/AboutUs.css';
 import { withRouter } from 'react-router-dom';
 
 class AboutUs extends React.Component {

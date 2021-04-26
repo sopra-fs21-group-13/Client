@@ -10,12 +10,13 @@ import { withRouter } from 'react-router-dom';
  * https://www.styled-components.com/
  */
 const Container = styled.div`
-  height: 80px;
+  margin-top: 10px;
+  height: 65px;
   background-color:#70F0A9;
   display: flex;
-  justify-content: top;
+  justify-content: center;
   align-items: top;
-  position: absolute;
+  position: relative;
   width: 100%
 `;
 
@@ -92,4 +93,4 @@ class Footer extends React.Component {
 /**
  * Don't forget to export your component!
  */
-export default Footer;
+export default withRouter(Footer);
