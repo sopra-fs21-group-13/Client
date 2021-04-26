@@ -42,6 +42,6 @@ header {
 
 flashy {
     grid-area: flashy;
-    background: url('../shared/images/flashy_h-white.svg') no-repeat;
+    background: url('../shared/images/flashy_h-green.png') no-repeat;
     background-size: cover;
 }

@@ -201,15 +201,6 @@ h1{
 
 }
 
-footer{
-    height: 100px;
-    position: relative;
-    text-align: center;
-    color:white;
-    background-color:#70F0A9;
-    bottom:0px;
-}
-
 .opac{
     opacity:0.5;
 }
