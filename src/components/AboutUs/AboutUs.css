@@ -3,37 +3,42 @@ body {
     height: 100vh;
 }
 
-.grid-container{
+grid-container{
     display: grid;
     grid-template-columns: 1fr 1.2fr 1.5fr;
     grid-template-rows: 1fr 4fr 3fr 2fr;
     grid-template-areas:
-        "main main header"
+        "header header header"
         "main main flashy"
         "nom yum flashy"
-        "footer footer flashy";
+        "emptyspace emptyspace flashy";
     height: 100vh;
     margin: 2em;
 }
 
 main {
     grid-area: main;
-    background: #FFFADF;
+    background: #70F0A9;
+    textAlign: 'bottom';
 }
 
 section.nom {
     grid-area: nom;
-    background: #C4B35A;
+    background: #6fa5aa;
+    margin-top: 10px;
 }
 
 section.yum {
     grid-area: yum;
-    background: #333333;
+    background: #306b6d;
+    margin-top: 10px;
+    margin-left: 10px;
+
 }
 
-section.footer {
-    grid-area: footer;
-    background: #202020;
+section.emptyspace {
+    grid-area: emptyspace;
+    background: #white;
 }
 
 header {
@@ -43,5 +48,6 @@ header {
 flashy {
     grid-area: flashy;
     background: url('../shared/images/flashy_h-green.png') no-repeat;
-    background-size: cover;
+    background-size: 80%;
+    margin-left: 50px;
 }

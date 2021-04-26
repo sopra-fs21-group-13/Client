@@ -45,7 +45,7 @@ class Footer extends React.Component {
    }
 
    aboutUs() {
-    this.props.history.push('/aboutUs');
+    this.props.history.push('/about');
    }
 
    help() {
