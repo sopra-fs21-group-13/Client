@@ -38,6 +38,7 @@ function Modal({ handleClose, show, children, currentWindow, mainPageModalTypeSe
 
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
+    const [name, setName] = useState();
 
     async function login(){
         try {
@@ -53,8 +54,8 @@ function Modal({ handleClose, show, children, currentWindow, mainPageModalTypeSe
             // Store the token into the local storage.
             localStorage.setItem('token', user.token);
     
-            // Login successfully worked --> navigate to the route /game in the GameRouter
-            this.props.history.push(`/dashboard`);
+            // Login successfully worked --> navigate to the route /dashboard in the GameRouter
+            props.history.push(`/dashboard`);
         } catch (error) {
             alert(`Something went wrong during the login: \n${handleError(error)}`);
         }
@@ -64,7 +65,8 @@ function Modal({ handleClose, show, children, currentWindow, mainPageModalTypeSe
         try {
             const requestBody = JSON.stringify({
             username: username,
-            password: password
+            password: password,
+            name: name
             });
             const response = await api.post('/users', requestBody);
     
@@ -74,10 +76,10 @@ function Modal({ handleClose, show, children, currentWindow, mainPageModalTypeSe
             // Store the token into the local storage.
             localStorage.setItem('token', user.token);
     
-            // Login successfully worked --> navigate to the route /game in the GameRouter
-            this.props.history.push(`/dashboard`);
+            // Register successfully worked --> navigate to the route /dashboard in the GameRouter
+            props.history.push(`/dashboard`);
         } catch (error) {
-            alert(`Something went wrong during the login: \n${handleError(error)}`);
+            alert(`Something went wrong during registering: \n${handleError(error)}`);
         }
     }
 
@@ -250,6 +252,13 @@ function Modal({ handleClose, show, children, currentWindow, mainPageModalTypeSe
                         placeholder = "password"
                         onChange={e => {
                             setPassword(e.target.value);
+                        }}>
+                        
+                    </input>
+                    <input className = "input-field"
+                        placeholder = "Full name"
+                        onChange={e => {
+                            setName(e.target.value);
                         }}>
                         
                     </input>
