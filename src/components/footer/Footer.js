@@ -92,4 +92,4 @@ class Footer extends React.Component {
 /**
  * Don't forget to export your component!
  */
-export default Footer;
+export default withRouter(Footer);

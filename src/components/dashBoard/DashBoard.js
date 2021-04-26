@@ -5,7 +5,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import {Button} from '../../views/design/Button.js';
 import './dashBoard.css';
 import SideNav from '../shared/sideNav/SideNav';
-import {api} from "../../helpers/api"
+import {api, handleError} from "../../helpers/api"
 
 //realted to modal
 import {Modal} from '../Modal/Modal.js';
@@ -20,7 +20,7 @@ class DashBoard extends React.Component {
         super();
         this.state = {
             which_menu: "dashBoard",
-            setList: this.response,
+            setList: null,
             show: false //for avilable Users modal
         };
         this.showModal = this.showModal.bind(this);
@@ -84,7 +84,7 @@ class DashBoard extends React.Component {
         
     
     async componentDidMount(){
-        // call the pai here to load the data from the backend localhost:8080/sets
+        // call the api here to load the data from the backend localhost:8080/sets
         api.get("/sets").then(data=>{
           //  console.log(data);
          // this.state.setList=data["data"];
@@ -111,12 +111,24 @@ class DashBoard extends React.Component {
         this.props.history.push("edit");
     }
 
-    
+    //helper function for testing
+    async createNewSetInBackend(){
+        try{
+            const requestBody = JSON.stringify({
+                card: [{
+                    question: "Area",
+                    answer: "Fläche"
+                }]
+              });
+        }catch(error){
+            alert(`Something went wrong during the set creation: \n${handleError(error)}`);
+        }
+    }
     
 
     render(){
         return(
-            <div>
+            <div id>
                 <Header/>
                 <div id="board"> 
                 <SideNav checked={1}/>
@@ -125,9 +137,28 @@ class DashBoard extends React.Component {
                 
                 <h1>All Sets You have! </h1>
                     
-                    
+                {!this.state.setList ? 
+                //Only shows the "add set"- Button before the server request has gone through
+                (<div id= "allSets">
+                <div class="oneSetWrapper">
+                <div class="oneSet opac">
+
+                    <div class="oneSetImage">
+                        <img src="https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg" />
+        
+                    </div>
+                    <div class="setTitle">
+                           
+                    </div>
+                </div>
+                <Button yellow={true} width="35px" >
+                    +
+                </Button>
+                    </div>
+                </div>
+                    ) : (
                     <div id="allSets"> 
-                       
+                    
                         {this.state.setList.map((res ,i)=> (
                             <div class="oneSetWrapper" key={i}>
                                 <div class="oneSet">
@@ -160,7 +191,8 @@ class DashBoard extends React.Component {
 
                                 {/*learn button*/}
                                 <Button width="45%" background="#FFF" onClick={() => {
-                                    this.props.history.push("learnpage");
+                                    //Pushes the set to the learn page so it can be displayed.
+                                    this.props.history.push({pathname: "learnpage", state: {set: res}});
                                 }} >
                                     Learn
                                 </Button>
@@ -176,7 +208,10 @@ class DashBoard extends React.Component {
                             
 
                             </div>
+
+                            
                         ))}
+                        
                        
 
                         {/* same result as the upper one 
@@ -208,6 +243,7 @@ class DashBoard extends React.Component {
                         </div>
                         
                     </div>
+                )}
                     <div class = "findSets">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Want new sets to join? &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>

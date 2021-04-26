@@ -2,6 +2,8 @@ import './modal.css';
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 import React, {useState, useEffect} from "react";
+import { api, handleError } from '../../helpers/api';
+import SocialButton from './Socialbutton';
 
 export const users = [
     {
@@ -31,6 +33,24 @@ export const users = [
 export const Modal = ({ handleClose, show, children, currentWindow, mainPageModalTypeSetter}) => {
   const showHideClassName = show ? "modal display-block" : "modal display-none";
 
+  const handleSocialLogin = (user) => {
+    console.log(user)
+    let requestBody = {email: user._profile.email, name:`${user._profile.firstName} ${user._profile.lastName}`,
+    token:user._token.accessToken 
+    }; 
+    
+    api.post('/users/socialLogin', requestBody).then(Data=>{
+      localStorage.setItem('token', user._token.accessToken);
+      this.props.history.push(`/game`);
+
+    }).catch(err=>{
+      console.log(err);
+    })
+  }
+  
+   const handleSocialLoginFailure = (err) => {
+    console.error(err)
+  }
 
   /*where to put?*/
 
@@ -118,6 +138,15 @@ export const Modal = ({ handleClose, show, children, currentWindow, mainPageModa
                         login
                     </button>
 
+                    <SocialButton
+                        provider='google'
+                        appId='1068306205440-f2i0rndpgpj7nl9e06pjvf1kjo9eklol.apps.googleusercontent.com'
+                        onLoginSuccess={handleSocialLogin}
+                        onLoginFailure={handleSocialLoginFailure}
+                        style={{cursor:"pointer"}}
+                        >
+                    </SocialButton>
+
                     <text className = "register-text"
                     onClick = {() => {
                         //switches between register and login modal
@@ -157,6 +186,14 @@ export const Modal = ({ handleClose, show, children, currentWindow, mainPageModa
                     <button className = "input-button">
                         register
                     </button>
+                    <SocialButton
+                        provider='google'
+                        appId='1068306205440-f2i0rndpgpj7nl9e06pjvf1kjo9eklol.apps.googleusercontent.com'
+                        onLoginSuccess={handleSocialLogin}
+                        onLoginFailure={handleSocialLoginFailure}
+                        style={{cursor:"pointer"}}
+                        >
+                    </SocialButton>
 
                     <text className = "register-text"
                     onClick = {() => {

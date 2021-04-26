@@ -689,16 +689,5 @@ class LearnPage extends React.Component {
 }
 export default withRouter(LearnPage);
 
-/*
-export default function LearnPage(){
-    //change state to flashcards trial
-    const [flashcards, setFlashcards] = useState(FLASHCARDS_TRIAL);
-    return (
-        <div>
-            <CardList flashcards = {flashcards} />
-        </div>
-    )
-}
-*/
 
 

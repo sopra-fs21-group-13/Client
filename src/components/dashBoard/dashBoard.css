@@ -22,12 +22,8 @@ header{
 }
 */
 
-.isScrollable{
-    overflow: unset;
-}
-
-.notScrollable{
-    overflow: hidden;
+.outerWrap{
+    background-color: red;
 }
 
 .sidenav {
@@ -102,6 +98,7 @@ h1{
     margin-left: 50px;
     
 }
+
 
 #board{
     display:grid;
