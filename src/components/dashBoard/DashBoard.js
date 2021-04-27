@@ -6,6 +6,7 @@ import {Button} from '../../views/design/Button.js';
 import './dashBoard.css';
 import SideNav from '../shared/sideNav/SideNav';
 import {api, handleError} from "../../helpers/api"
+import User from '../shared/models/User';
 
 //realted to modal
 import Modal from '../Modal/Modal.js';
@@ -22,7 +23,8 @@ class DashBoard extends React.Component {
             which_menu: "dashBoard",
             setList: null,
             userSettings: null,
-            show: false //for avilable Users modal
+            show: false, //for avilable Users modal
+            user: null
 
         };
         this.showModal = this.showModal.bind(this);
@@ -87,15 +89,57 @@ class DashBoard extends React.Component {
     
     async componentDidMount(){
         // call the api here to load the data from the backend localhost:8080/sets
-        api.get("/sets").then(data=>{
+        //api.get("/sets").then(data=>{
           //  console.log(data);
          // this.state.setList=data["data"];
-         this.setState({...this.state,setList:data["data"]})
-        }).catch(err=>{
-            console.log(err);
-        })
+         // this.setState({...this.state,setList:data["data"]})
+        //}).catch(err=>{
+        //  console.log(err);
+        //})
         
+        //--> Don't get all sets, but get only the user and his sets
+        try{
+        const response = await api.get('/users/' + localStorage.getItem('userId'));
+        const user = new User(response.data);
+
+        this.setState({setList: user.learnSets, user: user})
+        }catch (error) {
+            alert(`Something went wrong while fetching the usersets: \n${handleError(error)}`);
+        }
     }  
+
+    //for testing purposes
+    async createSet (){
+        try{
+            const requestBody = JSON.stringify({
+                setId:6,
+                title: "TOEFL 100+",
+                explain: "Aim higher",
+                user: this.state.user,
+                liked:21,
+                setCategory: "ENGLISH",
+                setStatus: "PUBLIC",
+                photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg",
+                cards: [{
+                    id: 0,
+                    question: "Area",
+                    answer: "Fläche"
+                },
+                {
+                    id: 1,
+                    question: "Politics",
+                    answer: "Politik"
+                }
+            ]
+            });
+    
+            await api.post('/sets', requestBody);
+    
+            this.props.history.push("/dashboard");
+        }catch (error) {
+            alert(`Something went wrong while creating the set: \n${handleError(error)}`);
+        }
+      }
 
     //deletes a set from the setList and also from the view.
     deleteSet(index){
@@ -109,25 +153,11 @@ class DashBoard extends React.Component {
     }
 
     goToEditPage(){
-        this.props.history.push("edit");
+        this.props.history.push({pathname: "edit", state: {editBehavior: true}});
     }
 
     goToCreatePage(){
-        this.props.history.push("create");
-    }
-
-    //helper function for testing
-    async createNewSetInBackend(){
-        try{
-            const requestBody = JSON.stringify({
-                card: [{
-                    question: "Area",
-                    answer: "Fläche"
-                }]
-              });
-        }catch(error){
-            alert(`Something went wrong during the set creation: \n${handleError(error)}`);
-        }
+        this.props.history.push({pathname: "edit", state: {editBehavior: false}});
     }
 
     //creates a set for testing without pushing to backend
@@ -169,7 +199,7 @@ class DashBoard extends React.Component {
         if(this.state.setList == [] || this.state.setList == null){
             const setList = [
                 {
-                    id:6,
+                    setId:6,
                     title: "TOEFL 100+",
                     explain: "Aim higher",
                     userId:5,
@@ -192,7 +222,7 @@ class DashBoard extends React.Component {
     }else{
         const setList = this.state.setList;
         const set = {
-                id:6,
+                setId:6,
                 title: "TOEFL 100+",
                 explain: "Aim higher",
                 userId:5,
@@ -268,7 +298,7 @@ class DashBoard extends React.Component {
                                     </button>
                                     <button class="iconEdit"
                                     onClick = {() =>{
-                                        this.goToEditPage();
+                                        this.props.history.push({pathname: "edit", state: {editBehavior: true, set: res}})
                                     }}
                                     >
                                         <div class = "iconEditBox">
@@ -287,7 +317,7 @@ class DashBoard extends React.Component {
                                 {/*learn button*/}
                                 <Button width="45%" background="#FFF" onClick={() => {
                                     //Pushes the set to the learn page so it can be displayed.
-                                    this.props.history.push({pathname: "learnpage", state: {set: res.cards, userSettings: this.state.userSettings[res.id]}});
+                                    this.props.history.push({pathname: "learnpage", state: {cards: res.cards, userSettings: this.state.userSettings[res.id]}});
                                 }} >
                                     Learn
                                 </Button>
@@ -335,7 +365,19 @@ class DashBoard extends React.Component {
                                 </div>
                                 <Button yellow={true} width="35px" 
                                 onClick = { () => {
+                                    const emptySet = 
+                                        {
+                                            setId: 0,
+                                            title: "",
+                                            explain: "",
+                                            userId:5,
+                                            liked:0,
+                                            photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg",
+                                            cards: [{id: 0, question: "", answer: ""}, {id: 1, question: "", answer: ""}]
+                                        }
                                     
+                                    
+                                    this.props.history.push({pathname: "edit", state: {editBehavior: false, set: emptySet}});
                                 }}>
                                     +
                                 </Button>

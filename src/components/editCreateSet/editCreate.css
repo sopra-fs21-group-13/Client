@@ -212,6 +212,12 @@
     
   }
 
+  .add_qna_btn:hover{
+    cursor: pointer;
+    background-color: #11d4697a;
+  }
+
+
   input[type=text] {
     background-color: whitesmoke;
     border: solid whitesmoke;

@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SideNav from '../shared/sideNav/SideNav';
 import './editCreate.css';
 import Header from "../header/header.js";
+import { withRouter, useLocation, useHistory } from 'react-router-dom';
+import {api, handleError} from "../../helpers/api"
+import User from '../shared/models/User';
 
 //icon
 import { DeleteForever } from '@material-ui/icons';
-
-
 
 
 function EditCreateSet(props){
@@ -19,21 +20,28 @@ function EditCreateSet(props){
         likes:32
     }]
 
-    //example input quizes
-    const quizes = [
-        {id: 0,
-        answer: "Fläche",
-        question: "Area"
-    },{
-        id:1,
-        answer: "Unternehmen",
-        question: "Business"
-    },
-    {
-        id:2,
-        answer: "Mathe",
-        question: "Math"
-    }];
+    //used for routing. Location passes the state from dashboard.
+    let location = useLocation();
+    let history = useHistory();
+
+
+    // quizes is the cards
+    //createBehavior is used for the save button, so that the request to the backend can act accordingly (old set update or new set creation)
+    const[quizes, setQuizes] = useState();
+    const[set, setSet] = useState({setId: 0, title: "",liked: 0, explain: "", userId: 5, cards: [{id: 0, question: "", answer: ""}, {id: 1, question: "", answer: ""}]
+                                    , photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"});
+    const [createBehavior, setBehavior] = useState();
+    const[cardCounter, setCounter] = useState();
+
+   //this is like componentDidMount in classes, happens only once in the beginning
+    useEffect( () => {
+        setQuizes(location.state.set.cards);
+        setSet(location.state.set);
+        setBehavior(location.state.createBehavior);
+        setCounter(location.state.set.cards.length);
+    }, [])
+
+    
   const [image, setImage] = useState({ preview: "", raw: "" });
 
   const handleChange = e => {
@@ -59,6 +67,68 @@ function EditCreateSet(props){
     });
   };
 
+  function addCard(){
+      const newCard = {id: cardCounter, question: "", answer: ""};
+      setCounter(cardCounter+1);
+      //clone array
+      const set = [...quizes];
+      set.push(newCard);
+      setQuizes(set);
+  }
+
+  //depending on "createBehavior" state, either one of those is chosen as the onClick of the "save" button.
+  function createSet(){
+ 
+        api.get('/users/' + localStorage.getItem('userId')).then(
+            result => {
+                const response = result;
+
+                const user = new User(response.data);
+        
+                const requestBody = JSON.stringify({
+                    title: set.title,
+                    explain: set.explain,
+                    user: {userId: localStorage.getItem("userId")},
+                    cards: quizes,
+                    photo: set.photo,
+                    liked: 0,
+                    setStatus: "PUBLIC",
+                    setCategory: "ENGLISH"
+                    });
+
+                api.post('/sets', requestBody).then(result => {console.log(result); history.push("/dashboard");}
+                ).catch(e=>{
+                    alert(`Something went wrong while creating user set: \n${handleError(e)}`);
+                });
+
+
+            }
+        ).catch(e=>{
+            alert(`Something went wrong while fetching the user: \n${handleError(e)}`);
+        })
+  }
+
+  const updateSet = async () => {
+    try{
+        const requestBody = JSON.stringify({
+            title: set.title,
+            explain: set.explain,
+            user: {userId: localStorage.getItem('userId')},
+            cards: quizes,
+            photo: set.photo,
+            liked: 0,
+            setStatus: "PUBLIC",
+            setCategory: "ENGLISH"
+            });
+
+        const response = await api.put('/sets', requestBody);
+
+        history.push("/dashboard");
+    }catch (error) {
+        alert(`Something went wrong while fetching the usersets: \n${handleError(error)}`);
+    }
+  }
+
 
     return(
         <div>
@@ -72,24 +142,29 @@ function EditCreateSet(props){
                 <div id="pureboard">
                 <h1>Edit My Set</h1>
 
+
                 <form class="editForm">
             
                     <div class="separator">Basic Info</div> 
 
-                    {example_set.map(set => (
+                   
                     <div id="basic_info">
                         
                         <div id="set_info">
                             <label type>
                                 Name of the set<br/>
-                                <input type="text" name="set_name" value={set.title} />
+                                <input type="text" className="set_name" defaultValue={set.title} 
+                                onChange={e => setSet({title: e.target.value, explain: set.explain, userId: set.userId, 
+                                                    cards: set.cards, setId: set.setId, photo: set.photo})} />
                             </label>
                             <br/>
 
 
                             <label>
                                 Description for the set <br/>
-                                <input type="text" name="set_des" value={set.info}/>
+                                <input type="text" className="set_des" defaultValue={set.explain}
+                                onChange={e => setSet({title: set.title, explain: e.target.value, userId: set.userId, 
+                                    cards: set.cards, setId: set.setId, photo: set.photo})} />
                             </label>
                             <br/>
 
@@ -139,29 +214,34 @@ function EditCreateSet(props){
                         
 
                     </div>
-                    ))}
+                  
                    
 
                     <div class="separator">Contents</div> 
 
                     <div id="contents">
+
+                    {!quizes ? (<div> loading cards </div>) : (
+                        <div>
                         {quizes.map(quiz => (
                             <div class="qna">
                                 <div class="q_id"> 
-                                    {quiz.id+1} 
+                                    {quiz.id + 1} 
                                 </div>
-                                
-                                                    
-                        
+
                                 <div class="qna_card">
                                     
                                     <div class="q_title">Question</div>
                                     <div class="q_content">
-                                        <input type="text" name="question_text" value={quiz.question}/>
+                                        <input type="text" className="question_text" defaultValue={quiz.question}
+                                            onChange={e => quiz.question = e.target.value}
+                                        />
                                     </div>
                                     <div class="a_title">Answer</div>
                                     <div class="a_content">
-                                        <input type="text" name="question_text" value={quiz.answer}/>
+                                        <input type="text" className="question_text" defaultValue={quiz.answer}
+                                            onChange={e => quiz.answer = e.target.value}
+                                        />
                                     </div>
 
                                 </div>
@@ -170,11 +250,16 @@ function EditCreateSet(props){
                                     <DeleteForever color="secondary"/>
                                 </div>
                             </div>
-                        
-                        ))}
+                            
+                        ))} 
+                        </div>
+                        ) }
 
                         <div class="new_qna">
-                            <div class="add_qna_btn">
+                            <div class="add_qna_btn"
+                            onClick = {() => {
+                                addCard();
+                            }}>
                                 + Add Card
                             </div>
                         
@@ -184,9 +269,18 @@ function EditCreateSet(props){
                         
 
                     </div>
-
-                    <input type="submit" class="thinButton" value="Save changes"/>
-                      
+                    {!createBehavior ? (
+                    <input type="button" class="thinButton" value="Save changes"
+                    onClick={()=>{
+                        createSet();
+                    }}
+                    />)
+                    : (<input type="button" class="thinButton" value="Save changes"
+                    
+                    onClick={()=>{
+                        updateSet();
+                    }}/>)
+                    }
             
 
                     </form>
@@ -200,6 +294,7 @@ function EditCreateSet(props){
 
 
     );
+
 }
 
-export default EditCreateSet; //is default right..?
+export default withRouter(EditCreateSet); //is default right..?

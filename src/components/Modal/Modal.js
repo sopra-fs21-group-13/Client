@@ -53,6 +53,7 @@ function Modal({ handleClose, show, children, currentWindow, mainPageModalTypeSe
     
             // Store the token into the local storage.
             localStorage.setItem('token', user.token);
+            localStorage.setItem('userId', user.userId);
     
             // Login successfully worked --> navigate to the route /dashboard in the GameRouter
             props.history.push(`/dashboard`);
@@ -75,6 +76,7 @@ function Modal({ handleClose, show, children, currentWindow, mainPageModalTypeSe
     
             // Store the token into the local storage.
             localStorage.setItem('token', user.token);
+            localStorage.setItem('userId', user.userId);
     
             // Register successfully worked --> navigate to the route /dashboard in the GameRouter
             props.history.push(`/dashboard`);
@@ -90,8 +92,11 @@ function Modal({ handleClose, show, children, currentWindow, mainPageModalTypeSe
         token:user._token.accessToken 
         }; 
         
-        api.post('/users/socialLogin', requestBody).then(Data=>{
-        localStorage.setItem('token', user._token.accessToken);
+        const response = api.post('/users/socialLogin', requestBody).then(Data=>{
+        
+        const user = new User(response.data);
+        localStorage.setItem('token', user._token.accessToken);   
+        localStorage.setItem('userId', user.userId);
         props.history.push(`/dashboard`);
 
         }).catch(err=>{
