@@ -78,38 +78,27 @@ function EditCreateSet(props){
 
   //depending on "createBehavior" state, either one of those is chosen as the onClick of the "save" button.
   function createSet(){
- 
-        api.get('/users/' + localStorage.getItem('userId')).then(
-            result => {
-                const response = result;
+        const requestBody = JSON.stringify({
+            title: set.title,
+            explain: set.explain,
+            user: {userId: localStorage.getItem("userId")},
+            cards: quizes,
+            photo: set.photo,
+            liked: 0,
+            setStatus: "PUBLIC",
+            setCategory: "ENGLISH"
+            });
 
-                const user = new User(response.data);
-        
-                const requestBody = JSON.stringify({
-                    title: set.title,
-                    explain: set.explain,
-                    user: {userId: localStorage.getItem("userId")},
-                    cards: quizes,
-                    photo: set.photo,
-                    liked: 0,
-                    setStatus: "PUBLIC",
-                    setCategory: "ENGLISH"
-                    });
-
-                api.post('/sets', requestBody).then(result => {console.log(result); history.push("/dashboard");}
-                ).catch(e=>{
-                    alert(`Something went wrong while creating user set: \n${handleError(e)}`);
-                });
-
-
-            }
+        api.post('/sets', requestBody).then(result => {console.log(result); history.push("/dashboard");}
         ).catch(e=>{
-            alert(`Something went wrong while fetching the user: \n${handleError(e)}`);
-        })
+            alert(`Something went wrong while updating user set: \n${handleError(e)}`);
+        });
+
   }
 
-  const updateSet = async () => {
-    try{
+  //TODO: Doesnt work yet probably beacuse of the card ID's
+  function updateSet() {
+    
         const requestBody = JSON.stringify({
             title: set.title,
             explain: set.explain,
@@ -121,12 +110,10 @@ function EditCreateSet(props){
             setCategory: "ENGLISH"
             });
 
-        const response = await api.put('/sets', requestBody);
-
-        history.push("/dashboard");
-    }catch (error) {
-        alert(`Something went wrong while fetching the usersets: \n${handleError(error)}`);
-    }
+        api.put('/sets', requestBody).then(result => {console.log(result); history.push("/dashboard");}
+        ).catch(e=>{
+            alert(`Something went wrong while creating user set: \n${handleError(e)}`);
+        });
   }
 
 
@@ -270,16 +257,20 @@ function EditCreateSet(props){
 
                     </div>
                     {!createBehavior ? (
-                    <input type="button" class="thinButton" value="Save changes"
+                        <div className = "buttonContainer">
+                    <button type="button" class="thinButton"
                     onClick={()=>{
                         createSet();
                     }}
-                    />)
-                    : (<input type="button" class="thinButton" value="Save changes"
-                    
+                    >Save changes</button>
+                    </div>)
+                    : (<div className = "buttonContainer">
+                    <button type="button" class="thinButton"
                     onClick={()=>{
                         updateSet();
-                    }}/>)
+                    }}
+                    >Save changes</button>
+                    </div>)
                     }
             
 

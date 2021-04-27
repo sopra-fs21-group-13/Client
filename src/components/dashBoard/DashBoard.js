@@ -108,38 +108,6 @@ class DashBoard extends React.Component {
         }
     }  
 
-    //for testing purposes
-    async createSet (){
-        try{
-            const requestBody = JSON.stringify({
-                setId:6,
-                title: "TOEFL 100+",
-                explain: "Aim higher",
-                user: this.state.user,
-                liked:21,
-                setCategory: "ENGLISH",
-                setStatus: "PUBLIC",
-                photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg",
-                cards: [{
-                    id: 0,
-                    question: "Area",
-                    answer: "Fläche"
-                },
-                {
-                    id: 1,
-                    question: "Politics",
-                    answer: "Politik"
-                }
-            ]
-            });
-    
-            await api.post('/sets', requestBody);
-    
-            this.props.history.push("/dashboard");
-        }catch (error) {
-            alert(`Something went wrong while creating the set: \n${handleError(error)}`);
-        }
-      }
 
     //deletes a set from the setList and also from the view.
     deleteSet(index){
@@ -245,6 +213,7 @@ class DashBoard extends React.Component {
         this.setState({setList:this.state.setList});
     }
     }
+
     
 
     render(){
@@ -317,7 +286,7 @@ class DashBoard extends React.Component {
                                 {/*learn button*/}
                                 <Button width="45%" background="#FFF" onClick={() => {
                                     //Pushes the set to the learn page so it can be displayed.
-                                    this.props.history.push({pathname: "learnpage", state: {cards: res.cards, userSettings: this.state.userSettings[res.id]}});
+                                    this.props.history.push({pathname: "learnpage", state: {set: res}});
                                 }} >
                                     Learn
                                 </Button>

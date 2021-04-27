@@ -68,6 +68,13 @@
   
   }
 
+
+.buttonContainer{
+  display: flex;
+  height: 200px;
+  justify-content: right;
+}
+
 .thinButton{
     
     background-color:#70F0A9;
@@ -76,13 +83,18 @@
    
     font-weight: bold;
     
-   
     border: none;
     cursor: pointer;
     border-radius: 60px;
     text-align: center;
     width: 200px;
     height: 30px;
+    position: relative;
+  }
+
+  .thinButton:hover{
+    background-color: #4ca875;
+    ;
   }
 
 

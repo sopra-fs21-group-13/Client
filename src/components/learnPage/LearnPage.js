@@ -97,10 +97,17 @@ class LearnPage extends React.Component {
 
         
         //This should get saved inside the user for every set. This is just a temporary representation, it can change.
-        const userSettings = this.props.location.state.userSettings;
+        
 
         //This is a placeholder response from the backend for a GET request.
-        const response = this.props.location.state.cards;
+        
+        const set = this.props.location.state.set;
+        const response = set.cards;
+
+        const userSettings = api.get("/settings/" + localStorage.getItem("userId") + "/" + set.setId).then(result => {console.log(result);}
+        ).catch(e=>{
+            alert(`Something went wrong while fetching user settings: \n${handleError(e)}`);
+        });
 
         //Here we could save the currentFlashcard id inside the user
         //and then reenter it here inside a variable for saving the current state
@@ -108,9 +115,18 @@ class LearnPage extends React.Component {
         
         const ordered_response = [];
 
+        if(!userSettings.markedCards){
+            userSettings.markedCards = [];
+        }
+
+        if(!userSettings.lastCard){
+            userSettings.lastCard = 1;
+        }
+
+        if(userSettings.cardsShuffled){
         for (var i = 0; i<response.length; i++){
             ordered_response.push(response[userSettings.savedOrder[i]]);
-        }
+        }}
 
         if(userSettings.cardsShuffled){
             this.setState({all_flashcards: ordered_response, all_flashcards_rem: response, set: example_set, 

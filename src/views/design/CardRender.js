@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import './cardRender.css'
 import Star from './Star.png';
 import StarActive from './StarActive.png';
@@ -15,6 +15,7 @@ export default function CardRender({flashcard, set_length, current_place, marked
     const [flip, setFlip] = useState(false);
     const [star_active, setStar] = useState(starred);
 
+ 
     if(markedCards.includes(flashcard.id)){
         starred = true;
     }
@@ -22,8 +23,6 @@ export default function CardRender({flashcard, set_length, current_place, marked
     const starState = starred ? StarActive : Star;
 
     
-
-
     //stars the card and pushes its id into the markedCards array. (which is a reference to the state in LearnPage.js)
     //if it is de-starred, then its id is deleted from the array
     function pressStar(){
@@ -39,7 +38,7 @@ export default function CardRender({flashcard, set_length, current_place, marked
         <div>
             <div
                 className={`card ${flip ? 'flip' : ''}`}
-                onClick={() => setFlip(!flip)}
+                onClick={() => {setFlip(!flip);}}
             >   
                 <div className = "id-front"> 
                     {current_place + 1} / {set_length}
@@ -55,7 +54,7 @@ export default function CardRender({flashcard, set_length, current_place, marked
             </div>
             <div className={`star-container ${flip ? 'flip-star' : ''}`}>
                 <button class = "star-front"
-                    onClick = {() => pressStar()}
+                    onClick = {() => {pressStar();}}
                 >
                     <img class = "star-front-image"
                         src = {starState} />
