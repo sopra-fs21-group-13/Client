@@ -87,8 +87,6 @@ class LearnPage extends React.Component {
 
     async componentDidMount(){
 
-        const flashcard1 = new Card({id: 1, question: "Area", answer: "Fläche"});
-
         //This probably won't be implemented with an array. This is placeholder information for the set info.
         const example_set = [
             "Business English",
@@ -102,7 +100,7 @@ class LearnPage extends React.Component {
         const userSettings = this.props.location.state.userSettings;
 
         //This is a placeholder response from the backend for a GET request.
-        const response = this.props.location.state.set;
+        const response = this.props.location.state.cards;
 
         //Here we could save the currentFlashcard id inside the user
         //and then reenter it here inside a variable for saving the current state

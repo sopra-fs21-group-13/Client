@@ -112,7 +112,7 @@ class AppRouter extends React.Component {
                   <Contact />
               )}
             />
-            <Route path="/" exact render={() => <Redirect to={"/dashboard"} />} />
+            <Route path="/" exact render={() => <Redirect to={"/main"} />} />
 
           </div>
         </Switch>

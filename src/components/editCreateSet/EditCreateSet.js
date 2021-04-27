@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SideNav from '../shared/sideNav/SideNav';
 import './editCreate.css';
 import Header from "../header/header.js";
+import { withRouter, useLocation, useHistory } from 'react-router-dom';
 
 //icon
 import { DeleteForever } from '@material-ui/icons';
-
-
 
 
 function EditCreateSet(props){
@@ -19,21 +18,23 @@ function EditCreateSet(props){
         likes:32
     }]
 
-    //example input quizes
-    const quizes = [
-        {id: 0,
-        answer: "Fläche",
-        question: "Area"
-    },{
-        id:1,
-        answer: "Unternehmen",
-        question: "Business"
-    },
-    {
-        id:2,
-        answer: "Mathe",
-        question: "Math"
-    }];
+    // quizes is the cards
+    //createBehavior is used for the save button, so that the request to the backend can act accordingly (old set update or new set creation)
+    const[quizes, setQuizes] = useState();
+    const [createBehavior, setBehavior] = useState();
+    const[cardCounter, setCounter] = useState();
+
+   //this is like componentDidMount in classes, happens only once in the beginning
+    useEffect( () => {
+        setQuizes(location.state.cards);
+        setBehavior(location.state.createBehavior);
+        setCounter(location.state.cards.length);
+    }, [])
+
+    //used for routing. Location passes the state from dashboard.
+    let location = useLocation();
+    let history = useHistory();
+
   const [image, setImage] = useState({ preview: "", raw: "" });
 
   const handleChange = e => {
@@ -58,6 +59,15 @@ function EditCreateSet(props){
       body: formData
     });
   };
+
+  function addCard(){
+      const newCard = {id: cardCounter, question: "", answer: ""};
+      setCounter(cardCounter+1);
+      //clone array
+      const set = [...quizes];
+      set.push(newCard);
+      setQuizes(set);
+  }
 
 
     return(
@@ -145,23 +155,28 @@ function EditCreateSet(props){
                     <div class="separator">Contents</div> 
 
                     <div id="contents">
+
+                    {!quizes ? (<div> loading cards </div>) : (
+                        <div>
                         {quizes.map(quiz => (
                             <div class="qna">
                                 <div class="q_id"> 
-                                    {quiz.id+1} 
+                                    {quiz.id + 1} 
                                 </div>
-                                
-                                                    
-                        
+
                                 <div class="qna_card">
                                     
                                     <div class="q_title">Question</div>
                                     <div class="q_content">
-                                        <input type="text" name="question_text" value={quiz.question}/>
+                                        <input type="text" name="question_text" defaultValue={quiz.question}
+                                            onChange={e => quiz.answer = e.target.value}
+                                        />
                                     </div>
                                     <div class="a_title">Answer</div>
                                     <div class="a_content">
-                                        <input type="text" name="question_text" value={quiz.answer}/>
+                                        <input type="text" name="question_text" defaultValue={quiz.answer}
+                                            onChange={e => quiz.answer = e.target.value}
+                                        />
                                     </div>
 
                                 </div>
@@ -170,11 +185,16 @@ function EditCreateSet(props){
                                     <DeleteForever color="secondary"/>
                                 </div>
                             </div>
-                        
-                        ))}
+                            
+                        ))} 
+                        </div>
+                        ) }
 
                         <div class="new_qna">
-                            <div class="add_qna_btn">
+                            <div class="add_qna_btn"
+                            onClick = {() => {
+                                addCard();
+                            }}>
                                 + Add Card
                             </div>
                         
@@ -184,9 +204,10 @@ function EditCreateSet(props){
                         
 
                     </div>
-
-                    <input type="submit" class="thinButton" value="Save changes"/>
-                      
+                    {!createBehavior ? (
+                    <input type="submit" class="thinButton" value="Save changes"/>)
+                    : (<input type="submit" class="thinButton" value="Save changes"/>)
+                    }
             
 
                     </form>
@@ -200,6 +221,7 @@ function EditCreateSet(props){
 
 
     );
+
 }
 
-export default EditCreateSet; //is default right..?
+export default withRouter(EditCreateSet); //is default right..?

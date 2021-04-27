@@ -109,11 +109,11 @@ class DashBoard extends React.Component {
     }
 
     goToEditPage(){
-        this.props.history.push("edit");
+        this.props.history.push({pathname: "edit", state: {editBehavior: true}});
     }
 
     goToCreatePage(){
-        this.props.history.push("create");
+        this.props.history.push({pathname: "edit", state: {editBehavior: false}});
     }
 
     //helper function for testing
@@ -268,7 +268,7 @@ class DashBoard extends React.Component {
                                     </button>
                                     <button class="iconEdit"
                                     onClick = {() =>{
-                                        this.goToEditPage();
+                                        this.props.history.push({pathname: "edit", state: {editBehavior: true, cards: res.cards}})
                                     }}
                                     >
                                         <div class = "iconEditBox">
@@ -287,7 +287,7 @@ class DashBoard extends React.Component {
                                 {/*learn button*/}
                                 <Button width="45%" background="#FFF" onClick={() => {
                                     //Pushes the set to the learn page so it can be displayed.
-                                    this.props.history.push({pathname: "learnpage", state: {set: res.cards, userSettings: this.state.userSettings[res.id]}});
+                                    this.props.history.push({pathname: "learnpage", state: {cards: res.cards, userSettings: this.state.userSettings[res.id]}});
                                 }} >
                                     Learn
                                 </Button>
@@ -335,7 +335,8 @@ class DashBoard extends React.Component {
                                 </div>
                                 <Button yellow={true} width="35px" 
                                 onClick = { () => {
-                                    
+                                    const emptySet = [{id: 0, question: "", answer: ""}, {id: 1, question: "", answer: ""}]
+                                    this.props.history.push({pathname: "edit", state: {editBehavior: false, cards: emptySet}});
                                 }}>
                                     +
                                 </Button>
