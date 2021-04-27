@@ -22,4 +22,4 @@ function SideNav(props){
     );
 }
 
-export default SideNav; //is default right..?
+export default SideNav; 

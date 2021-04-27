@@ -11,6 +11,8 @@ import PublicProfile from "../../profile/PublicProfile";
 import MainPage from "../../mainPage/MainPage";
 import EditCreateSet from "../../editCreateSet/EditCreateSet";
 import AboutUs from "../../AboutUs/AboutUs.js"
+import Search from "../../search/Search";
+
 import Help from "../../help/help.js"
 import Contact from "../../contact/contact.js"
 /**
@@ -96,6 +98,16 @@ class AppRouter extends React.Component {
                   <AboutUs />
               )}
             />
+
+            <Route
+              path="/search"
+              exact
+              render={() => (
+                  <Search />
+              )}
+            />
+
+            <Route path="/" exact render={() => <Redirect to={"/dashboard"} />} />
 
             <Route
               path="/help"

@@ -1,0 +1,48 @@
+#body{
+    display:grid;
+    grid-template-columns: 160px 1fr;
+}
+
+#board_title{
+    margin: 50px 0 0 0;
+}
+#result_board{
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+#board_contents{
+    display: grid;
+    background-color:white;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 0 30px 30px 30px;
+}
+
+
+.oneSetWrapper{
+    margin-bottom: 30px;
+    text-align:left;
+    
+    
+}
+
+.oneSet{
+    border: solid 1px whitesmoke;
+    background-color: white;
+    box-shadow: 0px 2px 2px  rgba(0,0,0,0.2);
+    border-radius:10px;
+    position: relative;
+    overflow: hidden;  
+    margin-bottom: 5px;
+}
+
+.setTitle{
+    height: 40px;
+    line-height:40px;
+    text-align: center;
+}
+
+.owner_likes{ 
+    margin: 20px;
+    line-height: 30px;
+}
