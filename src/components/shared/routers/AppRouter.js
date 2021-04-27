@@ -11,6 +11,8 @@ import PublicProfile from "../../profile/PublicProfile";
 import MainPage from "../../mainPage/MainPage";
 import EditCreateSet from "../../editCreateSet/EditCreateSet";
 import AboutUs from "../../AboutUs/AboutUs.js"
+import Search from "../../search/Search";
+
 /**
  * Main router of your application.
  * In the following class, different routes are rendered. In our case, there is a Login Route with matches the path "/login"
@@ -92,6 +94,14 @@ class AppRouter extends React.Component {
               exact
               render={() => (
                   <AboutUs />
+              )}
+            />
+
+            <Route
+              path="/search"
+              exact
+              render={() => (
+                  <Search />
               )}
             />
 
