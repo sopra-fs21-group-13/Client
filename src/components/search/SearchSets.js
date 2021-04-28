@@ -11,17 +11,8 @@ import ProfilePicture from '../shared/images/ProfilePicture.png';
 
 
 
-function Search(props){
-    const [view, setView] = useState();
-    const viewChange = () => {
-        if (view=="users"){
-            setView("sets");
-
-        }
-        else{
-            setView("users"); //if-else로 두 가지 모두 넣어야 함.
-        }
-    }
+function SearchSets(props){
+    
 
     /*useEffect(() => {
         history.push("dashboard")
@@ -78,7 +69,7 @@ function Search(props){
             <Header/>
             <div id="body"> {/* grid */}
 
-                <SideFilter onClick={viewChange} currentView={view}/>
+                <SideFilter view="sets"/>
 
                 <div id="result_board">
                     <div id="board_title"> {/*this should be changeable */}
@@ -115,4 +106,4 @@ function Search(props){
     );
 }
 
-export default Search; //is default right..?
+export default SearchSets; //is default right..?

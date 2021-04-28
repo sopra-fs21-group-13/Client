@@ -52,7 +52,7 @@ function SearchUsers(props){
             <Header/>
             <div id="body"> {/* grid */}
 
-                <SideFilter/>
+                <SideFilter view="users"/>
 
                 <div id="result_board">
                     <div id="board_title"> {/*this should be changeable */}

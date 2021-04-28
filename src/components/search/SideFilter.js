@@ -4,18 +4,11 @@ import './sideFilter.css';
 
 
 
-    
-  
+function SearchFilter(props){
+    //current value of the filter
+    const [value, setValue] = React.useState(props.view);
+    let history = useHistory();
 
-function SearchFilter({onClick, currentView}){
-    const [value, setValue] = React.useState();
-
-   
-    function handleChange(value) {
-        setValue({
-            value: value
-          });
-    }
 
 
     return(
@@ -25,13 +18,27 @@ function SearchFilter({onClick, currentView}){
                 <h3>Type</h3>
 
                 <label class="container">Sets
-                    <input type="radio" name="radio" checked= {value=="sets"} /*onClick={onClick}*/ onClick={()=>handleChange("users")}/>
+                    <input type="radio" name="radio" 
+                        onClick={()=>{
+                            history.push("searchsets");
+                            setValue("sets");
+                        }}
+                        checked={value=="sets"}
+                    />
+                  
                     <span class="checkmark"></span>
                 </label><br/>
 
                 <label class="container">Users
-                    <input type="radio" name="radio" checked= {value=="users"} /*onClick={onClick}*/ onClick={()=>handleChange("sets")}/>
+                    <input type="radio" name="radio" 
+                        onClick={()=>{
+                            history.push("searchusers");
+                            setValue("users");
+                        }}
+                        checked={value=="users"}
+                    />
                     <span class="checkmark"></span>
+
                 </label><br/>
 
             </div>
