@@ -11,7 +11,9 @@ import PublicProfile from "../../profile/PublicProfile";
 import MainPage from "../../mainPage/MainPage";
 import EditCreateSet from "../../editCreateSet/EditCreateSet";
 import AboutUs from "../../AboutUs/AboutUs.js"
-import Search from "../../search/Search";
+
+import SearchSets from "../../search/SearchSets";
+import SearchUsers from "../../search/SearchUsers";
 
 import Help from "../../help/help.js"
 import Contact from "../../contact/contact.js"
@@ -100,10 +102,18 @@ class AppRouter extends React.Component {
             />
 
             <Route
-              path="/search"
+              path="/searchSets"
               exact
               render={() => (
-                  <Search />
+                  <SearchSets />
+              )}
+            />
+
+            <Route
+              path="/searchUsers"
+              exact
+              render={() => (
+                  <SearchUsers />
               )}
             />
 

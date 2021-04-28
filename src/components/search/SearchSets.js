@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useHistory } from "react-router-dom";
+
 import SideFilter from './SideFilter.js';
-import './search.css';
+import './searchSets.css';
 import Header from "../header/header.js";
 
 //icons, default profile img
@@ -10,6 +12,20 @@ import ProfilePicture from '../shared/images/ProfilePicture.png';
 
 
 function Search(props){
+    const [view, setView] = useState();
+    const viewChange = () => {
+        if (view=="users"){
+            setView("sets");
+
+        }
+        else{
+            setView("users"); //if-else로 두 가지 모두 넣어야 함.
+        }
+    }
+
+    /*useEffect(() => {
+        history.push("dashboard")
+      });*/
 
     //example input set
     const allSets=[
@@ -61,12 +77,14 @@ function Search(props){
         <div>
             <Header/>
             <div id="body"> {/* grid */}
-                <SideFilter/>
+
+                <SideFilter onClick={viewChange} currentView={view}/>
+
                 <div id="result_board">
                     <div id="board_title"> {/*this should be changeable */}
                         <h1>All Sets</h1>
                     </div>
-                    <div id="board_contents"> {/* grid */}
+                    <div class="board_contents"> {/* grid */}
                     {allSets.map((res ,i)=> (
                             <div class="oneSetWrapper" key={i}>
                                 <div class="oneSet">

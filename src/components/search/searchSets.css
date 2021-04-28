@@ -11,7 +11,7 @@
     grid-column-end: 3;
 }
 
-#board_contents{
+.board_contents{
     display: grid;
     background-color:white;
     grid-template-columns: 1fr 1fr 1fr;

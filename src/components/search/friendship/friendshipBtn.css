@@ -1,0 +1,16 @@
+button{
+    grid-column-start:3;
+    grid-column-end: 4;
+    background-color:#70F0A9;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    line-height: 178px;
+
+    border:none;
+    width:100px;
+  }
+
+.red_f > button{
+  background-color: rgb(255, 154, 154);
+}
