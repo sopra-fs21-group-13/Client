@@ -8,6 +8,7 @@ import User from '../shared/models/User';
 
 //icon
 import { DeleteForever } from '@material-ui/icons';
+import { unstable_renderSubtreeIntoContainer } from 'react-dom';
 
 
 function EditCreateSet(props){
@@ -28,18 +29,31 @@ function EditCreateSet(props){
     // quizes is the cards
     //createBehavior is used for the save button, so that the request to the backend can act accordingly (old set update or new set creation)
     const[quizes, setQuizes] = useState();
+    const[quizesRem, setQuizesRem] = useState();
+    const[cardsCopiedCheck, setCheck] = useState(false);
     const[set, setSet] = useState({setId: 0, title: "",liked: 0, explain: "", userId: 5, cards: [{id: 0, question: "", answer: ""}, {id: 1, question: "", answer: ""}]
                                     , photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"});
-    const [createBehavior, setBehavior] = useState();
+    const [editBehavior, setBehavior] = useState();
     const[cardCounter, setCounter] = useState();
 
    //this is like componentDidMount in classes, happens only once in the beginning
     useEffect( () => {
         setQuizes(location.state.set.cards);
         setSet(location.state.set);
-        setBehavior(location.state.createBehavior);
+        setBehavior(location.state.editBehavior);
         setCounter(location.state.set.cards.length);
     }, [])
+
+    //happens only once because of cardsCopiedCheck
+    useEffect( () => {
+        if(cardsCopiedCheck || !quizes){
+            
+        }else{
+            setQuizesRem(quizes.slice());
+            setCheck(true);
+        }
+        
+    }, [quizes])
 
     
   const [image, setImage] = useState({ preview: "", raw: "" });
@@ -68,7 +82,7 @@ function EditCreateSet(props){
   };
 
   function addCard(){
-      const newCard = {id: cardCounter, question: "", answer: ""};
+      const newCard = {cardId: cardCounter, question: "", answer: ""};
       setCounter(cardCounter+1);
       //clone array
       const set = [...quizes];
@@ -98,7 +112,7 @@ function EditCreateSet(props){
 
   //TODO: Doesnt work yet probably beacuse of the card ID's
   function updateSet() {
-    
+
         const requestBody = JSON.stringify({
             title: set.title,
             explain: set.explain,
@@ -213,7 +227,7 @@ function EditCreateSet(props){
                         {quizes.map(quiz => (
                             <div class="qna">
                                 <div class="q_id"> 
-                                    {quiz.id + 1} 
+                                    {quiz.cardId + 1}
                                 </div>
 
                                 <div class="qna_card">
@@ -256,11 +270,11 @@ function EditCreateSet(props){
                         
 
                     </div>
-                    {!createBehavior ? (
+                    {!editBehavior ? (
                         <div className = "buttonContainer">
                     <button type="button" class="thinButton"
                     onClick={()=>{
-                        createSet();
+                        createSet()
                     }}
                     >Save changes</button>
                     </div>)
@@ -268,6 +282,8 @@ function EditCreateSet(props){
                     <button type="button" class="thinButton"
                     onClick={()=>{
                         updateSet();
+                        console.log("updated")
+                        ;
                     }}
                     >Save changes</button>
                     </div>)
