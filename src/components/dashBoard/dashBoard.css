@@ -100,7 +100,7 @@ h1{
 }
 
 
-#board{
+#board_dash{
     display:grid;
     grid-template-columns:160px 1fr;
 

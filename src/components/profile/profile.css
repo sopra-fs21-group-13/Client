@@ -35,7 +35,7 @@
     color: #f1f1f1;
   }
 
-  #board{
+  #board_profile{
     display:grid;
     grid-template-columns:160px 1fr;
     min-height: 100vh;
@@ -95,34 +95,66 @@
 }
 
 .formContainer{
+  text-align: middle;
+  padding: 50px;
+
+
   }
 
+  .form_name{
+    grid-row-start: 1;
+    grid-row-end: 2;
+
+    display:grid;
+    grid-template-columns: 1fr 3fr;
+
+    margin: 10px;
+
+    line-height: 56px;
+
+  }
+
+  .name_q{
+    grid-column-start: 1;
+    grid-column-end: 2;
+  }
+
+ 
+
+
+  .form_info{
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+    display:grid;
+    grid-template-columns: 1fr 3fr;
+
+    margin: 10px;
+
+    line-height: 56px;
+  }
+
+  .info_q{
+    grid-column-start: 1;
+    grid-column-end: 2;
+  }
+
+  
   /* used  for the PublicProfile to show the sets*/
 
 
 .editUserForm{
-  display: grid;
+  display:grid;
+  grid-template-rows: auto auto;
   margin:auto;
-  width: 50px;
+  
+
+  /*
   align-items: center;
-  justify-content: center;
+  justify-content: center;*/
 }
 
-.oneSetWrapper{
-  margin-bottom: 60px;
-  text-align: center;
-}
 
-.oneSet{
-  border: solid 1px whitesmoke;
-  background-color: white;
-  box-shadow: 0px 2px 2px  rgba(0,0,0,0.2);
-  border-radius:10px;
-  position: relative;
-  overflow: hidden;  
-  margin-bottom: 5px;
-
-}
 
 .setTitle{
   height: 40px;
@@ -130,4 +162,34 @@
   text-align: center;
 }
 
+input[type="submit"]
+{
+  background-color:#70F0A9;
 
+    color: white;
+   
+    font-weight: bold;
+    
+    border: none;
+    cursor: pointer;
+    border-radius: 60px;
+    text-align: center;
+    width: 200px;
+    height: 30px;
+    position: relative;
+  
+}
+
+input {
+  background-color: whitesmoke;
+  border: solid whitesmoke;
+  border-radius: 10px;
+  width: 80%;
+  
+  margin: 8px 0;
+  box-sizing: border-box;
+
+  color:gray;
+  height: 40px;
+  
+}

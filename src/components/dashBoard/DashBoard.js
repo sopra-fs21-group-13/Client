@@ -220,12 +220,14 @@ class DashBoard extends React.Component {
         return(
             <div id>
                 <Header/>
-                <div id="board"> 
+                <div id="board_dash"> 
                 <SideNav checked={1}/>
 
                 <div id="pureboard">
                 
-                <h1>All Sets You have! </h1>
+                <div id="board_title"> {/*this should be changeable */}
+                        <h1>All Sets you have!</h1>
+                </div>
                     
                 {!this.state.setList ? 
                 //Only shows the "add set"- Button before the server request has gone through

@@ -32,14 +32,18 @@ export default function Profile(){
             <div>
                 <Header/>
         
-                <div id="board"> 
+                <div id="board_profile"> 
                 <SideNav checked={2}/>
 
                     <div id="pureboard">
-                    <h1> Manage your profile here </h1>
+
+                     <div id="board_title"> {/*this should be changeable */}
+                         <h1> Manage your profile here </h1>
+                    </div>  
+                    
                         
                     {
-                    <div className ="profileCard"> 
+                        <div className ="profileCard"> 
                         
                         
                         <div className ="photoFrame">
@@ -62,23 +66,28 @@ export default function Profile(){
                     }
                     <div class="formContainer">
                         <form class="editUserForm">
-                        <label>
-                            <span>
-                            <span>Change Username</span>
-                            <input placeholder="e.g. Billy Gonzales"/>
+                            
+                        
+                            <label class="form_name">
+                              
+                                <span class="name_q">Change Username</span>
+                                <input class="name_a" placeholder="e.g. Billy Gonzales"/>
+                            
+                            </label>
+
+                            <label class="form_info">
+                               
+                                <span class="info_q">Change Info</span>
+                                <input class="info_a" placeholder="e.g. I like flowers"/>
                                 
-                            </span>
-                        </label>
-                        <label>
-                            <span>
-                            <span>Change Info</span>
-                            <input placeholder="e.g. I like flowers"/>
-                                
-                            </span>
-                        </label>
-                        <input
-                        class = "submitButton"
-                        type="submit" value="Save changes" />
+                            </label>
+    
+                            
+
+                            <input
+                            class = "submitButton"
+                            type="submit" value="Save changes" />
+
                         </form>
                     </div>
 
