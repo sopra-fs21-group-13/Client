@@ -92,10 +92,10 @@ function Modal({ handleClose, show, children, currentWindow, mainPageModalTypeSe
         token:user._token.accessToken 
         }; 
         
-        const response = api.post('/users/socialLogin', requestBody).then(Data=>{
+        api.post('/users/socialLogin', requestBody).then(Data=>{
         
-        const user = new User(response.data);
-        localStorage.setItem('token', user._token.accessToken);   
+        const user = new User(Data.data);
+        localStorage.setItem('token', user.token);   
         localStorage.setItem('userId', user.userId);
         props.history.push(`/dashboard`);
 

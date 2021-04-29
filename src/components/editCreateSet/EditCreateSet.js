@@ -30,14 +30,14 @@ function EditCreateSet(props){
     const[quizes, setQuizes] = useState();
     const[set, setSet] = useState({setId: 0, title: "",liked: 0, explain: "", userId: 5, cards: [{id: 0, question: "", answer: ""}, {id: 1, question: "", answer: ""}]
                                     , photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"});
-    const [createBehavior, setBehavior] = useState();
+    const [editBehavior, setBehavior] = useState();
     const[cardCounter, setCounter] = useState();
 
    //this is like componentDidMount in classes, happens only once in the beginning
     useEffect( () => {
         setQuizes(location.state.set.cards);
         setSet(location.state.set);
-        setBehavior(location.state.createBehavior);
+        setBehavior(location.state.editBehavior);
         setCounter(location.state.set.cards.length);
     }, [])
 
@@ -68,7 +68,7 @@ function EditCreateSet(props){
   };
 
   function addCard(){
-      const newCard = {id: cardCounter, question: "", answer: ""};
+      const newCard = {question: "", answer: ""};
       setCounter(cardCounter+1);
       //clone array
       const set = [...quizes];
@@ -101,8 +101,9 @@ function EditCreateSet(props){
     
         const requestBody = JSON.stringify({
             title: set.title,
+            setId: set.setId,
             explain: set.explain,
-            user: {userId: localStorage.getItem('userId')},
+            userId: Number(localStorage.getItem('userId')),
             cards: quizes,
             photo: set.photo,
             liked: 0,
@@ -213,7 +214,8 @@ function EditCreateSet(props){
                         {quizes.map(quiz => (
                             <div class="qna">
                                 <div class="q_id"> 
-                                    {quiz.id + 1} 
+                                    {//quiz.id + 1
+                                    } 
                                 </div>
 
                                 <div class="qna_card">
@@ -256,7 +258,7 @@ function EditCreateSet(props){
                         
 
                     </div>
-                    {!createBehavior ? (
+                    {!editBehavior ? (
                         <div className = "buttonContainer">
                     <button type="button" class="thinButton"
                     onClick={()=>{
@@ -268,6 +270,8 @@ function EditCreateSet(props){
                     <button type="button" class="thinButton"
                     onClick={()=>{
                         updateSet();
+                        console.log("updated");
+                        
                     }}
                     >Save changes</button>
                     </div>)
