@@ -16,8 +16,9 @@ export default function CardRender({flashcard, set_length, current_place, marked
     const [star_active, setStar] = useState(starred);
 
  
-    if(markedCards.includes(flashcard.id)){
+    if(markedCards.includes(flashcard.cardId)){
         starred = true;
+        console.log(flashcard.cardId);
     }
 
     const starState = starred ? StarActive : Star;
@@ -28,9 +29,9 @@ export default function CardRender({flashcard, set_length, current_place, marked
     function pressStar(){
         setStar(!star_active);
         if(!starred){
-        markedCards.push(flashcard.id);}
+        markedCards.push(flashcard.cardId);}
         else{
-        markedCards.splice(markedCards.indexOf(flashcard.id),1);
+        markedCards.splice(markedCards.indexOf(flashcard.cardId),1);
         }
     }
 
