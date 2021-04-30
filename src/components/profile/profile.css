@@ -97,7 +97,8 @@
 .formContainer{
   text-align: middle;
   padding: 50px;
-
+  display: grid;
+  grid-template-columns:  59% 45%;
 
   }
 
@@ -132,6 +133,7 @@
     margin: 10px;
 
     line-height: 56px;
+
   }
 
   .info_q{
@@ -142,17 +144,31 @@
   
   /* used  for the PublicProfile to show the sets*/
 
+.editUserFormContainer{
+  display: flex;
+  position: relative;
+  justify-self: right;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  width: 300px;
+}
 
 .editUserForm{
   display:grid;
   grid-template-rows: auto auto;
   margin:auto;
+  width: 50px;
+  align-items: center;
+  position: relative;
+  justify-content: center;
   
+}
 
   /*
   align-items: center;
   justify-content: center;*/
-}
+
 
 
 
@@ -165,8 +181,7 @@
 input[type="submit"]
 {
   background-color:#70F0A9;
-
-    color: white;
+  color: white;
    
     font-weight: bold;
     
@@ -179,6 +194,46 @@ input[type="submit"]
     position: relative;
   
 }
+
+.userPicturesSpan{
+  position: relative;
+  left:30px;
+  top: 10px;
+}
+
+.userPictures{
+  display: grid;
+  grid-column: 1fr 1fr 1fr;
+  width: 300px;
+  height: 300px;
+  position: relative;
+  justify-self: left;
+  left: 20px;
+  margin: 10px;
+  border: solid 1px whitesmoke;
+  box-shadow: 0px 2px 2px  rgba(0,0,0,0.2);
+  border-radius:10px;
+  background-color: rgb(255, 255, 255);
+}
+
+
+.pictureChoices{
+  height: 70px;
+  margin: 4px;
+  border-radius: 100px;
+  border: solid 1px rgb(201, 201, 201);
+  transition: transform .1s;
+}
+
+.pictureChoices:hover{
+  border:solid 1px rgb(80, 199, 90);
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+
+
+    
 
 input {
   background-color: whitesmoke;

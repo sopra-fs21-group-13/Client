@@ -44,7 +44,7 @@ function Modal({ handleClose, show, children, currentWindow, mainPageModalTypeSe
         try {
             const requestBody = JSON.stringify({
             username: username,
-            password: password
+            password: password,
             });
             const response = await api.post('/users/login', requestBody);
     
@@ -67,7 +67,8 @@ function Modal({ handleClose, show, children, currentWindow, mainPageModalTypeSe
             const requestBody = JSON.stringify({
             username: username,
             password: password,
-            name: name
+            name: name,
+            photo: "1"
             });
             const response = await api.post('/users', requestBody);
     

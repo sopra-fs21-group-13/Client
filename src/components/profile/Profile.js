@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useCallback} from 'react'
 import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
+import { withRouter, useHistory } from 'react-router-dom';
 
 //icons from google..
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
@@ -10,21 +10,56 @@ import {Button} from '../../views/design/Button.js';
 import './profile.css'
 import SideNav from '../shared/sideNav/SideNav';
 import Header from "../header/header.js";
-import Footer from "../footer/Footer.js"
+import Footer from "../footer/Footer.js";
+import { api, handleError } from "../../helpers/api";
+import User from '../shared/models/User';
+
+//profile pictures
+import char1 from "./char1.jpg";
+import char2 from "./char2.jpg";
 
 
 export default function Profile(){
 
     //I changed it to a functional component. Can be reverted anytime. Old code is below!
 
-    const response = 
-        {
-            username:"Unicorn",
-            info: "I like rainbows!",
-            likes: 205,
-            wins: 30,
-            photo: "https://images.unsplash.com/photo-1542103749-8ef59b94f47e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80"
-        }
+    //user state
+    const [user, setUser] = useState();
+    const [userPictures, setUserPictures] = useState([char1, char2]);
+    const [userPicturesDict, setUserPicturesDict] = useState({1: char1, 2: char2});
+    const [currentPic, setCurrentPic] = useState();
+
+    //history
+    const history = useHistory();
+
+    //when component mounts it fetches user and saves it into the user state above.
+    useEffect(() => {
+        api.get("/users/" + localStorage.getItem("userId")).then(response => {
+            
+            const user = new User(response.data);
+            setUser(user);
+            setCurrentPic(userPicturesDict[Number(user.photo)])
+
+        }).catch(e=>{
+            alert(`Something went wrong while fetching user info: \n${handleError(e)}`);
+        })
+    }, []) 
+
+    function submitChanges(){
+
+        const requestBody = JSON.stringify({
+            userId: Number(user.userId),
+            username: user.username,
+            name: user.name,
+        });
+
+        api.put("/users", requestBody).then(response=>{
+            console.log(response);
+            history.push("/dashboard");
+        }).catch(e=>{
+            alert(`Something went wrong while updating user info: \n${handleError(e)}`);
+        });
+    }
 
 
         return(
@@ -42,53 +77,105 @@ export default function Profile(){
                     </div>  
                     
                         
-                    {
-                        <div className ="profileCard"> 
+                    {!user ?   ( <div><div className ="profileCard"> 
                         
                         
                         <div className ="photoFrame">
-                            <img src={response.photo} />                            
+                            <img src={""} />                            
                         </div>
                             
                             
                         <p className ="profile_username">
-                            {response.username}
+                            username
                         </p>
 
                         <p className ="likes_wins">
-                            <span class="thumbIcon"><ThumbUpAltOutlinedIcon/></span> {response.likes} <span class="winIcon"><EmojiEventsIcon/></span> {response.wins}
+                            {
+                            //<span class="thumbIcon"><ThumbUpAltOutlinedIcon/></span> {user.likes} 
+                            //<span class="winIcon"><EmojiEventsIcon/></span> {user.wins}
+                        }
                         </p>
                         <p>
-                            {response.info}
+                            info
+
+                        </p>   
+                    </div> </div>): (
+                    
+                    <div className ="profileCard"> 
+                        
+                        
+                        <div className ="photoFrame">
+                            <img src={currentPic} />                            
+                        </div>
+                            
+                            
+                        <p className ="profile_username">
+                            {user.username}
+                        </p>
+
+                        <p className ="likes_wins">
+                            {
+                            //<span class="thumbIcon"><ThumbUpAltOutlinedIcon/></span> {user.likes} 
+                            //<span class="winIcon"><EmojiEventsIcon/></span> {user.wins}
+                        }
+                        </p>
+                        <p>
+                            {user.name}
 
                         </p>   
                     </div>
-                    }
+                    )}
                     <div class="formContainer">
+                        <div className= "editUserFormContainer">
                         <form class="editUserForm">
-                            
-                        
-                            <label class="form_name">
-                              
-                                <span class="name_q">Change Username</span>
-                                <input class="name_a" placeholder="e.g. Billy Gonzales"/>
-                            
-                            </label>
-
-                            <label class="form_info">
-                               
-                                <span class="info_q">Change Info</span>
-                                <input class="info_a" placeholder="e.g. I like flowers"/>
+                        <label>
+                            <span>
+                            <span>Change Username</span>
+                            <input placeholder="e.g. Berty1979"
+                                onChange={e => user.username = e.target.value}
+                            />
                                 
-                            </label>
-    
-                            
-
-                            <input
-                            class = "submitButton"
-                            type="submit" value="Save changes" />
+                            </span>
+                        </label>
+                        <label>
+                            <span>
+                            <span>Change Name</span>
+                            <input placeholder="e.g. Berthold Dietrich"
+                                onChange={e => user.name = e.target.value}
+                            />
+                            {//onChange={e => user.explain = e.target.value}
+                                }
+                                
+                            </span>
+                        </label>
+                        <input
+                        class = "submitButton"
+                        type="button" value="Save changes" 
+                        onClick = {() => {
+                            submitChanges();
+                        }}
+                        />
 
                         </form>
+                        </div>
+                        <label>
+                        <span className = "userPicturesSpan">Change Picture</span>
+                        <div className = "userPictures">
+                            {!userPictures ? 
+                            ("loading pictures") : (
+                                <div>
+                                {userPictures.map((pic, i) => (
+                                        <img 
+                                        onClick={()=>{
+
+                                        }}
+                                        className = "pictureChoices" src={pic} key={i}/>
+                                ))}
+                                </div>
+                            ) 
+                        }
+                        </div>
+                        </label>
                     </div>
 
                 </div>
