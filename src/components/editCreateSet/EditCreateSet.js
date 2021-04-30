@@ -124,7 +124,7 @@ function EditCreateSet(props){
             
             <div id="screen"> 
                 <SideNav checked={1}/>
-                <div id="board">
+                <div id="board_edit">
             
 
                 <div id="pureboard">

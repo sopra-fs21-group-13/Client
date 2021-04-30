@@ -100,6 +100,8 @@ export default function Profile(){
                     </div>  
                     
                         
+                    
+                    
                     {!user ?   ( <div><div className ="profileCard"> 
                         
                         
@@ -148,58 +150,69 @@ export default function Profile(){
                         </p>   
                     </div>
                     )}
+
+
+                    {/** */}
                     <div class="formContainer">
                         <div className= "editUserFormContainer">
-                        <form class="editUserForm">
-                        <label>
-                            <span>
-                            <span>Change Username</span>
-                            <input placeholder="e.g. Berty1979"
-                                onChange={e => user.username = e.target.value}
-                            />
-                                
-                            </span>
-                        </label>
-                        <label>
-                            <span>
-                            <span>Change Name</span>
-                            <input placeholder="e.g. Berthold Dietrich"
-                                onChange={e => user.name = e.target.value}
-                            />
-                            {//onChange={e => user.explain = e.target.value}
-                                }
-                                
-                            </span>
-                        </label>
-                        <input
-                        className = "submitButton"
-                        type="button" value="Save changes" 
-                        onClick = {() => {
-                            submitChanges();
-                        }}
-                        />
+                            <form class="editUserForm">
+                                <label>
+                                    <span>
+                                    <span>Change Username</span>
+                                    <input class="edit_profile" placeholder="e.g. Berty1979"
+                                        onChange={e => user.username = e.target.value}
+                                    />
+                                        
+                                    </span>
+                                </label>
+                                <label>
+                                    <span>
+                                    <span>Change Name</span>
+                                    <input class="edit_profile" placeholder="e.g. Berthold Dietrich"
+                                        onChange={e => user.name = e.target.value}
+                                    />
+                                    {//onChange={e => user.explain = e.target.value}
+                                        }
+                                        
+                                    </span>
+                                </label>
 
-                        </form>
+                            </form>
                         </div>
-                        <label>
-                        <span className = "userPicturesSpan">Change Picture</span>
-                        <div className = "userPictures">
-                            {!userPictures ? 
-                            ("loading pictures") : (
-                                <div>
-                                {userPictures.map((pic, i) => (
-                                        <img 
-                                        onClick={()=>{
-                                            setCurrentPic(pic);
-                                        }}
-                                        className = "pictureChoices" src={pic} key={i}/>
-                                ))}
+
+                        <div class="pictureBox">
+                            <label>
+                                <span className = "userPicturesSpan">Change Picture</span>
+                                <div className = "userPictures">
+                                    {!userPictures ? 
+                                    ("loading pictures") : (
+                                        <div>
+                                        {userPictures.map((pic, i) => (
+                                                <img 
+                                                onClick={()=>{
+                                                    setCurrentPic(pic);
+                                                }}
+                                                className = "pictureChoices" src={pic} key={i}/>
+                                        ))}
+                                        </div>
+                                    ) 
+                                }
                                 </div>
-                            ) 
-                        }
+                            </label>
+                            <input
+                                class= "submitButton"
+                                type="button" value="Save changes" 
+                                onClick = {() => {
+                                    submitChanges();
+                                }}
+                            />
                         </div>
-                        </label>
+                        
                     </div>
+
+                    
+
+
 
                 </div>
                 </div>

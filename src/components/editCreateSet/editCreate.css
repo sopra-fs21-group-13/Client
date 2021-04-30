@@ -262,3 +262,9 @@
     grid-column-start: 2;
     grid-column-end: 3;
 }
+
+#board_edit{
+  grid-column-start: 2;
+    grid-column-end: 3;
+
+}
