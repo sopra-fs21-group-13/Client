@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
-import SideFilter from './SideFilter.js';
-import FriendshipBtn from './friendship/FriendshipBtn.js'
+import SideFilter from '../sideFilter/SideFilter';
+import FriendshipBtn from '../friendship/FriendshipBtn.js'
 
 import './searchUsers.css';
-import Header from "../header/header.js";
+import Header from "../../header/header.js";
 
 //icons, default profile img
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';

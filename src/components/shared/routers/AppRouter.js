@@ -12,8 +12,8 @@ import MainPage from "../../mainPage/MainPage";
 import EditCreateSet from "../../editCreateSet/EditCreateSet";
 import AboutUs from "../../AboutUs/AboutUs.js"
 
-import SearchSets from "../../search/SearchSets";
-import SearchUsers from "../../search/SearchUsers";
+import SearchSets from "../../search/searchSets/SearchSets";
+import SearchUsers from "../../search/searchUsers/SearchUsers";
 
 import Help from "../../help/help.js"
 import Contact from "../../contact/contact.js"
