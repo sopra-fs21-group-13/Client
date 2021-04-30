@@ -17,6 +17,20 @@ import User from '../shared/models/User';
 //profile pictures
 import char1 from "./char1.jpg";
 import char2 from "./char2.jpg";
+import char3 from "./char3.jpg";
+import char4 from "./char4.jpg";
+import char5 from "./char5.jpg";
+import char6 from "./char6.jpg";
+import char7 from "./char7.jpg";
+import char8 from "./char8.jpg";
+import char9 from "./char9.jpg";
+import char10 from "./char10.jpg";
+import char11 from "./char11.jpg";
+import char12 from "./char12.jpg";
+import char13 from "./char13.jpg";
+import char14 from "./char14.jpg";
+import char15 from "./char15.jpg";
+import char16 from "./char16.jpg";
 
 
 export default function Profile(){
@@ -25,8 +39,10 @@ export default function Profile(){
 
     //user state
     const [user, setUser] = useState();
-    const [userPictures, setUserPictures] = useState([char1, char2]);
-    const [userPicturesDict, setUserPicturesDict] = useState({1: char1, 2: char2});
+    const [userPictures, setUserPictures] = useState([char1, char2, char3, char4, char5, char6, char7, char8, 
+        char9, char10, char11, char12, char13, char14, char15, char16]);
+    const [userPicturesDict, setUserPicturesDict] = useState({1: char1, 2: char2, 3: char3, 4: char4, 5: char5, 6: char6,
+        7: char7, 8: char8, 9: char9,10: char10, 11: char11, 12: char12,13: char13, 14: char14, 15: char15, 16: char16});
     const [currentPic, setCurrentPic] = useState();
 
     //history

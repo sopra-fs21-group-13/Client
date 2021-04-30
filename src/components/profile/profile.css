@@ -218,7 +218,9 @@ input[type="submit"]
 
 
 .pictureChoices{
-  height: 70px;
+  position:relative;
+  left:10px;
+  height: 60px;
   margin: 4px;
   border-radius: 100px;
   border: solid 1px rgb(201, 201, 201);
