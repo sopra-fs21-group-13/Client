@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,  useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 
 import SideFilter from '../sideFilter/SideFilter';
@@ -11,15 +11,29 @@ import Header from "../../header/header.js";
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 
-
+//api
+import { api, handleError } from "../../../helpers/api";
 
 
 function SearchUsers(props){
+
+    const [allUsers, setAllUsers] = useState([]);
+
+    useEffect(() => {
+        api.get("/users").then(response => {
+            setAllUsers(response.data);
+            console.log("hello",allUsers);
+
+        }).catch(e=>{
+            alert(`Something went wrong while fetching all users: \n${handleError(e)}`);
+        })
+    }, []) 
 
     /*useEffect(() => {
         history.push("dashboard")
       });*/
 
+      /*
     //example input set
     const allUsers=[
         {
@@ -42,8 +56,7 @@ function SearchUsers(props){
             likes: 1000,
             wins: 1,
             photo:"https://www.meme-arsenal.com/memes/f04ebf47a09312cbedfca22256c5722d.jpg"
-    }]
-
+    }]*/
 
 
 
@@ -78,7 +91,7 @@ function SearchUsers(props){
                                 <span class="thumbIcon"><ThumbUpAltOutlinedIcon/></span> {user.likes} <span class="winIcon"><EmojiEventsIcon/></span> {user.wins}
                             </p>
                             <p>
-                                {user.info}
+                                {user.username}
                             </p>   
                             </div>
                         
