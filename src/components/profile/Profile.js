@@ -46,11 +46,18 @@ export default function Profile(){
     }, []) 
 
     function submitChanges(){
+        let photo = ""
+        for(var i = 1; i <= userPictures.length; i++){
+            if(userPicturesDict[i] == currentPic){
+                photo = i.toString();
+            }
+        }
 
         const requestBody = JSON.stringify({
             userId: Number(user.userId),
             username: user.username,
             name: user.name,
+            photo: photo
         });
 
         api.put("/users", requestBody).then(response=>{
@@ -149,7 +156,7 @@ export default function Profile(){
                             </span>
                         </label>
                         <input
-                        class = "submitButton"
+                        className = "submitButton"
                         type="button" value="Save changes" 
                         onClick = {() => {
                             submitChanges();
@@ -167,7 +174,7 @@ export default function Profile(){
                                 {userPictures.map((pic, i) => (
                                         <img 
                                         onClick={()=>{
-
+                                            setCurrentPic(pic);
                                         }}
                                         className = "pictureChoices" src={pic} key={i}/>
                                 ))}

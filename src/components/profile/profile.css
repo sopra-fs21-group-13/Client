@@ -232,7 +232,9 @@ input[type="submit"]
 }
 
 
-
+.submitButton:hover{
+  cursor: pointer;
+}
     
 
 input {
