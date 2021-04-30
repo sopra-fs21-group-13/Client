@@ -258,24 +258,27 @@ function EditCreateSet(props){
                         
 
                     </div>
-                    {!editBehavior ? (
-                        <div className = "buttonContainer">
-                    <button type="button" class="thinButton"
-                    onClick={()=>{
-                        createSet();
-                    }}
-                    >Save changes</button>
-                    </div>)
-                    : (<div className = "buttonContainer">
-                    <button type="button" class="thinButton"
-                    onClick={()=>{
-                        updateSet();
-                        console.log("updated");
-                        
-                    }}
-                    >Save changes</button>
-                    </div>)
-                    }
+
+                    <div class="saveBox">
+                        {!editBehavior ? (
+                            <div className = "buttonContainer">
+                                <button type="button" class="thinButton saveSet" 
+                                onClick={()=>{
+                                    createSet();
+                                }}
+                                >Save changes</button>
+                            </div>)
+                        : (<div className = "buttonContainer">
+                                <button type="button" class="thinButton saveSet"
+                                onClick={()=>{
+                                    updateSet();
+                                    console.log("updated");
+                                    
+                                }}
+                                >Save changes</button>
+                            </div>)
+                        }
+                    </div>
             
 
                     </form>

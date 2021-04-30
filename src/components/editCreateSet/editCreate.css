@@ -69,11 +69,11 @@
   }
 
 
-.buttonContainer{
+/*.buttonContainer{
   display: flex;
   height: 200px;
   justify-content: right;
-}
+}*/
 
 .thinButton{
     
@@ -92,9 +92,19 @@
     position: relative;
   }
 
+  .saveBox{
+    text-align:center;
+    width: 900px;
+    margin:0 0 0 46px;
+  }
+
+  .saveSet{
+    display:inline-block;
+  }
+
   .thinButton:hover{
     background-color: #4ca875;
-    ;
+    
   }
 
 
