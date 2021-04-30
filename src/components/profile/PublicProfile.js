@@ -79,7 +79,7 @@ export default function PublicProfile(){
             <div>
                 <Header/>
                 
-                <div id="board"> {/**probably board_profile */}
+                <div id="board_profile"> {/**probably board_profile */}
                 <SideNav/>
                 <div id="pureboard">
                     <h1> User profile </h1>
