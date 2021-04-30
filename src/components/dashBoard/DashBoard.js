@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+
 import { withRouter } from 'react-router-dom';
 import ClearIcon from '@material-ui/icons/Clear';
 import EditIcon from '@material-ui/icons/Edit';
@@ -362,9 +363,12 @@ class DashBoard extends React.Component {
                         
                     </div>
                 )}
-                    <div class = "findSets">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Want new sets to join? &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </div>
+                    <button class = "findSets" onClick = {() =>{
+                                        this.props.history.push({pathname: "searchSets"})
+                                    }}
+                    >
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Want to find new sets to join? &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </button>
                     </div>
 
                 </div>

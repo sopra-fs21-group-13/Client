@@ -205,13 +205,20 @@ h1{
     opacity:0.5;
 }
 
-.findSets{
+button[class="findSets"]{
     margin: auto;
     width:fit-content;
-    height: 30px;
-    line-height: 30px;
-    background-color: skyblue;
+    line-height: 40px;
+    border: solid #70F0A9 2px;
+    background-color:white;
     text-align: center;
     border-radius:10px;
-    color: white;
+    color: #70F0A9;
+    display:flex;
+
+    cursor: pointer;
+
+}
+button[class="findSets"]:hover {
+	background-color:#70f0aa2d;
 }
