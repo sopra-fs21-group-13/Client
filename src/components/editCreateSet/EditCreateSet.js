@@ -128,9 +128,12 @@ function EditCreateSet(props){
             
 
                 <div id="pureboard">
-                <h1>Edit My Set</h1>
 
+                <div id="board_title">
+                    <h1>Edit My Set</h1>
+                </div>
 
+                <div class="board_contents_edit">
                 <form class="editForm">
             
                     <div class="separator">Basic Info</div> 
@@ -282,6 +285,7 @@ function EditCreateSet(props){
             
 
                     </form>
+                    </div>
                 </div>
                 </div>
                 

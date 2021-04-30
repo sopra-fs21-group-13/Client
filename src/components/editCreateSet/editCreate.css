@@ -25,6 +25,11 @@
     
   }
 
+  .board_contents_edit{
+    margin: 0 50px 0 30px;
+
+  }
+
   #basic_info{
     display: grid;
     grid-template-columns: 1fr 1fr;
