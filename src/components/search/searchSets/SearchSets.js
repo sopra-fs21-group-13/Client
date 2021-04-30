@@ -11,14 +11,20 @@ import ProfilePicture from '../../shared/images/ProfilePicture.png';
 
 //api
 import { api, handleError } from "../../../helpers/api";
-import { LensTwoTone } from '@material-ui/icons';
+
 
 
 
 function SearchSets(props){
     /*var allSets=[];*/
     const [allSets, setAllSets] = useState([]);
-    let ownerName="";
+
+    /** setId:username  */
+    const [userNames, setUserNames] = useState([]);
+
+
+
+    
     
    
 
@@ -33,55 +39,14 @@ function SearchSets(props){
     }, []) 
 
 
-    
-
-    /*useEffect(() => {
-        history.push("dashboard")
-      });*/
-
-    //example input set
-    /*const allSets=[
-            {
-                id:0,
-                title: "Business English",
-                explain: "This set is for people that want to learn some business english. Study well, live well",
-                userId:1,
-                liked:102,
-                photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"
-            },{
-                id:5,
-                title: "TOEFL 80+",
-                explain: "This set is for people that want to learn some business english. Study well, live well.",
-                userId:2,
-                liked:32,
-                photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"
-            },
-            {
-                id:6,
-                title: "TOEFL 100+",
-                explain: "Aim higher",
-                userId:3,
-                liked:21,
-                photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"
-            },
-            {
-                id:6,
-                title: "TOEFL 100+",
-                explain: "Aim higher",
-                userId:4,
-                liked:21,
-                photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"
-            },
-            {
-                id:6,
-                title: "TOEFL 100+",
-                explain: "Aim higher",
-                userId:5,
-                liked:21,
-                photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"
-            }
-    ]*/
-
+/*
+    for(var j = 0; j < response.length; j++){
+        if(response[j].cardId == userSettings.savedOrder[i]){
+          ordered_response.push(response[j]);
+        }
+        console.log(response[j].cardId + "/" + userSettings.savedOrder[i])
+      }
+*/
 
 
 
@@ -103,14 +68,22 @@ function SearchSets(props){
                         {allSets.map((res ,i)=> (
                             <div class="oneSetWrapper" key={i}>
                                 {
-                                api.get("/users/"+ res.userId.toString()).then(response => {
-                                            ownerName=response.data.username;
-                                            console.log(ownerName);
+                                api.get("/users/"+ res.userId.toString()).then
+                                        (response => {
+                                            let ownerName=response.data.username;
+                                            //console.log(ownerName);
+                                            var dict=userNames;
+                                            dict[res.userId]=ownerName;
+                                            setUserNames(dict);
+                                            //userNames=>{userNames, [key: res.userId, value:ownerName] )
+                                               // ...userNames, [res.userId,ownerName]);
+
                                         }).catch(e=>{
                                             alert(`Something went wrong while finding name of the user: \n${handleError(e)}`);
                                         }
                                         )
-                                , []}
+                                , []
+                                }
 
                                 <div class="oneSet">
                                     <div class="oneSetImage">
@@ -124,7 +97,8 @@ function SearchSets(props){
 
                                 <div class ="owner_likes">
                                     {/* should be changed to user name(not user ID)*/}
-                                    <img src={ProfilePicture}/>{ownerName}
+                                    <img src={ProfilePicture}/>{String(userNames[res.userId])}
+                                    {/*console.log(userNames[res.userId])*/}
                                     
                                     <br/>
                                     <FavoriteIcon/> {res.liked} 
