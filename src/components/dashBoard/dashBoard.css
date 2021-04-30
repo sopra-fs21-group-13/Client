@@ -80,6 +80,7 @@ header{
     line-height: 50px;
     cursor:default;
     user-select: none;
+    font-weight:bold;
 }
 
 #allSets{
@@ -220,5 +221,5 @@ button[class="findSets"]{
 
 }
 button[class="findSets"]:hover {
-	background-color:#70f0aa2d;
+	background-color:#70f0aa5b;
 }
