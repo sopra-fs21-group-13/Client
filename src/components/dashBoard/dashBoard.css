@@ -102,6 +102,58 @@ h1{
     
 }
 
+.setTabContainer{
+    display:grid;
+    grid-template-columns: 50% 50%;
+    margin: 20px;
+    justify-content: center;
+}
+
+.setTab{
+    display: flex;
+    position:relative;
+    align-self: right;
+    min-width: 300px;
+    max-width: 400px;
+    border-radius: 10px;
+    color:#70F0A9;
+    justify-content: center;
+    align-items: center;
+    height:30px;
+    border: solid #70F0A9 2px;
+    border-color: #70F0A9;
+    background-color:#ffffff;
+}
+
+.setTab:hover{
+    cursor: pointer;
+}
+
+.checkedSetTab{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    position:relative;
+    align-self: right;
+    min-width: 300px;
+    max-width: 400px;
+    height:30px;
+    border-radius: 10px;
+    color:white;
+    border: none;
+    background-color:#70F0A9;
+}
+
+.tabOne{
+    justify-self: right;
+    margin-right: 20px;
+}
+
+.tabTwo{
+    justify-self: left;
+    margin-left: 20px;
+}
+
 
 #board_dash{
     display:grid;

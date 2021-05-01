@@ -12,7 +12,7 @@ import ProfilePicture from '../../shared/images/ProfilePicture.png';
 
 //api
 import { api, handleError } from "../../../helpers/api";
-import User from '../../shared/models/User';
+import {Button} from '../../../views/design/Button.js';
 
 
 
@@ -23,6 +23,8 @@ function SearchSets(props){
 
     /** setId:username  */
     const [usernames, setUsernames] = useState([]);
+
+    const [disabledButtons, setDisabledButtons] = useState([]);
 
 
     useEffect(() => {
@@ -65,6 +67,13 @@ function SearchSets(props){
         
     }
 
+    //add foreign set to dashboard, if it is not added yet.
+    function addToDashboard(set){
+        api.put("/sets/" + localStorage.getItem("userId") + "/" + set.setId).then(response =>{
+            console.log("added set " + set.setId + " to users dashboard");
+        })
+    }
+
 
 /*
     for(var j = 0; j < response.length; j++){
@@ -95,25 +104,39 @@ function SearchSets(props){
                         {allSets.map((res ,i)=> (
                             <div class="oneSetWrapper" key={i}>
                                 
-
                                 <div class="oneSet">
                                     <div class="oneSetImage">
                                         <img src={res.photo} />
                         
                                     </div>
+                                    
                                     <div class="setTitle">
                                         {res.title}
                                     </div>
+                                    
                                 </div>
-
+                                <div className = "setTitleContainer">
                                 <div class ="owner_likes">
-                                    {/* should be changed to user name(not user ID)*/}
                                     <img src={ProfilePicture}/>{usernames[res.setId]}
-                                    {/*console.log(userNames[res.userId])*/}
                                     
                                     <br/>
                                     <FavoriteIcon/> {res.liked} 
                                 </div>
+                                <Button className = "addButton"
+                                disabled = {(
+                                    (disabledButtons.includes(res.setId)) ||
+                                    (localStorage.getItem("userId") == res.userId) || 
+                                    (localStorage.getItem("userId") != res.userId && res.memberIds.includes(Number(localStorage.getItem("userId")))))}
+                                onClick = {()=>{
+                                    //sets that button needs to be disabled
+                                    setDisabledButtons(disabledButtons.concat([res.setId]))
+                                    addToDashboard(res);
+                                    
+                                }}>
+                                        add to dashboard
+                                </Button>
+
+                                    </div>
 
                             </div>
 
