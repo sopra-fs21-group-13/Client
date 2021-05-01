@@ -28,7 +28,6 @@ function SearchSets(props){
     useEffect(() => {
         api.get("/sets").then(response => {
             setAllSets(response.data);
-            console.log("hello",allSets);
 
             setUsernameDict(response.data);
 
@@ -43,13 +42,14 @@ function SearchSets(props){
 
         api.get("/users").then(response => {
             users = response.data;
+            console.log(response);
 
             for(var i = 0; i < sets.length; i++){
                 var set = sets[i];
-                
                 for(var j = 0; j < users.length; j++){
-                    var user = users[i];
-                    if(users.userId == set.user){
+                    var user = users[j];
+                    console.log(set)
+                    if(user.userId == set.userId){
                         usernameDict[set.setId] = user.username;
                     }
                 }

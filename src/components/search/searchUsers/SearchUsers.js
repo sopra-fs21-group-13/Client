@@ -76,10 +76,10 @@ function SearchUsers(props){
             //calculates likes 
             var likes = 0;
             for(var j=0; j<user.learnSets.length; j++){
-                if(user.learnSets[i].likes == null){
-                    user.learnSets[i].likes = 0
+                if(user.learnSets[j].likes == null){
+                    user.learnSets[j].likes = 0
                 }
-                likes = likes + user.learnSets[i].likes
+                likes = likes + user.learnSets[j].likes
             }
             //sets likes in state
             likesDict[user.userId] = likes;
