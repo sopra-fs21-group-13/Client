@@ -37,6 +37,8 @@ import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 import { api, handleError } from "../../../helpers/api";
 
 
+
+
 function SearchUsers(props){
 
     //handles showing the right user picture
@@ -48,6 +50,8 @@ function SearchUsers(props){
     const[likes, setLikes] = useState();
 
     const [allUsers, setAllUsers] = useState();
+
+    const history = useHistory();
 
     useEffect(() => {
         api.get("/users").then(response => {
@@ -133,8 +137,12 @@ function SearchUsers(props){
                     </div>
 
                     <div id="board_contents"> {/* grid */}
+                    <div className = "userGrid">
                     {allUsers.map((user)=> (
-                            <div class="userCard">
+                            <div class="userCard"
+                            onClick = {() => {
+                                history.push({pathname: "PublicProfile", state: {userId: user.userId}})
+                            }}>
                                 
 
                             <div class="userBasic">
@@ -144,26 +152,33 @@ function SearchUsers(props){
                                 <p class="profile_username">
                                     {user.username}
                                 </p>
+                                <div class="userMore">
+                                <p>
+                                    {user.name}
+                                </p>  
+                                <p class="likes_wins">
+                                    <div className = "likesAndWins">
+                                    <span class="thumbIcon"><ThumbUpAltOutlinedIcon/></span> {likes[user.userId]} 
+                                    <span class="winIcon"><EmojiEventsIcon/></span> {0}
+                                    </div>
+                                </p>
+                                 
+                            </div>
                             </div>
 
-                            <div class="userMore">
-                            <p class="likes_wins">
-                                <span class="thumbIcon"><ThumbUpAltOutlinedIcon/></span> {likes[user.userId]} <span class="winIcon"><EmojiEventsIcon/></span> {user.wins}
-                            </p>
-                            <p>
-                                {user.username}
-                            </p>   
-                            </div>
+                            
                         
                             {/*must know if the user is friend or not. here temporarily used false */}
-                            <FriendshipBtn friendship={false}/>
+                            {/*<FriendshipBtn friendship={false}/>*/
+                            }
 
                             {/* if already friend 
                             <div class="invitationButton"> Unfriend </div> 
                             */}
-                    </div>
+                            </div>
 
                         ))}
+                    </div>
                     </div>
                 </div>) }
                 
