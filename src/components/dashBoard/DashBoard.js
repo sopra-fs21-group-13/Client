@@ -114,7 +114,7 @@ class DashBoard extends React.Component {
                 {!this.state.setList ? 
                 //Only shows the "add set"- Button before the server request has gone through
                 (<div id= "allSets">
-                <div class="oneSetWrapper">
+                <div class="oneSetWrapper_dashboard">
                 <div class="oneSet opac">
 
                     <div class="oneSetImage">
@@ -138,7 +138,7 @@ class DashBoard extends React.Component {
                     <div id="allSets"> 
                     
                         {this.state.setList.map((res ,i)=> (
-                            <div class="oneSetWrapper" key={i}>
+                            <div class="oneSetWrapper_dashboard" key={i}>
                                 <div class="oneSet">
                                     <button class="iconClear"
                                     onClick = {() =>{
@@ -205,7 +205,7 @@ class DashBoard extends React.Component {
 
                         {//card to add create a set
                         }
-                        <div class="oneSetWrapper">
+                        <div class="oneSetWrapper_dashboard">
                                 <div class="oneSet opac">
         
                                     <div class="oneSetImage">
