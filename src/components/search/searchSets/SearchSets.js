@@ -12,6 +12,7 @@ import ProfilePicture from '../../shared/images/ProfilePicture.png';
 
 //api
 import { api, handleError } from "../../../helpers/api";
+import User from '../../shared/models/User';
 
 
 
@@ -21,23 +22,48 @@ function SearchSets(props){
     const [allSets, setAllSets] = useState([]);
 
     /** setId:username  */
-    const [userNames, setUserNames] = useState([]);
+    const [usernames, setUsernames] = useState([]);
 
-
-
-    
-    
-   
 
     useEffect(() => {
         api.get("/sets").then(response => {
             setAllSets(response.data);
             console.log("hello",allSets);
 
+            setUsernameDict(response.data);
+
         }).catch(e=>{
             alert(`Something went wrong while fetching all sets: \n${handleError(e)}`);
         })
     }, []) 
+
+    function setUsernameDict(sets){
+        var usernameDict = {}
+        var users = []
+
+        api.get("/users").then(response => {
+            users = response.data;
+
+            for(var i = 0; i < sets.length; i++){
+                var set = sets[i];
+                
+                for(var j = 0; j < users.length; j++){
+                    var user = users[i];
+                    if(users.userId == set.user){
+                        usernameDict[set.setId] = user.username;
+                    }
+                }
+    
+            }
+    
+            console.log(usernameDict)
+            setUsernames(usernameDict)
+
+        }).catch(e=>{
+            alert(`Something went wrong while fetching all users: \n${handleError(e)}`);
+        })
+        
+    }
 
 
 /*
@@ -68,23 +94,7 @@ function SearchSets(props){
                     
                         {allSets.map((res ,i)=> (
                             <div class="oneSetWrapper" key={i}>
-                                {
-                                api.get("/users/"+ res.userId.toString()).then
-                                        (response => {
-                                            let ownerName=response.data.username;
-                                            //console.log(ownerName);
-                                            var dict=userNames;
-                                            dict[res.userId]=ownerName;
-                                            setUserNames(dict);
-                                            //userNames=>{userNames, [key: res.userId, value:ownerName] )
-                                               // ...userNames, [res.userId,ownerName]);
-
-                                        }).catch(e=>{
-                                            alert(`Something went wrong while finding name of the user: \n${handleError(e)}`);
-                                        }
-                                        )
-                                , []
-                                }
+                                
 
                                 <div class="oneSet">
                                     <div class="oneSetImage">
@@ -98,7 +108,7 @@ function SearchSets(props){
 
                                 <div class ="owner_likes">
                                     {/* should be changed to user name(not user ID)*/}
-                                    <img src={ProfilePicture}/>{String(userNames[res.userId])}
+                                    <img src={ProfilePicture}/>{usernames[res.setId]}
                                     {/*console.log(userNames[res.userId])*/}
                                     
                                     <br/>
