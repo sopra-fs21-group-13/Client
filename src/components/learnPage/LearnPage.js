@@ -22,6 +22,7 @@ import Header from "../header/header.js";
 import "./learnPage.css";
 import Footer from "../footer/Footer.js";
 import UserSettings from "../shared/models/UserSettings";
+import User from '../shared/models/User';
 
 const Container = styled(BaseContainer)`
   color: black;
@@ -68,7 +69,12 @@ const Info = styled.div`
 class LearnPage extends React.Component {
   constructor() {
     super();
+    this.handler = (ev) => {  
+      ev.preventDefault();
+      return ev.returnValue = 'Are you sure you want to close? Data like newly added starred cards might get lost in the process!';
+  };
     this.state = {
+      cardSet: null,
       setId: null,
       all_flashcards: null,
       flashcards_starred: null,
@@ -80,28 +86,38 @@ class LearnPage extends React.Component {
       cardsShuffled: null,
       studyStarred: null,
       markedCards: null,
-      settingsId: null
+      settingsId: null,
+      foreignUsername: null
     };
   }
 
   async componentDidMount() {
-    //This probably won't be implemented with an array. This is placeholder information for the set info.
-    const example_set = [
-      "Business English",
-      "This set is for people that want to learn some business english. Study well, live well.",
-      "FlashyBoss2003",
-      32,
-    ];
 
-    //This should get saved inside the user for every set. This is just a temporary representation, it can change.
+    //handler so that when window or tab gets closed you can save settings.
+    
 
-    //This is a placeholder response from the backend for a GET request.
+
+    //adds listener 
+    window.addEventListener("beforeunload", this.handler)
 
     const set = this.props.location.state.set;
     
+    if(set.likes == null){
+      set.likes = 0;
+    }
     
     const response = set.cards;
     this.setState({setId: set.setId});
+    this.setState({cardSet: set});
+
+    api.get("/users/" + set.user).then(response=>{
+
+      let user = new User(response.data);
+
+      this.setState({foreignUsername: user.username});
+    }).catch(e=>{
+      alert(`Something went wrong while geting user: \n${handleError(e)}`);
+  });
 
     api
       .get("/settings/" + localStorage.getItem("userId") + "/" + set.setId)
@@ -145,7 +161,6 @@ class LearnPage extends React.Component {
       this.setState({
         all_flashcards: ordered_response,
         all_flashcards_rem: response,
-        set: example_set,
         rightButtonDisabled: false,
         cardsShuffled: userSettings.cardsShuffled,
         studyStarred: userSettings.studyStarred,
@@ -155,7 +170,6 @@ class LearnPage extends React.Component {
       this.setState({
         all_flashcards: response,
         all_flashcards_rem: response,
-        set: example_set,
         rightButtonDisabled: false,
         cardsShuffled: userSettings.cardsShuffled,
         studyStarred: userSettings.studyStarred,
@@ -517,7 +531,7 @@ class LearnPage extends React.Component {
     this.state.flashcards_starred = [];
   }
 
-  pushSettings(destination){
+  pushSettings(){
 
     const savedOrder = [];
     let lastCard = 0;
@@ -545,18 +559,25 @@ class LearnPage extends React.Component {
       savedOrder: savedOrder,
     }
     api.post("/settings", requestBody).then(response=>{
-      this.props.history.push(destination);
+      console.log("settings pushed")
     }).catch(err=>{
         console.log(err);
     })
   }
 
+  componentWillUnmount(){
+    window.removeEventListener("beforeunload", this.handler)
+    this.pushSettings();
+  }
+
+
+
   goToDashboard() {
-    this.pushSettings(`/Dashboard`)
+    this.props.history.push(`/Dashboard`)
   }
 
   goToPublicProfile() {
-    this.pushSettings(`/PublicProfile`)
+    this.props.history.push({pathname: "PublicProfile", state: {userId: this.state.cardSet.user}})
   }
 
   render() {
@@ -594,11 +615,11 @@ class LearnPage extends React.Component {
             }
             <div class="info-grid">
               <div class="info-block info-block-1">
-                {!this.state.set ? (
+                {!this.state.cardSet ? (
                   <div>Name</div>
                 ) : (
                   <div class="name-grid">
-                    <div class="set-name">{this.state.set[0]}</div>
+                    <div class="set-name">{this.state.cardSet.title}</div>
                     <button
                       class="user-profile"
                       onClick={() => {
@@ -611,17 +632,17 @@ class LearnPage extends React.Component {
                           src={ProfilePicture}
                         />
                       </div>
-                      <div class="creator-name">{this.state.set[2]}</div>
+                      <div class="creator-name">{this.state.foreignUsername}</div>
                     </button>
                   </div>
                 )}
               </div>
               <div class="info-block info-block-2">
-                {!this.state.set ? <div>Name</div> : this.state.set[1]}
+                {!this.state.cardSet ? <div>Name</div> : this.state.cardSet.explain}
               </div>
               <div class="info-block info-block-3">
                 <img class="likes-image" src={Likes} />
-                {!this.state.set ? <div>Name</div> : " " + this.state.set[3]}
+                {!this.state.cardSet ? <div>Name</div> : " " + this.state.cardSet.likes}
               </div>
             </div>
           </Info>

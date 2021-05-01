@@ -42,50 +42,6 @@ class DashBoard extends React.Component {
         document.body.style.overflow = "unset"
     };
       
-  
-    response = [
-        {
-            id:0,
-            title: "Business English",
-            explain: "This set is for people that want to learn some business english. Study well, live well",
-            userId:1,
-            liked:102,
-            photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"
-        },{
-            id:5,
-            title: "TOEFL 80+",
-            explain: "This set is for people that want to learn some business english. Study well, live well.",
-            userId:2,
-            liked:32,
-            photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"
-        },
-        {
-            id:6,
-            title: "TOEFL 100+",
-            explain: "Aim higher",
-            userId:3,
-            liked:21,
-            photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"
-        },
-        {
-            id:6,
-            title: "TOEFL 100+",
-            explain: "Aim higher",
-            userId:4,
-            liked:21,
-            photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"
-        },
-        {
-            id:6,
-            title: "TOEFL 100+",
-            explain: "Aim higher",
-            userId:5,
-            liked:21,
-            photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"
-        }
-    ]
-
-        
         
     
     async componentDidMount(){
@@ -107,18 +63,31 @@ class DashBoard extends React.Component {
         }catch (error) {
             alert(`Something went wrong while fetching the usersets: \n${handleError(error)}`);
         }
-    }  
+    }
 
 
     //deletes a set from the setList and also from the view.
     deleteSet(index){
-        const updatedList = [];
-        for(var i = 0; i < this.state.setList.length; i++){
-            updatedList.push(this.state.setList[i])
-        }
-        updatedList.splice(index, 1);
+        if (window.confirm('Are you sure you want to delete this set?')) {
+            // delete it!
+            const updatedList = [];
+            for(var i = 0; i < this.state.setList.length; i++){
+                updatedList.push(this.state.setList[i])
+            }
+            let set = updatedList[index];
+            updatedList.splice(index, 1);
 
-        this.setState({setList: updatedList});
+            this.setState({setList: updatedList});
+
+            api.delete('/sets/' + set.setId).then(result => {console.log("deleted set");}
+            ).catch(e=>{
+                alert(`Something went wrong while deleting user set: \n${handleError(e)}`);
+            });
+          } else {
+            // Do nothing!
+            console.log('Thing was not saved to the database.');
+          }
+        
     }
 
     goToEditPage(){
@@ -128,94 +97,6 @@ class DashBoard extends React.Component {
     goToCreatePage(){
         this.props.history.push({pathname: "edit", state: {editBehavior: false}});
     }
-
-    //creates a set for testing without pushing to backend
-    addDummySet(){
-
-        //add user settings for the dummy set
-        if(this.state.setList == {} || this.state.userSettings == null){
-            const settings = {
-                6: {
-                    cardsShuffled: false,
-                    studyStarred: false,
-                    lastCard: 1,
-                    markedCards: [
-                    ],
-                    savedOrder: [
-                    ]
-                }
-            }
-
-            this.setState({userSettings: settings});
-        }else{
-            const userSettings = this.state.userSettings;
-            const settings = {
-                    cardsShuffled: false,
-                    studyStarred: false,
-                    lastCard: 1,
-                    markedCards: [
-                    ],
-                    savedOrder: [
-                    ]
-            }
-
-            userSettings[6] = settings;
-            this.setState({userSettings: userSettings});
-        }
-
-
-        //Add sets to state
-        if(this.state.setList == [] || this.state.setList == null){
-            const setList = [
-                {
-                    setId:6,
-                    title: "TOEFL 100+",
-                    explain: "Aim higher",
-                    userId:5,
-                    liked:21,
-                    photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg",
-                    cards: [{
-                        id: 0,
-                        question: "Area",
-                        answer: "Fläche"
-                    },
-                    {
-                        id: 1,
-                        question: "Politics",
-                        answer: "Politik"
-                    }
-                ]
-                }
-            ]
-            this.setState({setList:setList});
-    }else{
-        const setList = this.state.setList;
-        const set = {
-                setId:6,
-                title: "TOEFL 100+",
-                explain: "Aim higher",
-                userId:5,
-                liked:21,
-                photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg",
-                cards: [{
-                    id: 0,
-                    question: "Area",
-                    answer: "Fläche"
-                },
-                {   
-                    id: 1,
-                    question: "Politics",
-                    answer: "Politik"
-                }
-            ]
-            }
-        setList.push(set);
-        
-        this.setState({setList:this.state.setList});
-    }
-    }
-
-    
 
     render(){
         return(
@@ -352,12 +233,6 @@ class DashBoard extends React.Component {
                                     this.props.history.push({pathname: "edit", state: {editBehavior: false, set: emptySet}});
                                 }}>
                                     +
-                                </Button>
-                                <Button yellow={false} width="45%" 
-                                onClick = { () => {
-                                    this.addDummySet();
-                                }}>
-                                    add dummy set
                                 </Button>
                         </div>
                         

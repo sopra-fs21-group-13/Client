@@ -5,6 +5,7 @@ import Header from "../header/header.js";
 import { withRouter, useLocation, useHistory } from 'react-router-dom';
 import {api, handleError} from "../../helpers/api"
 import User from '../shared/models/User';
+import Footer from '../footer/Footer.js'
 
 //icon
 import { DeleteForever } from '@material-ui/icons';
@@ -290,7 +291,7 @@ function EditCreateSet(props){
                 </div>
                 
             </div>
-
+            <Footer></Footer>
         </div>
 
 
