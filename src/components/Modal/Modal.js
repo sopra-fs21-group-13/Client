@@ -131,7 +131,7 @@ function Modal({ handleClose, show, children, currentWindow, mainPageModalTypeSe
                     {users.map(user => (
                     <div id="modal_content">       
                         
-                            <div class="userCard">
+                            <div class="userCardModal">
                                 
 
                                     <div class="userBasic">
