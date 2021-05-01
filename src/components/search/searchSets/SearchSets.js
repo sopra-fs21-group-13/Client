@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import SideFilter from '../sideFilter/SideFilter';
 import './searchSets.css';
 import Header from "../../header/header.js";
+import Footer from '../../footer/Footer.js'
 
 //icons, default profile img
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -110,8 +111,10 @@ function SearchSets(props){
                         
                     </div>
                 </div>
+                
 
             </div>
+            <Footer></Footer>
         </div>
     );
 }

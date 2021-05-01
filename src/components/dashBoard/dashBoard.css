@@ -30,7 +30,7 @@ header{
     height: calc(100vh-160px);
     width: 160px;
     position: fixed;
-    z-index: 9;
+    z-index: 1;
     top: 60px;
     left: 0;
     background-color: white;
@@ -94,6 +94,7 @@ header{
 #pureboard{
     grid-column-start: 2;
     grid-column-end: 3;
+    min-height:708px;
 }
 
 h1{

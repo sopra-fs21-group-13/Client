@@ -44,7 +44,9 @@
     display: none;
   }
 
- 
+ #modal_play{
+   width:60%;
+ }
   .userBasic{
       width:150px;
       text-align:center;

@@ -4,8 +4,12 @@ import { useHistory } from "react-router-dom";
 import SideFilter from '../sideFilter/SideFilter';
 import FriendshipBtn from '../friendship/FriendshipBtn.js'
 
+//css
 import './searchUsers.css';
+
+//header, footer
 import Header from "../../header/header.js";
+import Footer from '../../footer/Footer.js'
 
 //icons, default profile img
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
@@ -106,8 +110,10 @@ function SearchUsers(props){
                         ))}
                     </div>
                 </div>
+                
 
             </div>
+            <Footer></Footer>
         </div>
     );
 }

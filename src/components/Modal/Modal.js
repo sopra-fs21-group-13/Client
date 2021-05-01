@@ -116,14 +116,14 @@ function Modal({ handleClose, show, children, currentWindow, mainPageModalTypeSe
     if(currentWindow == "dashboard"){
         return (
             <div
-            className={showHideClassName}>
+            className={showHideClassName} >
                 <div className = "outside"
                 onClick = {() => {
                     handleClose()
                 }}>
 
                 </div>
-            <section className="modal-main">
+            <section className="modal-main" id="modal_play">
                     <div id="modal_title">
                         Available Users
                     </div>

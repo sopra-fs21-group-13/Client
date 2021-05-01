@@ -6,6 +6,7 @@
 #result_board{
     grid-column-start: 2;
     grid-column-end: 3;
+    min-height: 708px;
 }
 
 #board_contents{
