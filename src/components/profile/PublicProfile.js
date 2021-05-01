@@ -1,8 +1,27 @@
 import React, {useState, useEffect, useCallback} from 'react'
 import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
+import { withRouter, useLocation } from 'react-router-dom';
 import Header from "../header/header.js";
 import Footer from '../footer/Footer.js'
+import User from '../shared/models/User';
+
+//profile pictures
+import char1 from "./char1.jpg";
+import char2 from "./char2.jpg";
+import char3 from "./char3.jpg";
+import char4 from "./char4.jpg";
+import char5 from "./char5.jpg";
+import char6 from "./char6.jpg";
+import char7 from "./char7.jpg";
+import char8 from "./char8.jpg";
+import char9 from "./char9.jpg";
+import char10 from "./char10.jpg";
+import char11 from "./char11.jpg";
+import char12 from "./char12.jpg";
+import char13 from "./char13.jpg";
+import char14 from "./char14.jpg";
+import char15 from "./char15.jpg";
+import char16 from "./char16.jpg";
 
 
 //icons from google..
@@ -11,6 +30,7 @@ import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 
 import './profile.css'
 import SideNav from '../shared/sideNav/SideNav';
+import { api, handleError } from '../../helpers/api.js';
 
 
 const Image = styled.img`
@@ -21,57 +41,39 @@ Image.defaultProps = {
 
 export default function PublicProfile(){
 
-    //I changed it to a functional component. Can be reverted anytime. Old code is below!
+    //handles showing the right user picture
+    const [userPicturesDict, setUserPicturesDict] = useState({1: char1, 2: char2, 3: char3, 4: char4, 5: char5, 6: char6,
+        7: char7, 8: char8, 9: char9,10: char10, 11: char11, 12: char12,13: char13, 14: char14, 15: char15, 16: char16});
+    const [currentPic, setCurrentPic] = useState();
 
-    const response = 
-        {
-            username:"Unicorn",
-            info: "I like rainbows!",
-            likes: 205,
-            wins: 30,
-            photo: "https://images.unsplash.com/photo-1542103749-8ef59b94f47e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80",
-            sets: [
-                {
-                    id:0,
-                    title: "Business English",
-                    explain: "This set is for people that want to learn some business english. Study well, live well",
-                    owner:"yeah",
-                    liked:102,
-                    photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"
-                },{
-                    id:5,
-                    title: "TOEFL 80+",
-                    explain: "This set is for people that want to learn some business english. Study well, live well.",
-                    owner:"hahaha",
-                    liked:32,
-                    photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"
-                },
-                {
-                    id:6,
-                    title: "TOEFL 100+",
-                    explain: "Aim higher",
-                    owner:"snowy",
-                    liked:21,
-                    photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"
-                },
-                {
-                    id:6,
-                    title: "TOEFL 100+",
-                    explain: "Aim higher",
-                    owner:"snowy",
-                    liked:21,
-                    photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"
-                },
-                {
-                    id:6,
-                    title: "TOEFL 100+",
-                    explain: "Aim higher",
-                    owner:"snowy",
-                    liked:21,
-                    photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg"
+    const location = useLocation();
+    const [user, setUser] = useState();
+    //amount of likes a user has across all his sets.
+    const[likes, setLikes] = useState(0);
+
+    useEffect(()=>{
+        //id of currently logged in user
+        const userId = location.state.userId;
+        //fetches user that is to be shown in public profile
+        api.get("/users/" + userId).then(response=>{
+            const user = new User(response.data);
+            setUser(user);
+            setCurrentPic(userPicturesDict[Number(user.photo)])
+
+            //adds all the likes from all the sets a user created
+            var likes = 0;
+            for(var i=0; i<user.learnSets.length; i++){
+                if(user.learnSets[i].likes == null){
+                    user.learnSets[i].likes = 0
                 }
-            ]
-        }
+                likes = likes + user.learnSets[i].likes
+            }
+            setLikes(likes);
+        }).catch(e=>{
+            alert(`Something went wrong while fetching user: \n${handleError(e)}`);
+        });
+    },[])
+
 
 
         return(
@@ -81,7 +83,10 @@ export default function PublicProfile(){
                 
                 <div id="board_profile"> {/**probably board_profile */}
                 <SideNav/>
-                <div id="pureboard">
+                {!user ? (
+                    <div>loading</div>
+                    ):(
+                        <div id="pureboard">
                     <h1> User profile </h1>
                         
                     
@@ -89,25 +94,25 @@ export default function PublicProfile(){
                         
                         
                         <div className ="photoFrame">
-                            <img src={response.photo} />                            
+                            <img src={currentPic} />                            
                         </div>
                             
                             
                         <p className ="profile_username">
-                            {response.username}
+                            {user.username}
                         </p>
 
                         <p className ="likes_wins">
-                            <span class="thumbIcon"><ThumbUpAltOutlinedIcon/></span> {response.likes} <span class="winIcon"><EmojiEventsIcon/></span> {response.wins}
+                            <span class="thumbIcon"><ThumbUpAltOutlinedIcon/></span> {likes} <span class="winIcon"><EmojiEventsIcon/></span> {user.numberOfWins}
                         </p>
                         <p>
-                            {response.info}
+                            {user.name}
 
                         </p>   
                     </div>
 
                     <div id="allSets"> 
-                        {response.sets.map(res => (
+                        {user.learnSets.map(res => (
                                     <div class="oneSetWrapper">
                                         <div class="oneSet">
                                             
@@ -124,6 +129,8 @@ export default function PublicProfile(){
                                 ))}
                     </div>
                 </div>
+                    )}
+                
                 
                 </div>
                 <Footer>Footer</Footer>
