@@ -3,10 +3,10 @@ body {
     height: 100vh;
 }
 
-grid-container{
+.grid-container{
     display: grid;
     grid-template-columns: 1fr 1.2fr 1.5fr;
-    grid-template-rows: 1fr 4fr 3fr 2fr;
+    grid-template-rows: 0.75fr 7fr 1fr 1fr;
     grid-template-areas:
         "header header header"
         "main main flashy"
@@ -18,17 +18,18 @@ grid-container{
 
 main {
     grid-area: main;
+    margin-top: 15px;
     background: #70F0A9;
     textAlign: 'bottom';
 }
 
-future {
+section.future {
     grid-area: future;
     background: #6fa5aa;
     margin-top: 10px;
 }
 
-uzh {
+section.uzh {
     grid-area: uzh;
     background: #306b6d;
     margin-top: 10px;
@@ -36,20 +37,21 @@ uzh {
 
 }
 
-emptyspace {
+section.emptyspace {
     grid-area: emptyspace;
     background: #white;
 }
 
-header {
+section.header {
     grid-area: header;
 }
 
-flashy {
+.flashy {
     grid-area: flashy;
     background: url('../shared/images/flashy_h-green.png') no-repeat;
     background-size: 80%;
     margin-left: 50px;
+    margin-top: 20px;
 }
 
 h1 {
@@ -59,5 +61,23 @@ h1 {
 h3 {
     margin-left: 15px;
     margin-right: 15px;
+}
+
+div.item {
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    width: 190px;
+}
+img {
+  height: 146px;
+  width: 146px;
+  border-radius: 73px;
+  overflow: hidden;
+  left: 50%;
+  border: solid 1px gainsboro;
+}
+.caption {
+    display: block;
 }
 
