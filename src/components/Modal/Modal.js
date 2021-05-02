@@ -32,7 +32,7 @@ export const users = [
 
 
 //export const /*erase if not working*/ 
-function Modal({ handleClose, show, children, currentWindow, mainPageModalTypeSetter, ...props }){
+function Modal({ handleClose, show, children, currentWindow, members,mainPageModalTypeSetter, ...props }){
 
     const showHideClassName = show ? "modal display-block" : "modal display-none";
 
@@ -112,7 +112,7 @@ function Modal({ handleClose, show, children, currentWindow, mainPageModalTypeSe
 
 
   /*where to put?*/
-
+console.log("current window:", currentWindow)
     if(currentWindow == "dashboard"){
         return (
             <div
@@ -298,6 +298,64 @@ function Modal({ handleClose, show, children, currentWindow, mainPageModalTypeSe
             </div>
           );
     }
-};
+    else if(currentWindow == "overview"){
+            return (
+                <div
+                className={showHideClassName} >
+                    <div className = "outside"
+                    onClick = {() => {
+                        handleClose()
+                    }}>
+    
+                    </div>
+                <section className="modal-main" id="modal_play">
+                        <div id="modal_title">
+                            Learning mates of this set
+                        </div>
+    
+                        {members.map(user => (
+                        <div id="modal_content">       
+                            
+                                <div class="userCardModal">
+                                    
+    
+                                        <div class="userBasic">
+                                            <div class="photoFrame">
+                                                <img src={user.photo} />                            
+                                            </div>
+                                            <p class="profile_username">
+                                                {user.username}
+                                            </p>
+                                        </div>
+    
+                                        <div class="userMore">
+                                        <p class="likes_wins">
+                                            <span class="thumbIcon"><ThumbUpAltOutlinedIcon/></span> {user.likes} <span class="winIcon"><EmojiEventsIcon/></span> {user.wins}
+                                        </p>
+                                        <p>
+                                            {user.info}
+                                        </p>   
+                                        </div>
+                                    
+                                        <div class="invitationButton"> INVITE </div> 
+                                </div>
+                                
+    
+                            
+                            
+                            {/* {children}*/}
+                        </div>
+                        ))}
+                        
+                    <button class="closeModal" type="button" onClick={handleClose} >
+                    Close
+                    </button>
+                    
+                </section>
+                </div>
+            );
+        
+    }
+}
 
 export default withRouter(Modal);
