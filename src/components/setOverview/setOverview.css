@@ -39,6 +39,12 @@
     grid-column-start:1;
     grid-column-end:2;
     padding: 30px;
+    font-size: 20px;
+    overflow-wrap: break-word;
+  }
+
+  .infoBlock{
+    max-width: 720px;
   }
 
   #set_img_upload{
@@ -156,12 +162,19 @@
     background-color: #70F0A9;
     border-radius: 10px 0 0 0;
     border-right: solid 3px white;
-
+    user-select: none;
 
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 1;
     grid-row-end:2;
+  }
+
+  .question_text{
+    position: relative;
+    left:23px;
+    overflow-wrap: break-word;
+    max-width: 400px;
   }
 
   .q_content{
@@ -181,6 +194,7 @@
     line-height: 36px;
     color:white;
     font-weight: bold;
+    user-select: none;
 
     background-color: #70F0A9;
     border-radius: 0 10px 0 0;
@@ -263,6 +277,12 @@
   input[  name="question_text"]{
     text-align: center;
 
+  }
+
+  .question_text{
+    text-align: center;
+    font-size: 22px;
+    
   }
 
   #screen{

@@ -7,6 +7,8 @@ import {api, handleError} from "../../helpers/api"
 import User from '../shared/models/User';
 import Footer from '../footer/Footer.js'
 
+import BackButton from "../learnPage/BackButton.png";
+
 //icon
 import { DeleteForever } from '@material-ui/icons';
 
@@ -118,13 +120,26 @@ function EditCreateSet(props){
         });
   }
 
+  function goToDashboard() {
+    history.push(`/Dashboard`)
+  }
+
 
     return(
         <div>
             <Header/>
             
             <div id="screen"> 
-                <SideNav checked={1}/>
+            <div class="back-button-container">
+            <button
+              class="back-button"
+              onClick={() => {
+                goToDashboard();
+              }}
+            >
+              <img class="back-button-image" src={BackButton} />
+            </button>
+          </div>
                 <div id="board_edit">
             
 
@@ -145,7 +160,8 @@ function EditCreateSet(props){
                         <div id="set_info">
                             <label type>
                                 Name of the set<br/>
-                                <input type="text" className="set_name" defaultValue={set.title} 
+                                <input type="text" className="set_name" 
+                                defaultValue={set.title} maxLength="20"
                                 onChange={e => setSet({title: e.target.value, explain: set.explain, userId: set.userId, 
                                                     cards: set.cards, setId: set.setId, photo: set.photo})} />
                             </label>
@@ -154,7 +170,8 @@ function EditCreateSet(props){
 
                             <label>
                                 Description for the set <br/>
-                                <input type="text" className="set_des" defaultValue={set.explain}
+                                <input type="text" className="set_des" 
+                                defaultValue={set.explain} maxLength="300"
                                 onChange={e => setSet({title: set.title, explain: e.target.value, userId: set.userId, 
                                     cards: set.cards, setId: set.setId, photo: set.photo})} />
                             </label>
@@ -226,15 +243,19 @@ function EditCreateSet(props){
                                     
                                     <div class="q_title">Question</div>
                                     <div class="q_content">
-                                        <input type="text" className="question_text" defaultValue={quiz.question}
+                                        <textArea type="text" maxLength="130" className="question_text"
                                             onChange={e => quiz.question = e.target.value}
-                                        />
+                                        >
+                                            {quiz.question}
+                                        </textArea>
                                     </div>
                                     <div class="a_title">Answer</div>
                                     <div class="a_content">
-                                        <input type="text" className="question_text" defaultValue={quiz.answer}
+                                        <textArea type="text" maxLength="130" className="question_text"
                                             onChange={e => quiz.answer = e.target.value}
-                                        />
+                                        >
+                                            {quiz.answer}
+                                        </textArea>
                                     </div>
 
                                 </div>

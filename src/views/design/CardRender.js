@@ -36,7 +36,8 @@ export default function CardRender({flashcard, set_length, current_place, marked
     }
 
     return(
-        <div>
+        <div className = "cardContainer">
+            <div className = "cardAdjust">
             <div
                 className={`card ${flip ? 'flip' : ''}`}
                 onClick={() => {setFlip(!flip);}}
@@ -66,6 +67,7 @@ export default function CardRender({flashcard, set_length, current_place, marked
                     <img class = "star-back-image"
                         src = {starState} />
                 </button>
+            </div>
             </div>
         </div>
     );

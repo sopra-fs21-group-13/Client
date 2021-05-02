@@ -182,6 +182,10 @@ h1{
     margin-bottom: 5px;
 }
 
+.oneSet:hover{
+    cursor: pointer;
+}
+
 .setTitle{
     height: 40px;
     line-height:40px;

@@ -170,11 +170,21 @@
 
   .q_content{
     grid-column-start: 1;
+    overflow-wrap: break-word;
     grid-column-end: 2;
     grid-row-start: 2;
     grid-row-end:3;
     border-right: solid 3px white;
     
+  }
+
+  .question_text{
+    height: 200px;
+    overflow-wrap: break-word;
+    border: none;
+    outline: none;
+    resize:none;
+    background-color: whitesmoke;
   }
 
   .a_title{
@@ -198,10 +208,10 @@
 
   .a_content{
     grid-column-start: 2;
+    overflow-wrap: break-word;
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end:3;
-
     border-left: solid 3px white;
   }
 

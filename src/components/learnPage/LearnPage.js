@@ -637,9 +637,6 @@ class LearnPage extends React.Component {
                   </div>
                 )}
               </div>
-              <div class="info-block info-block-2">
-                {!this.state.cardSet ? <div>Name</div> : this.state.cardSet.explain}
-              </div>
               <div class="info-block info-block-3">
                 <img class="likes-image" src={Likes} />
                 {!this.state.cardSet ? <div>Name</div> : " " + this.state.cardSet.likes}
