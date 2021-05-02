@@ -27,7 +27,6 @@ main {
 section.feedback {
     grid-area: feedback;
     background: #70F0A9;
-    margin-left: 10px;
 
 }
 
@@ -36,6 +35,11 @@ h1 {
 }
 
 h3 {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+h4 {
     margin-left: 15px;
     margin-right: 15px;
 }
@@ -56,3 +60,6 @@ flashy {
     margin-left: 50px;
 }
 
+box {
+    margin: 15px;
+}

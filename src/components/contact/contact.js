@@ -26,10 +26,12 @@ class Contact extends React.Component {
                         <h1> Contact Form </h1>
                             <h3> If you have any unanswered questions or would like to get in contact with the creators of this website
                             please fill out the form below. </h3>
-                            <h3> We will try and get back to you as soon as possible. </h3>
+                            <h3> We will try and get back to you as soon as possible! </h3>
                     </main>
+                    <section class="feedback">
                     <FeedbackForm>
                     </FeedbackForm>
+                    </section>
                     <section class="emptyspace">
                     </section>
                     <header>

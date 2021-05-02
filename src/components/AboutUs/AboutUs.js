@@ -34,12 +34,12 @@ class AboutUs extends React.Component {
                             We are students from UZH. The team is made up by Silvan, Nazim, Seonbin, Remus and Kiram.
                             </h3>
                     </main>
-                    <future>
-                        <h1> Future Projects </h1>
-                    </future>
-                    <uzh>
-                        <h1> Link UZH </h1>
-                    </uzh>
+                    <section class="future">
+                    <h3> Future Projects </h3>
+                    </section>
+                    <section class="uzh">
+                        <h3> Link UZH </h3>
+                    </section>
                     <emptyspace>
                     </emptyspace>
                     <header>
