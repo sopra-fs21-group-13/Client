@@ -206,7 +206,7 @@ class DashBoard extends React.Component {
                                         <div class="oneSet"
                                         onClick={() => {
                                             //Pushes the set to the set view page
-                                            this.props.history.push({pathname: "overview", userId:res.userId, clickedSet: res});
+                                            this.props.history.push({pathname: "overview", userId:this.state.user.userId, clickedSet: res});
                                         }}>
                                             <button class="iconClear"
                                             onClick = {(event) =>{
