@@ -23,22 +23,25 @@ class AboutUs extends React.Component {
                 <grid-container>
                     <main>
                         <h1> What is Flashy? </h1>
-                            <h3> Founded in 2008, Stack Overflow’s public platform is used by nearly everyone who codes to learn, share their knowledge, collaborate, and build their careers.
-
-                                 Whether it’s on Stack Overflow or within Stack Overflow for Teams, community is at the center of all that we do. </h3>
+                            <h3>
+                            Flashy is an application with which students (and other users) can create digital flashcard stacks.
+                            Besides the ordinary capabilities of physical flashcards, the ability to share the created stacks with
+                            other users will be offered by our service, promoting the learning experience using social interaction
+                            and creating a good working environment.
+                            </h3>
                         <h1> Who are we? </h1>
-                            <h3> Founded in 2008, Stack Overflow’s public platform is used by nearly everyone who codes to learn, share their knowledge, collaborate, and build their careers.
-
-                                 Whether it’s on Stack Overflow or within Stack Overflow for Teams, community is at the center of all that we do. </h3>
+                            <h3>
+                            We are students from UZH. The team is made up by Silvan, Nazim, Seonbin, Remus and Kiram.
+                            </h3>
                     </main>
-                    <section class="future">
+                    <future>
                         <h1> Future Projects </h1>
-                    </section>
-                    <section class="uzh">
+                    </future>
+                    <uzh>
                         <h1> Link UZH </h1>
-                    </section>
-                    <section class="emptyspace">
-                    </section>
+                    </uzh>
+                    <emptyspace>
+                    </emptyspace>
                     <header>
                         <Header>
                         </Header>

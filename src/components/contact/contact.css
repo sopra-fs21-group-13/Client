@@ -10,7 +10,7 @@ grid-container{
     grid-template-areas:
         "header header header"
         "main main flashy"
-        "future uzh flashy"
+        "feedback feedback flashy"
         "emptyspace emptyspace flashy";
     height: 100vh;
     margin: 2em;
@@ -22,16 +22,11 @@ main {
     textAlign: 'bottom';
 }
 
-section.future {
-    grid-area: future;
-    background: #6fa5aa;
-    margin-top: 10px;
-}
 
-section.uzh {
-    grid-area: uzh;
-    background: #306b6d;
-    margin-top: 10px;
+
+section.feedback {
+    grid-area: feedback;
+    background: #70F0A9;
     margin-left: 10px;
 
 }
@@ -59,11 +54,5 @@ flashy {
     background: url('../shared/images/flashy_h-green.png') no-repeat;
     background-size: 80%;
     margin-left: 50px;
-}
-
-textBox{
-    position: absolute;
-    right: 800px;
-    left: 50px;
 }
 

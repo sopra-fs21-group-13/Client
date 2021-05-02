@@ -22,13 +22,13 @@ main {
     textAlign: 'bottom';
 }
 
-section.future {
+future {
     grid-area: future;
     background: #6fa5aa;
     margin-top: 10px;
 }
 
-section.uzh {
+uzh {
     grid-area: uzh;
     background: #306b6d;
     margin-top: 10px;
@@ -36,7 +36,7 @@ section.uzh {
 
 }
 
-section.emptyspace {
+emptyspace {
     grid-area: emptyspace;
     background: #white;
 }
