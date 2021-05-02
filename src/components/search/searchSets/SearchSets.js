@@ -27,6 +27,17 @@ function SearchSets(props){
     const [usernames, setUsernames] = useState([]);
 
     const [disabledButtons, setDisabledButtons] = useState([]);
+    const [currentUserId, setCurrentUserId]=useState();
+
+    useEffect(() => {
+        api.get("/users/" + localStorage.getItem("userId")).then(response => {
+            
+            setCurrentUserId(response.data.userId);
+
+        }).catch(e=>{
+            alert(`Something went wrong while fetching curren user id: \n${handleError(e)}`);
+        })
+    }, []) 
 
 
     useEffect(() => {
@@ -34,11 +45,14 @@ function SearchSets(props){
             setAllSets(response.data);
 
             setUsernameDict(response.data);
+            console.log("all sets:",response.data);
 
         }).catch(e=>{
             alert(`Something went wrong while fetching all sets: \n${handleError(e)}`);
         })
     }, []) 
+
+
 
     function setUsernameDict(sets){
         var usernameDict = {}
@@ -110,7 +124,7 @@ function SearchSets(props){
                                 
                                 <div class="oneSet" onClick={() => {
                                     //Pushes the set to the set view page
-                                    history.push({pathname: "overview", userId:res.userId, clickedSet: res});
+                                    history.push({pathname: "overview", userId:currentUserId, clickedSet: res});
                                 }}>
                                     <div class="oneSetImage">
                                         <img src={res.photo} />

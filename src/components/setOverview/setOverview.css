@@ -26,7 +26,7 @@
   }
 
   .board_contents_edit{
-    margin: 0 50px 0 30px;
+    margin: 0 0 0 30px;
 
   }
 
@@ -38,6 +38,7 @@
   #set_info{
     grid-column-start:1;
     grid-column-end:2;
+    padding: 30px;
   }
 
   #set_img_upload{
@@ -169,6 +170,7 @@
     grid-row-start: 2;
     grid-row-end:3;
     border-right: solid 3px white;
+    height: auto;
     
   }
 
@@ -198,6 +200,7 @@
     grid-row-end:3;
 
     border-left: solid 3px white;
+    height: auto;
   }
 
   .throw_card{
@@ -271,6 +274,7 @@
   #pureboard{
     grid-column-start: 2;
     grid-column-end: 3;
+    width: 950px;
 }
 
 #board_edit{

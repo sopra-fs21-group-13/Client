@@ -55,7 +55,7 @@ function SetOverview(props){
     //used for routing. Location passes the state from dashboard.
     let location = useLocation();
     let history = useHistory();
-    const [cUser, setCUser] = useState(location.userId);
+    const [currentUser, setCUser] = useState(location.userId);
     const[explain, setExplain]=useState();
     const [title, setTitle]=useState();
     const [cards, setCards]=useState();
@@ -102,9 +102,10 @@ function SetOverview(props){
         api.get("/sets/" + setId).then(response=>{
             setTitle(response.data.title);
             {/*set heart if the user is the member*/}
-            setSaved(cUser==response.data.userId?true:false)
-            console.log(response.data)
-            console.log("curren user:", cUser)
+            setSaved(currentUser==response.data.userId?true:false)
+            console.log("current set:", response.data)
+
+            console.log("curren user:", currentUser)
 
             setMembers(response.data.members)
             setExplain(response.data.explain)
@@ -141,7 +142,7 @@ function SetOverview(props){
                     <div class="heart_container">
                     <span>  <h1>{saved?(<div class="heart"></div>):(<div class="heart_no"></div>)} {title} </h1>  </span>
                     </div>
-                    {console.log("saved?",{saved})  }
+                    
                 </div>
 
                 <div class="board_contents_edit">
