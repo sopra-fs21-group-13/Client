@@ -1,0 +1,50 @@
+.green_h > button{
+    /**/
+    background-color:#70F0A9;
+
+    
+    color: white;
+
+    font-weight: bold;
+    
+    border: none;
+    cursor: pointer;
+    border-radius: 60px;
+    text-align: center;
+    width: 200px;
+    height: 30px;
+    position: relative;
+
+    margin: 10px 0 0 0;
+   
+   
+  }
+  
+
+.red_h > button{
+  background-color:coral;
+
+  color: white;
+
+  font-weight: bold;
+  
+  border: none;
+  cursor: pointer;
+  border-radius: 60px;
+  text-align: center;
+  width: 200px;
+  height: 30px;
+  position: relative;
+  margin: 10px 0 0 0;
+
+}
+
+.set_img_frame{
+    margin: 0px 50px 0 0;
+    size: 100%;
+    display:inline-block;
+}
+
+.set_img_upload{
+    text-align:right;
+}

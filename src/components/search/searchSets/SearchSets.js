@@ -1,5 +1,6 @@
-import React, { useState,  useEffect } from 'react';
+import React, { useState,  useEffect, useLocation} from 'react';
 import { useHistory } from "react-router-dom";
+
 
 import SideFilter from '../sideFilter/SideFilter';
 import './searchSets.css';
@@ -18,6 +19,7 @@ import {Button} from '../../../views/design/Button.js';
 
 
 function SearchSets(props){
+    
     /*var allSets=[];*/
     const [allSets, setAllSets] = useState([]);
 
@@ -85,8 +87,10 @@ function SearchSets(props){
 */
 
 
-
+    let history = useHistory();
     return(
+        
+
         <div>
             {console.log("hmm",allSets)}
 
@@ -104,7 +108,10 @@ function SearchSets(props){
                         {allSets.map((res ,i)=> (
                             <div class="oneSetWrapper" key={i}>
                                 
-                                <div class="oneSet">
+                                <div class="oneSet" onClick={() => {
+                                    //Pushes the set to the set view page
+                                    history.push({pathname: "overview", userId:res.userId, clickedSet: res});
+                                }}>
                                     <div class="oneSetImage">
                                         <img src={res.photo} />
                         
@@ -120,7 +127,7 @@ function SearchSets(props){
                                     <img src={ProfilePicture}/>{usernames[res.setId]}
                                     
                                     <br/>
-                                    <FavoriteIcon/> {res.liked} 
+                                    {/*<FavoriteIcon/> {res.liked}*/}
                                 </div>
                                 <Button className = "addButton"
                                 disabled = {(

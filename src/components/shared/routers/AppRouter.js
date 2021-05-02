@@ -12,11 +12,13 @@ import MainPage from "../../mainPage/MainPage";
 import EditCreateSet from "../../editCreateSet/EditCreateSet";
 import AboutUs from "../../AboutUs/AboutUs.js"
 
+
 import SearchSets from "../../search/searchSets/SearchSets";
 import SearchUsers from "../../search/searchUsers/SearchUsers";
 
 import Help from "../../help/help.js"
 import Contact from "../../contact/contact.js"
+import SetOverview from "../../setOverview/SetOverview";
 /**
  * Main router of your application.
  * In the following class, different routes are rendered. In our case, there is a Login Route with matches the path "/login"
@@ -134,6 +136,16 @@ class AppRouter extends React.Component {
                   <Contact />
               )}
             />
+
+            <Route
+              path="/overview"
+              exact
+              render={() => (
+                  <SetOverview />                
+              )}
+            />
+
+
             <Route path="/" exact render={() => <Redirect to={"/main"} />} />
 
           </div>
