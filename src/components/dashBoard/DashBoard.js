@@ -138,6 +138,7 @@ class DashBoard extends React.Component {
           }
     }
 
+
     goToEditPage(){
         this.props.history.push({pathname: "edit", state: {editBehavior: true}});
     }
@@ -145,6 +146,8 @@ class DashBoard extends React.Component {
     goToCreatePage(){
         this.props.history.push({pathname: "edit", state: {editBehavior: false}});
     }
+
+    
 
     render(){
         return(
@@ -200,9 +203,14 @@ class DashBoard extends React.Component {
                                 {this.state.ownSetList.map((res ,i)=> (
                                     
                                     <div class="oneSetWrapper_dashboard" key={i}>
-                                        <div class="oneSet">
+                                        <div class="oneSet"
+                                        onClick={() => {
+                                            //Pushes the set to the set view page
+                                            this.props.history.push({pathname: "overview", userId:res.userId, clickedSet: res});
+                                        }}>
                                             <button class="iconClear"
-                                            onClick = {() =>{
+                                            onClick = {(event) =>{
+                                                event.stopPropagation();
                                                 (this.state.ownSetList.includes(res)) ? (
                                                     this.deleteSet(this.state.setList.indexOf(res))
                                                 ) : (
@@ -216,7 +224,8 @@ class DashBoard extends React.Component {
                                                 </div>
                                             </button>
                                             <button class="iconEdit"
-                                            onClick = {() =>{
+                                            onClick = {(event) =>{
+                                                event.stopPropagation();
                                                 this.props.history.push({pathname: "edit", state: {editBehavior: true, set: res}})
                                             }}
                                             >
@@ -260,9 +269,24 @@ class DashBoard extends React.Component {
                                 {//card to add create a set
                                 }
                                 <div class="oneSetWrapper_dashboard">
-                                        <div class="oneSet opac">
+                                        <div class="oneSet opac" 
+                                        onClick = {() => {
+                                            const emptySet = 
+                                                {
+                                                    setId: 0,
+                                                    title: "",
+                                                    explain: "",
+                                                    userId:5,
+                                                    liked:0,
+                                                    photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg",
+                                                    cards: [{id: 0, question: "", answer: ""}, {id: 1, question: "", answer: ""}]
+                                                }
+                                            this.props.history.push({pathname: "edit", state: {editBehavior: false, set: emptySet}});
+                                        }}
+                                        >
                 
-                                            <div class="oneSetImage">
+                                            <div class="oneSetImage"
+                                            >
                                                 <img src="https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg" />
                                 
                                             </div>
@@ -320,9 +344,15 @@ class DashBoard extends React.Component {
                             
                                 {this.state.foreignSetList.map((res ,i)=> (
                                     <div class="oneSetWrapper_dashboard" key={i}>
-                                        <div class="oneSet">
+                                        <div class="oneSet"
+                                        onClick={(event) => {
+                                            event.stopPropagation();
+                                            //Pushes the set to the set view page
+                                            this.props.history.push({pathname: "overview", userId:res.userId, clickedSet: res});
+                                        }}>
                                             <button class="iconClear"
-                                            onClick = {() =>{
+                                            onClick = {(event) =>{
+                                                event.stopPropagation();
                                                 (this.state.ownSetList.includes(res)) ? (
                                                     this.deleteSet(this.state.setList.indexOf(res))
                                                 ) : (

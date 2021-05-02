@@ -149,7 +149,7 @@ function SetOverview(props){
 
                 <div class="separator">Basic Info</div> 
                     <div id="basic_info">
-                        
+                        <div className = "infoBlock">
                         <div id="set_info">
                             <label>
                                 {explain}
@@ -158,6 +158,7 @@ function SetOverview(props){
                             <br/>
                             
 
+                        </div>
                         </div>
                         <div id="set_img_upload">
                             
@@ -197,15 +198,18 @@ function SetOverview(props){
                                     
                                     <div class="q_title">Question</div>
                                     <div class="q_content">
-                                        <input type="text" className="question_text" value=
-                                            {quiz.question}/>
+                                        <div className="question_text"
+                                            >
+                                                {quiz.question}
+                                        </div>
                                         
                                     </div>
                                     <div class="a_title">Answer</div>
                                     <div class="a_content">
-                                        <input type="text" className="question_text" defaultValue={quiz.answer}
-                                            
-                                        />
+                                        <div className="question_text"
+                                        >
+                                            {quiz.answer}
+                                        </div>
                                     </div>
 
                                 </div>
