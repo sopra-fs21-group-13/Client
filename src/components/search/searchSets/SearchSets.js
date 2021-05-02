@@ -138,9 +138,21 @@ function SearchSets(props){
                                 </div>
                                 <div className = "setTitleContainer">
                                 <div class ="owner_likes">
-                                    <img src={ProfilePicture}/>{usernames[res.setId]}
-                                    
+                                    <div className = "owner_info">
+                                    <img
+                                    onClick = {() => {
+                                        history.push({pathname: "PublicProfile", state: {userId: res.userId}})
+                                    }}
+                                    src={ProfilePicture}/>
+                                    <div
+                                    onClick = {() => {
+                                        history.push({pathname: "PublicProfile", state: {userId: res.userId}})
+                                        
+                                    }}>
+                                    {" " + usernames[res.setId]}
+                                    </div>
                                     <br/>
+                                    </div>
                                     {/*<FavoriteIcon/> {res.liked}*/}
                                 </div>
                                 <Button className = "addButton"

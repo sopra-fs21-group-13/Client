@@ -21,6 +21,15 @@
     padding: 0 30px 30px 30px;
 }
 
+.owner_info{
+    display: flex;
+    width: 250px;
+}
+
+.owner_info:hover{
+    cursor: pointer;
+}
+
 
 .oneSetWrapper{
     margin-bottom: 30px;
