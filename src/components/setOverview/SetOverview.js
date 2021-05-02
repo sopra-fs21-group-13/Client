@@ -102,7 +102,7 @@ function SetOverview(props){
         api.get("/sets/" + setId).then(response=>{
             setTitle(response.data.title);
             {/*set heart if the user is the member*/}
-            setSaved(currentUser==response.data.userId?true:false)
+            setSaved(response.data.memberIds.includes(currentUser)?true:false)
             console.log("current set:", response.data)
 
             console.log("curren user:", currentUser)

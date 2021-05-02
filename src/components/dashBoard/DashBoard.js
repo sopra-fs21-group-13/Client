@@ -207,6 +207,7 @@ class DashBoard extends React.Component {
                                         onClick={() => {
                                             //Pushes the set to the set view page
                                             this.props.history.push({pathname: "overview", userId:this.state.user.userId, clickedSet: res});
+                                            
                                         }}>
                                             <button class="iconClear"
                                             onClick = {(event) =>{
@@ -348,7 +349,9 @@ class DashBoard extends React.Component {
                                         onClick={(event) => {
                                             event.stopPropagation();
                                             //Pushes the set to the set view page
-                                            this.props.history.push({pathname: "overview", userId:res.userId, clickedSet: res});
+                                            this.props.history.push({pathname: "overview", userId:this.state.user.userId, clickedSet: res});
+                                            console.log(res.setId);
+                                            
                                         }}>
                                             <button class="iconClear"
                                             onClick = {(event) =>{
