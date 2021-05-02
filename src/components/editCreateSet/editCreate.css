@@ -47,7 +47,7 @@
         
   }
   .set_img_frame{
-    margin: 30px auto 30px 30px;
+    margin: auto;
     width: 300px;
     height: 180px;
     background-color: orange;

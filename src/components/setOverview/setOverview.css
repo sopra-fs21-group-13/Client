@@ -219,7 +219,7 @@
 
   .throw_card{
     height: 20px;
-    width: 930px;
+    width: 950px;
     line-height: 20px;
     text-align: right;
     color:gray;
@@ -294,7 +294,7 @@
   #pureboard{
     grid-column-start: 2;
     grid-column-end: 3;
-    /*width: 950px;*/
+    width: 950px;
 }
 
 #board_edit{
