@@ -6,7 +6,7 @@ body {
 grid-container{
     display: grid;
     grid-template-columns: 1fr 1.2fr 1.5fr;
-    grid-template-rows: 0.75fr 2fr 3fr 2fr;
+    grid-template-rows: 1fr 2fr 3fr 2fr;
     grid-template-areas:
         "header header header"
         "main main flashy"
