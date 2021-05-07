@@ -8,12 +8,6 @@ import SideNav from '../shared/sideNav/SideNav';
 import './AboutUs.css';
 import Header from "../header/header.js";
 import Footer from '../footer/Footer.js'
-import char1 from "../profile/char1.jpg";
-import char2 from "../profile/char2.jpg";
-import char3 from "../profile/char3.jpg";
-import char15 from "../profile/char15.jpg";
-import char5 from "../profile/char5.jpg";
-
 
 
 class AboutUs extends React.Component {
@@ -27,10 +21,6 @@ class AboutUs extends React.Component {
         return(
             <div>
                 <grid-container>
-                     <header>
-                       <Header>
-                       </Header>
-                     </header>
                     <main>
                         <h1 className ="fragen"> What is Flashy? </h1>
                             <h3 className = "text">
@@ -39,6 +29,7 @@ class AboutUs extends React.Component {
                             other users, promoting the learning experience using social interaction and creating a good working environment.
 
                             </h3>
+<<<<<<< HEAD
                         <h1 className ="fragen"> Who are we? </h1>
                         <div class="item">
                             <img className = "bild" src={char1} />
@@ -67,11 +58,27 @@ class AboutUs extends React.Component {
                         </div>
 
                         <h3 className = "text"> We are a team of students from UZH who created this project as part of our Software-Praktium. </h3>
+=======
+                        <h1> Who are we? </h1>
+                            <h3>
+                            We are students from UZH. The team is made up by Silvan, Nazim, Seonbin, Remus and Kiram.
+                            </h3>
+>>>>>>> 5cd6ee9f0301bc38992466b983b274d73afefd3d
                     </main>
                     <emptyspace>
                     </emptyspace>
+<<<<<<< HEAD
                     <section className="flashy">
                     </section>
+=======
+                    <header>
+                        <Header>
+                        </Header>
+                    </header>
+                    <flashy>
+
+                    </flashy>
+>>>>>>> 5cd6ee9f0301bc38992466b983b274d73afefd3d
                 </grid-container>
                 <Footer>
                 </Footer>

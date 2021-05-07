@@ -3,10 +3,14 @@ body {
     height: 100vh;
 }
 
-.grid-container{
+grid-container{
     display: grid;
     grid-template-columns: 1fr 1.2fr 1.5fr;
+<<<<<<< HEAD
     grid-template-rows: 0.75fr 7fr 4fr 8fr;
+=======
+    grid-template-rows: 1fr 4fr 3fr 2fr;
+>>>>>>> 5cd6ee9f0301bc38992466b983b274d73afefd3d
     grid-template-areas:
         "header header header"
         "main main flashy"
@@ -22,13 +26,21 @@ main {
     textAlign: 'bottom';
 }
 
+<<<<<<< HEAD
 .future {
+=======
+future {
+>>>>>>> 5cd6ee9f0301bc38992466b983b274d73afefd3d
     grid-area: future;
     background: #70F0A9;
     margin-top: 10px;
 }
 
+<<<<<<< HEAD
 .uzh {
+=======
+uzh {
+>>>>>>> 5cd6ee9f0301bc38992466b983b274d73afefd3d
     grid-area: uzh;
     background: #306b6d;
     margin-top: 10px;
@@ -36,21 +48,28 @@ main {
 
 }
 
+<<<<<<< HEAD
 .emptyspace {
+=======
+emptyspace {
+>>>>>>> 5cd6ee9f0301bc38992466b983b274d73afefd3d
     grid-area: emptyspace;
     background: #white;
 }
 
+<<<<<<< HEAD
 .header {
+=======
+header {
+>>>>>>> 5cd6ee9f0301bc38992466b983b274d73afefd3d
     grid-area: header;
 }
 
-.flashy {
+flashy {
     grid-area: flashy;
     background: url('../shared/images/flashy_h-green.png') no-repeat;
     background-size: 80%;
     margin-left: 50px;
-    margin-top: 20px;
 }
 
 .fragen {
@@ -62,6 +81,7 @@ main {
     width: 940px;
 }
 
+<<<<<<< HEAD
 .item {
     vertical-align: top;
     display: inline-block;
@@ -80,3 +100,5 @@ main {
     display: block;
 }
 
+=======
+>>>>>>> 5cd6ee9f0301bc38992466b983b274d73afefd3d
