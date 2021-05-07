@@ -32,46 +32,46 @@ class AboutUs extends React.Component {
                        </Header>
                      </header>
                     <main>
-                        <h1> What is Flashy? </h1>
-                            <h3>
-                            Flashy is an application with which students (and other users) can create digital flashcard stacks.
-                            Besides the ordinary capabilities of physical flashcards, the ability to share the created stacks with
-                            other users will be offered by our service, promoting the learning experience using social interaction
-                            and creating a good working environment.
+                        <h1 className ="fragen"> What is Flashy? </h1>
+                            <h3 className = "text">
+                            Flashy is an application with which users can create digital flashcard stacks.
+                            Besides the ordinary capabilities of physical flashcards, flashy offers the ability to share the created stacks with
+                            other users, promoting the learning experience using social interaction and creating a good working environment.
+
                             </h3>
-                        <h1> Who are we? </h1>
-                        <h3> We are students from UZH. </h3>
+                        <h1 className ="fragen"> Who are we? </h1>
                         <div class="item">
-                            <img src={char1} />
+                            <img className = "bild" src={char1} />
                             <span class="caption">Nazim</span>
+                            <span class="caption">MSc Informatics</span>
                         </div>
-                        <div class="item">
-                            <img src={char2} />
+                        <div className="item">
+                            <img className = "bild" src={char2} />
                             <span class="caption">Seonbin</span>
+                            <span class="caption">BSc Informatics</span>
                         </div>
-                        <div class="item">
-                            <img src={char3} />
+                        <div className="item">
+                            <img className = "bild" src={char3} />
                             <span class="caption">Silvan</span>
+                            <span class="caption">MSc Geography</span>
                         </div>
-                        <div class="item">
-                            <img src={char15} />
+                        <div className="item">
+                            <img className = "bild" src={char15} />
                             <span class="caption">Remus</span>
+                            <span class="caption">BSc Informatics</span>
                         </div>
-                        <div class="item">
-                            <img src={char5} />
+                        <div className="item">
+                            <img className = "bild" src={char5} />
                             <span class="caption">Kiram</span>
+                            <span class="caption">BSc Informatics</span>
                         </div>
+
+                        <h3 className = "text"> We are a team of students from UZH who created this project as part of our Software-Praktium. </h3>
                     </main>
-                    <section class="future">
-                    <h3> Future Projects </h3>
-                    </section>
-                    <section class="uzh">
-                        <h3> Link UZH </h3>
-                    </section>
                     <emptyspace>
                     </emptyspace>
-                    <flashy>
-                    </flashy>
+                    <section className="flashy">
+                    </section>
                 </grid-container>
                 <Footer>
                 </Footer>

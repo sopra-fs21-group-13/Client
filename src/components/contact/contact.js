@@ -23,10 +23,10 @@ class Contact extends React.Component {
             <div>
                 <grid-container>
                     <main>
-                        <h1> Contact Form </h1>
+                        <h1 className ="fragen"> Contact Form </h1>
                             <h3> If you have any unanswered questions or would like to get in contact with the creators of this website
                             please fill out the form below. </h3>
-                            <h3> We will try and get back to you as soon as possible! </h3>
+                            <h3 className = "text"> We will try and get back to you as soon as possible! </h3>
                     </main>
                     <section class="feedback">
                     <FeedbackForm>
@@ -38,9 +38,9 @@ class Contact extends React.Component {
                         <Header>
                         </Header>
                     </header>
-                    <flashy>
+                    <section class="flashy">
 
-                    </flashy>
+                    </section>
                 </grid-container>
                 <Footer>
                 </Footer>

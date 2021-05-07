@@ -11,7 +11,7 @@ function ContactForm() {
   return (
       <form onSubmit={handleSubmit}>
       <label htmlFor="email">
-      <h4>
+      <h4 className = "h4text">
         Email Address:
         </h4>
       </label>
@@ -27,7 +27,7 @@ function ContactForm() {
         field="email"
         errors={state.errors}
       />
-      <h4>
+      <h4 className = "h4text">
       Message / Question:
       </h4>
       <box>
