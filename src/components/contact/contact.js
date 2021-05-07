@@ -23,17 +23,14 @@ class Contact extends React.Component {
             <div>
                 <grid-container>
                     <main>
-                        <h1 className ="fragen"> Contact Form </h1>
+                        <h1 className ="fragen"> CONTACT US </h1>
                             <h3> If you have any unanswered questions or would like to get in contact with the creators of this website
-                            please fill out the form below. </h3>
-                            <h3 className = "text"> We will try and get back to you as soon as possible! </h3>
+                            please fill out the form below. As the website is not constantly monitored it may take a few days to answer but
+                             we will try and get back to you as soon as possible! We are always open to new suggestions or any other feedback. </h3>
+                            <FeedbackForm>
+                            </FeedbackForm>
                     </main>
-                    <section class="feedback">
-                    <FeedbackForm>
-                    </FeedbackForm>
-                    </section>
-                    <section class="emptyspace">
-                    </section>
+
                     <header>
                         <Header>
                         </Header>

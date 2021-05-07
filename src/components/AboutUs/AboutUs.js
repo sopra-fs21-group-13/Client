@@ -30,14 +30,13 @@ class AboutUs extends React.Component {
                         </Header>
                     </header>
                     <main>
-                        <h1 className ="fragen"> What is Flashy? </h1>
+                        <h1 className ="fragen"> WHAT IS FLASHY? </h1>
                             <h3 className = "text">
                             Flashy is an application with which users can create digital flashcard stacks.
                             Besides the ordinary capabilities of physical flashcards, flashy offers the ability to share the created stacks with
                             other users, promoting the learning experience using social interaction and creating a good working environment.
-
                             </h3>
-                        <h1 className ="fragen"> Who are we? </h1>
+                        <h1 className ="fragen"> WHO ARE WE? </h1>
                         <div class="item">
                             <img className = "bild" src={char1} />
                             <span class="caption">Nazim</span>
