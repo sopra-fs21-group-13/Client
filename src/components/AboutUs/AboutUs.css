@@ -6,11 +6,7 @@ body {
 grid-container{
     display: grid;
     grid-template-columns: 1fr 1.2fr 1.5fr;
-<<<<<<< HEAD
     grid-template-rows: 0.75fr 7fr 4fr 8fr;
-=======
-    grid-template-rows: 1fr 4fr 3fr 2fr;
->>>>>>> 5cd6ee9f0301bc38992466b983b274d73afefd3d
     grid-template-areas:
         "header header header"
         "main main flashy"
@@ -21,16 +17,15 @@ grid-container{
 }
 
 main {
+    margin-top: 15px;
     grid-area: main;
     background: #70F0A9;
     textAlign: 'bottom';
 }
 
-<<<<<<< HEAD
+
 .future {
-=======
-future {
->>>>>>> 5cd6ee9f0301bc38992466b983b274d73afefd3d
+
     grid-area: future;
     background: #70F0A9;
     margin-top: 10px;
@@ -55,6 +50,7 @@ future {
 }
 
 flashy {
+    margin-top: 15px;
     grid-area: flashy;
     background: url('../shared/images/flashy_h-green.png') no-repeat;
     background-size: 80%;

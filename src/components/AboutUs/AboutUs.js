@@ -8,7 +8,11 @@ import SideNav from '../shared/sideNav/SideNav';
 import './AboutUs.css';
 import Header from "../header/header.js";
 import Footer from '../footer/Footer.js'
-
+import char1 from '../profile/char1.jpg'
+import char2 from '../profile/char2.jpg'
+import char3 from '../profile/char3.jpg'
+import char15 from '../profile/char15.jpg'
+import char5 from '../profile/char5.jpg'
 
 class AboutUs extends React.Component {
 
@@ -21,6 +25,10 @@ class AboutUs extends React.Component {
         return(
             <div>
                 <grid-container>
+                    <header>
+                        <Header>
+                        </Header>
+                    </header>
                     <main>
                         <h1 className ="fragen"> What is Flashy? </h1>
                             <h3 className = "text">
@@ -57,6 +65,9 @@ class AboutUs extends React.Component {
                         </div>
 
                         <h3 className = "text"> We are a team of students from UZH who created this project as part of our Software-Praktium. </h3>
+                    </main>
+                    <flashy>
+                    </flashy>
                 </grid-container>
                 <Footer>
                 </Footer>
