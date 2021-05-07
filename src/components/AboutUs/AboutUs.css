@@ -36,11 +36,7 @@ future {
     margin-top: 10px;
 }
 
-<<<<<<< HEAD
 .uzh {
-=======
-uzh {
->>>>>>> 5cd6ee9f0301bc38992466b983b274d73afefd3d
     grid-area: uzh;
     background: #306b6d;
     margin-top: 10px;
@@ -48,20 +44,13 @@ uzh {
 
 }
 
-<<<<<<< HEAD
 .emptyspace {
-=======
-emptyspace {
->>>>>>> 5cd6ee9f0301bc38992466b983b274d73afefd3d
     grid-area: emptyspace;
     background: #white;
 }
 
-<<<<<<< HEAD
+
 .header {
-=======
-header {
->>>>>>> 5cd6ee9f0301bc38992466b983b274d73afefd3d
     grid-area: header;
 }
 
@@ -81,7 +70,6 @@ flashy {
     width: 940px;
 }
 
-<<<<<<< HEAD
 .item {
     vertical-align: top;
     display: inline-block;
@@ -100,5 +88,4 @@ flashy {
     display: block;
 }
 
-=======
->>>>>>> 5cd6ee9f0301bc38992466b983b274d73afefd3d
+

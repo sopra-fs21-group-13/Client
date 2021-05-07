@@ -29,7 +29,6 @@ class AboutUs extends React.Component {
                             other users, promoting the learning experience using social interaction and creating a good working environment.
 
                             </h3>
-<<<<<<< HEAD
                         <h1 className ="fragen"> Who are we? </h1>
                         <div class="item">
                             <img className = "bild" src={char1} />
@@ -58,27 +57,6 @@ class AboutUs extends React.Component {
                         </div>
 
                         <h3 className = "text"> We are a team of students from UZH who created this project as part of our Software-Praktium. </h3>
-=======
-                        <h1> Who are we? </h1>
-                            <h3>
-                            We are students from UZH. The team is made up by Silvan, Nazim, Seonbin, Remus and Kiram.
-                            </h3>
->>>>>>> 5cd6ee9f0301bc38992466b983b274d73afefd3d
-                    </main>
-                    <emptyspace>
-                    </emptyspace>
-<<<<<<< HEAD
-                    <section className="flashy">
-                    </section>
-=======
-                    <header>
-                        <Header>
-                        </Header>
-                    </header>
-                    <flashy>
-
-                    </flashy>
->>>>>>> 5cd6ee9f0301bc38992466b983b274d73afefd3d
                 </grid-container>
                 <Footer>
                 </Footer>
