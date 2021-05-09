@@ -9,6 +9,7 @@
   }
   
   .modal-main {
+    justify-content: space-around;
     position: fixed;
     background: white;
     width: 40%;
@@ -22,7 +23,6 @@
     overflow: auto;
     z-index: 13;
     user-select: none;
-    
   }
 
   .modal_content{

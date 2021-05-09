@@ -127,13 +127,9 @@ console.log("current window:", currentWindow)
                     <div id="modal_title">
                         Available Users
                     </div>
-
                     {users.map(user => (
                     <div id="modal_content">       
-                        
                             <div class="userCardModal">
-                                
-
                                     <div class="userBasic">
                                         <div class="photoFrame">
                                             <img src={user.photo} />                            
@@ -237,7 +233,7 @@ console.log("current window:", currentWindow)
                 }}>
 
                 </div>
-              <section className="modal-main">
+              <div className="modal-main">
                     <div id="modal_title">
                         Register
                     </div>
@@ -290,7 +286,7 @@ console.log("current window:", currentWindow)
 
                     </div>
                 
-              </section>
+              </div>
             </div>
           );
     }
