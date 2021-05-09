@@ -23,6 +23,10 @@ import char14 from "./char14.jpg";
 import char15 from "./char15.jpg";
 import char16 from "./char16.jpg";
 
+//online offline icons
+import OnlineSign from "../shared/images/OnlineSign.png";
+import OfflineSign from "../shared/images/OfflineSign.png";
+
 
 //icons from google..
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
@@ -96,6 +100,8 @@ export default function PublicProfile(){
                         <div className ="photoFrame">
                             <img src={currentPic} />                            
                         </div>
+                        <img className = "online-sign"
+                        src={(user.status == "ONLINE") ? OnlineSign : OfflineSign}/>
                             
                             
                         <p className ="profile_username">

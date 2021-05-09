@@ -20,6 +20,7 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
+
 .userCard{
 
     display: grid;
@@ -49,6 +50,14 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
 
+}
+
+
+.online-sign{
+    position: relative;
+    height:25px;
+    bottom: 20px;
+    left: 30px;
 }
 
   .userMore{
