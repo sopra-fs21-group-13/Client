@@ -154,10 +154,6 @@ console.log("current window:", currentWindow)
                                 
                                     <div class="invitationButton"> INVITE </div> 
                             </div>
-                            
-
-                        
-                        
                         {/* {children}*/}
                     </div>
                     ))}
