@@ -3,7 +3,7 @@ import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { GameGuard } from "../routeProtectors/GameGuard";
 import GameRouter from "./GameRouter";
 import { LoginGuard } from "../routeProtectors/LoginGuard";
-import Login from "../../login/Login";
+//import Login from "../../login/Login";
 import LearnPage from "../../learnPage/LearnPage";
 import DashBoard from "../../dashBoard/DashBoard";
 import Profile from "../../profile/Profile";
@@ -49,7 +49,7 @@ class AppRouter extends React.Component {
                 </GameGuard>
               )}
             />
-            <Route
+            {/* <Route
               path="/login"
               exact
               render={() => (
@@ -57,7 +57,7 @@ class AppRouter extends React.Component {
                   <Login />
                 </LoginGuard>
               )}
-            />
+            /> */}
             <Route
               path="/dashboard"
               exact

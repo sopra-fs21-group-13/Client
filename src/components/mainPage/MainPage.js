@@ -131,11 +131,7 @@ class MainPage extends React.Component {
                         mainPageModalTypeSetter = {modalTypeSetter}
                 >
                                     <p>Modal</p>
-                </Modal>
-
-                
-                
-                
+                </Modal>            
                 
                 <Footer>Footer</Footer> 
             </div>
