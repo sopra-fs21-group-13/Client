@@ -4,6 +4,7 @@ import "./header.css";
 import flashy_h_white from '../shared/images/flashy_h-white.svg';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
+import { api, handleError } from "../../helpers/api";
 
 const Container = styled.div`
     justify-content: space-between;
@@ -35,7 +36,19 @@ const HeaderComponent = styled.header`
 function Header({buttonBehavior, setMainModalLogin, ...props}){
 
 
-    const LoginPopUp = () => {
+    //logout user in backend and reroute to main page.
+    function logout(){
+        
+        api.put("/users/logout/" + localStorage.getItem("userId")).then(result=>{
+            
+            //after logout
+            console.log("user "+localStorage.getItem("userId") + " logged out!");
+            localStorage.clear();
+            props.history.push("/main");
+
+        }).catch(e=>{
+            alert(`Something went wrong while logging out user: \n${handleError(e)}`);
+        });
 
     }
 
@@ -86,8 +99,7 @@ function Header({buttonBehavior, setMainModalLogin, ...props}){
                     />
                     <Button
                     onClick = {() => {
-                        localStorage.clear();
-                        props.history.push("/main");
+                        logout();
                     }}
                     >
                         logout
