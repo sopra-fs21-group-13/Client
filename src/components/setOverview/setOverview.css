@@ -44,7 +44,15 @@
   }
 
   .infoBlock{
+    display: grid;
+    grid-template-rows: 80% 20%;
     max-width: 720px;
+  }
+
+  .addToDashboardBtn{
+    width: 300px;
+    position: relative;
+    top:30px;
   }
 
   #set_img_upload{
@@ -150,6 +158,8 @@
     font-weight:bold;
 
   }
+
+  
 
   .q_title{
     height: 36px;

@@ -87,6 +87,8 @@ function SearchSets(props){
     function addToDashboard(set){
         api.put("/sets/" + localStorage.getItem("userId") + "/" + set.setId).then(response =>{
             console.log("added set " + set.setId + " to users dashboard");
+        }).catch(e=>{
+            alert(`Something went wrong while adding set to dashboard: \n${handleError(e)}`);
         })
     }
 

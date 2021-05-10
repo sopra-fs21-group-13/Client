@@ -28,6 +28,7 @@ function EditCreateSet(props){
     let history = useHistory();
 
 
+
     // quizes is the cards
     //createBehavior is used for the save button, so that the request to the backend can act accordingly (old set update or new set creation)
     const[quizes, setQuizes] = useState();
@@ -37,12 +38,13 @@ function EditCreateSet(props){
     const[cardCounter, setCounter] = useState();
 
    //this is like componentDidMount in classes, happens only once in the beginning
-    useEffect( () => {
+    useEffect(() => {
         setQuizes(location.state.set.cards);
         setSet(location.state.set);
         setBehavior(location.state.editBehavior);
         setCounter(location.state.set.cards.length);
     }, [])
+
 
     
   const [image, setImage] = useState({ preview: "", raw: "" });
@@ -176,11 +178,6 @@ function EditCreateSet(props){
                                     cards: set.cards, setId: set.setId, photo: set.photo})} />
                             </label>
                             <br/>
-
-                            <button class="thinButton" type="button" onClick={() => {
-                                        this.props.history.push("dashboard");}}>                 
-                                Manage class members                   
-                            </button>
                         </div>
                         <div id="set_img_upload">
                             Image for the set
