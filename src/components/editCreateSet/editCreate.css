@@ -255,7 +255,7 @@
   }
 
 
-  input[type=text] {
+input[type=text][class="set_"] {
     background-color: whitesmoke;
     border: solid whitesmoke;
     border-radius: 10px;
@@ -268,11 +268,11 @@
     
   }
 
-  input[type=submit]{
+ input[type=submit][class="set_"]{
     float:right;
   }
 
-  input[  name="question_text"]{
+input[  name="question_text"][class="set_"]{
     text-align: center;
 
   }

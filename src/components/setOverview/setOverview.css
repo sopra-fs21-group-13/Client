@@ -267,27 +267,8 @@
   }
 
 
-  input[type=text] {
-    background-color: whitesmoke;
-    border: solid whitesmoke;
-    border-radius: 10px;
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
+ 
 
-    color:gray;
-    
-  }
-
-  input[type=submit]{
-    float:right;
-  }
-
-  input[  name="question_text"]{
-    text-align: center;
-
-  }
 
   .question_text{
     text-align: center;

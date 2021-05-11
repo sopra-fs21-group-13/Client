@@ -1,3 +1,7 @@
 .logoImage:hover{
     cursor: pointer;
 }
+
+.logoImage{
+    margin-right:auto;
+}

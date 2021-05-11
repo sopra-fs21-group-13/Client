@@ -160,9 +160,9 @@ function EditCreateSet(props){
                     <div id="basic_info">
                         
                         <div id="set_info">
-                            <label type>
+                            <label type class="set_">
                                 Name of the set<br/>
-                                <input type="text" className="set_name" 
+                                <input type="text" class="set_"
                                 defaultValue={set.title} maxLength="20"
                                 onChange={e => setSet({title: e.target.value, explain: set.explain, userId: set.userId, 
                                                     cards: set.cards, setId: set.setId, photo: set.photo})} />
@@ -170,9 +170,9 @@ function EditCreateSet(props){
                             <br/>
 
 
-                            <label>
+                            <label class="set_">
                                 Description for the set <br/>
-                                <input type="text" className="set_des" 
+                                <input type="text" class="set_" 
                                 defaultValue={set.explain} maxLength="300"
                                 onChange={e => setSet({title: set.title, explain: e.target.value, userId: set.userId, 
                                     cards: set.cards, setId: set.setId, photo: set.photo})} />
