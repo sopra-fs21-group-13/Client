@@ -18,6 +18,7 @@ function SideNav(props){
             }}>
                 Profile
             </div>
+            
         </div>
     );
 }

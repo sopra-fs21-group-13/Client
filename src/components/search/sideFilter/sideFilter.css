@@ -78,3 +78,41 @@
     border-radius: 50%;
     background: white;
   }
+
+  .filter-key{
+    background-color:whitesmoke;
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    border:none;
+    margin: 0 5px 5px 5px;
+  }
+
+  .filter-apply-btn{
+    background-color:#70F0A9;
+
+    color: white;
+   
+    font-weight: bold;
+    
+    border: none;
+    cursor: pointer;
+    border-radius: 60px;
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    position: relative;
+
+    display:inline-block;
+    margin: 5px;
+  }
+
+  .filter-apply-btn:hover{
+      background-color: #4ca875;
+   
+  }
+
+  /*use this class when you want to make the content of it centered(horizontally)*/
+  .middle-wrapper{ 
+    text-align: center;
+  }
