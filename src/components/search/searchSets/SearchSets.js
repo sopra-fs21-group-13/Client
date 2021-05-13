@@ -25,7 +25,6 @@ function SearchSets(props){
 
     /** setId:username  */
     const [usernames, setUsernames] = useState([]);
-
     const [disabledButtons, setDisabledButtons] = useState([]);
     const [currentUserId, setCurrentUserId]=useState();
 
