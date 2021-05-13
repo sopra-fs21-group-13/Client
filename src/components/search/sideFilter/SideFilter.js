@@ -16,8 +16,8 @@ function SearchFilter(props){
    
             <div class="searchFilter"> 
             <p>
-                <h3>View all</h3>
-             </p>    <br/>
+                <h3 class="view-all">View all</h3>
+             </p><br/>
 {/*  
                  <h2 class="middle-wrapper">View all</h2>
 */}
@@ -38,13 +38,13 @@ function SearchFilter(props){
                 </label><br/>
 */}
 
-                <label class="container">All types
+                <label class="container">All Types
                     <input type="radio" name="radio" 
                         onClick={()=>{
-                            history.push("searchusers");
-                            setValue("users");
+                            history.push("searchall");
+                            setValue("all");
                         }}
-                        checked={value=="users"}
+                        checked={value=="all"}
                     />
                     <span class="checkmark"></span>
 

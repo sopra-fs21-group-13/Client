@@ -15,6 +15,14 @@ import ProfilePicture from '../../shared/images/ProfilePicture.png';
 import { api, handleError } from "../../../helpers/api";
 import {Button} from '../../../views/design/Button.js';
 
+/**
+ * type==set
+ * 1. no keyword
+ * 2. with keyword
+ * @param {*} props 
+ * @returns 
+ */
+
 
 
 
@@ -107,7 +115,7 @@ function SearchSets(props){
         
 
         <div>
-            {console.log("hmm",allSets)}
+            {console.log("",allSets)}
 
             <Header/>
             <div id="body"> {/* grid */}

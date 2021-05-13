@@ -15,6 +15,7 @@ import AboutUs from "../../AboutUs/AboutUs.js"
 
 import SearchSets from "../../search/searchSets/SearchSets";
 import SearchUsers from "../../search/searchUsers/SearchUsers";
+import SearchAll from "../../search/SearchAll";
 
 import Help from "../../help/help.js"
 import Contact from "../../contact/contact.js"
@@ -116,6 +117,13 @@ class AppRouter extends React.Component {
               exact
               render={() => (
                   <SearchUsers />
+              )}
+            />
+            <Route
+              path="/searchAll"
+              exact
+              render={() => (
+                  <SearchAll />
               )}
             />
 

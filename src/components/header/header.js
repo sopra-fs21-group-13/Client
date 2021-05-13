@@ -34,7 +34,7 @@ const HeaderComponent = styled.header`
 `
 
 
-function Header({buttonBehavior, setMainModalLogin, ...props}){
+function Header({buttonBehavior, setMainModalLogin, keyword, setKeyword,...props}){
 
 
     //logout user in backend and reroute to main page.
