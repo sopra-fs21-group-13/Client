@@ -252,7 +252,7 @@ class DashBoard extends React.Component {
                                         </Button>
         
                                         {/*Play button: show modal*/}
-                                        <Modal show={this.state.show} handleClose={this.hideModal} currentWindow="dashboard">
+                                        <Modal show={this.state.show} handleClose={this.hideModal} currentWindow="dashboard" set={res}>
                                             <p>Modal</p>
                                         </Modal>
         
@@ -387,7 +387,7 @@ class DashBoard extends React.Component {
                                         </Button>
         
                                         {/*Play button: show modal*/}
-                                        <Modal show={this.state.show} handleClose={this.hideModal} currentWindow="dashboard">
+                                        <Modal show={this.state.show} handleClose={this.hideModal} currentWindow="dashboard" set={res}>
                                             <p>Modal</p>
                                         </Modal>
         
