@@ -57,7 +57,9 @@ function EditCreateSet(props) {
   });
   const [editBehavior, setBehavior] = useState();
   const [cardCounter, setCounter] = useState();
-  const [hoverOverDelete, setHoverDelete] = useState();
+  const [hoverOverDelete, setHoverDelete] = useState([]);
+
+  
 
   //this is like componentDidMount in classes, happens only once in the beginning
   useEffect(() => {
@@ -65,6 +67,15 @@ function EditCreateSet(props) {
     setSet(location.state.set);
     setBehavior(location.state.editBehavior);
     setCounter(location.state.set.cards.length);
+
+    //prepare the hover array and styles so that each delete button has own animation.
+    var prepHoverArray = [];
+
+    for(var i = 0; i<location.state.set.cards.length; i++){
+      prepHoverArray.push(false);
+    }
+    setHoverDelete(prepHoverArray);
+    
   }, []);
 
   const [image, setImage] = useState({ preview: "", raw: "" });
@@ -97,16 +108,25 @@ function EditCreateSet(props) {
     setCounter(cardCounter + 1);
     //clone array
     const set = [...quizes];
+    const deleteBools = [...hoverOverDelete];
+
     set.push(newCard);
+
+    deleteBools.push(false);
     setQuizes(set);
+    setHoverDelete(deleteBools);
   }
 
   function deleteCard(card) {
     //clone array
     var set = [...quizes];
+    const deleteBools = [...hoverOverDelete];
+
     var index = set.indexOf(card);
     set.splice(index,1);
+    deleteBools.splice(index,1);
     setQuizes(set);
+    setHoverDelete(deleteBools);
   }
 
   //depending on "createBehavior" state, either one of those is chosen as the onClick of the "save" button.
@@ -166,7 +186,18 @@ function EditCreateSet(props) {
     history.push(`/Dashboard`);
   }
 
-  var DeleteButton = hoverOverDelete ? Delete : DeleteForever;
+  function deleteButtonAnim(event, index){
+    var hoverDelete = [...hoverOverDelete];
+    hoverDelete[index] = true;
+    setHoverDelete(hoverDelete);
+  }
+
+  function deleteButtonAnimOff(event, index){
+    var hoverDelete = [...hoverOverDelete];
+    hoverDelete[index] = false;
+    setHoverDelete(hoverDelete);
+  }
+
 
   return (
     <div>
@@ -315,21 +346,24 @@ function EditCreateSet(props) {
                             </div>
                           </div>
                           <div class="throw_card"
-                          onClick = {()=>{
-                              deleteCard(quiz);
-                          }}
+                          
                           >
-                            Throw this card away
                             {//TODO:
                             }
-                            <Delete
-                            
-                            style={{
-                                fontSize: 25,
-                                
-                            }}
-                            onmouseover="this.style.fontSize=40"
-                            color="secondary"/>
+                            <div className = "throw_card_press_area"
+                            onMouseLeave = {(event) => deleteButtonAnimOff(event, quizes.indexOf(quiz))}
+                            onMouseEnter = {(event) => deleteButtonAnim(event, quizes.indexOf(quiz))}
+                            onClick = {()=>{
+                              deleteCard(quiz);
+                          }}>Throw this card away
+                            {hoverOverDelete[quizes.indexOf(quiz)] ? (<DeleteForever
+                                style={{fontSize: 35}}
+                                color="secondary"/>)
+                                :
+                                (<Delete
+                                  style={{fontSize: 25}}
+                                  color="secondary"/>)}
+                            </div>
                           </div>
                         </div>
                       ))}

@@ -216,20 +216,34 @@
   }
 
   .throw_card{
+    display: flex;
     height: 20px;
     width: 950px;
     line-height: 20px;
     text-align: right;
+    justify-content: right;
     color:gray;
+    user-select: none;
+    position: relative;
+    top:10px;
   }
 
-  .throw_card:hover{
+  
+  .throw_card_press_area{
+    display: grid;
+    align-items: center;
+    grid-template-columns: 170px 20px;
+    grid-template-rows: 25px;
+    height: 25px;    
+    width: 190px;
+    position: relative;
+    bottom:5px;
+  }
+
+  .throw_card_press_area:hover{
     cursor: pointer;
   }
-
-
-  .DeleteForever{
-  }
+  
 
   .new_qna{
     
