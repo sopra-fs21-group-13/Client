@@ -15,11 +15,11 @@ import ShuffleCardsActive from "./ShuffleCardsActive.png";
 import StudyOnlyStarredActive from "./StudyOnlyStarredActive.png";
 import ProfilePicture from "./ProfilePicture.png";
 import Likes from "./Likes.png";
-import BackButton from "./BackButton.png";
+import BackButton from "./BackButton.png"
 import Card from "../shared/models/Card";
 import { withRouter } from "react-router-dom";
 import Header from "../header/header.js";
-import "./learnPage.css";
+import styles from "./learnPage.css";
 import Footer from "../footer/Footer.js";
 import UserSettings from "../shared/models/UserSettings";
 import User from '../shared/models/User';

@@ -19,6 +19,7 @@ import SearchUsers from "../../search/searchUsers/SearchUsers";
 import Help from "../../help/help.js"
 import Contact from "../../contact/contact.js"
 import SetOverview from "../../setOverview/SetOverview";
+import Game from "../../game/Game";
 /**
  * Main router of your application.
  * In the following class, different routes are rendered. In our case, there is a Login Route with matches the path "/login"
@@ -42,13 +43,11 @@ class AppRouter extends React.Component {
             />
 
             <Route
-              path="/game"
-              render={() => (
-                <GameGuard>
-                  <GameRouter base={"/game"} />
-                </GameGuard>
-              )}
-            />
+                path="/game"
+                render={() => (
+                  <Game />
+                )}
+            />    
             {/* <Route
               path="/login"
               exact

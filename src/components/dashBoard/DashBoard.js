@@ -394,9 +394,6 @@ class DashBoard extends React.Component {
                                         <Button yellow={true} width="45%" onClick={this.showModal}>
                                             Play
                                         </Button>
-                                        
-                                                    
-        
                                     </div>
         
                                     

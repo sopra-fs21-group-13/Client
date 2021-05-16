@@ -1,0 +1,290 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+
+.game-setname{
+    position: relative;
+    display: grid;
+    grid-template-columns: 400px 800px 400px;
+    grid-template-rows: 100px 100px 100px;
+    justify-items: center;    
+    margin: 30px; 
+    font-family: 'Roboto', sans-serif;
+    color: #4F4D4D;
+    font-size: 45px;
+}
+
+.game-userbox{
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, 155px);
+    grid-column: 2;
+    grid-row: 2;
+    align-self: end;
+    width: 800px;   
+    height: 50px;
+    font-family: 'Roboto', sans-serif;
+    color: #4F4D4D;
+    font-size: 45px;
+    border-radius: .4rem;
+    background-color:rgba(0, 226, 0, 0.3);
+}
+
+.game-guesses{
+    position: relative;
+    display: grid;
+    grid-template-rows: 50px;
+    grid-column: 3;
+    grid-row: 3;
+    font-size: 25px;
+    align-items: center;
+    justify-items: center;
+    height: 800px;
+    width: 300px;
+    border-radius: .8rem; 
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.game-guesses-title{
+    position: relative;
+    grid-column: 3;
+    grid-row: 2;
+    top: 60px;
+    font-family: 'exampleserif', sans-serif;
+    font-size: 35px;
+    font-weight: lighter;
+}
+
+.game-scoreboard{
+    display: grid;
+    grid-template-rows: 80px repeat(5, 1fr);
+    grid-template-columns: repeat(5, 1fr); 
+    grid-column: 1;
+    grid-row: 3;
+    align-items: center;
+    justify-items: center;
+    height: 350px;
+    width: 300px;
+    position: relative;
+    border-radius: .8rem;
+}
+
+.game-timer{
+    position: relative;
+    left: 16px;
+    display: grid;
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.game-time{
+    position: relative;
+    left: 16px;
+    display: grid;
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.game-scoreboard-title{
+    position: relative;
+    bottom: 20px;
+    display: grid;
+    grid-column: 2/5;
+    grid-row: 2;
+    font-family: 'exampleserif', sans-serif;
+    font-size: 40px;
+    font-weight: lighter;
+}
+
+.game-scoreboard-profile1{
+    display: grid;
+    grid-template-rows: 20px repeat(3, 1fr);
+    grid-template-columns: 90px 60px 150px;
+    grid-column: 1/6;
+    grid-row: 3/4;
+    align-items: center;
+    justify-items: center;
+    height: 100px;
+    width: 300px;
+    background-color: rgba(0, 0, 0, 0.05);
+    position: relative;
+    border-radius: .8rem;
+} 
+
+.game-scoreboard-profile2{
+    display: grid;
+    grid-template-rows: 20px repeat(3, 1fr);
+    grid-template-columns: 90px 60px 150px;
+    grid-column: 1/6;
+    grid-row: 5/6;
+    align-items: center;
+    justify-items: center;
+    height: 100px;
+    width: 300px;
+    background-color: rgba(0, 0, 0, 0.05);
+    position: relative;
+    border-radius: .8rem;
+}
+
+.game-profile-picture2a{
+    position:relative;
+    display: grid;
+    grid-column: 2;
+    grid-row: 2;
+    align-items: center;
+    justify-self: end;
+    right: 10px; 
+}
+
+.game-rank{
+    position:relative;
+    display: grid;
+    grid-column: 1;
+    grid-row: 2/4;
+    align-items: center;
+    justify-self: end;
+    font-size: 40px;
+    /* right: 10px; */
+}
+
+.game-creator-name-b{
+    grid-column: 3;
+    grid-row: 2;
+    position: relative;
+    font-size: 20px;
+    justify-self: start;
+    align-self: end;
+}
+
+.game-points1{
+    grid-column: 3;
+    grid-row: 3;
+    position: relative;
+    font-size: 20px;
+    justify-self: start;
+    align-self: end;
+}
+
+.game-user-profile{
+    display: grid;
+    align-self: end;
+    justify-self: end;
+    position: relative;
+    left: 110px;
+    bottom: 5px;
+    background-color: rgba(2, 255, 255, 0);
+    box-shadow: none;
+    border: none;
+    z-index: 1;
+}
+
+.game-user-profile2{
+    grid-column: 4;
+    display: grid;
+    align-self: end;
+    justify-self: start;
+    position: relative;
+    left: -10px; 
+    bottom: 5px;
+    background-color: rgba(2, 255, 255, 0);
+    box-shadow: none;
+    border: none;
+    z-index: 1;
+}
+
+.game-user-profile:hover{
+    cursor: pointer;
+    
+}
+
+.game-vs-picture{
+    display: flex;
+    align-self: end;
+    justify-self: center;
+}
+
+.game-online-offline{
+    height:13px;
+    position: relative;
+    top:20px;
+}
+
+.game-creator-name{
+    justify-self: end;
+    align-self: end;
+    position: relative;
+    bottom: 5px;
+    font-size: 20px;
+}
+
+.game-creator-name2{
+    justify-self: start;
+    align-self: end;
+    right: 105px;
+    position: relative;
+    bottom: 5px;
+    font-size: 20px;
+}
+
+.game-profile-picture{
+    display: flex;
+    align-self: flex-end;
+    justify-self: flex-end;
+    transform: translateY(var(--translate-profile-y,0));
+}
+
+.game-profile-picture:hover{
+    --translate-profile-y: -1.5px;
+}
+
+.game-profile-picture-image{
+    position: relative;
+    left: 10px;
+    height: 30px;
+    width: 30px;
+    user-select: none;
+    
+}
+
+.game-back-button-container{
+    background-color: white;
+    display: flex;
+    height: 60px;
+}
+
+.game-back-button{
+    display: flex;
+    position: relative;
+    top: 16px;
+    left: 10px;
+    height: 50px;
+    width: 50px;
+    border-radius: 12%;
+    border: none;
+    background-color: rgba(255, 255, 255, 0);;
+    transform: translateY(var(--translate-y,0));
+    box-shadow: 0 0 1px 1px rgba(43, 42, 42, 0.2);
+}
+
+.game-back-button:hover{
+    --translate-y: -1.5px;
+    cursor: pointer;
+}
+
+.game-back-button-image{
+    height:50px;
+    width:50px;
+    position: relative;
+    bottom: 1px;
+    right: 8px;
+    user-select: none;
+}
+
+
+
+
+
+
+
+
+
+
