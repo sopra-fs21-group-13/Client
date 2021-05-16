@@ -44,7 +44,7 @@ class AppRouter extends React.Component {
             />
 
             <Route
-                path="/game"
+                path="/game/:id"
                 render={() => (
                   <Game />
                 )}

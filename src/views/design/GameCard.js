@@ -7,7 +7,7 @@ import "./AnswerBox.css"
  */
 
 //styling is handled in the cardRender.css file
-export default function GameCard({flashcard, set_length, current_place, markedCards}) {
+export default function GameCard({flashcard, set_length, current_place}) {
     var starred = false;
 
     return(
@@ -23,7 +23,7 @@ export default function GameCard({flashcard, set_length, current_place, markedCa
                     <div className='front'>
                         {flashcard.question}
                     </div>
-                    <div className='back'> {flashcard.answer} </div>
+                   
                 </div>
                 <input className="answerGame"
                        placeholder = "Your answer..."/> 

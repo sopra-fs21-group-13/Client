@@ -29,10 +29,11 @@ import OnlineSign from "../shared/images/OnlineSign.png";
 import OfflineSign from "../shared/images/OfflineSign.png";
 import GameCard from "../../views/design/GameCard.js"
 import "./game.css"
+import { CallToActionSharp } from "@material-ui/icons";
 
 class Game extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.handler = (ev) => {  
       ev.preventDefault();
       return ev.returnValue = 'Are you sure you want to close? Data like newly added starred cards might get lost in the process!';
@@ -52,9 +53,28 @@ class Game extends React.Component {
       markedCards: [Card],
       settingsId: 1,
       foreignUsername: "Neyz",
-      user: User
+      user: User,
+      cards:[],
+      players:[]
     };
   }
+
+  componentDidMount(){
+    let CallApi=async()=>
+{
+  let gameId=this.props.match.params["id"];
+  let response=await api.get(`/games/${gameId}`);
+  console.log(response["data"].players);
+  this.setState({...this.state,players:response["data"].players})
+  let setId=response["data"].playSetId
+  let response2=await api.get(`/sets/${setId}`);
+
+  this.setState({...this.state,cards:response2["data"].cards})
+
+}    
+CallApi();
+  
+}
 
 
   render() {
@@ -62,70 +82,71 @@ class Game extends React.Component {
     return (
       <div>
           <Header />
-          <div class="game-back-button-container">
+          <div className="game-back-button-container">
             <button
-              class="game-back-button"
+              className="game-back-button"
               onClick={() => {
                 this.goToDashboard();
               }}
             >
-              <img class="game-back-button-image" src={BackButton} />
+              <img className="game-back-button-image" src={BackButton} />
             </button>
           </div>
-          <div class="game-setname">
+          <div className="game-setname">
                 {this.state.cardSet.title = "SetTest"}
-                <div class="game-userbox">
-                <button class="game-user-profile"
+                <div className="game-userbox">
+                <button className="game-user-profile"
                     onClick={() => {
                       this.goToPublicProfile();
                     }}
                   >
-                    <div class="game-profile-picture">
-                      <img class="game-profile-picture-image" src={ProfilePicture}/>
+                    <div className="game-profile-picture">
+                      <img className="game-profile-picture-image" src={ProfilePicture}/>
                       <img className = "game-online-offline"
                       src={(this.state.user.status == "ONLINE") ? OnlineSign : OfflineSign}/>
                     </div>
                 </button> 
-                <div class="game-creator-name">{this.state.foreignUsername}</div>
+                <div className="game-creator-name">{this.state.foreignUsername}</div>
 
-                <img class="game-vs-picture" src={Vs}></img>
+                <img className="game-vs-picture" src={Vs}></img>
 
-                <button class="game-user-profile2"
+                <button className="game-user-profile2"
                     onClick={() => {
                       this.goToPublicProfile();
                     }}
                   >
-                    <div class="game-profile-picture">
-                      <img class="game-profile-picture-image" src={ProfilePicture}/>
+                    <div className="game-profile-picture">
+                      <img className="game-profile-picture-image" src={ProfilePicture}/>
                       <img className = "game-online-offline"
                       src={(this.state.user.status == "ONLINE") ? OnlineSign : OfflineSign}/>
                     </div>
                 </button> 
-                <div class="game-creator-name2">{this.state.foreignUsername}</div>
+                <div className="game-creator-name2">{this.state.foreignUsername}</div>
                 </div>
-                <GameCard
-                markedCards={this.state.markedCards}
-                flashcard={this.state.currentFlashcard}
-                />
-                <div class="game-scoreboard">
-                <img class="game-timer" src={Timer}/>
-                <div class="game-time"> 43s </div>
-                <div class="game-scoreboard-title">scoreboard</div>
-                <div class="game-scoreboard-profile1">
-                    <img class="game-profile-picture2a" src={ProfilePicture}></img>
-                    <div class="game-creator-name-b">{this.state.foreignUsername}</div>
-                    <div class="game-points1">Points: 200</div>
-                    <div class="game-rank">#1</div>
+                {this.state.cards.length>0? <GameCard
+                
+                flashcard={this.state.cards[0]}
+                />:""}
+               
+                <div className="game-scoreboard">
+                <img className="game-timer" src={Timer}/>
+                <div className="game-time"> 43s </div>
+                <div className="game-scoreboard-title">scoreboard</div>
+                <div className="game-scoreboard-profile1">
+                    <img className="game-profile-picture2a" src={ProfilePicture}></img>
+                    <div className="game-creator-name-b">{this.state.foreignUsername}</div>
+                    <div className="game-points1">Points: 200</div>
+                    <div className="game-rank">#1</div>
                 </div>
-                <div class="game-scoreboard-profile2">
-                    <img class="game-profile-picture2a" src={ProfilePicture}></img>
-                    <div class="game-creator-name-b">{this.state.foreignUsername}</div>
-                    <div class="game-points1">Points: 450</div>
-                    <div class="game-rank">#2</div>
+                <div className="game-scoreboard-profile2">
+                    <img className="game-profile-picture2a" src={ProfilePicture}></img>
+                    <div className="game-creator-name-b">{this.state.foreignUsername}</div>
+                    <div className="game-points1">Points: 450</div>
+                    <div className="game-rank">#2</div>
                 </div>
                 </div>
-                <div class="game-guesses"></div>
-                <div class="game-guesses-title">Past Guesses</div>
+                <div className="game-guesses"></div>
+                <div className="game-guesses-title">Past Guesses</div>
           </div> 
       </div>
     );
