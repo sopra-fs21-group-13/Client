@@ -5,7 +5,7 @@ import React, {useState, useEffect} from "react";
 import { api, handleError } from '../../helpers/api';
 import SocialButton from './Socialbutton';
 import User from '../shared/models/User';
-import { withRouter } from 'react-router-dom';
+import { useHistory, useLocation, withRouter } from 'react-router-dom';
 
 export const users = [
     {
@@ -32,13 +32,41 @@ export const users = [
 
 
 //export const /*erase if not working*/ 
-function Modal({ handleClose, show, children, currentWindow, members,mainPageModalTypeSetter, ...props }){
+function Modal({ handleClose, show, children, currentWindow, members,mainPageModalTypeSetter, set, ...props }){
 
     const showHideClassName = show ? "modal display-block" : "modal display-none";
 
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [name, setName] = useState();
+    const [onlineUsers, setOnlineUsers] = useState([]);
+    const [suitableUsers, setSuitableUsers] = useState([]);
+    const [invitedUsers, setInvitedUsers] = useState([]);
+    const [setInternal, setSet] = useState(set);
+
+    useEffect(() => {
+        console.log(set)
+        if (setInternal != null){
+            api.get('/users/online').then(response => {
+
+                var suitableUsersList = [];
+                         
+                for(var i=0; i<response.data.length; i++){
+                    if (setInternal.members.includes(response.data[i].userId)){
+                        suitableUsersList.push(response.data[i]);
+                    }
+                }
+                
+                setSuitableUsers(suitableUsersList);    
+                console.log(suitableUsersList);
+                }).catch(error=>{
+                    alert(`Something went wrong during fetching online users with same learn set: \n${handleError(error)}`);
+                })
+        }
+        
+    }, [setInternal])
+
+
 
     async function login(){
         try {
@@ -127,8 +155,11 @@ console.log("current window:", currentWindow)
                     <div id="modal_title">
                         Available Users
                     </div>
-                    {users.map(user => (
-                    <div id="modal_content">       
+                    <button onClick={() => {console.log(set)}}>
+                        Click me
+                    </button>
+                    {suitableUsers.map(user => (
+                    <div id="modal_content">
                             <div class="userCardModal">
                                     <div class="userBasic">
                                         <div class="photoFrame">
@@ -141,10 +172,10 @@ console.log("current window:", currentWindow)
 
                                     <div class="userMore">
                                     <p class="likes_wins">
-                                        <span class="thumbIcon"><ThumbUpAltOutlinedIcon/></span> {user.likes} <span class="winIcon"><EmojiEventsIcon/></span> {user.wins}
+                                        <span class="thumbIcon"><ThumbUpAltOutlinedIcon/></span> {user.userId} <span class="winIcon"><EmojiEventsIcon/></span> {user.numberOfWins}
                                     </p>
                                     <p>
-                                        {user.info}
+                                        {user.email}
                                     </p>   
                                     </div>
                                 

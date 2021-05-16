@@ -15,13 +15,14 @@ function SearchFilter(props){
     return(
    
             <div class="searchFilter"> 
-                <h2>View all</h2>
-{/*               
+            <p>
+                <h3 class="view-all">View all</h3>
+             </p><br/>
+{/*  
                  <h2 class="middle-wrapper">View all</h2>
 */}
-                
-                <h2>Filter</h2>
-                <h3>Type</h3>
+                <p><h3>Filter</h3></p>
+                <p><b> ▶️ Type</b></p>
 
 {/*
                 <label class="container">All results
@@ -36,6 +37,18 @@ function SearchFilter(props){
 
                 </label><br/>
 */}
+
+                <label class="container">All Types
+                    <input type="radio" name="radio" 
+                        onClick={()=>{
+                            history.push("searchall");
+                            setValue("all");
+                        }}
+                        checked={value=="all"}
+                    />
+                    <span class="checkmark"></span>
+
+                </label><br/>
 
                 <label class="container">Sets
                     <input type="radio" name="radio" 
@@ -59,16 +72,18 @@ function SearchFilter(props){
                     />
                     <span class="checkmark"></span>
 
-                </label><br/>
+                </label>
 
-                <h3>keyword</h3>
+                
+
+                <h4>▶️ keyword</h4>
                
 
 
                 <div class="middle-wrapper">
                     <input type="text" class="filter-key"/>
 
-                    <br/><br/><br/>
+                    <br/><br/>
 
                     <button class="filter-apply-btn">
                         apply

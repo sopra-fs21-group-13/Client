@@ -59,8 +59,6 @@ function SearchUsers(props){
     useEffect(() => {
         api.get("/users").then(response => {
             setAllUsers(response.data);
-            console.log("hello",allUsers);
-
             setLikesAndPics(response.data)
         }).catch(e=>{
             alert(`Something went wrong while fetching all users: \n${handleError(e)}`);

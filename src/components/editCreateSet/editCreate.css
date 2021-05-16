@@ -223,6 +223,11 @@
     color:gray;
   }
 
+  .throw_card:hover{
+    cursor: pointer;
+  }
+
+
   .DeleteForever{
   }
 
