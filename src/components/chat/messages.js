@@ -76,7 +76,7 @@ class Messages extends React.Component {
     async loadMessages() {
         const response = await api.get("/game/" + localStorage.getItem("userId"));
         const data = await response.json();
-        this.setState({messages: data});
+        this.setState({messages: data.histories});
         console.log(data);
         this.scrollToRef();
     };

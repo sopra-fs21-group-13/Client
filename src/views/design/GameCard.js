@@ -1,14 +1,22 @@
 import React, {useState, useEffect} from "react";
 import './gameCard.css'
 import "./AnswerBox.css"
+import { Button } from "@material-ui/core";
 
 /**
  * setFlip exchanges the answer and question on click. 
  */
 
 //styling is handled in the cardRender.css file
-export default function GameCard({flashcard, set_length, current_place}) {
+export default function GameCard({flashcard, set_length, current_place,submitAnswer}) {
     var starred = false;
+    const [state, setstate] = useState(null);
+    //console.log(flashcard);
+
+    let handleChange=(event)=>{
+        setstate(event.target.value);
+
+    }
 
     return(
         <div className = "cardGameContainer">
@@ -26,7 +34,8 @@ export default function GameCard({flashcard, set_length, current_place}) {
                    
                 </div>
                 <input className="answerGame"
-                       placeholder = "Your answer..."/> 
+                       placeholder = "Your answer..." onChange={handleChange}/> 
+                <Button onClick={()=>submitAnswer(state,flashcard.cardId)}>Submit</Button>
         </div>
     );
 }

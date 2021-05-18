@@ -55,25 +55,74 @@ class Game extends React.Component {
       foreignUsername: "Neyz",
       user: User,
       cards:[],
-      players:[]
+      players:[],
+      inviter:"",
+      timer:10,
     };
   }
 
+
+checkAnsweStatus=(gameId)=>
+  {
+       setInterval( async()=>{
+        let response=await api.get(`/games/${gameId}`);
+        let history=response["data"].history;
+        let curreCardHistory=history.filter(ele=>ele.cardId==this.state.cards[0].cardId);
+
+        if(curreCardHistory.length==2)
+        {
+          this.state.cards.shift();
+          this.setState({...this.state,cards:this.state.cards})
+          alert("Times up !!")
+        }
+       },1000)
+  }
+
+  submitAnswer=(value,cardId)=>{
+    console.log("Answer",value);
+    console.log(cardId);
+
+
+    //Submit the response of user to the backend
+
+    //check for correct answer from the this.state.cards---->
+
+  }
+
   componentDidMount(){
-    let CallApi=async()=>
-{
-  let gameId=this.props.match.params["id"];
-  let response=await api.get(`/games/${gameId}`);
-  console.log(response["data"].players);
-  this.setState({...this.state,players:response["data"].players})
-  let setId=response["data"].playSetId
-  let response2=await api.get(`/sets/${setId}`);
 
-  this.setState({...this.state,cards:response2["data"].cards})
+  let CallApi=async()=>
+    {
+      let gameId=this.props.match.params["id"];
+      let response=await api.get(`/games/${gameId}`);
+      console.log(response["data"]);
+      
+      this.setState({...this.state,players:response["data"].players,inviter:response["data"].inviter.name})
+      let setId=response["data"].playSetId
+      let response2=await api.get(`/sets/${setId}`);
 
-}    
-CallApi();
-  
+      this.setState({...this.state,cards:response2["data"].cards})
+
+      this.checkAnsweStatus(gameId)
+
+      //---->
+      let timerPointer=setInterval(()=>{
+        if(this.state.timer>0)
+        {
+          this.setState({...this.state,timer:this.state.timer-1})
+        }
+      
+        else{
+          clearInterval(timerPointer);
+          this.state.cards.shift();
+          this.setState({...this.state,cards:this.state.cards})
+          alert("Times up !!")
+        }
+
+      },1000)
+    }  
+
+  CallApi();
 }
 
 
@@ -106,7 +155,7 @@ CallApi();
                       src={(this.state.user.status == "ONLINE") ? OnlineSign : OfflineSign}/>
                     </div>
                 </button> 
-                <div className="game-creator-name">{this.state.foreignUsername}</div>
+                <div className="game-creator-name">{this.state.inviter}</div>
 
                 <img className="game-vs-picture" src={Vs}></img>
 
@@ -125,25 +174,29 @@ CallApi();
                 </div>
                 {this.state.cards.length>0? <GameCard
                 
+                submitAnswer={this.submitAnswer}
                 flashcard={this.state.cards[0]}
                 />:""}
                
                 <div className="game-scoreboard">
                 <img className="game-timer" src={Timer}/>
-                <div className="game-time"> 43s </div>
+                <div className="game-time"> {this.state.timer}s </div>
                 <div className="game-scoreboard-title">scoreboard</div>
-                <div className="game-scoreboard-profile1">
+
+                {this.state.players.map(ele=>(
+                  <>
+
+<div className="game-scoreboard-profile1">
                     <img className="game-profile-picture2a" src={ProfilePicture}></img>
-                    <div className="game-creator-name-b">{this.state.foreignUsername}</div>
+                    <div className="game-creator-name-b">{ele.name}</div>
                     <div className="game-points1">Points: 200</div>
                     <div className="game-rank">#1</div>
                 </div>
-                <div className="game-scoreboard-profile2">
-                    <img className="game-profile-picture2a" src={ProfilePicture}></img>
-                    <div className="game-creator-name-b">{this.state.foreignUsername}</div>
-                    <div className="game-points1">Points: 450</div>
-                    <div className="game-rank">#2</div>
-                </div>
+                </>
+
+                ))}
+                
+              
                 </div>
                 <div className="game-guesses"></div>
                 <div className="game-guesses-title">Past Guesses</div>
