@@ -15,14 +15,16 @@ import ShuffleCardsActive from "./ShuffleCardsActive.png";
 import StudyOnlyStarredActive from "./StudyOnlyStarredActive.png";
 import ProfilePicture from "./ProfilePicture.png";
 import Likes from "./Likes.png";
-import BackButton from "./BackButton.png";
+import BackButton from "./BackButton.png"
 import Card from "../shared/models/Card";
 import { withRouter } from "react-router-dom";
 import Header from "../header/header.js";
-import "./learnPage.css";
+import styles from "./learnPage.css";
 import Footer from "../footer/Footer.js";
 import UserSettings from "../shared/models/UserSettings";
 import User from '../shared/models/User';
+import OnlineSign from "../shared/images/OnlineSign.png";
+import OfflineSign from "../shared/images/OfflineSign.png";
 
 const Container = styled(BaseContainer)`
   color: black;
@@ -87,11 +89,13 @@ class LearnPage extends React.Component {
       studyStarred: null,
       markedCards: null,
       settingsId: null,
-      foreignUsername: null
+      foreignUsername: null,
+      user:null
     };
   }
 
-  async componentDidMount() {
+
+  async componentDidMount(){
 
     //handler so that when window or tab gets closed you can save settings.
     
@@ -114,6 +118,7 @@ class LearnPage extends React.Component {
 
       let user = new User(response.data);
 
+      this.setState({user: user})
       this.setState({foreignUsername: user.username});
     }).catch(e=>{
       alert(`Something went wrong while geting user: \n${handleError(e)}`);
@@ -615,7 +620,7 @@ class LearnPage extends React.Component {
             }
             <div class="info-grid">
               <div class="info-block info-block-1">
-                {!this.state.cardSet ? (
+                {!this.state.cardSet || !this.state.user ? (
                   <div>Name</div>
                 ) : (
                   <div class="name-grid">
@@ -631,6 +636,9 @@ class LearnPage extends React.Component {
                           class="profile-picture-image"
                           src={ProfilePicture}
                         />
+                        <img className = "online-offline"
+                        src={(this.state.user.status == "ONLINE") ? OnlineSign : OfflineSign}/>
+                        
                       </div>
                       <div class="creator-name">{this.state.foreignUsername}</div>
                     </button>

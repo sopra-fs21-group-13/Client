@@ -1,9 +1,8 @@
 .google-button{
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    justify-self: center;
-    border: none;
-    width: 200px;
-    height: 51px;
+    box-sizing: content-box;
+    position:sticky;
+    border: none; 
+    width: 300px;
+    height:100px;
+    background-color: transparent;
 }

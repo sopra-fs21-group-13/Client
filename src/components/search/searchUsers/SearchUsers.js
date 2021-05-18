@@ -21,6 +21,9 @@ import char13 from "../../profile/char13.jpg";
 import char14 from "../../profile/char14.jpg";
 import char15 from "../../profile/char15.jpg";
 import char16 from "../../profile/char16.jpg";
+import OnlineSign from "../../shared/images/OnlineSign.png";
+import OfflineSign from "../../shared/images/OfflineSign.png";
+
 
 //css
 import './searchUsers.css';
@@ -56,8 +59,6 @@ function SearchUsers(props){
     useEffect(() => {
         api.get("/users").then(response => {
             setAllUsers(response.data);
-            console.log("hello",allUsers);
-
             setLikesAndPics(response.data)
         }).catch(e=>{
             alert(`Something went wrong while fetching all users: \n${handleError(e)}`);
@@ -93,36 +94,6 @@ function SearchUsers(props){
         setCurrentPics(picsDict);
     }
 
-    /*useEffect(() => {
-        history.push("dashboard")
-      });*/
-
-      /*
-    //example input set
-    const allUsers=[
-        {
-            username:"realUnicorn",
-            info: "Rainbows are mine.",
-            likes: 205,
-            wins: 30,
-            photo:"https://images-na.ssl-images-amazon.com/images/I/51mBDeh7PcL.jpg"
-        },
-        {
-            username:"Squirrel",
-            info: "Where are more nuts?? I have to keep a looot for this winter!",
-            likes: 23,
-            wins: 31,
-            photo:"https://i.pinimg.com/originals/ea/53/fd/ea53fdd77bfcf158b3015ed93ab39d8a.jpg"
-        },
-        {
-            username:"Kitty",
-            info: "I want to be alone",
-            likes: 1000,
-            wins: 1,
-            photo:"https://www.meme-arsenal.com/memes/f04ebf47a09312cbedfca22256c5722d.jpg"
-    }]*/
-
-
 
     return(
         <div>
@@ -146,8 +117,12 @@ function SearchUsers(props){
                                 
 
                             <div class="userBasic">
+                                <div>
                                 <div class="photoFrame">
-                                    <img src={currentPics[user.userId]} />                            
+                                    <img src={currentPics[user.userId]} /> 
+                                </div>
+                                <img className = "online-sign"
+                                    src={(user.status == "ONLINE") ? OnlineSign : OfflineSign}/>
                                 </div>
                                 <p class="profile_username">
                                     {user.username}

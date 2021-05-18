@@ -3,7 +3,7 @@ import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { GameGuard } from "../routeProtectors/GameGuard";
 import GameRouter from "./GameRouter";
 import { LoginGuard } from "../routeProtectors/LoginGuard";
-import Login from "../../login/Login";
+//import Login from "../../login/Login";
 import LearnPage from "../../learnPage/LearnPage";
 import DashBoard from "../../dashBoard/DashBoard";
 import Profile from "../../profile/Profile";
@@ -15,10 +15,12 @@ import Chat from "../../chat/chat.js"
 
 import SearchSets from "../../search/searchSets/SearchSets";
 import SearchUsers from "../../search/searchUsers/SearchUsers";
+import SearchAll from "../../search/SearchAll";
 
 import Help from "../../help/help.js"
 import Contact from "../../contact/contact.js"
 import SetOverview from "../../setOverview/SetOverview";
+import Game from "../../game/Game";
 /**
  * Main router of your application.
  * In the following class, different routes are rendered. In our case, there is a Login Route with matches the path "/login"
@@ -42,14 +44,12 @@ class AppRouter extends React.Component {
             />
 
             <Route
-              path="/game"
-              render={() => (
-                <GameGuard>
-                  <GameRouter base={"/game"} />
-                </GameGuard>
-              )}
-            />
-            <Route
+                path="/game/:id"
+                render={() => (
+                  <Game />
+                )}
+            />    
+            {/* <Route
               path="/login"
               exact
               render={() => (
@@ -57,7 +57,7 @@ class AppRouter extends React.Component {
                   <Login />
                 </LoginGuard>
               )}
-            />
+            /> */}
             <Route
               path="/dashboard"
               exact
@@ -116,6 +116,13 @@ class AppRouter extends React.Component {
               exact
               render={() => (
                   <SearchUsers />
+              )}
+            />
+            <Route
+              path="/searchAll"
+              exact
+              render={() => (
+                  <SearchAll />
               )}
             />
 

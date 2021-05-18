@@ -216,15 +216,34 @@
   }
 
   .throw_card{
+    display: flex;
     height: 20px;
     width: 950px;
     line-height: 20px;
     text-align: right;
+    justify-content: right;
     color:gray;
+    user-select: none;
+    position: relative;
+    top:10px;
   }
 
-  .DeleteForever{
+  
+  .throw_card_press_area{
+    display: grid;
+    align-items: center;
+    grid-template-columns: 170px 20px;
+    grid-template-rows: 25px;
+    height: 25px;    
+    width: 190px;
+    position: relative;
+    bottom:5px;
   }
+
+  .throw_card_press_area:hover{
+    cursor: pointer;
+  }
+  
 
   .new_qna{
     
@@ -255,7 +274,7 @@
   }
 
 
-  input[type=text] {
+input[type=text][class="set_"] {
     background-color: whitesmoke;
     border: solid whitesmoke;
     border-radius: 10px;
@@ -268,11 +287,11 @@
     
   }
 
-  input[type=submit]{
+ input[type=submit][class="set_"]{
     float:right;
   }
 
-  input[  name="question_text"]{
+input[  name="question_text"][class="set_"]{
     text-align: center;
 
   }

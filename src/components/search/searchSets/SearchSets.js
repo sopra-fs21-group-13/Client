@@ -15,6 +15,14 @@ import ProfilePicture from '../../shared/images/ProfilePicture.png';
 import { api, handleError } from "../../../helpers/api";
 import {Button} from '../../../views/design/Button.js';
 
+/**
+ * type==set
+ * 1. no keyword
+ * 2. with keyword
+ * @param {*} props 
+ * @returns 
+ */
+
 
 
 
@@ -25,7 +33,6 @@ function SearchSets(props){
 
     /** setId:username  */
     const [usernames, setUsernames] = useState([]);
-
     const [disabledButtons, setDisabledButtons] = useState([]);
     const [currentUserId, setCurrentUserId]=useState();
 
@@ -87,6 +94,8 @@ function SearchSets(props){
     function addToDashboard(set){
         api.put("/sets/" + localStorage.getItem("userId") + "/" + set.setId).then(response =>{
             console.log("added set " + set.setId + " to users dashboard");
+        }).catch(e=>{
+            alert(`Something went wrong while adding set to dashboard: \n${handleError(e)}`);
         })
     }
 
@@ -106,7 +115,7 @@ function SearchSets(props){
         
 
         <div>
-            {console.log("hmm",allSets)}
+            {console.log("",allSets)}
 
             <Header/>
             <div id="body"> {/* grid */}
