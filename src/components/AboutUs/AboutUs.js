@@ -61,7 +61,6 @@ class AboutUs extends React.Component {
                             <span className="caption">Kiram</span>
                             <span className="caption">BSc Informatics</span>
                         </div>
-                        <h3> We are a team of students from UZH who created this project as part of our Software-Praktium. </h3>
                         <h3 className = "text"> We are a team of students from UZH who created this project as part of our Software-Praktikum. </h3>
                     </main>
                     <flashy>
