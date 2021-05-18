@@ -25,7 +25,6 @@ main {
 
 
 .future {
-
     grid-area: future;
     background: #70F0A9;
     margin-top: 10px;
@@ -63,7 +62,8 @@ flashy {
 .text {
     margin-left: 15px;
     margin-right: 15px;
-    width: 940px;
+    width: 960px;
+    textAlign: justify;
 }
 
 .item {

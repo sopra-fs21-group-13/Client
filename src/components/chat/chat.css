@@ -1,0 +1,30 @@
+.writing{
+width:100%;
+padding:10px;
+box-sizing:border-box;
+outline:none;
+resize:none;
+border:0;
+font-family:'Montserrat',sans-serif;
+transition:all .3s;border-bottom:2px solid #70F0A9
+}
+
+
+
+.writing:focus{
+   border-bottom:2px solid #78788c
+}
+
+
+.formulare{
+    width:500px;
+    height:150px;
+    background:#e6e6e6;
+    border-radius:8px;
+    margin:calc(50vh - 400px) auto;
+    padding:20px 30px;
+    max-width:calc(100vw - 40px);
+    box-sizing:border-box;
+    font-family:'Montserrat',sans-serif;
+    position:relative
+}

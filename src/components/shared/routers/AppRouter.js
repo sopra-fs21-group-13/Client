@@ -11,7 +11,7 @@ import PublicProfile from "../../profile/PublicProfile";
 import MainPage from "../../mainPage/MainPage";
 import EditCreateSet from "../../editCreateSet/EditCreateSet";
 import AboutUs from "../../AboutUs/AboutUs.js"
-
+import Chat from "../../chat/chat.js"
 
 import SearchSets from "../../search/searchSets/SearchSets";
 import SearchUsers from "../../search/searchUsers/SearchUsers";
@@ -134,6 +134,14 @@ class AppRouter extends React.Component {
               exact
               render={() => (
                   <Contact />
+              )}
+            />
+
+            <Route
+              path="/chat"
+              exact
+              render={() => (
+                  <Chat />
               )}
             />
 

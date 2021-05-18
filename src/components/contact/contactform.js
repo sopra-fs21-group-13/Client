@@ -27,7 +27,7 @@ function ContactForm() {
             field="email"
             errors={state.errors}
           />
-          <p className="p" type="Message:"><input className = 'input' placeholder="What would you like to tell us.."
+          <p className="p" type="Message / Question:"><input className = 'input' placeholder="What would you like to tell us.."
           id="message"
           name="message"
           />
