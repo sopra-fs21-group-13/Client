@@ -13,6 +13,9 @@
  import './searchUsers/searchUsers.css';
  import Header from "../header/header.js";
  import Footer from '../footer/Footer.js'
+ import SearchSets from './searchSets/SearchSets.js';
+ import SearchUsers from './searchUsers/SearchUsers.js';
+
  
  //icons, default profile img
  import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -46,6 +49,7 @@ import OfflineSign from "../shared/images/OfflineSign.png";
 import './searchUsers/searchUsers.css';
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
+import { SettingsInputAntennaTwoTone } from '@material-ui/icons';
 
 
  
@@ -54,23 +58,18 @@ import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
  function SearchAll(props){
     let history = useHistory();
     let location = useLocation();
-    const[keyword, setKeyword]=useState();
-
+    console.log("키워드:", location.keyword);
     console.log("delivered keyword:",location.keyword);
-    
-    /*
-    useEffect(() => {
-        setKeyword(location.keyword)
-    }, [])
-    */
+    var searchTitle="All Sets & Users";
+
+    if (location.keyword!=undefined){ 
+        searchTitle="All Sets and Users Related to \""+location.keyword.toString()+"\"";
+    }
 
 {/*
     SHOW SETS
  */}
-    
-     /*var allSets=[];*/
      const [allSets, setAllSets] = useState([]);
-     /** setId:username  */
      const [usernames, setUsernames] = useState([]);
      const [disabledButtons, setDisabledButtons] = useState([]);
      const [currentUserId, setCurrentUserId]=useState();
@@ -171,35 +170,50 @@ const fSets=[];
 /**
  * make filtered Sets Dict(fSets)
  */
-var k=0;
-console.log("얘는 보잖아:", allSets);
-for (var i=0;i<allSets.length;i++)
-{
-    if(location.keyword)//only when there's keyword
+ function setFilteredSet(){
+    var k=0;
+    console.log("얘는 보잖아:", allSets);
+    for (var i=0;i<allSets.length;i++)
     {
+        if(location.keyword!=undefined)//only when there's keyword
+        {
 
-        //if (allSets[i].title.toLowerCase().includes(keyword.toLowerCase())){
-        if (allSets[i].title.toLowerCase().includes(location.keyword.toLowerCase())){
-            fSets[k++]=allSets[i];
+            //if (allSets[i].title.toLowerCase().includes(keyword.toLowerCase())){
+            if (allSets[i].title.toLowerCase().includes(location.keyword.toLowerCase())){
+                fSets[k++]=allSets[i];
+            }
+        }
+        else{
+            fSets[i]=allSets[i];
         }
     }
+    console.log("filter worked:",fSets );
 }
-console.log("filter worked:",fSets );
+
+setFilteredSet();
+
+
 
 /**
  * make filtered Users Dict(fUsers)
  */
- var l=0;
- for (var i=0; i<(allUsers.length); i++)
- {
-     if(location.keyword)//only when there's keyword
-     {
-         if (allUsers[i].username.toLowerCase().includes(location.keyword.toLowerCase())){
-             fUsers[l++]=allUsers[i];
-         }
-     }
- }
- console.log("filter worked:",fUsers );
+function setFilteredUsers(){
+    var l=0;
+    for (var i=0; i<(allUsers.length); i++)
+    {
+        if(location.keyword!=undefined)//only when there's keyword
+        {
+            if (allUsers[i].username.toLowerCase().includes(location.keyword.toLowerCase())){
+                fUsers[l++]=allUsers[i];
+            }
+        }
+        else{
+            fUsers[i]=allUsers[i];
+        }
+    }
+    console.log("filter worked:",fUsers );
+}
+setFilteredUsers();
 
 
 function setLikesAndPics(users){
@@ -249,7 +263,8 @@ function setLikesAndPics(users){
  */}
                 
                      <div id="board_title"> {/*this should be changeable */}
-                         <h1>All Sets & Users</h1>
+                         <h1>{searchTitle}</h1>
+                         {/*<h1>All Sets & Users</h1>*/}
                      </div>
                      <div class="board_contents"> {/* grid */}
 
