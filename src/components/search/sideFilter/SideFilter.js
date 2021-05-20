@@ -2,10 +2,15 @@ import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import './sideFilter.css';
 import SearchBox from "../../header/searchBox/SearchBox";
+import BackButton from "../../learnPage/BackButton.png";
+
 
 
 
 function SearchFilter(props){
+    function goToDashboard() {
+        history.push(`/Dashboard`);
+      }
     //current value of the filter
     const [value, setValue] = React.useState(props.view);
     const [keyword, setKeyword]=useState();
@@ -28,9 +33,20 @@ function SearchFilter(props){
     return(
    
             <div class="searchFilter"> 
+            
+                <button
+                    class="back-button"
+                    onClick={() => {
+                    goToDashboard();
+                    }}
+                >
+                    <img class="back-button-image" src={BackButton} />
+                </button>
+           
+            
             <p>
                 <h3 class="view-all" onClick={()=> history.push({pathname: "searchAll"})}>View all</h3>
-             </p><br/>
+             </p>
 {/*  
                  <h2 class="middle-wrapper">View all</h2>
 */}
