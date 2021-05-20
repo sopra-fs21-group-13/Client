@@ -163,7 +163,7 @@
     border: none;
     background-color: rgba(255, 255, 255, 0);;
     transform: translateY(var(--translate-y,0));
-    box-shadow: 0 0 1px 1px rgba(43, 42, 42, 0.2);
+    /*box-shadow: 0 0 1px 1px rgba(43, 42, 42, 0.2);*/
 }
 
 .back-button:hover{
