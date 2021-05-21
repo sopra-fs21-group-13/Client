@@ -26,10 +26,12 @@ class DashBoard extends React.Component {
             ownSetList: null,
             foreignSetList: null,
             userSettings: null,
-            show: false, //for avilable Users modal
+            show: false, //for available Users modal
             user: null,
             showOwnSets: true,
-            buttonChecked: true
+            buttonChecked: true,
+            assignSet: null,
+            suitableUsers: []
         };
         this.showModal = this.showModal.bind(this);
         this.hideModal=this.hideModal.bind(this);
@@ -44,7 +46,7 @@ class DashBoard extends React.Component {
         this.setState({show: false});
         document.body.style.overflow = "unset"
     };
-      
+
         
     
     async componentDidMount(){
@@ -145,6 +147,25 @@ class DashBoard extends React.Component {
 
     goToCreatePage(){
         this.props.history.push({pathname: "edit", state: {editBehavior: false}});
+    }
+
+    setSuitableUsers(set) {
+        api.get('/users/online').then(response => {
+
+            var suitableUsersList = [];
+                        
+            for(var i=0; i<response.data.length; i++){
+                if (set.members.includes(response.data[i].userId)){
+                    suitableUsersList.push(response.data[i]);
+                }
+            }
+            
+            this.setState({suitableUsers: suitableUsersList})   
+            console.log(suitableUsersList);
+            localStorage.setItem('invitationSetId', set.setId);
+        }).catch(error=>{
+                alert(`Something went wrong during fetching online users with same learn set: \n${handleError(error)}`);
+        })
     }
 
     
@@ -252,16 +273,14 @@ class DashBoard extends React.Component {
                                         </Button>
         
                                         {/*Play button: show modal*/}
-                                        <Modal show={this.state.show} handleClose={this.hideModal} currentWindow="dashboard" set={res}>
+                                        <Modal show={this.state.show} handleClose={this.hideModal} currentWindow="dashboard" clickUsers={this.state.suitableUsers}>
                                             <p>Modal</p>
                                         </Modal>
         
-                                        <Button yellow={true} width="45%" onClick={this.showModal}>
+                                        <Button yellow={true} width="45%" onClick={() => {this.setSuitableUsers(res); this.showModal();}}>
                                             Play
                                         </Button>
                                         
-                                                    
-        
                                     </div>
         
                                     
@@ -387,13 +406,17 @@ class DashBoard extends React.Component {
                                         </Button>
         
                                         {/*Play button: show modal*/}
-                                        <Modal show={this.state.show} handleClose={this.hideModal} currentWindow="dashboard" set={res}>
+                                        <Modal show={this.state.show} handleClose={this.hideModal} currentWindow="dashboard" clickUsers={this.state.suitableUsers}>
+                                            
                                             <p>Modal</p>
                                         </Modal>
         
-                                        <Button yellow={true} width="45%" onClick={this.showModal}>
+                                        <Button yellow={true} width="45%" onClick={() => {this.setSuitableUsers(res); this.showModal();}}>
                                             Play
                                         </Button>
+                                        
+                                                    
+        
                                     </div>
         
                                     
