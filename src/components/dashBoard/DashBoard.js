@@ -443,7 +443,7 @@ class DashBoard extends React.Component {
                                                 
                                                 <div readOnly className = "singleCardPreview cardOne"></div>
                                                 <div readOnly className = "singleCardPreview cardTwo"></div>
-                                                <div readOnly className = "singleCardPreview cardThree"
+                                                <div readOnly className = "singleCardPreview newCard"
                                                 onClick = { () => {
                                                     const emptySet = 
                                                         {
@@ -460,19 +460,14 @@ class DashBoard extends React.Component {
                                                     this.props.history.push({pathname: "edit", state: {editBehavior: false, set: emptySet}});
                                                 }}
                                                 >
-                                                    <div className = "cardFront">
+                                                    <div className = "newCardPlus">
                                                         <text>
-                                                        new card
-                                                        </text>
-                                                    </div>
-                                                    <div className = "setTitleNew" style = {{opacity: 0.5}}>
-                                                        <text>
-                                                            Create a new Set
+                                                        +
                                                         </text>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className = "setSizeIndicator"><text>0</text></div>
+                                            <div><text></text> " "</div>
                                             
                                     </div>
                                     

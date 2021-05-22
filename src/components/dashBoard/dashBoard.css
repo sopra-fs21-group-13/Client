@@ -362,14 +362,12 @@ h1{
     padding: 1rem;
     font-size: 30px;
     top:3px;
-    transition: all 0.2s ease;
 }
 
 .cardOne{
     grid-column-start: 2;
     grid-row-start: 1;
     left:20px;
-    transition: all 0.2s ease;
 }
 
 .cardTwo{
@@ -377,17 +375,29 @@ h1{
     grid-row-start: 1;
     left: 10px;
     top: 12px;
-    transition: all 0.2s ease;
 }
 
-.cardThree{
+.cardThree,
+.newCard{
     grid-column-start: 2;
     grid-row-start: 1;
     top: 24px;
 }
 
+.newCard{
+    font-size: 40px;
+}
+
+
 .cardThree:hover{
     outline: 2px solid #b8b8b8;
+}
+
+.newCard:hover{
+    outline: 2px solid #70F0A9;
+    color:#70F0A9;
+    font-size: 60px;
+    transition: all 0.05s ease;
 }
 
 .setSizeIndicator{
