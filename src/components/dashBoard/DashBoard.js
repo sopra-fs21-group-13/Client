@@ -266,22 +266,7 @@ class DashBoard extends React.Component {
                     {(!this.state.setList || !this.state.ownSetList) ? 
                         //Only shows the "add set"- Button before the server request has gone through
                         (<div id= "allSets">
-                        <div class="oneSetWrapper_dashboard">
-                        <div class="oneSet opac">
-        
-                            <div class="oneSetImage">
-                                <img src="https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg" />
-                
-                            </div>
-                            <div class="setTitle">
-                                   
-                            </div>
-                        </div>
-                        <Button 
-                        yellow={true} width="35px" >
-                            +
-                        </Button>
-                            </div>
+                        
                         </div>
                             ) : (
                             <div id="allSets"> 
