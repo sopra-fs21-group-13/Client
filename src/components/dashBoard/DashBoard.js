@@ -57,6 +57,23 @@ class DashBoard extends React.Component {
         document.body.style.overflow = "unset"
     };
 
+    componentDidUpdate(){
+        //for css variables
+        let root = document.documentElement;
+        var numberOfColumns = 4;
+        if(this.state.windowWidth < 1800){
+            numberOfColumns = 3;
+        }
+        if(this.state.windowWidth < 1500){
+            numberOfColumns = 2;
+        }
+        if(this.state.windowWidth < 1000){
+            numberOfColumns = 1;
+        }
+        //changes amount of columns in dashboard depending on window width
+        root.style.setProperty('--columnNumbers', numberOfColumns);
+    }
+
 
     async componentDidMount(){
         // call the api here to load the data from the backend localhost:8080/sets
@@ -232,10 +249,6 @@ class DashBoard extends React.Component {
     }
     
     render(){
-        var windowHeight = this.state.windowHeight; 
-        var windowWidth = this.state.windowWidth; 
-        //for css variables
-        let root = document.documentElement;
         return(
             <div id>
                 <Header/>
