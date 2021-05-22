@@ -68,7 +68,9 @@ function Modal({ handleClose, show, children, currentWindow, members,mainPageMod
         setInvitedPlayers([]);
     }, [handleClose])
  
-    
+    useEffect(() => {
+
+    }, [invitedPlayers])
 
     async function invite(){
         try {
@@ -179,15 +181,14 @@ function Modal({ handleClose, show, children, currentWindow, members,mainPageMod
     function addPlayers(invitedPlayer){
         try{ 
             if (!invitedPlayers.includes(invitedPlayer)){
-                var players = [];
-                for(var i=0; i<invitedPlayers.length; i++){
-                    players.push(invitedPlayers[i]);
-                }
+                var players = [...invitedPlayers];
                 players.push(invitedPlayer);
                 setInvitedPlayers(players);
             }else{
-                var index = invitedPlayers.indexOf(invitedPlayer);
-                invitedPlayers.splice(index, 1);
+                var playersDelete = [...invitedPlayers]
+                var index = playersDelete.indexOf(invitedPlayer);
+                playersDelete.splice(index, 1);
+                setInvitedPlayers(playersDelete)
             }
         } catch (error) {
             alert(`Something went wrong during adding players to invitation: \n${handleError(error)}`);
@@ -224,7 +225,7 @@ console.log("current window:", currentWindow)
                         <div key={i} 
                             onClick={()=> {addPlayers(user);
                                 console.log(invitedPlayers);}} 
-                            class={invitedPlayers.includes(user) ? 'userCardModalSelected' : 'userCardModal'} >
+                            className={invitedPlayers.includes(user) ? 'userCardModalSelected' : 'userCardModal'} >
                             <div class="userBasic">
                                 <div class="photoFrame">
                                     <img src={user.photo} />                            
