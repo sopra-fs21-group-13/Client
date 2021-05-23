@@ -195,7 +195,7 @@ class DashBoard extends React.Component {
             var suitableUsersList = [];
                         
             for(var i=0; i<response.data.length; i++){
-                if (set.members.includes(response.data[i].userId)){
+                if ((set.members.includes(response.data[i].userId)) && (response.data[i].userId != localStorage.getItem("userId"))){
                     suitableUsersList.push(response.data[i]);
                 }
             }

@@ -46,6 +46,8 @@ function Modal({ handleClose, show, children, currentWindow, members,mainPageMod
     const [lastTime, setLastTime] = useState(30);
     const [lastCard, setLastCard] = useState(10);
 
+    let history = useHistory();
+
     const [time] = useState([
         {value: 30},
         {value: 60},
@@ -58,19 +60,32 @@ function Modal({ handleClose, show, children, currentWindow, members,mainPageMod
         {value: 30}
     ]);
 
-
+    /*
     useEffect(() => {
-        setSuitableUsers(clickUsers)
+        setSuitableUsers(clickUsers);
+    }, [])
+    */
+
+    useEffect(() => { 
+        
+        /*
+        var suitableUsersCopy = [...suitableUsers];
+        var correctUsers = [];
+        for (var i= 0; i < suitableUsersCopy.length; i++){
+            if (suitableUsersCopy[i].userId != localStorage.getItem('userId')){
+                correctUsers.push(clickUsers[i])
+            }
+        }
+        */
+
+        setSuitableUsers(clickUsers);
         setInvitedPlayers([]);
     },[clickUsers])
 
     useEffect(() => {
         setInvitedPlayers([]);
     }, [handleClose])
- 
-    useEffect(() => {
 
-    }, [invitedPlayers])
 
     async function invite(){
         try {
@@ -84,25 +99,32 @@ function Modal({ handleClose, show, children, currentWindow, members,mainPageMod
                 numberOfPlayers: 2 
             },
             countDown: 'false'  
-            })
-            console.log('createdJSON')
+            });
+            console.log('createdJSON');
             // Create a Game instance
             const gameResponse = await api.post('/games', requestBody);
-            console.log('gameCreated')
+            console.log('gameCreated');
             const invitedPlayersId =[];
             for (var i=0; i < invitedPlayers.length; i++) {
                 invitedPlayersId.push({'userId': invitedPlayers[i].userId})
             }
-            console.log(invitedPlayersId)
+
+            // Get Set for the set title
+            const setResponse = await api.get('/sets/' + localStorage.getItem('invitationSetId'));
+            
+
+            console.log(invitedPlayersId);
             const invitation = JSON.stringify({
                 gameId: Number(gameResponse.data.gameId),
                 sentFromId: Number(gameResponse.data.inviter.userId),
                 receivers: invitedPlayersId,
+                setTitle: setResponse.data.title, 
                 gameSetting:{gameSettingId: Number(gameResponse.data.gameSettings.gameSettingId)}
-                })
+                });
             
-            await api.post('/games/invitations', invitation)
-            handleClose();
+            await api.post('/games/invitations', invitation);
+            //handleClose();
+            history.push('/game/' + Number(gameResponse.data.gameId));
 
         } catch (error){
             alert(`Something went sending the Invitation(s): \n${handleError(error)}`);
@@ -214,9 +236,6 @@ console.log("current window:", currentWindow)
                     <div id="modal_title">
                         Invitation
                     </div>
-                    <button onClick={() => console.log(invitedPlayers)}>
-                        click me
-                    </button>
                     <div class='section_title'>
                         Available Users
                     </div>
