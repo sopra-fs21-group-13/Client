@@ -160,7 +160,7 @@ export default function Profile(){
                                     <span>
                                     <span>Change Username</span>
                                     <input class="edit_profile" 
-                                    maxLength="16" placeholder="e.g. Berty1979"
+                                    maxLength="13" placeholder="e.g. Berty1979"
                                         onChange={e => user.username = e.target.value}
                                     />
                                         
@@ -170,7 +170,7 @@ export default function Profile(){
                                     <span>
                                     <span>Change Name</span>
                                     <input class="edit_profile" 
-                                    maxLength="16" placeholder="e.g. Berthold Dietrich"
+                                    maxLength="13" placeholder="e.g. Berthold Dietrich"
                                         onChange={e => user.name = e.target.value}
                                     />
                                     {//onChange={e => user.explain = e.target.value}
