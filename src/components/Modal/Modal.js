@@ -7,6 +7,7 @@ import SocialButton from './Socialbutton';
 import User from '../shared/models/User';
 import { useHistory, useLocation, withRouter } from 'react-router-dom';
 
+
 export const users = [
     {
         username:"realUnicorn",
@@ -31,42 +32,104 @@ export const users = [
 }]
 
 
+
+
 //export const /*erase if not working*/ 
-function Modal({ handleClose, show, children, currentWindow, members,mainPageModalTypeSetter, set, ...props }){
+function Modal({ handleClose, show, children, currentWindow, members,mainPageModalTypeSetter, clickUsers, ...props }){
 
     const showHideClassName = show ? "modal display-block" : "modal display-none";
-
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [name, setName] = useState();
-    const [onlineUsers, setOnlineUsers] = useState([]);
-    const [suitableUsers, setSuitableUsers] = useState([]);
-    const [invitedUsers, setInvitedUsers] = useState([]);
-    const [setInternal, setSet] = useState(set);
+    const [suitableUsers, setSuitableUsers] = useState(clickUsers);
+    const [invitedPlayers, setInvitedPlayers] = useState([]);
+    const [lastTime, setLastTime] = useState(30);
+    const [lastCard, setLastCard] = useState(10);
+
+    let history = useHistory();
+
+    const [time] = useState([
+        {value: 30},
+        {value: 60},
+        {value:120}
+    ]);
+
+    const [numberCards] = useState([
+        {value: 10},
+        {value: 20},
+        {value: 30}
+    ]);
+
+    /*
+    useEffect(() => {
+        setSuitableUsers(clickUsers);
+    }, [])
+    */
+
+    useEffect(() => { 
+        
+        /*
+        var suitableUsersCopy = [...suitableUsers];
+        var correctUsers = [];
+        for (var i= 0; i < suitableUsersCopy.length; i++){
+            if (suitableUsersCopy[i].userId != localStorage.getItem('userId')){
+                correctUsers.push(clickUsers[i])
+            }
+        }
+        */
+
+        setSuitableUsers(clickUsers);
+        setInvitedPlayers([]);
+    },[clickUsers])
 
     useEffect(() => {
-        console.log(set)
-        if (setInternal != null){
-            api.get('/users/online').then(response => {
+        setInvitedPlayers([]);
+    }, [handleClose])
 
-                var suitableUsersList = [];
-                         
-                for(var i=0; i<response.data.length; i++){
-                    if (setInternal.members.includes(response.data[i].userId)){
-                        suitableUsersList.push(response.data[i]);
-                    }
-                }
-                
-                setSuitableUsers(suitableUsersList);    
-                console.log(suitableUsersList);
-                }).catch(error=>{
-                    alert(`Something went wrong during fetching online users with same learn set: \n${handleError(error)}`);
-                })
+
+    async function invite(){
+        try {
+            console.log('functionWorks')
+            const requestBody = JSON.stringify({
+            inviter: {userId: Number(localStorage.getItem("userId"))},
+            playSetId: Number(localStorage.getItem('invitationSetId')),
+            gameSettings: {
+                time: Number(lastTime),
+                numberOfCards: Number(lastCard),
+                numberOfPlayers: 2 
+            },
+            countDown: 'false'  
+            });
+            console.log('createdJSON');
+            // Create a Game instance
+            const gameResponse = await api.post('/games', requestBody);
+            console.log('gameCreated');
+            const invitedPlayersId =[];
+            for (var i=0; i < invitedPlayers.length; i++) {
+                invitedPlayersId.push({'userId': invitedPlayers[i].userId})
+            }
+
+            // Get Set for the set title
+            const setResponse = await api.get('/sets/' + localStorage.getItem('invitationSetId'));
+            
+
+            console.log(invitedPlayersId);
+            const invitation = JSON.stringify({
+                gameId: Number(gameResponse.data.gameId),
+                sentFromId: Number(gameResponse.data.inviter.userId),
+                receivers: invitedPlayersId,
+                setTitle: setResponse.data.title, 
+                gameSetting:{gameSettingId: Number(gameResponse.data.gameSettings.gameSettingId)}
+                });
+            
+            await api.post('/games/invitations', invitation);
+            //handleClose();
+            history.push('/game/' + Number(gameResponse.data.gameId));
+
+        } catch (error){
+            alert(`Something went sending the Invitation(s): \n${handleError(error)}`);
         }
-        
-    }, [setInternal])
-
-
+    }
 
     async function login(){
         try {
@@ -137,10 +200,27 @@ function Modal({ handleClose, show, children, currentWindow, members,mainPageMod
         console.error(err)
     }
 
+    function addPlayers(invitedPlayer){
+        try{ 
+            if (!invitedPlayers.includes(invitedPlayer)){
+                var players = [...invitedPlayers];
+                players.push(invitedPlayer);
+                setInvitedPlayers(players);
+            }else{
+                var playersDelete = [...invitedPlayers]
+                var index = playersDelete.indexOf(invitedPlayer);
+                playersDelete.splice(index, 1);
+                setInvitedPlayers(playersDelete)
+            }
+        } catch (error) {
+            alert(`Something went wrong during adding players to invitation: \n${handleError(error)}`);
+        }
+    }
 
 
   /*where to put?*/
 console.log("current window:", currentWindow)
+
     if(currentWindow == "dashboard"){
         return (
             <div
@@ -151,42 +231,94 @@ console.log("current window:", currentWindow)
                 }}>
 
                 </div>
+                
             <section className="modal-main" id="modal_play">
                     <div id="modal_title">
+                        Invitation
+                    </div>
+                    <div class='section_title'>
                         Available Users
                     </div>
-                    <button onClick={() => {console.log(set)}}>
-                        Click me
-                    </button>
-                    {suitableUsers.map(user => (
-                    <div id="modal_content">
-                            <div class="userCardModal">
-                                    <div class="userBasic">
-                                        <div class="photoFrame">
-                                            <img src={user.photo} />                            
-                                        </div>
-                                        <p class="profile_username">
-                                            {user.username}
-                                        </p>
-                                    </div>
-
-                                    <div class="userMore">
-                                    <p class="likes_wins">
-                                        <span class="thumbIcon"><ThumbUpAltOutlinedIcon/></span> {user.userId} <span class="winIcon"><EmojiEventsIcon/></span> {user.numberOfWins}
-                                    </p>
-                                    <p>
-                                        {user.email}
-                                    </p>   
-                                    </div>
-                                
-                                    <div class="invitationButton"> INVITE </div> 
+                    {suitableUsers.map((user, i)=> (
+                    <div id="modal_content" >
+                        <div key={i} 
+                            onClick={()=> {addPlayers(user);
+                                console.log(invitedPlayers);}} 
+                            className={invitedPlayers.includes(user) ? 'userCardModalSelected' : 'userCardModal'} >
+                            <div class="userBasic">
+                                <div class="photoFrame">
+                                    <img src={user.photo} />                            
+                                </div>
+                                <p class="profile_username">
+                                    {user.username}
+                                </p>
                             </div>
-                        {/* {children}*/}
+                            <div class="userMore">
+                                <p class="likes_wins">
+                                    <span class="thumbIcon"><ThumbUpAltOutlinedIcon/></span> {user.userId}
+                                    <span class="winIcon"><EmojiEventsIcon/></span> {user.numberOfWins}
+                                </p>
+                                <p>
+                                    {user.email}
+                                </p>   
+                            </div>
+                            <div class="invitationButton"> INVITE </div>
+                        </div>
+                        
                     </div>
                     ))}
-                    
+                <div class='section_title'>
+                Game Settings
+                </div>
+                <div class='selectContainer'>
+                    <div class='select_time'>
+                        <div class='selectTitle'>
+                            Select Time in Seconds:
+                        </div>
+                        <div class = 'custom-select'>
+                        <select>
+                            {time.map((t,i)=>(
+                                <option
+                                    key={i}
+                                    value={t.value}
+                                    onClick={() => setLastTime(t.value)}
+                                >
+                                    {t.value}
+                                </option>
+                            ))}
+                        </select>
+                        <span class='custom-arrow'></span>
+                        </div>
+                    </div>
+
+
+                    <div class='select_cards'>
+                            <div class='selectTitle'>
+                                Select Number of Cards:
+                            </div>
+                        <div class='custom-select'>     
+                            <select>
+                                {numberCards.map((card,i)=>(
+                                    <option
+                                        key={i}
+                                        value={card.value}
+                                        onClick={() => setLastCard(card.value)}
+                                    >
+                                        {card.value}
+                                    </option>
+                                ))}
+                            </select>
+                            <span class='custom-arrow'></span>
+                        </div>
+                    </div>
+                </div>
+
                 <button class="closeModal" type="button" onClick={handleClose} >
-                Close
+                    Close
+                </button>
+
+                <button class='sendInvite' onClick={() => invite()}>
+                    Send Invitation
                 </button>
                 
             </section>

@@ -1,5 +1,5 @@
-import React, { useState,  useEffect, useLocation} from 'react';
-import { useHistory } from "react-router-dom";
+import React, { useState,  useEffect} from 'react';
+import { useHistory, useLocation } from "react-router-dom";
 
 
 import SideFilter from '../sideFilter/SideFilter';
@@ -27,6 +27,32 @@ import {Button} from '../../../views/design/Button.js';
 
 
 function SearchSets(props){
+    let location = useLocation();
+    var searchTitle="All Sets";
+    if (location.keyword!=undefined){ 
+        searchTitle="All Sets Related to \""+location.keyword.toString()+"\"";
+    }
+    function setFilteredSet(){
+    
+        var k=0;
+        console.log("얘는 보잖아:", allSets);
+        for (var i=0;i<allSets.length;i++)
+        {
+            if(location.keyword!=undefined)//only when there's keyword
+            {
+    
+                //if (allSets[i].title.toLowerCase().includes(keyword.toLowerCase())){
+                if (allSets[i].title.toLowerCase().includes(location.keyword.toLowerCase())){
+                    fSets[k++]=allSets[i];
+                }
+            }
+            else{
+                fSets[i]=allSets[i];
+            }
+        }
+        console.log("filter worked:",fSets );
+    }
+    
     
     /*var allSets=[];*/
     const [allSets, setAllSets] = useState([]);
@@ -35,6 +61,8 @@ function SearchSets(props){
     const [usernames, setUsernames] = useState([]);
     const [disabledButtons, setDisabledButtons] = useState([]);
     const [currentUserId, setCurrentUserId]=useState();
+    const fSets=[];
+    setFilteredSet();
 
     useEffect(() => {
         api.get("/users/" + localStorage.getItem("userId")).then(response => {
@@ -124,11 +152,11 @@ function SearchSets(props){
 
                 <div id="result_board">
                     <div id="board_title"> {/*this should be changeable */}
-                        <h1>All Sets</h1>
+                        <h1>{searchTitle}</h1>
                     </div>
                     <div class="board_contents"> {/* grid */}
                     
-                        {allSets.map((res ,i)=> (
+                        {fSets.map((res ,i)=> (
                             <div class="oneSetWrapper" key={i}>
                                 
                                 <div class="oneSet" onClick={() => {

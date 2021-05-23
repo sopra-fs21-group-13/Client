@@ -118,4 +118,9 @@
   }
 
   .view-all{
+    cursor:pointer;
+  }
+
+  .view-all:hover{
+    color: #70F0A9;
   }

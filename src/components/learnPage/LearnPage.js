@@ -57,6 +57,7 @@ const InfoContainer = styled.div`
   height: 250px;
   background-color: white;
   justify-content: bottom;
+  
 `;
 
 const Info = styled.div`
@@ -599,20 +600,23 @@ class LearnPage extends React.Component {
     return (
       <div>
         <Header />
+        <div id="screen">  {/**added */}
+          <div class="back-button-container"> {/**added */}
+              <button
+                class="back-button"
+                onClick={() => {
+                  this.goToDashboard();
+                }}
+              >
+                <img class="back-button-image" src={BackButton} />
+              </button>
+            </div>
+          <div class="board_learnpage">
         <InfoContainer>
           {
             //back to Dashboard button
           }
-          <div class="back-button-container">
-            <button
-              class="back-button"
-              onClick={() => {
-                this.goToDashboard();
-              }}
-            >
-              <img class="back-button-image" src={BackButton} />
-            </button>
-          </div>
+          
           <Info>
             {
               //This is the info block that shows the information about the set that is being learned. check learnPage.css for the css styling. I opted for the external css file
@@ -877,6 +881,9 @@ class LearnPage extends React.Component {
             </div>
           )}
         </MainContainer>
+        </div>
+        
+        </div>
         <Footer></Footer>
       </div>
     );
