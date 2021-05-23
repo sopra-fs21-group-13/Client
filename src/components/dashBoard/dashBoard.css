@@ -102,7 +102,7 @@ header{
     grid-column-start: 2;
     grid-column-end: 3;
     background-color:white;
-    min-height:900px;
+    min-height:870px;
 }
 
 h1{
@@ -123,8 +123,8 @@ h1{
     align-self: right;
     min-width: 300px;
     max-width: 400px;
-    border-radius: 10px;
-    color:#70F0A9;
+    border-radius: 7px;
+    color:rgb(89, 89, 89);;
     justify-content: center;
     align-items: center;
     height:30px;
@@ -135,6 +135,7 @@ h1{
 
 .setTab:hover{
     cursor: pointer;
+    background-color: #70f0aa5b
 }
 
 .checkedSetTab{
@@ -146,7 +147,7 @@ h1{
     min-width: 300px;
     max-width: 400px;
     height:30px;
-    border-radius: 10px;
+    border-radius: 7px;
     color:white;
     border: none;
     background-color:#70F0A9;
@@ -478,12 +479,12 @@ h1{
 button[class="findSets"]{
     margin: auto;
     width:fit-content;
-    line-height: 40px;
+    line-height: 45px;
     border: solid #70F0A9 2px;
     background-color:white;
     text-align: center;
     border-radius:10px;
-    color: #70F0A9;
+    color: rgb(89, 89, 89);
     display:flex;
 
     cursor: pointer;

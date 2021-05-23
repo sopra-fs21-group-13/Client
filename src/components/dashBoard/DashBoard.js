@@ -208,33 +208,6 @@ class DashBoard extends React.Component {
         })
     }
 
-    /*
-    setOwnButtonActive = debounce( query => {
-        var ownButtons = [...this.state.ownButtonsActive];
-        ownButtons[query] = true;
-        this.setState({ownButtonsActive: ownButtons})
-        console.log(this.state.ownButtonsActive)
-    }, 1000)
-
-    setOwnButtonInactive = debounce( query => {
-        var ownButtons = [...this.state.ownButtonsActive];
-        ownButtons[query] = false;
-        this.setState({ownButtonsActive: ownButtons})
-        console.log(this.state.ownButtonsActive)
-    }, 1000)
-
-    setForeignButtonActive = debounce( query => {
-        var foreignButtons = [...this.state.foreignButtonsActive];
-        foreignButtons[query] = true;
-        this.setState({foreignButtonsActive: foreignButtons})
-    }, 1000)
-
-    setForeignButtonActive = debounce( query => {
-        var foreignButtons = [...this.state.foreignButtonsActive];
-        foreignButtons[query] = false;
-        this.setState({foreignButtonsActive: foreignButtons})
-    }, 1000)
-    */
 
     activateButton(index){
         var copyButtonArray = [...this.state.ownButtonsActive]
@@ -242,10 +215,22 @@ class DashBoard extends React.Component {
         this.setState({ownButtonsActive: copyButtonArray})
     }
 
+    activateForeignButton(index){
+        var copyButtonArray = [...this.state.foreignButtonsActive]
+        copyButtonArray[index] = "visible";
+        this.setState({foreignButtonsActive: copyButtonArray})
+    }
+
     deactivateButton(index){
         var copyButtonArray = [...this.state.ownButtonsActive]
         copyButtonArray[index] = "hidden";
         this.setState({ownButtonsActive: copyButtonArray})
+    }
+
+    deactivateForeignButton(index){
+        var copyButtonArray = [...this.state.foreignButtonsActive]
+        copyButtonArray[index] = "hidden";
+        this.setState({foreignButtonsActive: copyButtonArray})
     }
     
     render(){
@@ -256,10 +241,13 @@ class DashBoard extends React.Component {
                 <SideNav checked={1}/>
 
                 <div id="pureboard">
-                
-                <div id="board_title"> {/*this should be changeable */}
+                {/*
+                <div id="board_title"> {//this should be changeable 
+                }
                         <h1>All Sets you have!</h1>
                 </div>
+                */
+                }
                 <div className = "setTabContainer">
                     <div className = {this.state.buttonChecked ? "checkedSetTab tabOne" : "setTab tabOne"}
                     onClick={()=>{
@@ -285,10 +273,6 @@ class DashBoard extends React.Component {
                             <div id="allSets"> 
                             
                                 {this.state.ownSetList.map((res ,i)=> {
-                                    var current = 0;
-                                    var questionSize = res.cards[current].question.length;
-                                    var titleSize = res.title.length;
-                                    var displayButtons = "hidden";
                                     return (
                                     <div class="oneSetWrapper_dashboard" key={i}>
                                         <div className = "cardsContainer">
@@ -351,74 +335,6 @@ class DashBoard extends React.Component {
                                             </div>
                                             <div className = "setSizeIndicator"><text>{res.cards.length}</text></div>
                                         </div>
-                                        {/*<div class="oneSet"
-                                        onClick={() => {
-                                            //Pushes the set to the set view page
-                                            this.props.history.push({pathname: "overview", userId:this.state.user.userId, clickedSet: res});
-                                            
-                                        }}>
-                                            <div class="setTitle">
-                                                {res.title}
-                                            </div>
-                                            <button class="iconClear"
-                                            onClick = {(event) =>{
-                                                event.stopPropagation();
-                                                (this.state.ownSetList.includes(res)) ? (
-                                                    this.deleteSet(this.state.setList.indexOf(res))
-                                                ) : (
-                                                    this.removeSetFromDashboard(this.state.setList.indexOf(res))
-                                                )
-                                                
-                                            }
-                                            }>
-                                                <div class = "iconClearBox">
-                                                    <ClearIcon/>
-                                                </div>
-                                            </button>
-                                            <button class="iconEdit"
-                                            onClick = {(event) =>{
-                                                event.stopPropagation();
-                                                this.props.history.push({pathname: "edit", state: {editBehavior: true, set: res}})
-                                            }}
-                                            >
-                                                <div class = "iconEditBox">
-                                                    <EditIcon/>
-                                                </div>
-                                            </button>
-                                            <div className = "setInfoOverview">
-                                                <div className = "setLength">{res.cards.length} cards</div>
-                                                <div className = "cardPreview">
-                                                    <div className = "previewTag"> card preview</div>
-                                                    <div className = "allCardsPreview">
-                                                    {res.cards.length < 6 ? (res.cards.map((card) => (
-                                                        <textArea readOnly className = "singleCardPreview"
-                                                        type="text"
-                                                        maxLength="130"
-                                                        onClick = {(event) =>{
-                                                            event.stopPropagation();
-                                                        }}>{card.question}
-                                                        
-                                                        </textArea>
-                                                    ))) : (
-                                                        res.cards.slice(0,6).map((card) => (
-                                                            <textArea readOnly className = "singleCardPreview"
-                                                            type="text"
-                                                            maxLength="130"
-                                                            onClick = {(event) =>{
-                                                                event.stopPropagation();
-                                                            }}>{card.question}</textArea>
-                                                        ))
-                                                    )}
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <ThumbUpAltOutlinedIcon className="thumbIcon" /> {res.liked}
-                                                </div>
-                                            </div>
-
-                                            
-                                        </div>*/
-                                    }
                     
                                         {/*learn button*/}
                                         <div onMouseEnter={()=>{
@@ -468,8 +384,6 @@ class DashBoard extends React.Component {
                                                             photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg",
                                                             cards: [{id: 0, question: "", answer: ""}, {id: 1, question: "", answer: ""}]
                                                         }
-                                                    
-                                                    
                                                     this.props.history.push({pathname: "edit", state: {editBehavior: false, set: emptySet}});
                                                 }}
                                                 >
@@ -484,148 +398,111 @@ class DashBoard extends React.Component {
                                             
                                     </div>
                                     
-                                    {/*
-                                        <div class="oneSet opac" 
-                                        onClick = {() => {
-                                            const emptySet = 
-                                                {
-                                                    setId: 0,
-                                                    title: "",
-                                                    explain: "",
-                                                    userId:5,
-                                                    liked:0,
-                                                    photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg",
-                                                    cards: [{id: 0, question: "", answer: ""}, {id: 1, question: "", answer: ""}]
-                                                }
-                                            this.props.history.push({pathname: "edit", state: {editBehavior: false, set: emptySet}});
-                                        }}
-                                        >
-                
-                                            <div class="oneSetImage"
-                                            >
-                                                <img src="https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg" />
-                                
-                                            </div>
-                                            <div class="setTitle">
-                                                   
-                                            </div>
-                                        </div>
-                                        <Button yellow={true} width="35px" 
-                                        onClick = { () => {
-                                            const emptySet = 
-                                                {
-                                                    setId: 0,
-                                                    title: "",
-                                                    explain: "",
-                                                    userId:5,
-                                                    liked:0,
-                                                    photo: "https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg",
-                                                    cards: [{id: 0, question: "", answer: ""}, {id: 1, question: "", answer: ""}]
-                                                }
-                                            
-                                            
-                                            this.props.history.push({pathname: "edit", state: {editBehavior: false, set: emptySet}});
-                                        }}>
-                                            +
-                                        </Button>
-                                        */
-                    }
+                                    
                                 </div>
                                 
                             </div>
                         )}
                     </div>
-                ):(
+                ):
+                
+                (
                     <div>
-                    {!this.state.setList || !this.state.foreignSetList ? 
+                    {(!this.state.setList || !this.state.foreignSetList) ? 
                         //Only shows the "add set"- Button before the server request has gone through
                         (<div id= "allSets">
-                        <div class="oneSetWrapper_dashboard">
-                        <div class="oneSet opac">
-        
-                            <div class="oneSetImage">
-                                <img src="https://www.onatlas.com/wp-content/uploads/2019/03/education-students-people-knowledge-concept-P6MBQ5W-1080x675.jpg" />
-                
-                            </div>
-                            <div class="setTitle">
-                                   
-                            </div>
-                        </div>
-                        <Button 
-                        yellow={true} width="35px" >
-                            +
-                        </Button>
-                            </div>
+                        
                         </div>
                             ) : (
                             <div id="allSets"> 
                             
-                                {this.state.foreignSetList.map((res ,i)=> (
+                                {this.state.foreignSetList.map((res ,i)=> {
+                                    return (
                                     <div class="oneSetWrapper_dashboard" key={i}>
-                                        <div class="oneSet"
-                                        onClick={(event) => {
-                                            event.stopPropagation();
-                                            //Pushes the set to the set view page
-                                            this.props.history.push({pathname: "overview", userId:this.state.user.userId, clickedSet: res});
-                                            console.log(res.setId);
-                                            
-                                        }}>
-                                            <button class="iconClear"
-                                            onClick = {(event) =>{
-                                                event.stopPropagation();
-                                                (this.state.ownSetList.includes(res)) ? (
-                                                    this.deleteSet(this.state.setList.indexOf(res))
-                                                ) : (
-                                                    this.removeSetFromDashboard(this.state.setList.indexOf(res))
-                                                )
+                                        <div className = "cardsContainer">
+                                            <div className = "singleSetBorder">
                                                 
-                                            }
-                                            }>
-                                                <div class = "iconClearBox">
-                                                    <ClearIcon/>
+                                                <div readOnly className = "singleCardPreview cardOne"></div>
+                                                <div readOnly className = "singleCardPreview cardTwo"></div>
+                                                <div readOnly className = "singleCardPreview cardThree"
+                                                onClick={() => {
+                                                    //Pushes the set to the set view page
+                                                    this.props.history.push({pathname: "overview", userId:this.state.user.userId, clickedSet: res});
+                                                }}
+                                                onMouseEnter={()=>{
+                                                    this.activateForeignButton(i);
+                                                }} onMouseLeave ={()=>{
+                                                    this.deactivateForeignButton(i);
+                                                }}>
+                                                    <div className = "cardFront">
+                                                        <text>
+                                                        {res.cards[0].question}
+                                                        </text>
+                                                    </div>
+                                                    <div className = "setTitleNew">
+                                                        <text>
+                                                            {res.title}
+                                                        </text>
+                                                    </div>
+                                                    <button class="iconClear"
+                                                        style = {{visibility: this.state.foreignButtonsActive[i]}}
+                                                        onClick = {(event) =>{
+                                                            event.stopPropagation();
+                                                            (this.state.ownSetList.includes(res)) ? (
+                                                                this.deleteSet(this.state.setList.indexOf(res))
+                                                            ) : (
+                                                                this.removeSetFromDashboard(this.state.setList.indexOf(res))
+                                                            )
+                                                            
+                                                        }
+                                                        }>
+                                                            <div class = "iconClearBox">
+                                                                <ClearIcon/>
+                                                            </div>
+                                                        </button>
+                                                        <div className = "thumbIconBox">
+                                                            <ThumbUpAltOutlinedIcon className = "thumbIcon"/> {res.liked}
+                                                        </div>
                                                 </div>
-                                            </button>
-                                            
-                                            <div class="oneSetImage">
-                                                <img src={res.photo} />
-                                
+                                                
                                             </div>
-                                            <div class="setTitle">
-                                                {res.title}
-                                            </div>
+                                            <div className = "setSizeIndicator"><text>{res.cards.length}</text></div>
                                         </div>
-        
+                    
                                         {/*learn button*/}
-                                        <Button width="45%" background="#FFF" onClick={() => {
+                                        <div onMouseEnter={()=>{
+                                                    this.activateForeignButton(i);
+                                                }}
+                                        onMouseLeave ={()=>{
+                                                    this.deactivateForeignButton(i);
+                                                }}>
+                                        <button style = {{visibility: this.state.foreignButtonsActive[i]}} className = "learnButton" width="45%" background="#FFF" onClick={() => {
                                             //Pushes the set to the learn page so it can be displayed.
                                             this.props.history.push({pathname: "learnpage", state: {set: res}});
                                         }} >
                                             Learn
-                                        </Button>
+                                        </button>
         
                                         {/*Play button: show modal*/}
                                         <Modal show={this.state.show} handleClose={this.hideModal} currentWindow="dashboard" clickUsers={this.state.suitableUsers}>
-                                            
                                             <p>Modal</p>
                                         </Modal>
         
-                                        <Button yellow={true} width="45%" onClick={() => {this.setSuitableUsers(res); this.showModal();}}>
+                                        <button style = {{visibility: this.state.foreignButtonsActive[i]}} className = "playButton" yellow={true} width="45%" onClick={() => {this.setSuitableUsers(res); this.showModal();}}>
                                             Play
-                                        </Button>
+                                        </button>
+                                        </div>
                                         
-                                                    
-        
                                     </div>
         
                                     
-                                ))}
-                                
+                                    )})}
                                 
                             </div>
-                        )}
+                            )}
                     </div>
-                )}
                 
+                )}
                     <button class = "findSets" onClick = {() =>{
                                         this.props.history.push({pathname: "searchSets"})
                                     }}

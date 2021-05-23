@@ -348,8 +348,6 @@ function EditCreateSet(props) {
                           <div class="throw_card"
                           
                           >
-                            {//TODO:
-                            }
                             <div className = "throw_card_press_area"
                             onMouseLeave = {(event) => deleteButtonAnimOff(event, quizes.indexOf(quiz))}
                             onMouseEnter = {(event) => deleteButtonAnim(event, quizes.indexOf(quiz))}
