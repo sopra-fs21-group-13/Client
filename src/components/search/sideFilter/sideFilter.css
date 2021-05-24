@@ -2,7 +2,6 @@
     height: calc(100vh-160px);
     width: 160px;
     position: fixed;
-    z-index: 9;
     top: 60px;
     left: 0;
     background-color: white;
@@ -118,4 +117,9 @@
   }
 
   .view-all{
+    cursor:pointer;
+  }
+
+  .view-all:hover{
+    color: #70F0A9;
   }

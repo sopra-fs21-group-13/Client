@@ -166,10 +166,12 @@
 
 .game-user-profile{
     display: grid;
+    grid-column: 1;
+    grid-row: 1;
     align-self: end;
     justify-self: end;
     position: relative;
-    left: 110px;
+    left: 70px;
     bottom: 5px;
     background-color: rgba(2, 255, 255, 0);
     box-shadow: none;
@@ -209,9 +211,12 @@
 }
 
 .game-creator-name{
-    justify-self: end;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: start;
     align-self: end;
     position: relative;
+    left:70px;
     bottom: 5px;
     font-size: 20px;
 }

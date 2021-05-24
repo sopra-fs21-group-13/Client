@@ -6,7 +6,7 @@ import Header from "../header/header.js";
 import './mainPage.css'
 import {Button} from '../../views/design/Button.js';
 
-//realted to modal
+//related to modal
 import Modal from '../Modal/Modal.js';
 import Footer from '../footer/Footer.js'
 
@@ -20,7 +20,7 @@ class MainPage extends React.Component {
             /*
             which_menu: "dashBoard",
             setList: this.response,
-            show: false //for avilable Users modal
+            show: false //for available Users modal
             */
            show: false,
            modalLogin: true,

@@ -1,5 +1,5 @@
 import React, { useState,  useEffect } from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation} from "react-router-dom";
 
 import SideFilter from '../sideFilter/SideFilter';
 import FriendshipBtn from '../friendship/FriendshipBtn.js'
@@ -43,6 +43,12 @@ import { api, handleError } from "../../../helpers/api";
 
 
 function SearchUsers(props){
+    const history = useHistory();
+    let location = useLocation();
+    var searchTitle="All Users";
+    if (location.keyword!=undefined){ 
+        searchTitle="All Users Related to \""+location.keyword.toString()+"\"";
+    }
 
     //handles showing the right user picture
     const [userPicturesDict, setUserPicturesDict] = useState({1: char1, 2: char2, 3: char3, 4: char4, 5: char5, 6: char6,
@@ -51,10 +57,10 @@ function SearchUsers(props){
 
     //amount of likes all user have across all their sets.
     const[likes, setLikes] = useState();
+    const [allUsers, setAllUsers] = useState([]);
+    const fUsers=[];
 
-    const [allUsers, setAllUsers] = useState();
-
-    const history = useHistory();
+    
 
     useEffect(() => {
         api.get("/users").then(response => {
@@ -93,6 +99,23 @@ function SearchUsers(props){
         setLikes(likesDict);
         setCurrentPics(picsDict);
     }
+    function setFilteredUsers(){
+        var l=0;
+        for (var i=0; i<(allUsers.length); i++)
+        {
+            if(location.keyword!=undefined)//only when there's keyword
+            {
+                if (allUsers[i].username.toLowerCase().includes(location.keyword.toLowerCase())){
+                    fUsers[l++]=allUsers[i];
+                }
+            }
+            else{
+                fUsers[i]=allUsers[i];
+            }
+        }
+        console.log("filter worked:",fUsers );
+    }
+    setFilteredUsers();
 
 
     return(
@@ -104,44 +127,39 @@ function SearchUsers(props){
 
                 {(!currentPics || !likes) ? (<div>loading users</div>) : (<div id="result_board">
                     <div id="board_title"> {/*this should be changeable */}
-                        <h1>All Users</h1>
+                        <h1>{searchTitle}</h1>
                     </div>
 
                     <div id="board_contents"> {/* grid */}
                     <div className = "userGrid">
-                    {allUsers.map((user)=> (
+                    {fUsers.map((user)=> (
                             <div class="userCard"
                             onClick = {() => {
                                 history.push({pathname: "PublicProfile", state: {userId: user.userId}})
                             }}>
                                 
 
-                            <div class="userBasic">
+                                <div className = "photoContainer">
+                                    <div class="photoFrame">
+                                        <img src={currentPics[user.userId]} /> 
+                                    </div>
+                                    <img className = "online-sign"
+                                        src={(user.status == "ONLINE") ? OnlineSign : OfflineSign}/>
+                                </div>
+                                <div class="username">
+                                    <div className = "usernameText">{user.username}</div>
+                                </div>
+                                
                                 <div>
-                                <div class="photoFrame">
-                                    <img src={currentPics[user.userId]} /> 
-                                </div>
-                                <img className = "online-sign"
-                                    src={(user.status == "ONLINE") ? OnlineSign : OfflineSign}/>
-                                </div>
-                                <p class="profile_username">
-                                    {user.username}
-                                </p>
-                                <div class="userMore">
-                                <p>
                                     {user.name}
-                                </p>  
-                                <p class="likes_wins">
+                                </div>  
+                                <div class="likes_wins">
                                     <div className = "likesAndWins">
-                                    <span class="thumbIcon"><ThumbUpAltOutlinedIcon/></span> {likes[user.userId]} 
+                                    <span class="thumbIconLikes"><ThumbUpAltOutlinedIcon/></span> {likes[user.userId]} 
                                     <span class="winIcon"><EmojiEventsIcon/></span> {0}
                                     </div>
-                                </p>
+                                </div>
                                  
-                            </div>
-                            </div>
-
-                            
                         
                             {/*must know if the user is friend or not. here temporarily used false */}
                             {/*<FriendshipBtn friendship={false}/>*/

@@ -13,6 +13,9 @@
  import './searchUsers/searchUsers.css';
  import Header from "../header/header.js";
  import Footer from '../footer/Footer.js'
+ import SearchSets from './searchSets/SearchSets.js';
+ import SearchUsers from './searchUsers/SearchUsers.js';
+
  
  //icons, default profile img
  import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -23,6 +26,7 @@
  import {Button} from '../../views/design/Button.js';
 
  //SEARCH USERS
+
  //profile pictures
 import char1 from "../profile/char1.jpg";
 import char2 from "../profile/char2.jpg";
@@ -45,6 +49,7 @@ import OfflineSign from "../shared/images/OfflineSign.png";
 import './searchUsers/searchUsers.css';
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
+import { SettingsInputAntennaTwoTone } from '@material-ui/icons';
 
 
  
@@ -53,28 +58,62 @@ import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
  function SearchAll(props){
     let history = useHistory();
     let location = useLocation();
-    const[keyword, setKeyword]=useState();
-
+    console.log("키워드:", location.keyword);
     console.log("delivered keyword:",location.keyword);
-    
-    /*
-    useEffect(() => {
-        setKeyword(location.keyword)
-    }, [])
-    */
+    var searchTitle="All Sets & Users";
+
+    if (location.keyword!=undefined){ 
+        searchTitle="All Sets and Users Related to \""+location.keyword.toString()+"\"";
+    }
 
 {/*
     SHOW SETS
  */}
-    
-     /*var allSets=[];*/
      const [allSets, setAllSets] = useState([]);
-     /** setId:username  */
      const [usernames, setUsernames] = useState([]);
      const [disabledButtons, setDisabledButtons] = useState([]);
      const [currentUserId, setCurrentUserId]=useState();
 
+    
+
+
+    //checks for button animation
+    const [addButtonCheck, setAddButtonCheck] = useState([]);
+    const [addButtonAnim, setAddButtonAnim] = useState([]);
+
+    //keep track of window size so you can adjust number of columns of sets shown at one time.
+    const [windowWidth, setWindowWidth]=useState();
+    const [windowHeght, setWindowHeight]=useState();
+
+    //componentDidMount for columns of sets adjusting to window size
+    useEffect(() => {
+        //for css variables
+        let root = document.documentElement;
+        var numberOfColumns = 4;
+        if(windowWidth < 1800){
+            numberOfColumns = 3;
+        }
+        if(windowWidth < 1500){
+            numberOfColumns = 2;
+        }
+        if(windowWidth < 1000){
+            numberOfColumns = 1;
+        }
+        //changes amount of columns in dashboard depending on window width
+        root.style.setProperty('--columnNumbers', numberOfColumns);
+    })
+   
+    
+    //check resize
+    function handleResize(){
+        setWindowHeight(window.innerHeight);
+        setWindowWidth(window.innerWidth);
+    };
+
      useEffect(() => {
+        //handles resize of window
+        window.addEventListener("resize", handleResize);
+
          api.get("/users/" + localStorage.getItem("userId")).then(response => {
              
              setCurrentUserId(response.data.userId);
@@ -87,6 +126,16 @@ import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
      //@@ Get all sets
      useEffect(() => {
          api.get("/sets").then(response => {
+             //prepare add button checks, so that animation can work individually for every button.
+            var addButtonCheckArray = [];
+            var addButtonAnimArray = [];
+            for(var i = 0; i < response.data.length; i++){
+                addButtonCheckArray.push(false);
+                addButtonAnimArray.push(true);
+            }
+            setAddButtonCheck(addButtonCheckArray);
+            setAddButtonAnim(addButtonAnimArray);
+
              setAllSets(response.data);
  
              setUsernameDict(response.data);
@@ -146,7 +195,7 @@ const [currentPics, setCurrentPics] = useState();
 
 //amount of likes all user have across all their sets.
 const[likes, setLikes] = useState();
-const [allUsers, setAllUsers] = useState();
+const [allUsers, setAllUsers] = useState([]);
 
 
 
@@ -158,58 +207,62 @@ useEffect(() => {
     }).catch(e=>{
         alert(`Something went wrong while fetching all users: \n${handleError(e)}`);
     })
-    console.log("너도안돼?",allUsers);
+    
 }, []) 
 
+
 //filtered users and sets
-const fUsers={};
+const fUsers=[];
 const fSets=[];
 
-/*console.log("state:",keyword);*/
-//set filtered sets
-for (var i=0;i<allSets.length;i++)
-{
-    if(location.keyword)//only when there's keyword
-    {
 
-        //if (allSets[i].title.toLowerCase().includes(keyword.toLowerCase())){
-        if (allSets[i].title.toLowerCase().includes(location.keyword.toLowerCase())){
-//            setFSets(fSets.concat(allSets[i]));
-            fSets[allSets[i].title]=allSets[i];
-            console.log("found: ",allSets[i]);
-        }
-    }
-}
-console.log("filter worked:",fSets );
-
-/* 
-//set filtered users
-console.log("왜안돼",allUsers);
-for (var i=0;i<allUsers.length;i++)
-{
-    if(location.keyword)//only when there's keyword
-    {
-        if (allUsers[i].username.toLowerCase().includes(location.keyword.toLowerCase())){
-//           
-            fUsers[allUsers[i].username]=allUsers[i];
-            console.log("found: ",allUsers[i]);
-        }
-    }
-}
-console.log("filter worked:",fUsers );
-*/
-
-/*
-setFSets(allSets[].title)
-
-const updateInput = async (input) => {
-    const filtered = countryListDefault.filter(country => {
-     return country.name.toLowerCase().includes(input.toLowerCase())
-    })
-    setInput(input);
-    setCountryList(filtered);
- }
+/**
+ * make filtered Sets Dict(fSets)
  */
+ function setFilteredSet(){
+    var k=0;
+    console.log("얘는 보잖아:", allSets);
+    for (var i=0;i<allSets.length;i++)
+    {
+        if(location.keyword!=undefined)//only when there's keyword
+        {
+
+            //if (allSets[i].title.toLowerCase().includes(keyword.toLowerCase())){
+            if (allSets[i].title.toLowerCase().includes(location.keyword.toLowerCase())){
+                fSets[k++]=allSets[i];
+            }
+        }
+        else{
+            fSets[i]=allSets[i];
+        }
+    }
+    console.log("filter worked:",fSets );
+}
+
+setFilteredSet();
+
+
+
+/**
+ * make filtered Users Dict(fUsers)
+ */
+function setFilteredUsers(){
+    var l=0;
+    for (var i=0; i<(allUsers.length); i++)
+    {
+        if(location.keyword!=undefined)//only when there's keyword
+        {
+            if (allUsers[i].username.toLowerCase().includes(location.keyword.toLowerCase())){
+                fUsers[l++]=allUsers[i];
+            }
+        }
+        else{
+            fUsers[i]=allUsers[i];
+        }
+    }
+    console.log("filter worked:",fUsers );
+}
+setFilteredUsers();
 
 
 function setLikesAndPics(users){
@@ -241,6 +294,8 @@ function setLikesAndPics(users){
     setCurrentPics(picsDict);
 }
 
+
+
      return(
          
          <div>
@@ -257,7 +312,8 @@ function setLikesAndPics(users){
  */}
                 
                      <div id="board_title"> {/*this should be changeable */}
-                         <h1>All Sets & Users</h1>
+                         <h1>{searchTitle}</h1>
+                         {/*<h1>All Sets & Users</h1>*/}
                      </div>
                      <div class="board_contents"> {/* grid */}
 
@@ -266,107 +322,130 @@ function setLikesAndPics(users){
                         {/*!keyword?(<div></div>):(<div></div>)*/
                         
                         }
+                        {fSets.map((res ,i)=> (
+                                                <div>
+                                                    <div class="oneSetWrapper_dashboard" key={i}>
+                                                        <div className = "cardsContainer">
+                                                            <div className = "singleSetBorder">
+                                                                
+                                                                <div readOnly className = "singleCardPreview cardOne"></div>
+                                                                <div readOnly className = "singleCardPreview cardTwo"></div>
+                                                                <div readOnly className = "singleCardPreview cardThree"
+                                                                onClick={() => {
+                                                                    //Pushes the set to the set view page
+                                                                    history.push({pathname: "overview", userId: res.userId, clickedSet: res});
+                                                                }}>
+                                                                    <div className = "cardFront">
+                                                                        <text>
+                                                                        {res.cards[0].question}
+                                                                        </text>
+                                                                    </div>
+                                                                    <div className = "setTitleNew">
+                                                                        <text>
+                                                                            {res.title}
+                                                                        </text>
+                                                                    </div>
+                                                                    <div className = "thumbIconBox">
+                                                                        <ThumbUpAltOutlinedIcon className = "thumbIcon"/> {res.liked}
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            <div className = "setSizeIndicator"><text>{res.cards.length}</text></div>
+                                                        </div>
+                                                    </div>
+                                                <div className = "containerUnderSets">
+                                                    <div class ="owner_likes">
+                                                        <div className = "owner_info">
+                                                            <div className = "owner_info_picture"v>
+                                                            <img 
+                                                            onClick = {() => {
+                                                                history.push({pathname: "PublicProfile", state: {userId: res.userId}})
+                                                            }}
+                                                        src={ProfilePicture}/>
+                                                            </div>
+                                                            <div className = "owner_info_username"
+                                                            onClick = {() => {
+                                                                history.push({pathname: "PublicProfile", state: {userId: res.userId}})
+                                                                
+                                                            }}>
+                                                            {" " + usernames[res.setId]}
+                                                            </div>
+                                                        </div>
+                                                        <button className = {`addButton ${addButtonCheck[i] ? 'open' : ''}`}
+                                                            onMouseEnter = {() => {if(addButtonAnim[i]){
+                                                                var addButtonCheckArray = [...addButtonCheck];
+                                                                addButtonCheckArray[i] = true;
+                                                                setAddButtonCheck(addButtonCheckArray)}}}
+                                                            onMouseLeave = {() => {
+                                                                var addButtonCheckArray = [...addButtonCheck];
+                                                                addButtonCheckArray[i] = false;
+                                                                setAddButtonCheck(addButtonCheckArray)}}
+                                                            disabled = {(
+                                                                (disabledButtons.includes(res.setId)) ||
+                                                                (localStorage.getItem("userId") == res.userId) || 
+                                                                (localStorage.getItem("userId") != res.userId && res.memberIds.includes(Number(localStorage.getItem("userId")))))}
+                                                            onClick = {()=>{
+                                                                //disable button animation and transformation into bigger button
+                                                                var addButtonCheckArray = [...addButtonCheck];
+                                                                addButtonCheckArray[i] = false;
+                                                                var addButtonAnimArray = [...addButtonAnim];
+                                                                addButtonAnimArray[i] = false;
+                                                                setAddButtonAnim(addButtonAnimArray)
+                                                                setAddButtonCheck(addButtonCheckArray)
+                                                                //sets that button needs to be disabled
+                                                                setDisabledButtons(disabledButtons.concat([res.setId]))
+                                                                addToDashboard(res);
+                                                                
+                                                            }}>
+                                                                {addButtonCheck[i] ? (<text className="addText">add to dashboard</text>):(<text className="addText">+</text>)}
+                                                                    
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
 
-                        
-                         {fSets.map((res ,i)=> (
-                             
-                             <div class="oneSetWrapper" key={i}>
-                                 
-                                 <div class="oneSet" onClick={() => {
-                                     //Pushes the set to the set view page
-                                     history.push({pathname: "overview", userId:currentUserId, clickedSet: res});
-                                 }}>
-                                     <div class="oneSetImage">
-                                         <img src={res.photo} />
-                         
-                                     </div>
-                                     
-                                     <div class="setTitle">
-                                         {res.title}
-                                     </div>
-                                     
-                                 </div>
-                                 <div className = "setTitleContainer">
-                                 <div class ="owner_likes">
-                                     <div className = "owner_info">
-                                     <img
-                                     onClick = {() => {
-                                         history.push({pathname: "PublicProfile", state: {userId: res.userId}})
-                                     }}
-                                     src={ProfilePicture}/>
-                                     <div
-                                     onClick = {() => {
-                                         history.push({pathname: "PublicProfile", state: {userId: res.userId}})
-                                         
-                                     }}>
-                                     {" " + usernames[res.setId]}
-                                     </div>
-                                     <br/>
-                                     </div>
-                                     {/*<FavoriteIcon/> {res.liked}*/}
-                                 </div>
-                                 <Button className = "addButton"
-                                 disabled = {(
-                                     (disabledButtons.includes(res.setId)) ||
-                                     (localStorage.getItem("userId") == res.userId) || 
-                                     (localStorage.getItem("userId") != res.userId && res.memberIds.includes(Number(localStorage.getItem("userId")))))}
-                                 onClick = {()=>{
-                                     //sets that button needs to be disabled
-                                     setDisabledButtons(disabledButtons.concat([res.setId]))
-                                     addToDashboard(res);
-                                     
-                                 }}>
-                                         add to dashboard
-                                 </Button>
- 
-                                     </div>
- 
-                             </div>
- 
-                         ))}
+                                                    
+                                                ))}
                          
                      </div>
 
 {/**
  * users (filtered or non-filtered)
  */}
-                     {(!currentPics || !likes) ? (<div>loading users</div>) : (<div id="result_board">
+                     {(!currentPics || !likes) ? (<div> </div>) : (<div id="result_board">
                     
                     <div id="board_contents"> {/* grid */}
                     <div className = "userGrid">
-                    {allUsers.map((user)=> (
+                    {fUsers.map((user)=> (
                             <div class="userCard"
                             onClick = {() => {
                                 history.push({pathname: "PublicProfile", state: {userId: user.userId}})
                             }}>
                                 
 
-                            <div class="userBasic">
+                                <div className = "photoContainer">
+                                    <div class="photoFrame">
+                                        <img src={currentPics[user.userId]} /> 
+                                    </div>
+                                    <img className = "online-sign"
+                                        src={(user.status == "ONLINE") ? OnlineSign : OfflineSign}/>
+                                </div>
+                                <div class="username">
+                                    <div className = "usernameText">{user.username}</div>
+                                </div>
+                                
                                 <div>
-                                <div class="photoFrame">
-                                    <img src={currentPics[user.userId]} /> 
-                                </div>
-                                <img className = "online-sign"
-                                    src={(user.status == "ONLINE") ? OnlineSign : OfflineSign}/>
-                                </div>
-                                <p class="profile_username">
-                                    {user.username}
-                                </p>
-                                <div class="userMore">
-                                <p>
                                     {user.name}
-                                </p>  
-                                <p class="likes_wins">
+                                </div>  
+                                <div class="likes_wins">
                                     <div className = "likesAndWins">
-                                    <span class="thumbIcon"><ThumbUpAltOutlinedIcon/></span> {likes[user.userId]} 
+                                    <span class="thumbIconLikes"><ThumbUpAltOutlinedIcon/></span> {likes[user.userId]} 
                                     <span class="winIcon"><EmojiEventsIcon/></span> {0}
                                     </div>
-                                </p>
+                                </div>
                                  
-                            </div>
-                            </div>
-
-                            
                         
                             {/*must know if the user is friend or not. here temporarily used false */}
                             {/*<FriendshipBtn friendship={false}/>*/
