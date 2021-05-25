@@ -10,7 +10,7 @@ import { Button } from "@material-ui/core";
 export default function GameCard({flashcard, submitAnswer}) {
     var starred = false;
     const [state, setstate] = useState(null);
-    console.log("TEXT FOR GAME ID", flashcard.cardId);
+    //console.log("TEXT FOR GAME ID", flashcard.cardId);
 
     let handleChange=(event)=>{
         setstate(event.target.value);
