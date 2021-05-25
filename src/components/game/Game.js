@@ -48,10 +48,12 @@ class Game extends React.Component {
       setTitle:"",
       message: null,
       senderId: null,
-      timer:10,
+      timer:100,
       points1: 0,
       points2: 0,
-      cardsLength:0
+      cardsLength:0,
+      Rang1: "",
+      Rang2: ""
     };
   }
 
@@ -66,15 +68,26 @@ checkAnswerStatus=async(gameId,cb)=>{
         let players=response["data"].players;
         let points1=history.filter(ele=>ele.senderId==players[0].userId) 
         let points2=history.filter(ele=>ele.senderId==players[1].userId) 
-        console.log(points2);
         console.log(points1);
+        console.log(points2);
 
         let total1=points1.reduce((acc,ele)=>ele.score+acc,0)
         let total2=points2.reduce((acc,ele)=>ele.score+acc,0)
         
-    
-
         this.setState({...this.state,points1:total1,points2:total2})
+
+        if(total1 > total2)
+        {
+          this.setState({...this.state,Rang1:"#1",Rang2:"#2"})
+        }
+        // console.log("Rang1",this.state.Rang1);
+        // console.log("Total",total1);
+        // console.log("Total",total1);
+
+        if(total1 < total2)
+        {
+          this.setState({...this.state,Rang1:"#2",Rang2:"#1"})
+        }
       
         let currentCardHistory=history.filter(ele=>ele.cardId==this.state.cards[0].cardId);
         //debugger;
@@ -103,42 +116,30 @@ checkAnswerStatus=async(gameId,cb)=>{
     let gameId=this.props.match.params["id"];
     let answered=this.state.cards.find(ele=>ele.cardId===cardId);
     let score=0;
+    // debugger;
 
     this.setState({...this.state,message:value});
     this.setState({senderId:this.state.cardId});
 
-  
     let userID=localStorage.getItem("userId")
 
     if(answered.answer===value && parseInt(userID )=== this.state.players[0].userId){
-     //this.state.points1 = this.state.points1 + 10;
+      score+=10;
+    //this.state.points1 = this.state.points1 + 10;
      //debugger;
     // this.setState({...this.state,points1:this.state.points1 + 10});
-    score+=10;
-    
     }
 
     if(answered.answer===value && parseInt(userID) === this.state.players[1].userId){
+      score+=10;
       //this.state.points2 = this.state.points2 + 10;
      // this.setState({...this.state,points2:this.state.points2 + 10});
-     score+=10;
     }
-   
+
     console.log("answeredAnswer", answered.answer)
     console.log("points1", this.state.points1)
     console.log("points2", this.state.points2)
 
-    // const requestBody = {
-    //   "firstPlayerScore":points1,
-    //   "secondPlayerScore":points2,
-    // };
-  
-    // api.put('/games/', requestBody).then(result => {console.log("Score",result);}
-    // ).catch(e=>{
-    //   alert(`Something went wrong while updating the chat: \n${handleError(e)}`);
-    // });
-
-    // debugger;
     const requestBody = {
       "senderId":userID,
       "message": value,
@@ -146,13 +147,13 @@ checkAnswerStatus=async(gameId,cb)=>{
       "score": score
     };
   
-  
     api.put('/games/' + gameId + '/histories', requestBody).then(result => {console.log("RESULT",result);}
     ).catch(e=>{
       alert(`Something went wrong while updating the chat: \n${handleError(e)}`);
     });
     
   }
+
 
   componentDidMount(){
 
@@ -163,6 +164,7 @@ checkAnswerStatus=async(gameId,cb)=>{
       console.log("huuu",response["data"]);
       let history=response["data"].history;
       let players=response["data"].players;
+      
       if(players.length==2)
       {
         let points1=history.filter(ele=>ele.senderId==players[0].userId) 
@@ -170,19 +172,19 @@ checkAnswerStatus=async(gameId,cb)=>{
 
         let total1=points1.reduce((acc,ele)=>ele.score+acc,0)
         let total2=points2.reduce((acc,ele)=>ele.score+acc,0)
-      //let points2=history
-      console.log(total1);
-      console.log(total2);
-     
-      this.setState({...this.state,players:response["data"].players,inviter:response["data"].inviter.name,player2:response["data"].players[1].name,points1:total1,points2:total2})
-      console.log(this.state.player2);
+        //let points2=history
+        console.log(total1);
+        console.log(total2);
+      
+        this.setState({...this.state,players:response["data"].players,inviter:response["data"].inviter.name,player2:response["data"].players[1].name,points1:total1,points2:total2})
+        console.log(this.state.player2);
 
-      let setId=response["data"].playSetId
-      let response2 = await api.get(`/sets/${setId}`);
+        let setId=response["data"].playSetId
+        let response2 = await api.get(`/sets/${setId}`);
 
-      this.setState({...this.state,cards:response2["data"].cards,cardsLength:response2["data"].cards.length,setTitle:response2["data"].title})
-      //console.log(response2["data"]);
-      let timerPointer=setInterval(()=>{
+        this.setState({...this.state,cards:response2["data"].cards,cardsLength:response2["data"].cards.length,setTitle:response2["data"].title})
+        //console.log(response2["data"]);
+        let timerPointer=setInterval(()=>{
         if(this.state.timer>0)
         {
           this.setState({...this.state,timer:this.state.timer-1})
@@ -192,7 +194,7 @@ checkAnswerStatus=async(gameId,cb)=>{
           if(this.state.cards.length>0)
           {
            alert("Times up ,next card !!")
-            this.setState({...this.state,cards:this.state.cards,timer:10})
+            this.setState({...this.state,cards:this.state.cards,timer:100})
           }
           else{
             alert("Times up ,next card !!");
@@ -223,6 +225,38 @@ checkAnswerStatus=async(gameId,cb)=>{
   CallApi();
 }
 
+
+// RangOfPlayers1=()=>{
+//   debugger
+//   if(this.state.points1>this.state.points2){
+//     return "#1"
+//   }
+//   else if(this.state.points1<this.state.points2){
+//     return "#2"
+//   }
+//   else{
+//     return ""
+//   }
+// }
+
+// RangOfPlayers1(params) {
+//   debugger;
+//   let rang1="#1";
+//   console.log("rangofplayer1", rang1);
+//   return rang1;
+// }
+
+// RangOfPlayers2=()=>{
+//   if(this.state.points1<this.state.points2){
+//     return "#1"
+//   }
+//   else if(this.state.points1>this.state.points2){
+//     return "#2"
+//   }
+//   else{
+//     return ""
+//   }
+// }
 
   render() {
 
@@ -281,13 +315,13 @@ checkAnswerStatus=async(gameId,cb)=>{
                   <img className="game-profile-picture2a" src={ProfilePicture}></img>
                   <div className="game-creator-name-b">{this.state.inviter}</div>
                   <div className="game-points1">{this.state.points1}</div>
-                  <div className="game-rank">#1</div>
+                  <script className="game-rank">{this.state.Rang1}</script>
                 </div>
-                <div class="game-scoreboard-profile2">
-                    <img class="game-profile-picture2a" src={ProfilePicture}></img>
-                    <div class="game-creator-name-b">{this.state.player2}</div>
-                    <div class="game-points1">{this.state.points2}</div>
-                    <div class="game-rank">#2</div>
+                <div className="game-scoreboard-profile2">
+                    <img className="game-profile-picture2a" src={ProfilePicture}></img>
+                    <div className="game-creator-name-b">{this.state.player2}</div>
+                    <div className="game-points1">{this.state.points2}</div>
+                    <script className="game-rank">{this.state.Rang2}</script>
                 </div>
 
                 </div>
