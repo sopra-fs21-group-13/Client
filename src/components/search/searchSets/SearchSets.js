@@ -6,6 +6,7 @@ import SideFilter from '../sideFilter/SideFilter';
 import './searchSets.css';
 import Header from "../../header/header.js";
 import Footer from '../../footer/Footer.js'
+import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 
 //icons, default profile img
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -62,9 +63,20 @@ function SearchSets(props){
     const [disabledButtons, setDisabledButtons] = useState([]);
     const [currentUserId, setCurrentUserId]=useState();
     const fSets=[];
+    //keep track of window size so you can adjust number of columns of sets shown at one time.
+    const [windowWidth, setWindowWidth]=useState();
+    const [windowHeght, setWindowHeight]=useState();
+
+
+    //checks for button animation
+    const [addButtonCheck, setAddButtonCheck] = useState([]);
+    const [addButtonAnim, setAddButtonAnim] = useState([]);
+
+
     setFilteredSet();
 
     useEffect(() => {
+        window.addEventListener("resize", handleResize);
         api.get("/users/" + localStorage.getItem("userId")).then(response => {
             
             setCurrentUserId(response.data.userId);
@@ -72,11 +84,22 @@ function SearchSets(props){
         }).catch(e=>{
             alert(`Something went wrong while fetching curren user id: \n${handleError(e)}`);
         })
+
     }, []) 
 
 
     useEffect(() => {
         api.get("/sets").then(response => {
+            //prepare add button checks, so that animation can work individually for every button.
+            var addButtonCheckArray = [];
+            var addButtonAnimArray = [];
+            for(var i = 0; i < response.data.length; i++){
+                addButtonCheckArray.push(false);
+                addButtonAnimArray.push(true);
+            }
+            setAddButtonCheck(addButtonCheckArray);
+            setAddButtonAnim(addButtonAnimArray);
+
             setAllSets(response.data);
 
             setUsernameDict(response.data);
@@ -86,6 +109,31 @@ function SearchSets(props){
             alert(`Something went wrong while fetching all sets: \n${handleError(e)}`);
         })
     }, []) 
+
+
+    //componentDidMount for columns of sets adjusting to window size
+    useEffect(() => {
+        //for css variables
+        let root = document.documentElement;
+        var numberOfColumns = 4;
+        if(windowWidth < 1800){
+            numberOfColumns = 3;
+        }
+        if(windowWidth < 1500){
+            numberOfColumns = 2;
+        }
+        if(windowWidth < 1000){
+            numberOfColumns = 1;
+        }
+        //changes amount of columns in dashboard depending on window width
+        root.style.setProperty('--columnNumbers', numberOfColumns);
+    })
+
+    //check resize
+    function handleResize(){
+        setWindowHeight(window.innerHeight);
+        setWindowWidth(window.innerWidth);
+    };
 
 
 
@@ -137,6 +185,7 @@ function SearchSets(props){
       }
 */
 
+    
 
     let history = useHistory();
     return(
@@ -157,59 +206,90 @@ function SearchSets(props){
                     <div class="board_contents"> {/* grid */}
                     
                         {fSets.map((res ,i)=> (
-                            <div class="oneSetWrapper" key={i}>
-                                
-                                <div class="oneSet" onClick={() => {
-                                    //Pushes the set to the set view page
-                                    history.push({pathname: "overview", userId:currentUserId, clickedSet: res});
-                                }}>
-                                    <div class="oneSetImage">
-                                        <img src={res.photo} />
-                        
+                        <div>
+                            <div class="oneSetWrapper_dashboard" key={i}>
+                                <div className = "cardsContainer">
+                                    <div className = "singleSetBorder">
+                                        
+                                        <div readOnly className = "singleCardPreview cardOne"></div>
+                                        <div readOnly className = "singleCardPreview cardTwo"></div>
+                                        <div readOnly className = "singleCardPreview cardThree"
+                                        onClick={() => {
+                                            //Pushes the set to the set view page
+                                            history.push({pathname: "overview", userId: res.userId, clickedSet: res});
+                                        }}>
+                                            <div className = "cardFront">
+                                                <text>
+                                                {res.cards[0].question}
+                                                </text>
+                                            </div>
+                                            <div className = "setTitleNew">
+                                                <text>
+                                                    {res.title}
+                                                </text>
+                                            </div>
+                                            <div className = "thumbIconBox">
+                                                <ThumbUpAltOutlinedIcon className = "thumbIcon"/> {res.liked}
+                                            </div>
+                                        </div>
+                                        
                                     </div>
-                                    
-                                    <div class="setTitle">
-                                        {res.title}
-                                    </div>
-                                    
+                                    <div className = "setSizeIndicator"><text>{res.cards.length}</text></div>
                                 </div>
-                                <div className = "setTitleContainer">
-                                <div class ="owner_likes">
-                                    <div className = "owner_info">
-                                    <img
+                            </div>
+                        <div className = "containerUnderSets">
+                            <div class ="owner_likes">
+                                <div className = "owner_info">
+                                    <div className = "owner_info_picture"v>
+                                    <img 
                                     onClick = {() => {
                                         history.push({pathname: "PublicProfile", state: {userId: res.userId}})
                                     }}
-                                    src={ProfilePicture}/>
-                                    <div
+                                src={ProfilePicture}/>
+                                    </div>
+                                    <div className = "owner_info_username"
                                     onClick = {() => {
                                         history.push({pathname: "PublicProfile", state: {userId: res.userId}})
                                         
                                     }}>
                                     {" " + usernames[res.setId]}
                                     </div>
-                                    <br/>
-                                    </div>
-                                    {/*<FavoriteIcon/> {res.liked}*/}
                                 </div>
-                                <Button className = "addButton"
-                                disabled = {(
-                                    (disabledButtons.includes(res.setId)) ||
-                                    (localStorage.getItem("userId") == res.userId) || 
-                                    (localStorage.getItem("userId") != res.userId && res.memberIds.includes(Number(localStorage.getItem("userId")))))}
-                                onClick = {()=>{
-                                    //sets that button needs to be disabled
-                                    setDisabledButtons(disabledButtons.concat([res.setId]))
-                                    addToDashboard(res);
-                                    
-                                }}>
-                                        add to dashboard
-                                </Button>
-
-                                    </div>
-
+                                <button className = {`addButton ${addButtonCheck[i] ? 'open' : ''}`}
+                                    onMouseEnter = {() => {if(addButtonAnim[i]){
+                                        var addButtonCheckArray = [...addButtonCheck];
+                                        addButtonCheckArray[i] = true;
+                                        setAddButtonCheck(addButtonCheckArray)}}}
+                                    onMouseLeave = {() => {
+                                        var addButtonCheckArray = [...addButtonCheck];
+                                        addButtonCheckArray[i] = false;
+                                        setAddButtonCheck(addButtonCheckArray)}}
+                                    disabled = {(
+                                        (disabledButtons.includes(res.setId)) ||
+                                        (localStorage.getItem("userId") == res.userId) || 
+                                        (localStorage.getItem("userId") != res.userId && res.memberIds.includes(Number(localStorage.getItem("userId")))))}
+                                    onClick = {()=>{
+                                        //disable button animation and transformation into bigger button
+                                        var addButtonCheckArray = [...addButtonCheck];
+                                        addButtonCheckArray[i] = false;
+                                        var addButtonAnimArray = [...addButtonAnim];
+                                        addButtonAnimArray[i] = false;
+                                        setAddButtonAnim(addButtonAnimArray)
+                                        setAddButtonCheck(addButtonCheckArray)
+                                        //sets that button needs to be disabled
+                                        setDisabledButtons(disabledButtons.concat([res.setId]))
+                                        addToDashboard(res);
+                                        
+                                    }}>
+                                        {addButtonCheck[i] ? (<text className="addText">add to dashboard</text>):(<text className="addText">+</text>)}
+                                            
+                                </button>
                             </div>
+                        </div>
+                        
+                    </div>
 
+                            
                         ))}
                         
                     </div>

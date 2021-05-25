@@ -507,7 +507,7 @@ class DashBoard extends React.Component {
                                         this.props.history.push({pathname: "searchSets"})
                                     }}
                     >
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Want to find new sets or users? &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Want to find new flashcards to study? &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </button>
                     </div>
 

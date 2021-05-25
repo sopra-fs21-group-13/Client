@@ -139,32 +139,27 @@ function SearchUsers(props){
                             }}>
                                 
 
-                            <div class="userBasic">
+                                <div className = "photoContainer">
+                                    <div class="photoFrame">
+                                        <img src={currentPics[user.userId]} /> 
+                                    </div>
+                                    <img className = "online-sign"
+                                        src={(user.status == "ONLINE") ? OnlineSign : OfflineSign}/>
+                                </div>
+                                <div class="username">
+                                    <div className = "usernameText">{user.username}</div>
+                                </div>
+                                
                                 <div>
-                                <div class="photoFrame">
-                                    <img src={currentPics[user.userId]} /> 
-                                </div>
-                                <img className = "online-sign"
-                                    src={(user.status == "ONLINE") ? OnlineSign : OfflineSign}/>
-                                </div>
-                                <p class="profile_username">
-                                    {user.username}
-                                </p>
-                                <div class="userMore">
-                                <p>
                                     {user.name}
-                                </p>  
-                                <p class="likes_wins">
+                                </div>  
+                                <div class="likes_wins">
                                     <div className = "likesAndWins">
-                                    <span class="thumbIcon"><ThumbUpAltOutlinedIcon/></span> {likes[user.userId]} 
+                                    <span class="thumbIconLikes"><ThumbUpAltOutlinedIcon/></span> {likes[user.userId]} 
                                     <span class="winIcon"><EmojiEventsIcon/></span> {0}
                                     </div>
-                                </p>
+                                </div>
                                  
-                            </div>
-                            </div>
-
-                            
                         
                             {/*must know if the user is friend or not. here temporarily used false */}
                             {/*<FriendshipBtn friendship={false}/>*/

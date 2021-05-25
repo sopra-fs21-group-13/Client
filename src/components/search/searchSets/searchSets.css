@@ -1,10 +1,16 @@
+:root{
+    --columnNumbers: 4;
+}
+
 #body{
     display:grid;
     grid-template-columns: 160px 1fr;
+    min-height:870px;
 }
 
 #board_title{
     margin: 50px 0 0 20px;
+    
 }
 
 
@@ -17,19 +23,31 @@
 .board_contents{
     display: grid;
     background-color:white;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns:  repeat(var(--columnNumbers), 1fr);
     /*padding: 0 30px 30px 30px;*/
     padding: 0 30px 0px 30px;
 }
 
 .owner_info{
     display: flex;
-    width: 250px;
+    width: 120px;
+    align-items: center;
+}
+
+.owner_info_picture:hover{
+    transform: translateY(-2px);
 }
 
 .owner_info:hover{
     cursor: pointer;
 }
+
+.owner_info_username{
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    left:3px;
+}
+
 
 
 .oneSetWrapper{
@@ -55,10 +73,6 @@
     align-items: center;
 }
 
-.addButton{
-    
-    
-}
 
 
 .setTitle{
@@ -68,6 +82,65 @@
 }
 
 .owner_likes{ 
+    display: grid;
+    width: 320px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 30px;
     margin: 20px;
     line-height: 30px;
+    align-items: center;
+    position: relative;
+}
+
+.containerUnderSets{
+    height:40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    bottom:20px;
+}
+
+.addButton{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: grid;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 13px;
+    text-align: center;
+    color: rgba(255, 255, 255, 1);
+    border: none;
+    border-radius: 15px;
+    margin: 3px;
+    background-color: #70F0A9;
+    transition: 150ms;
+    justify-self: right;
+    position: relative;
+    bottom:50px;
+    right: 35px;
+    width: 32px;
+}
+
+
+
+.addButton.open{
+    height:34px;
+    width: auto;
+    
+}
+
+.addButton:disabled{
+    cursor: default;
+    opacity: 0.4;
+}
+
+.addButton:enabled:hover{
+    cursor: pointer;
+    background-color: #4ca875;
+}
+
+.addText{
+    position: relative;
 }

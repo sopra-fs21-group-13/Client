@@ -28,9 +28,9 @@
     height: 146px;
     width: 146px;
     border-radius: 73px;
-    overflow: hidden;  
-    left: 50%;
+    overflow: hidden; 
     border: solid 1px gainsboro;
+    position: relative;
   
   }
 
