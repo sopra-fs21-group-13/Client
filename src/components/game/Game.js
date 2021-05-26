@@ -327,13 +327,12 @@ checkAnswerStatus=async(gameId,cb)=>{
                   <div className="game-points1">{this.state.points1}</div>
                   <script className="game-rank">{this.state.Rang1}</script>
                 </div>
-                <div className="game-scoreboard-profile2">
-                    <img className="game-profile-picture2a" src={ProfilePicture}></img>
-                    <div className="game-creator-name-b">{this.state.player2}</div>
-                    <div className="game-points1">{this.state.points2}</div>
-                    <script className="game-rank">{this.state.Rang2}</script>
-                </div>
-
+                  <div className="game-scoreboard-profile2">
+                      <img className="game-profile-picture2a" src={ProfilePicture}></img>
+                      <div className="game-creator-name-b">{this.state.player2}</div>
+                      <div className="game-points1">{this.state.points2}</div>
+                      <script className="game-rank">{this.state.Rang2}</script>
+                  </div>
                 </div>
                 <div className="game-guesses"></div>
                 <div className="game-guesses-title">Past Guesses</div>
