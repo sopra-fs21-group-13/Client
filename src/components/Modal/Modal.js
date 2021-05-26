@@ -112,13 +112,16 @@ function Modal({ handleClose, show, children, currentWindow, members,mainPageMod
             // Get Set for the set title
             const setResponse = await api.get('/sets/' + localStorage.getItem('invitationSetId'));
             
+            // Get User for the userName
+            const userResponse = await api.get('/users/' + localStorage.getItem('userId'));      
 
             console.log(invitedPlayersId);
             const invitation = JSON.stringify({
                 gameId: Number(gameResponse.data.gameId),
+                sentFromUserName: userResponse.data.username,
                 sentFromId: Number(gameResponse.data.inviter.userId),
                 receivers: invitedPlayersId,
-                setTitle: setResponse.data.title, 
+                setTitle: setResponse.data.title,
                 gameSetting:{gameSettingId: Number(gameResponse.data.gameSettings.gameSettingId)}
                 });
             
