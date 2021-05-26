@@ -53,7 +53,8 @@ class Game extends React.Component {
       points2: 0,
       cardsLength:0,
       Rang1: "",
-      Rang2: ""
+      Rang2: "",
+      refresh:null
     };
   }
 
@@ -80,10 +81,7 @@ checkAnswerStatus=async(gameId,cb)=>{
         {
           this.setState({...this.state,Rang1:"#1",Rang2:"#2"})
         }
-        // console.log("Rang1",this.state.Rang1);
-        // console.log("Total",total1);
-        // console.log("Total",total1);
-
+     
         if(total1 < total2)
         {
           this.setState({...this.state,Rang1:"#2",Rang2:"#1"})
@@ -164,6 +162,7 @@ checkAnswerStatus=async(gameId,cb)=>{
       console.log("huuu",response["data"]);
       let history=response["data"].history;
       let players=response["data"].players;
+
       
       if(players.length==2)
       {
@@ -176,14 +175,77 @@ checkAnswerStatus=async(gameId,cb)=>{
         console.log(total1);
         console.log(total2);
       
-        this.setState({...this.state,players:response["data"].players,inviter:response["data"].inviter.name,player2:response["data"].players[1].name,points1:total1,points2:total2})
+        this.setState({...this.state,timer:response["data"].timer,players:response["data"].players,inviter:response["data"].inviter.name,player2:response["data"].players[1].name,points1:total1,points2:total2})
         console.log(this.state.player2);
 
         let setId=response["data"].playSetId
         let response2 = await api.get(`/sets/${setId}`);
 
         this.setState({...this.state,cards:response2["data"].cards,cardsLength:response2["data"].cards.length,setTitle:response2["data"].title})
-        //console.log(response2["data"]);
+       let timerPointer= setInterval(()=>{
+         let requestBody={timer:this.state.timer-10,gameId:gameId}
+        api.put('/games', requestBody).then(result => {console.log("RESULT");
+
+        
+
+        if(this.state.timer>0)
+        {
+          this.setState({...this.state,timer:result["data"].timer})
+        }
+        else{
+          this.state.cards.shift();
+          if(this.state.cards.length>0)
+          {
+          
+           let requestBody={timer:100,gameId:gameId}
+
+           api.put('/games', requestBody).then(result =>{
+            alert("Times up ,next card !!")
+            this.setState({...this.state,cards:this.state.cards,timer:result["data"].timer})
+            //this.setState({...this.state,cards:this.state.cards,timer:100})
+           })
+          }
+          else{
+            alert("Times up ,next card !!");
+            clearInterval(timerPointer);
+            this.setState({...this.state,cards:this.state.cards,timer:0})
+          }
+        }
+      }
+    ).catch(e=>{
+      console.log(e);
+     // alert(`Something went wrong while updating the chat: \n${handleError(e)}`);
+    });
+       },10000)
+
+      setInterval(()=>{
+        this.checkAnswerStatus(gameId,(data)=>{
+          if(data)
+          {
+            alert("Game is finished");
+            clearInterval(timerPointer);
+            this.setState({...this.state,timer:0})
+          }
+        })
+      },1000)
+      }
+      else{
+        setTimeout(()=>{
+        // this.setState({...this.state,refresh:true});
+        window.location.reload()
+
+        },5000)
+        this.setState({...this.state,players:response["data"].players,inviter:response["data"].inviter.name})
+      }
+      
+    }  
+
+  CallApi();
+}
+
+
+//console.log(response2["data"]);
+        /*
         let timerPointer=setInterval(()=>{
         if(this.state.timer>0)
         {
@@ -204,59 +266,7 @@ checkAnswerStatus=async(gameId,cb)=>{
         }
 
       },1000)
-
-      setInterval(()=>{
-        this.checkAnswerStatus(gameId,(data)=>{
-          if(data)
-          {
-            alert("Game is finished");
-            clearInterval(timerPointer);
-            this.setState({...this.state,timer:0})
-          }
-        })
-      },1000)
-      }
-      else{
-        this.setState({...this.state,players:response["data"].players,inviter:response["data"].inviter.name})
-      }
-      
-    }  
-
-  CallApi();
-}
-
-
-// RangOfPlayers1=()=>{
-//   debugger
-//   if(this.state.points1>this.state.points2){
-//     return "#1"
-//   }
-//   else if(this.state.points1<this.state.points2){
-//     return "#2"
-//   }
-//   else{
-//     return ""
-//   }
-// }
-
-// RangOfPlayers1(params) {
-//   debugger;
-//   let rang1="#1";
-//   console.log("rangofplayer1", rang1);
-//   return rang1;
-// }
-
-// RangOfPlayers2=()=>{
-//   if(this.state.points1<this.state.points2){
-//     return "#1"
-//   }
-//   else if(this.state.points1>this.state.points2){
-//     return "#2"
-//   }
-//   else{
-//     return ""
-//   }
-// }
+      */
 
   render() {
 
