@@ -191,7 +191,7 @@ import { SettingsInputAntennaTwoTone } from '@material-ui/icons';
  //handles showing the right user picture
  const [userPicturesDict, setUserPicturesDict] = useState({1: char1, 2: char2, 3: char3, 4: char4, 5: char5, 6: char6,
     7: char7, 8: char8, 9: char9,10: char10, 11: char11, 12: char12,13: char13, 14: char14, 15: char15, 16: char16});
-const [currentPics, setCurrentPics] = useState();
+const [currentPics, setCurrentPics] = useState([]);
 
 //amount of likes all user have across all their sets.
 const[likes, setLikes] = useState();
@@ -208,6 +208,7 @@ useEffect(() => {
         alert(`Something went wrong while fetching all users: \n${handleError(e)}`);
     })
     
+    
 }, []) 
 
 
@@ -221,7 +222,6 @@ const fSets=[];
  */
  function setFilteredSet(){
     var k=0;
-    console.log("얘는 보잖아:", allSets);
     for (var i=0;i<allSets.length;i++)
     {
         if(location.keyword!=undefined)//only when there's keyword
@@ -292,6 +292,7 @@ function setLikesAndPics(users){
 
     setLikes(likesDict);
     setCurrentPics(picsDict);
+    console.log("profile imgs",currentPics)
 }
 
 
@@ -357,12 +358,16 @@ function setLikesAndPics(users){
                                                 <div className = "containerUnderSets">
                                                     <div class ="owner_likes">
                                                         <div className = "owner_info">
-                                                            <div className = "owner_info_picture"v>
-                                                            <img 
-                                                            onClick = {() => {
-                                                                history.push({pathname: "PublicProfile", state: {userId: res.userId}})
-                                                            }}
-                                                        src={ProfilePicture}/>
+                                                        
+                                                            <div className = "owner_info_picture">
+                                                                {console.log("현재 set",res)}
+                                                                <div class="photoFrame_s">
+                                                                    <img 
+                                                                    onClick = {() => {
+                                                                        history.push({pathname: "PublicProfile", state: {userId: res.userId}})
+                                                                    }}
+                                                                    src={currentPics[res.userId]}/>
+                                                                </div>
                                                             </div>
                                                             <div className = "owner_info_username"
                                                             onClick = {() => {

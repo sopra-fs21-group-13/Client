@@ -60,8 +60,7 @@ function SearchUsers(props){
     const [allUsers, setAllUsers] = useState([]);
     const fUsers=[];
 
-    
-
+    //get all users and likes/pics from the backend
     useEffect(() => {
         api.get("/users").then(response => {
             setAllUsers(response.data);
@@ -69,7 +68,9 @@ function SearchUsers(props){
         }).catch(e=>{
             alert(`Something went wrong while fetching all users: \n${handleError(e)}`);
         })
-    }, []) 
+    }, [])
+
+    
 
     function setLikesAndPics(users){
         
@@ -95,10 +96,10 @@ function SearchUsers(props){
             //sets likes in state
             likesDict[user.userId] = likes;
         }
-
         setLikes(likesDict);
         setCurrentPics(picsDict);
     }
+    
     function setFilteredUsers(){
         var l=0;
         for (var i=0; i<(allUsers.length); i++)

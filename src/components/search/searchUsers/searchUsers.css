@@ -53,6 +53,26 @@
     justify-items: center;
 }
 
+.photoFrame_s{
+    height: 30px;
+    width: 30px;
+    border-radius: 30px;
+    overflow: hidden; 
+    border: solid 1px gainsboro;
+    position: relative;
+    margin: 0 10px 0 0;
+  
+  }
+
+  .photoFrame_s > img{
+    height: 30px;
+    min-width: 100%;
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+    
+  }
+
 
 .online-sign{
     position: relative;

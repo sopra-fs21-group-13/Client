@@ -26,6 +26,25 @@ import User from '../shared/models/User';
 import OnlineSign from "../shared/images/OnlineSign.png";
 import OfflineSign from "../shared/images/OfflineSign.png";
 
+
+//profile pictures
+import char1 from "../profile/char1.jpg";
+import char2 from "../profile/char2.jpg";
+import char3 from "../profile/char3.jpg";
+import char4 from "../profile/char4.jpg";
+import char5 from "../profile/char5.jpg";
+import char6 from "../profile/char6.jpg";
+import char7 from "../profile/char7.jpg";
+import char8 from "../profile/char8.jpg";
+import char9 from "../profile/char9.jpg";
+import char10 from "../profile/char10.jpg";
+import char11 from "../profile/char11.jpg";
+import char12 from "../profile/char12.jpg";
+import char13 from "../profile/char13.jpg";
+import char14 from "../profile/char14.jpg";
+import char15 from "../profile/char15.jpg";
+import char16 from "../profile/char16.jpg";
+
 const Container = styled(BaseContainer)`
   color: black;
   text-align: center;
@@ -91,7 +110,9 @@ class LearnPage extends React.Component {
       markedCards: null,
       settingsId: null,
       foreignUsername: null,
-      user:null
+      user:null,
+      userPicturesDict:{1: char1, 2: char2, 3: char3, 4: char4, 5: char5, 6: char6,
+        7: char7, 8: char8, 9: char9,10: char10, 11: char11, 12: char12,13: char13, 14: char14, 15: char15, 16: char16}
     };
   }
 
@@ -638,7 +659,7 @@ class LearnPage extends React.Component {
                       <div class="profile-picture">
                         <img
                           class="profile-picture-image"
-                          src={ProfilePicture}
+                          src={this.state.userPicturesDict[this.state.user.photo]}
                         />
                         <img className = "online-offline"
                         src={(this.state.user.status == "ONLINE") ? OnlineSign : OfflineSign}/>
