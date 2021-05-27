@@ -31,13 +31,11 @@
   }
 
   #basic_info{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+   
   }
 
   #set_info{
-    grid-column-start:1;
-    grid-column-end:2;
+ 
   }
 
   #set_img_upload{
@@ -100,7 +98,7 @@
   .saveBox{
     text-align:center;
     width: 900px;
-    margin:0 0 0 46px;
+    margin:0 0 0 0;
   }
 
   .saveSet{
@@ -259,7 +257,7 @@
     background-color: #70f0aa7a;
     border-radius: 10px;
 
-    margin:10px 0 0 46px;
+    margin:10px 0 0 0;
 
     text-align:center;
     line-height:36px;

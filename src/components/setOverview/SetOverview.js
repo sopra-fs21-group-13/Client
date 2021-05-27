@@ -209,9 +209,7 @@ function SetOverview(props) {
                         </Button>
                       )}
                   </div>
-                  <div id="set_img_upload">
-                    <div class="set_img_frame"></div>
-                  </div>
+                 
                 </div>
 
                 <br />
