@@ -6,7 +6,7 @@ import { api, handleError } from '../../helpers/api';
 import SocialButton from './Socialbutton';
 import User from '../shared/models/User';
 import { useHistory, useLocation, withRouter } from 'react-router-dom';
-
+import Invite from '../InviteHeader/invite.js'
 
 export const users = [
     {

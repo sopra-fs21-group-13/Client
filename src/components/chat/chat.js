@@ -33,7 +33,7 @@ class Chat extends React.Component {
             <Messages> </Messages>
                 <form className="formulare" onSubmit={this.handleSubmit}>
                     <input className = 'writing'
-                        placeholder="Enter your message/solution..."
+                        placeholder="Enter your message..."
                         type="text"
                         value={this.state.message}
                         onChange={this.handleChange}

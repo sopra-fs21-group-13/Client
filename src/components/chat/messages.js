@@ -74,7 +74,7 @@ class Messages extends React.Component {
     }
 
     async loadMessages() {
-        const response = await api.get("/game/" + localStorage.getItem("userId"));
+        const response = await api.get("/games/" + localStorage.getItem("userId"));
         const data = await response.json();
         this.setState({messages: data.histories});
         console.log(data);
@@ -88,7 +88,7 @@ class Messages extends React.Component {
 
     startInterval() {
         setInterval(this.loadMessages(),1000);
-        setTimeout(this.loadMessages(), 1000);
+       // setTimeout(this.loadMessages(), 1000);
     };
 
     mapMessages() {
