@@ -269,39 +269,9 @@ function EditCreateSet(props) {
                     </label>
                     <br />
                   </div>
-                  <div id="set_img_upload">
-                    Image for the set
-                    <div class="set_img_frame">
-                      <div class="img_upload_btn">+</div>
-                    </div>
-                  </div>
+                  
 
-                  {/*
-                        <div class= "add_set_img">
-                            <label htmlFor="upload-button">
-                                {image.preview ? (
-                                <img src={image.preview} alt="dummy" width="300" height="280" />
-                                ) : (
-                                <>
-                                    <span className="fa-stack fa-2x mt-3 mb-2">
-                                    <i className="fas fa-circle fa-stack-2x" />
-                                    <i className="fas fa-store fa-stack-1x fa-inverse" />
-                                    </span>
-                                    <h5 className="text-center">Upload your photo</h5>
-                                </>
-                                )}
-                            </label>
-                            <input
-                                type="file"
-                                id="upload-button"
-                                style={{ display: "none" }}
-                                onChange={handleChange}
-                            />
-                            <br />
-                            <button onClick={handleUpload}>Upload</button>
-    
-                        </div>
-                        */}
+            
                 </div>
 
                 <div class="separator">Contents</div>
@@ -313,11 +283,7 @@ function EditCreateSet(props) {
                     <div>
                       {quizes.map((quiz) => (
                         <div class="qna">
-                          <div class="q_id">
-                            {
-                              //quiz.id + 1
-                            }
-                          </div>
+                         
 
                           <div class="qna_card">
                             <div class="q_title">Question</div>
