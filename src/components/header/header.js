@@ -8,6 +8,7 @@ import { withRouter } from 'react-router-dom';
 import { api, handleError } from "../../helpers/api";
 import Invite from "../InviteHeader/invite.js";
 import Popup from "../InviteHeader/Popup.js";
+import InboxRoundedIcon from '@material-ui/icons/InboxRounded';
 
 
 const Container = styled.div`
@@ -104,16 +105,17 @@ function Header({buttonBehavior, setMainModalLogin, keyword, setKeyword,...props
                     />
 
                     <SearchBox/>
-                    <img
-                    onClick = {() => {
-                       setButtonPopup(true);
-                    }}
-                    class = "logoImage"
-                    src = {"https://img.icons8.com/metro/52/000000/inbox.png"}
-                    />
-                    <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
-                        <Invite></Invite>
-                    </Popup>
+
+                    <div class="IconInHeader">
+                        <InboxRoundedIcon onClick = {() => {
+                            setButtonPopup(true);
+                            }}
+                        />
+                    </div>
+                        <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
+                            <Invite></Invite>
+                        </Popup>
+                    
 
                     <Button
                     onClick = {() => {

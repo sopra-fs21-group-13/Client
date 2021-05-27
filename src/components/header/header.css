@@ -5,3 +5,17 @@
 .logoImage{
     margin-right:auto;
 }
+
+
+
+.IconInHeader{
+    
+    color:white;
+    height: 30px; 
+    margin: 0 20px 0 0;
+    line-height: 30px;
+}
+
+.IconInHeader:hover{
+    cursor: pointer;
+}
