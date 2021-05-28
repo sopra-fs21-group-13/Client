@@ -11,33 +11,6 @@ import Popup from "../InviteHeader/Popup.js";
 import InboxRoundedIcon from '@material-ui/icons/InboxRounded';
 
 
-const Container = styled.div`
-    justify-content: flex-end;
-    display: flex;
-`
-
-const Button = styled.button`
-    width: 60px;
-    border: none;
-    background-color: rgba(255,255,255,0);
-    &:hover {
-        cursor: pointer;
-        color: rgba(255,255,255,0.6)
-    }
-    color: white;
-`
-
-//had to lower the z-index of the header so the components inside were clickable.
-const HeaderComponent = styled.header`
-    color:white;
-    background-color:#70F0A9;
-    top: 0px;
-    position: sticky;
-    height: 60px;
-    padding: 15px;
-    z-index: 99999999;
-`
-
 
 function Header({buttonBehavior, setMainModalLogin, keyword, setKeyword,...props}){
 
@@ -69,8 +42,8 @@ function Header({buttonBehavior, setMainModalLogin, keyword, setKeyword,...props
     if(localStorage.getItem('token') == null){
     return(
         <div>
-            <HeaderComponent>
-                <Container>
+            <div className = "headerComponent">
+                <div className = "outerContainer">
                     <img 
                     onClick = {() => {
                         goToMain();
@@ -78,24 +51,23 @@ function Header({buttonBehavior, setMainModalLogin, keyword, setKeyword,...props
                     class = "logoImage"
                     src = {flashy_h_white}
                     />
-                    <Button
+                    <button className = "logoutButton"
                     onClick = {() => {
                         setMainModalLogin();
                         buttonBehavior();
                     }}
                     >
                         login
-                    </Button>
-                </Container>
-            </HeaderComponent>
-
+                    </button>
+                </div>
+            </div>
         </div>
     );
     }else{
     return(
         <div>
-            <HeaderComponent>
-                <Container>
+            <div className = "headerComponent">
+                <div className = "outerContainer">
                     <img 
                     onClick = {() => {
                         goToDashboard();
@@ -103,6 +75,9 @@ function Header({buttonBehavior, setMainModalLogin, keyword, setKeyword,...props
                     class = "logoImage"
                     src = {flashy_h_white}
                     />
+                    <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
+                            <Invite></Invite>
+                        </Popup>
 
                     <SearchBox/>
 
@@ -112,20 +87,16 @@ function Header({buttonBehavior, setMainModalLogin, keyword, setKeyword,...props
                             }}
                         />
                     </div>
-                        <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
-                            <Invite></Invite>
-                        </Popup>
                     
-
-                    <Button
+                    <button className = "logoutButton"
                     onClick = {() => {
                         logout();
                     }}
                     >
                         logout
-                    </Button>
-                </Container>
-            </HeaderComponent>
+                    </button>
+                </div>
+            </div>
 
         </div>
     );

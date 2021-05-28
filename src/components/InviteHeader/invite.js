@@ -12,18 +12,15 @@ class Invite extends React.Component {
             invitations: null,
         };
     }
-    async update(){
+    update(){
         // update the invitations every second
-        const response = await api.get("/users/" + localStorage.getItem("userId"));
-        const data = await response.json();
-        this.setState({invitations: data.invitations});
-        console.log(data);
-        this.scrollToRef();
-    };
-
-    scrollToRef() {
-        const scroll = this.chatContainer.current.scrollHeight - this.chatContainer.current.clientHeight;
-        this.chatContainer.current.scrollTo(0, scroll);
+        api.get("/users/" + localStorage.getItem("userId")).then((response) => {
+            const data = response.data;
+            this.setState({invitations: data.invitations});
+            console.log(data);
+        }).catch((e) => {
+            alert(`Something went wrong while fetching user: \n${handleError(e)}`);
+        });
     };
 
     componentDidMount() {
