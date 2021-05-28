@@ -28,7 +28,7 @@ class Invite extends React.Component {
     };
 
     componentWillUnmount(){
-        clearInterval(this.invitations);
+        clearInterval();
     }
 
     async join(currentGameID){
