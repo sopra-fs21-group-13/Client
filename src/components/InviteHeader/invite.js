@@ -40,7 +40,7 @@ class Invite extends React.Component {
             // Add player to game
             await api.put("/game/" + currentGameID + "/" + localStorage.getItem("userId"));
             // Redirect to game
-            this.props.history.push('/game');
+            this.props.history.push("/game/" + currentGameID);
         } catch (error) {
             alert('Something went wrong registering the game: \n${handleError(error)}');
         }
