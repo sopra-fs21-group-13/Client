@@ -38,7 +38,7 @@ class Invite extends React.Component {
     async join(currentGameID){
         try{
             // Add player to game
-            api.put("/game/" + currentGameID + "/" + localStorage.getItem("userId"));
+            await api.put("/game/" + currentGameID + "/" + localStorage.getItem("userId"));
             // Redirect to game
             this.props.history.push('/game');
         } catch (error) {
