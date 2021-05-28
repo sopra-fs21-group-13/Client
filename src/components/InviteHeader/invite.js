@@ -60,8 +60,8 @@ class Invite extends React.Component {
                         <span>
                             <h3 className="text"> {item.sentFromUserName} </h3>
                             <h4 className="h4"> has invited you to play a game &nbsp;</h4>
-                            <Button className="spacing" onClick={this.join(item.gameId)}>Join Game</Button>
-                            <Button className="spacing" onClick={this.ignore(item.gameId)}>Ignore</Button>
+                            <Button className="spacing" onClick={() => {this.join(item.gameId)}}>Join Game</Button>
+                            <Button className="spacing" onClick={() => {this.ignore(item.gameId)}}>Ignore</Button>
                             <hr  style={{
                                 color: '#70F0A9',
                                 backgroundColor: '#70F0A9',
