@@ -75,14 +75,12 @@ function Header({buttonBehavior, setMainModalLogin, keyword, setKeyword,...props
                     class = "logoImage"
                     src = {flashy_h_white}
                     />
-                    <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
-                            <Invite></Invite>
-                        </Popup>
+                    
 
                     <SearchBox/>
 
                     <div class="IconInHeader">
-                        <InboxRoundedIcon onClick = {() => {
+                        <InboxRoundedIcon fontSize = "inherit" className = "inboxIcon" onClick = {() => {
                             setButtonPopup(true);
                             }}
                         />
@@ -95,6 +93,11 @@ function Header({buttonBehavior, setMainModalLogin, keyword, setKeyword,...props
                     >
                         logout
                     </button>
+                </div>
+                <div className = "popupContainer">
+                    <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
+                                <Invite></Invite>
+                    </Popup>
                 </div>
             </div>
 
