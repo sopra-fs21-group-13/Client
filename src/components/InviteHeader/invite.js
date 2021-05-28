@@ -13,7 +13,7 @@ class Invite extends React.Component {
         };
     }
     update(){
-        // update the invitations every second
+        // update the invitations
         api.get("/users/" + localStorage.getItem("userId")).then((response) => {
             const data = response.data;
             this.setState({invitations: data.invitations});
@@ -49,7 +49,7 @@ class Invite extends React.Component {
 
     mapMessages() {
         // map messages to array so they can be displayed
-        if (this.state.testInvitations != null){
+        if (this.state.invitations != null){
             return (
                 <div>
                     {this.state.invitations.map((item, index)=>
