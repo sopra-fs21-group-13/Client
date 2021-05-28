@@ -16,8 +16,12 @@ class Invite extends React.Component {
         // update the invitations
         api.get("/users/" + localStorage.getItem("userId")).then((response) => {
             const data = response.data;
-            this.setState({invitations: data.invitations});
-            console.log(data);
+            if(data.invitations.length > 0){
+                this.setState({invitations: data.invitations});
+            }else{
+                this.setState({invitations: null})
+            }
+            console.log(data.invitations);
         }).catch((e) => {
             alert(`Something went wrong while fetching user: \n${handleError(e)}`);
         });
