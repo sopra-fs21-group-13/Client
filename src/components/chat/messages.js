@@ -8,7 +8,7 @@ class Messages extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            messages: null,
+            messages: [],
         };
     }
 
@@ -35,33 +35,24 @@ class Messages extends React.Component {
    };
 
     mapMessages() {
-        // map messages to array so they can be displayed
-        if (this.state.messages != null){
-            return (
-                <div>
-                    {this.state.messages.map((item, index)=>
-                      <div className="textContainer" ref={this.chatContainer}>
-                        {this.state.users.map((item, index)=>
-                          <div>
-                            <div className="id">{item.senderID} &nbsp;</div>
-                            <div className="message">{item.message} &nbsp;</div>
-                            <div className="timestamp"> {item.timeStamp}</div>
-                          </div>
-                        )}
+        // map messages so they can be displayed
+        return (
+            <div>
+                {this.state.messages.map((item, index)=>
+                    <div className="textContainer" ref={this.chatContainer}>
+                       <div className="id">{item.senderId} &nbsp;</div>
+                       <div className="message">{item.message} &nbsp;</div>
+                       <div className="timestamp"> {item.timeStamp}</div>
+                    </div>
                     )}
-                </div>
-            );
-        }
-        else {
-            return(
-                <div className="text">You don't have any invitations! </div>
-            );
-        }
+                )}
+            </div>
+        );
     };
 
     render() {
         return (
-            this.mapMessages();
+            this.mapMessages()
         );
     }
 }
