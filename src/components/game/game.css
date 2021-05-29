@@ -4,8 +4,8 @@
 .game-setname{
     position: relative;
     display: grid;
-    grid-template-columns: 400px 800px 400px;
-    grid-template-rows: 100px 100px 100px;
+    grid-template-columns: 400px 800px 400px 400px;
+    grid-template-rows: 100px 100px 400px 400px;
     justify-items: center;    
     margin: 30px; 
     font-family: 'Roboto', sans-serif;
@@ -39,6 +39,21 @@
     align-items: center;
     justify-items: center;
     height: 800px;
+    width: 300px;
+    border-radius: .8rem; 
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.game-chat{
+    position: relative;
+    display: grid;
+    grid-template-rows: 50px;
+    grid-column: 1;
+    grid-row: 4;
+    font-size: 25px;
+    align-items: center;
+    justify-items: center;
+    height: 400px;
     width: 300px;
     border-radius: .8rem; 
     background-color: rgba(0, 0, 0, 0.05);

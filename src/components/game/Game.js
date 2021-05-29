@@ -29,7 +29,8 @@ import User from '../shared/models/User';
 import OnlineSign from "../shared/images/OnlineSign.png";
 import OfflineSign from "../shared/images/OfflineSign.png";
 import GameCard from "../../views/design/GameCard.js"
-import "./game.css"
+import "./game.css";
+import Chat from "../chat/chat.js";
 import { CallToActionSharp } from "@material-ui/icons";
 
 //profile pictures
@@ -82,6 +83,23 @@ class Game extends React.Component {
   }
 
 goToDashboard() {
+    let gameId=this.props.match.params["id"];
+    let userID=localStorage.getItem("userId")
+    // console.log("RemovePlayerTest#2",this.state.players.length)
+
+    // debugger;
+    //if check if gameID exists
+    if(this.state.players.length==1){
+      api.delete(`/games/${gameId}`);
+      this.props.history.push(`/Dashboard`);
+    }
+
+    api.put(`/games/${gameId}/${userID}/remover`);
+
+    const response = api.get(`/games/${gameId}`);
+    this.setState({players:response.players});
+    console.log("RemovePlayerTest#2",response);
+    
     this.props.history.push(`/Dashboard`)
   }
 
@@ -179,12 +197,18 @@ checkAnswerStatus=async(gameId,cb)=>{
     
   }
 
+  // componentDidUpdate(){
+  //   if(this.state.players.length<2){
+  //     alert
+  //   }
+  // }
 
   componentDidMount(){
 
   let CallApi=async()=>
     {
       let gameId=this.props.match.params["id"];
+      localStorage.setItem('gameId', gameId);
       let response = await api.get(`/games/${gameId}`);
       console.log("huuu",response["data"]);
       let history=response["data"].history;
@@ -218,12 +242,11 @@ checkAnswerStatus=async(gameId,cb)=>{
         let response2 = await api.get(`/sets/${setId}`);
 
         this.setState({...this.state,cards:response2["data"].cards,cardsLength:response2["data"].cards.length,setTitle:response2["data"].title})
-       let timerPointer= setInterval(()=>{
+        let timerPointer= setInterval(()=>{
          let requestBody={timer:this.state.timer-1,gameId:gameId}
         api.put('/games', requestBody).then(result => {console.log("RESULT");
 
         
-
         if(this.state.timer>0)
         {
           this.setState({...this.state,timer:result["data"].timer})
@@ -242,7 +265,7 @@ checkAnswerStatus=async(gameId,cb)=>{
            })
           }
           else{
-            alert("Times up ,next card !!");
+            //alert("Times up ,next card !!");
             clearInterval(timerPointer);
             this.setState({...this.state,cards:this.state.cards,timer:0})
           }
@@ -252,7 +275,7 @@ checkAnswerStatus=async(gameId,cb)=>{
       console.log(e);
      // alert(`Something went wrong while updating the chat: \n${handleError(e)}`);
     });
-       },10000)
+       },5000)
 
       setInterval(()=>{
         this.checkAnswerStatus(gameId,(data)=>{
@@ -269,7 +292,7 @@ checkAnswerStatus=async(gameId,cb)=>{
         setTimeout(()=>{
         // this.setState({...this.state,refresh:true});
         window.location.reload()
-        },500000)
+        },5000)
         if(response["data"].players[0].photo!==null){
           this.setState({...this.state,photo1:response["data"].players[0].photo})
         }
@@ -378,6 +401,10 @@ checkAnswerStatus=async(gameId,cb)=>{
                 </div>
                 <div className="game-guesses"></div>
                 <div className="game-guesses-title">Past Guesses</div>
+                {/* <div className="game-chat">
+                  <Chat
+                  />
+                </div> */}
           </div> 
       </div>
     );

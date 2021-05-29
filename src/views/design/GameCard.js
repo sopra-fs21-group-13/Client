@@ -16,6 +16,10 @@ export default function GameCard({flashcard, submitAnswer}) {
         setstate(event.target.value);
     }
 
+    let clearfield=()=>{
+        setstate("");
+    }
+
     return(
         <div className = "cardGameContainer">
                 <div className= "cardGame">
@@ -24,9 +28,12 @@ export default function GameCard({flashcard, submitAnswer}) {
                     </div>
                 </div>
                 <input className="answerGame"
-                       placeholder = "Your answer..." onChange={handleChange}/> 
+                       placeholder = "Your answer..." onChange={handleChange}>
+                        {state}
+                </input> 
                 <Button className="submit"
-                onClick={()=>submitAnswer(state,flashcard.cardId)}>Submit
+                onClick={()=>{submitAnswer(state,flashcard.cardId);
+                              clearfield()}}>Submit
                 </Button>
         </div>
     );
