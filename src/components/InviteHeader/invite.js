@@ -35,15 +35,13 @@ class Invite extends React.Component {
         clearInterval();
     }
 
-    async join(currentGameID){
-        try{
-            // Add player to game
-            await api.put("/game/" + currentGameID + "/" + localStorage.getItem("userId"));
+    join(currentGameID){
+        api.put("/games/" + currentGameID + "/" + localStorage.getItem("userId")).then((response) => {
             // Redirect to game
             this.props.history.push("/game/" + currentGameID);
-        } catch (error) {
+        }).catch((e) => {
             alert('Something went wrong registering the game: \n${handleError(error)}');
-        }
+        });
     };
 
     async ignore(currentGameID){
