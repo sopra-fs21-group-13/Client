@@ -39,6 +39,9 @@ function Header({buttonBehavior, setMainModalLogin, keyword, setKeyword,...props
         props.history.push("main");
     }
 
+    //makes popup invisible and not clickable
+    const showHidePopup =buttonPopup ? "popupContainer showPopup" : "popupContainer hidePopup";
+
     if(localStorage.getItem('token') == null){
     return(
         <div>
@@ -94,7 +97,7 @@ function Header({buttonBehavior, setMainModalLogin, keyword, setKeyword,...props
                         logout
                     </button>
                 </div>
-                <div className = "popupContainer">
+                <div className = {showHidePopup}>
                     <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
                                 <Invite></Invite>
                     </Popup>

@@ -51,7 +51,6 @@
 }
 
 .popupContainer{
-    display: flex;
     justify-content: flex-end;
     left: 80%;
     position:sticky;
@@ -59,4 +58,12 @@
     align-self: right;
     width: 500px;
     height: 350px;
+}
+
+.hidePopup{
+    display:none;
+}
+
+.showPopup{
+    display:flex;
 }
