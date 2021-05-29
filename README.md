@@ -22,13 +22,13 @@ A game component is also introduced, such that multiple users can participate co
 ## High-level components
 After you add sets from public set search page or created new sets by yourself, you can learn from the set(Learn button) or play game(Play button) with another user on the sets you have in the dashboard.
 
-###dashboard Component
+### dashboard Component
 (link to the dashboard.js file)
 - Own Sets: Sets created by yourself, by clicking set box with '+'
 - Foreign Sets: Public sets you added to your dashboard, created by other users
 - Want to find new flashcards to join?: Directing you to search sets&users page so that you can add new sets to your dashboard
 
-###Learnpage Component
+### Learnpage Component
 (link to the learnpage.js file)
 You can learn cards by flipping the cards to see the questions and answers, combining with the functions:
 - learning only from starred cards
@@ -36,7 +36,7 @@ You can learn cards by flipping the cards to see the questions and answers, comb
 - flip the card
 - starring all
 
-###Game Component
+### Game Component
 (link to the game.js file)
 - after invitating 
 
