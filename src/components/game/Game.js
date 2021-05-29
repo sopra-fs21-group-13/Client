@@ -14,6 +14,7 @@ import StudyOnlyStarred from "../learnPage/StudyOnlyStarred.png";
 import ShuffleCardsActive from "../learnPage/ShuffleCardsActive.png";
 import StudyOnlyStarredActive from "../learnPage/StudyOnlyStarredActive.png";
 import ProfilePicture from "../learnPage/ProfilePicture.png";
+import QuitGame from "./QuitGame.png";
 import Vs from "./vs.png";
 import Timer from "./timer.png"
 import Likes from "../learnPage/Likes.png";
@@ -30,6 +31,24 @@ import OfflineSign from "../shared/images/OfflineSign.png";
 import GameCard from "../../views/design/GameCard.js"
 import "./game.css"
 import { CallToActionSharp } from "@material-ui/icons";
+
+//profile pictures
+import char1 from "../profile/char1.jpg";
+import char2 from "../profile/char2.jpg";
+import char3 from "../profile/char3.jpg";
+import char4 from "../profile/char4.jpg";
+import char5 from "../profile/char5.jpg";
+import char6 from "../profile/char6.jpg";
+import char7 from "../profile/char7.jpg";
+import char8 from "../profile/char8.jpg";
+import char9 from "../profile/char9.jpg";
+import char10 from "../profile/char10.jpg";
+import char11 from "../profile/char11.jpg";
+import char12 from "../profile/char12.jpg";
+import char13 from "../profile/char13.jpg";
+import char14 from "../profile/char14.jpg";
+import char15 from "../profile/char15.jpg";
+import char16 from "../profile/char16.jpg";
 
 class Game extends React.Component {
   constructor(props) {
@@ -48,14 +67,22 @@ class Game extends React.Component {
       setTitle:"",
       message: null,
       senderId: null,
-      timer:100,
+      timer:30,
       points1: 0,
       points2: 0,
       cardsLength:0,
       Rang1: "",
       Rang2: "",
-      refresh:null
+      refresh:null,
+      photo1:17,
+      photo2:17,
+      userPicturesDict:{1: char1, 2: char2, 3: char3, 4: char4, 5: char5, 6: char6,
+        7: char7, 8: char8, 9: char9,10: char10, 11: char11, 12: char12,13: char13, 14: char14, 15: char15, 16: char16, 17: ProfilePicture}
     };
+  }
+
+goToDashboard() {
+    this.props.history.push(`/Dashboard`)
   }
 
 
@@ -121,7 +148,7 @@ checkAnswerStatus=async(gameId,cb)=>{
 
     let userID=localStorage.getItem("userId")
 
-    if(answered.answer===value && parseInt(userID )=== this.state.players[0].userId){
+    if(answered.answer===value && parseInt(userID ) === this.state.players[0].userId){
       score+=10;
     //this.state.points1 = this.state.points1 + 10;
      //debugger;
@@ -174,6 +201,15 @@ checkAnswerStatus=async(gameId,cb)=>{
         //let points2=history
         console.log(total1);
         console.log(total2);
+
+        if(response["data"].players[0].photo!==null){
+          this.setState({...this.state,photo1:response["data"].players[0].photo});
+        }
+
+        if(response["data"].players[1].photo!==null){
+          this.setState({...this.state,photo2:response["data"].players[1].photo});
+        }
+        console.log("photo2",this.state.photo2);
       
         this.setState({...this.state,timer:response["data"].timer,players:response["data"].players,inviter:response["data"].inviter.name,player2:response["data"].players[1].name,points1:total1,points2:total2})
         console.log(this.state.player2);
@@ -183,7 +219,7 @@ checkAnswerStatus=async(gameId,cb)=>{
 
         this.setState({...this.state,cards:response2["data"].cards,cardsLength:response2["data"].cards.length,setTitle:response2["data"].title})
        let timerPointer= setInterval(()=>{
-         let requestBody={timer:this.state.timer-10,gameId:gameId}
+         let requestBody={timer:this.state.timer-1,gameId:gameId}
         api.put('/games', requestBody).then(result => {console.log("RESULT");
 
         
@@ -197,7 +233,7 @@ checkAnswerStatus=async(gameId,cb)=>{
           if(this.state.cards.length>0)
           {
           
-           let requestBody={timer:100,gameId:gameId}
+           let requestBody={timer:30,gameId:gameId}
 
            api.put('/games', requestBody).then(result =>{
             alert("Times up ,next card !!")
@@ -233,8 +269,10 @@ checkAnswerStatus=async(gameId,cb)=>{
         setTimeout(()=>{
         // this.setState({...this.state,refresh:true});
         window.location.reload()
-
-        },5000)
+        },500000)
+        if(response["data"].players[1].photo!==null){
+          this.setState({...this.state,photo1:response["data"].players[0].photo})
+        }
         this.setState({...this.state,players:response["data"].players,inviter:response["data"].inviter.name})
       }
       
@@ -273,16 +311,16 @@ checkAnswerStatus=async(gameId,cb)=>{
     return (
       <div>
           <Header />
-          <div className="game-back-button-container">
-            <button
-              className="game-back-button"
-              onClick={() => {
-                this.goToDashboard();
-              }}
-            >
-              <img className="game-back-button-image" src={BackButton} />
-            </button>
-          </div>
+            <div class="game-quitGame-container"> {/**added */}
+              <button
+                class="game-quitGame-button"
+                onClick={() => {
+                  this.goToDashboard();
+                }}
+              >
+                <img class="game-quitGame-image" src={QuitGame} />
+              </button>
+            </div>
           <div className="game-setname">
                 {this.state.setTitle}
                 <div className="game-userbox">
@@ -292,7 +330,9 @@ checkAnswerStatus=async(gameId,cb)=>{
                     }}
                   >
                     <div className="game-profile-picture">
-                      <img className="game-profile-picture-image" src={ProfilePicture}/>
+                      <img className="game-profile-picture-image"
+                           src={this.state.userPicturesDict[this.state.photo1]} 
+                      />
                       <img className = "game-online-offline"
                       src={(this.state.user.status == "ONLINE") ? OnlineSign : OfflineSign}/>
                     </div>
@@ -305,7 +345,9 @@ checkAnswerStatus=async(gameId,cb)=>{
                     }}
                   >
                     <div className="game-profile-picture">
-                      <img className="game-profile-picture-image" src={ProfilePicture}/>
+                      <img className="game-profile-picture-image" 
+                           src={this.state.userPicturesDict[this.state.photo2]} 
+                      />
                       <img className = "game-online-offline"
                       src={(this.state.user.status == "ONLINE") ? OnlineSign : OfflineSign}/>
                     </div>

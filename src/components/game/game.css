@@ -250,19 +250,20 @@
     
 }
 
-.game-back-button-container{
+.game-quitGame-container{
     background-color: white;
     display: flex;
     height: 60px;
 }
 
-.game-back-button{
+.game-quitGame-button{
     display: flex;
     position: relative;
-    top: 16px;
-    left: 10px;
-    height: 50px;
-    width: 50px;
+    top: 80px;
+    left: 650px;
+    height:100px;
+    /* margin: 0 0 50px 0; */
+    width:300px;
     border-radius: 12%;
     border: none;
     background-color: rgba(255, 255, 255, 0);;
@@ -270,17 +271,18 @@
     box-shadow: 0 0 1px 1px rgba(43, 42, 42, 0.2);
 }
 
-.game-back-button:hover{
-    --translate-y: -1.5px;
+.game-quitGame-button:hover{
+    --translate-y: -10px;
     cursor: pointer;
 }
 
-.game-back-button-image{
-    height:50px;
-    width:50px;
+.game-quitGame-image{
+    height:100px;
+    width:300px;
     position: relative;
     bottom: 1px;
     right: 8px;
+    /* left: 100px; */
     user-select: none;
 }
 
