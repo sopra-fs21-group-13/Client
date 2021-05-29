@@ -270,7 +270,7 @@ checkAnswerStatus=async(gameId,cb)=>{
         // this.setState({...this.state,refresh:true});
         window.location.reload()
         },500000)
-        if(response["data"].players[1].photo!==null){
+        if(response["data"].players[0].photo!==null){
           this.setState({...this.state,photo1:response["data"].players[0].photo})
         }
         this.setState({...this.state,players:response["data"].players,inviter:response["data"].inviter.name})
