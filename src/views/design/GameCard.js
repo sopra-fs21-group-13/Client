@@ -9,15 +9,21 @@ import { Button } from "@material-ui/core";
 //styling is handled in the cardRender.css file
 export default function GameCard({flashcard, submitAnswer}) {
     var starred = false;
-    const [state, setstate] = useState(null);
+    const [state, setState] = useState(null);
     //console.log("TEXT FOR GAME ID", flashcard.cardId);
 
     let handleChange=(event)=>{
-        setstate(event.target.value);
+        setState(event.target.value);
     }
 
     let clearfield=()=>{
-        setstate("");
+        setState("");
+    }
+
+    function onHandleSubmit(e){
+        e.preventDefault();
+        const emptyAnswer = "";
+        setState(emptyAnswer);
     }
 
     return(
@@ -27,13 +33,13 @@ export default function GameCard({flashcard, submitAnswer}) {
                         {flashcard.question}
                     </div>
                 </div>
-                <input className="answerGame"
+                <textArea className="answerGame"
                        placeholder = "Your answer..." onChange={handleChange}>
                         {state}
-                </input> 
-                <Button className="submit"
-                onClick={()=>{submitAnswer(state,flashcard.cardId);
-                              clearfield()}}>Submit
+                </textArea> 
+                <Button className="submit" type ="submit" 
+                onClick={(e)=>{submitAnswer(state,flashcard.cardId);
+                              onHandleSubmit(e)}}>Submit
                 </Button>
         </div>
     );

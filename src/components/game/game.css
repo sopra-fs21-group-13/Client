@@ -13,6 +13,52 @@
     font-size: 45px;
 }
 
+.startGameButton{
+    grid-column: 2;
+    grid-row: 3;
+    padding: 6px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 25px;
+    text-align: center;
+    color: rgba(255, 255, 255, 1);
+    width: 45%;
+    height: 70px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    margin: 3px;
+    background: #70F0A9;
+    position: relative;
+    top: 30px;
+}
+
+.startGameButton:hover{
+    transform: translateY(-2px);
+}
+
+.otherPlayerNotReadyField{
+    grid-column: 2;
+    grid-row: 3;
+    padding: 6px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 20px;
+    text-align: center;
+    color: rgba(255, 255, 255, 1);
+    width: 45%;
+    height: 70px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    margin: 3px;
+    background: #F0DA65;
+    position: relative;
+    top: 30px;
+}
+
 .game-userbox{
     position: relative;
     display: grid;
