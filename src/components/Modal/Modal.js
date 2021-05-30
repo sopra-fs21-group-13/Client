@@ -355,6 +355,7 @@ console.log("current window:", currentWindow)
                     <input 
                         className = "input-field"
                         placeholder = "password"
+                        type = "password"
                         onChange={e => {
                             setPassword(e.target.value);
                             }}>
@@ -415,6 +416,7 @@ console.log("current window:", currentWindow)
                     </input>
                     <input className = "input-field"
                         placeholder = "password"
+                        type = "password"
                         onChange={e => {
                             setPassword(e.target.value);
                         }}>
