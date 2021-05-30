@@ -270,6 +270,7 @@ console.log("current window:", currentWindow)
                         
                     </div>
                     ))}
+                {/* 
                 <div class='section_title'>
                 Game Settings
                 </div>
@@ -294,7 +295,6 @@ console.log("current window:", currentWindow)
                         </div>
                     </div>
 
-
                     <div class='select_cards'>
                             <div class='selectTitle'>
                                 Select Number of Cards:
@@ -315,7 +315,8 @@ console.log("current window:", currentWindow)
                         </div>
                     </div>
                 </div>
-
+                */}     
+                 
                 <button class="closeModal" type="button" onClick={handleClose} >
                     Close
                 </button>
