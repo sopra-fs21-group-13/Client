@@ -17,6 +17,9 @@ class Results extends React.Component{
             players: null,
             points1: null,
             points2: null,
+            ownPoints: null,
+            opponentPoints: null,
+            message: null,
       }
     };
 
@@ -32,14 +35,26 @@ class Results extends React.Component{
             let players=gameData.players;
 
             //set the state variables from the game data
-            this.setState({players: players,  gameId: gameId, points1: gameData.points1, points2: gameData.points2});
+            this.setState({players: players,  gameId: gameId});
 
             //checks if this player is the one that gives the timer data to backend.
             if(gameData.players[0].userId == localStorage.getItem("userId")){
-                this.setState({timerPlayer: true});
+                this.setState({timerPlayer: true, ownPoints: gameData.player1Score, opponentPoints: gameData.player2Score});
+                if(gameData.palyer2Score>gameData.player1Score){
+                    this.setState({message: "You lost." })
+                }else{
+                    this.setState({message: "Congratulations! You win!"})
+                }
             }else{
-                this.setState({timerPlayer: false});
+                this.setState({timerPlayer: false, ownPoints: gameData.player2Score, opponentPoints: gameData.player1Score});
+                if(gameData.player2Score>gameData.player1Score){
+                    this.setState({message: "Congratulations! You win!"})
+                }else{
+                    this.setState({message: "You lost." })
+                    
+                }
             }
+
 
         }).catch((e) => {
             alert(`Something went wrong while fetching game. Maybe the host left the game?: \n${handleError(e)}`);
@@ -86,16 +101,26 @@ class Results extends React.Component{
     render(){
         return(
             <div>
-                <Header/>
-                <div>
-                    {"You WON"}
+                <div className = "wholeResultsContainer">
+                    <div className = "gameResults">
+                        <div>
+                            {"Points you:"+ this.state.ownPoints}
+                        </div>
+                        <div>
+                            {"Points Opponent:"+ this.state.opponentPoints}
+                        </div>
+                        <div>
+                            {this.state.message}
+                        </div>
+                        <button className = "submitButton"
+                        onClick={()=>{
+                            this.goToDashboard();
+                        }}>
+                            go back to dashboard
+                        </button>
+                    </div>
                 </div>
-                <button
-                onClick={()=>{
-                    this.goToDashboard();
-                }}>
-                    go back to dashboard
-                </button>
+                
             </div>)
 
         }
