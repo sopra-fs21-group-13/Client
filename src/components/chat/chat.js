@@ -13,9 +13,9 @@ class Chat extends React.Component {
      handleSubmit = event => {
         const requestBody = JSON.stringify({
             message: this.state,
-            gameID: localStorage.getItem("userId"),
+            gameID: localStorage.getItem("gameId"),
         });
-        api.put('/games/' + localStorage.getItem('userId') + '/histories').then(result => {console.log(result);}
+        api.put('/games/' + localStorage.getItem('gameId') + '/histories').then(result => {console.log(result);}
         ).catch(e=>{
           alert(`Something went wrong while updating the chat: \n${handleError(e)}`);
         });
