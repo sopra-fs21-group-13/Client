@@ -7,26 +7,31 @@ import { Button } from "@material-ui/core";
  */
 
 //styling is handled in the cardRender.css file
-export default function GameCard({flashcard, submitAnswer}) {
+export default function GameCard({flashcard,submitReadyAndCheckOponent, showAnswerTransition, points, previousAnswer, buttonDisabled}) {
     var starred = false;
-    const [state, setState] = useState(null);
+    const [state, setText] = useState(null);
     //console.log("TEXT FOR GAME ID", flashcard.cardId);
 
     let handleChange=(event)=>{
-        setState(event.target.value);
+        setText(event.target.value);
     }
 
-    let clearfield=()=>{
-        setState("");
+    if(showAnswerTransition){
+        return(
+            <div className = "cardGameContainer">
+                    <div className= "answerTransition">
+                        <div className='correctAnswer'>
+                            The answer was: "{previousAnswer}"
+                        </div>
+                        <div className='score'>
+                            You got {points} points this round.
+                        </div>
+                    </div>
+            </div>
+        );
     }
-
-    function onHandleSubmit(e){
-        e.preventDefault();
-        const emptyAnswer = "";
-        setState(emptyAnswer);
-    }
-
-    return(
+    else{
+        return(
         <div className = "cardGameContainer">
                 <div className= "cardGame">
                     <div className='front'>
@@ -37,10 +42,14 @@ export default function GameCard({flashcard, submitAnswer}) {
                        placeholder = "Your answer..." onChange={handleChange}>
                         {state}
                 </textArea> 
-                <Button className="submit" type ="submit" 
-                onClick={(e)=>{submitAnswer(state,flashcard.cardId);
-                              onHandleSubmit(e)}}>Submit
+                <Button disabled={buttonDisabled} className="submit"
+                onClick={()=>{
+                    setText("");
+                    if(flashcard.answer == state){
+                    submitReadyAndCheckOponent();
+                }}}>Submit
                 </Button>
         </div>
-    );
+    );}
+    
 }
