@@ -4,7 +4,7 @@
   <br>
   <a href="https://github.com/sopra-fs21-group13"><img src="src/components/shared/images/flashy_h-green.svg" alt="Flashy" width="500"></a>
   <br>
-  Flashy-Server
+  Flashy-Client
   <br>
 </h1>
 
