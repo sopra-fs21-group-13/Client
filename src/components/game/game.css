@@ -11,6 +11,8 @@
     font-family: 'Roboto', sans-serif;
     color: #4F4D4D;
     font-size: 45px;
+    bottom: 200px;
+    left: 29px;
 }
 
 .startGameButton{
@@ -320,20 +322,29 @@
 .game-quitGame-button{
     display: flex;
     position: relative;
-    top: 80px;
-    left: 650px;
-    height:100px;
-    /* margin: 0 0 50px 0; */
-    width:300px;
+    top: 16px;
+    left: 10px;
+    height: 50px;
+    width: 50px;
     border-radius: 12%;
     border: none;
     background-color: rgba(255, 255, 255, 0);;
     transform: translateY(var(--translate-y,0));
-    box-shadow: 0 0 1px 1px rgba(43, 42, 42, 0.2);
 }
 
+
+.back-button-image{
+    height:50px;
+    width:50px;
+    position: relative;
+    bottom: 1px;
+    right: 8px;
+    user-select: none;
+}
+
+
 .game-quitGame-button:hover{
-    --translate-y: -10px;
+    --translate-y: -1.5px;
     cursor: pointer;
 }
 

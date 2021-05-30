@@ -94,6 +94,7 @@ class GameNew extends React.Component{
             statusDownloadInterval:null,
             previousAnswer:null,
             buttonDisabled: false,
+            waitForPlayer: null,
         };
       }
 
@@ -116,10 +117,50 @@ class GameNew extends React.Component{
 
             //checks if this player is the one that gives the timer data to backend.
             if(gameData.players[0].userId == localStorage.getItem("userId")){
-                this.setState({timerPlayer: true});
+                this.setState({timerPlayer: true, inviter:gameData.players[0].username,
+                     photo1: gameData.players[0].photo});
+                if(gameData.players[1] != null){
+                this.setState({photo2: gameData.players[1].photo, player2: gameData.players[1].username })
+                }else{
+                    let waitForPlayer = setInterval(()=>{
+                        api.get(`/games/${gameId}`).then((response)=>{
+                            //after the game was fetched
+                            let gameData = response.data
+                            this.setState({players: gameData.players});
+
+                            if(gameData.players[1] != null){
+                            this.setState({photo2: gameData.players[1].photo, player2: gameData.players[1].username })
+                            clearInterval(this.state.waitForPlayer);
+                        }
+                        })
+                        
+                    }, 2000)
+                    this.setState({waitForPlayer: waitForPlayer})
+                }
+
             }else{
-                this.setState({timerPlayer: false});
+                this.setState({timerPlayer: false, inviter:gameData.players[1].username,
+                    photo1: gameData.players[1].photo});
+                
+                if(gameData.players[0] != null){
+                    this.setState({photo2: gameData.players[0].photo, player2: gameData.players[0].username })
+                }else{
+                    let waitForPlayer = setInterval(()=>{
+                        api.get(`/games/${gameId}`).then((response)=>{
+                            //after the game was fetched
+                            let gameData = response.data
+                            this.setState({players: gameData.players});
+
+                            if(gameData.players[1] != null){
+                            this.setState({photo2: gameData.players[1].photo, player2: gameData.players[1].username })
+                            clearInterval(this.state.waitForPlayer);
+                        }
+                        })
+                    }, 1000)
+                    this.setState({waitForPlayer: waitForPlayer})
+                }
             }
+            
             let setId=response.data.playSetId
             //get the set that is played with
             api.get(`/sets/${setId}`).then((response2)=>{
@@ -142,6 +183,7 @@ class GameNew extends React.Component{
         clearInterval(this.state.timerUploadInterval);
         clearInterval(this.state.readyCheck);
         clearInterval(this.state.statusDownloadInterval);
+        clearInterval(this.state.waitForPlayer);
         window.removeEventListener("beforeunload", this.handler)
       }
 
@@ -168,7 +210,6 @@ class GameNew extends React.Component{
             
             if(response.data.players.length < 2){
                 api.delete(`/games/${gameId}`).then((result)=>{
-                    console.log("closed game");
                     this.props.history.push("/dashboard");
                     
                 }).catch((e) => {
@@ -176,7 +217,6 @@ class GameNew extends React.Component{
                 });
             }else{
                 api.put("/games/" + gameId + "/" + userId + "/remover").then((result)=>{
-                    console.log("removed player from game");
                     this.props.history.push("/dashboard");
                 }).catch(e=>{
                     alert(`Something went wrong while leaving the game. Maybe the host left the game?: \n${handleError(e)}`);
@@ -216,7 +256,6 @@ class GameNew extends React.Component{
         //show card again and not the answer screen.
         this.setState({showAnswerTransition:false, buttonDisabled: false});
 
-        console.log("timer downlo from next card")
         //create timerUpload / timerDownload interval. person with timerUpload, uploads the timer to backend, the download player fetches the timer to sync his timer.
         this.createUploadAndDownloadTimer();
         this.updateOpponentScore();
@@ -243,7 +282,6 @@ class GameNew extends React.Component{
             //update status in backend
             let requestBody={gameId:this.state.gameId, status: "CLOSED"}
             api.put('/games', requestBody).then((result) => {
-                console.log('uploaded status');
             }).catch((e) => {
                 alert(`Something went wrong during status upload interval. Maybe the host left the game?: \n${handleError(e)}`);
                 this.props.history.push("/dashboard");
@@ -264,7 +302,6 @@ class GameNew extends React.Component{
                 //update status in backend
                 let requestBody={gameId:this.state.gameId, status: this.state.currentStatus}
                 api.put('/games', requestBody).then((result) => {
-                    console.log('uploaded status');
                 }).catch((e) => {
                     alert(`Something went wrong during status upload interval. Maybe the host left the game?: \n${handleError(e)}`);
                     this.props.history.push("/dashboard");
@@ -275,12 +312,10 @@ class GameNew extends React.Component{
       }
 
       createStatusCheck(){
-        console.log("created status check")
         var statusDownloadInterval = setInterval(()=>{
             api.get(`/games/${this.state.gameId}`).then((response)=>{
                 //get status
                 if(this.state.currentStatus != response.data.status){
-                    console.log("status isn't the same anymore change view!")
                     if(response.data.status == "GUESSING"){
                         this.setState({currentStatus: response.data.status, nextStatus: "ANSWER"});
                         this.nextCard();
@@ -392,9 +427,7 @@ class GameNew extends React.Component{
       submitReady(ready){
 
         if(ready){
-            console.log("ready");
         }else{
-            console.log("not ready");
         }
 
         let gameId=this.state.gameId;
@@ -515,7 +548,6 @@ class GameNew extends React.Component{
         }
         //update score of this player in backend.
         api.put(`/games`, requestBody).then(result => {
-            console.log("updated points")
             this.setState({buttonDisabled: true});
 
             //check status
@@ -551,14 +583,14 @@ class GameNew extends React.Component{
 
         return (
           <div>
-                <div class="game-quitGame-container"> {/**added */}
+                <div class="back-button-container"> {/**added */}
                   <button
-                    class="game-quitGame-button"
+                    class="back-button"
                     onClick={() => {
                       this.goToDashboard();
                     }}
                   >
-                    <img class="game-quitGame-image" src={QuitGame} />
+                    <img class= "back-button-image" src={BackButton} />
                   </button>
                 </div>
               <div className="game-setname">
@@ -627,10 +659,11 @@ class GameNew extends React.Component{
                     </div>
                     <div className="game-guesses"></div>
                     <div className="game-guesses-title">Past Guesses</div>
-                    <div className="game-chat">
+                    {/*<div className="game-chat">
                       <Chat
                       />
-                    </div>
+                    </div>*/
+                        }
               </div> 
           </div>
         );
