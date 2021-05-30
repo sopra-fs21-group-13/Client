@@ -22,7 +22,6 @@ class Help extends React.Component {
             <div>
                 <grid-container>
                     <main>
-                        <textBox>
                             <h1> FAQ </h1>
 
                                 <h2 className="questions"> What login possibilities exist? </h2>
@@ -41,7 +40,6 @@ class Help extends React.Component {
                                 <h3> At the moment the limit is set to 2 players. We are currently working on the development
                                      of a multiplayer option. </h3>
 
-                        </textBox>
                     </main>
                     <section class="emptyspace">
                     </section>

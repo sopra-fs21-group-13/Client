@@ -22,19 +22,7 @@ main {
     textAlign: 'bottom';
 }
 
-section.future {
-    grid-area: future;
-    background: #6fa5aa;
-    margin-top: 10px;
-}
 
-section.uzh {
-    grid-area: uzh;
-    background: #306b6d;
-    margin-top: 10px;
-    margin-left: 10px;
-
-}
 
 section.emptyspace {
     grid-area: emptyspace;
