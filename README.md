@@ -1,4 +1,3 @@
-# FLASHY - Client Side
 
 <h1 align="center">
   <br>
