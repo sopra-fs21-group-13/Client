@@ -36,20 +36,27 @@ class Messages extends React.Component {
 
     mapMessages() {
         // map messages so they can be displayed
-        return (
-            <div>
-                {this.state.messages.map((item, index)=>
-                    <div className="textContainer" ref={this.chatContainer}>
-                       <div className="id">{item.senderId} &nbsp;</div>
-                       <div className="message">{item.message} &nbsp;</div>
-                       <div className="timestamp"> {item.timeStamp}</div>
-                    </div>
+        if (this.state.messages == []){
+            return (
+                <div>
+                    <h1> Welcome to the game!</h1>
+                </div>
+            )
+        }
+        else {
+            return(
+                <div>
+                    {this.state.messages.map((item, index)=>
+                        <div className="textContainer" ref={this.chatContainer}>
+                           <div className="id">{item.senderId} &nbsp;</div>
+                           <div className="message">{item.message} &nbsp;</div>
+                           <div className="timestamp"> {item.timeStamp}</div>
+                        </div>
                     )}
-                )}
-            </div>
-        );
-    };
-
+                </div>
+            );
+        }
+};
     render() {
         return (
             this.mapMessages()

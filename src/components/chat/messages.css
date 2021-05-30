@@ -23,8 +23,8 @@
 }
 
 .textContainer{
-    width:500px;
-    height:300px;
+    width:300px;
+    height:250px;
     background:#e6e6e6;
     border-radius:8px;
     margin:calc(50vh - 400px) auto;
