@@ -81,11 +81,12 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 In your client repository, briefly describe and illustrate the main user flow(s)
 of your interface. How does it work (without going into too much detail)? Feel free to
 include a few screenshots of your application.
-1. Main page: login
-2. Dashboard: view sets that users can learn from
-3. Learning Page
-4. Game
-5. Search page
+### 1. Dashboard: view sets that users can learn from
+![dashboard](./READMEimg/dashboard.png)
+### 2. Learning Page
+![learning page](./READMEimg/learnpage.png)
+### 3. Search page
+![sesarch](./READMEimg/search.png)
 
 ## Roadmap: The top 2-3 features that new developers who want to contribute to your project
 - Gaming for more than 2 users can be good to be implemented later
