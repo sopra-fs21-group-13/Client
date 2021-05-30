@@ -7,15 +7,15 @@ import './chat.css';
 class Chat extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {message: ''};
+        this.state = {message: ""};
     }
 
      handleSubmit = event => {
         const requestBody = JSON.stringify({
-            message: this.state,
             senderId: localStorage.getItem("userId"),
+            message: this.state.message            
         });
-        api.put('/games/' + localStorage.getItem('gameId') + '/histories').then(result => {console.log(result);}
+        api.put('/games/' + localStorage.getItem('gameId') + '/histories', requestBody).then(result => {console.log(result);}
         ).catch(e=>{
           alert(`Something went wrong while updating the chat: \n${handleError(e)}`);
         });
