@@ -22,20 +22,27 @@ class Help extends React.Component {
             <div>
                 <grid-container>
                     <main>
-                    <textBox>
-                        <h1> FAQ </h1>
-                            <h3> Founded in 2008, Stack Overflow’s public platform is used by nearly everyone who codes to learn, share their knowledge, collaborate, and build their careers.
+                        <textBox>
+                            <h1> FAQ </h1>
 
-                                 Whether it’s on Stack Overflow or within Stack Overflow for Teams, community is at the center of all that we do. </h3>
+                                <h2 className="questions"> What login possibilities exist? </h2>
+                                <h3> As a user you can either create an account using your email address or you can use your
+                                     Google-Login.</h3>
+                                <br></br>
+                                <h2 className="questions"> What should I do if I come across any bugs or other problems? </h2>
+                                <h3> Please contact the development team. We will be happy to support you solving should
+                                     you encounter any issues.</h3>
+                                <br></br>
+                                <h2 className="questions"> How do I contact the developer team?</h2>
+                                <h3> Just click on "contact" in the footer and fill out the contact form. We will
+                                     reply as quickly as possible.</h3>
+                                <br></br>
+                                <h2 className="questions"> Can the game be played by more than two players? </h2>
+                                <h3> At the moment the limit is set to 2 players. We are currently working on the development
+                                     of a multiplayer option. </h3>
 
-                    </textBox>
+                        </textBox>
                     </main>
-                    <section class="future">
-                        <h1> Current Version </h1>
-                    </section>
-                    <section class="uzh">
-                        <h1> Link UZH </h1>
-                    </section>
                     <section class="emptyspace">
                     </section>
                     <header>

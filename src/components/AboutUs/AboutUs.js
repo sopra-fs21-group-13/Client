@@ -28,7 +28,7 @@ class AboutUs extends React.Component {
                     </header>
                     <main>
                         <h1 className ="fragen"> WHAT IS FLASHY? </h1>
-                            <h3 className = "text">
+                            <h3>
                             Flashy is an application with which users can create digital flashcard stacks.
                             Besides the ordinary capabilities of physical flashcards, flashy offers the ability to
                             share the created stacks with other users, promoting the learning experience using social
@@ -61,7 +61,7 @@ class AboutUs extends React.Component {
                             <span className="caption">Kiram</span>
                             <span className="caption">BSc Informatics</span>
                         </div>
-                        <h3 className = "text"> We are a team of students from UZH who created this project as part of our Software-Praktikum. </h3>
+                        <h3> We are a team of students from UZH who created this project as part of our Software-Praktikum. </h3>
                     </main>
                     <flashy>
                     </flashy>

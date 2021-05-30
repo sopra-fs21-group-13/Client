@@ -10,7 +10,7 @@ grid-container{
     grid-template-areas:
         "header header header"
         "main main flashy"
-        "future uzh flashy"
+        "main main flashy"
         "emptyspace emptyspace flashy";
     height: 100vh;
     margin: 2em;
@@ -65,4 +65,8 @@ h1 {
 h3 {
     margin-left: 15px;
     margin-right: 15px;
+}
+
+.questions {
+    margin-left: 15px;
 }
