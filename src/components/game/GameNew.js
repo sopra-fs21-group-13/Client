@@ -659,11 +659,20 @@ class GameNew extends React.Component{
                     </div>
                     <div className="game-guesses"></div>
                     <div className="game-guesses-title">Past Guesses</div>
-                    {/*<div className="game-chat">
-                      <Chat
-                      />
-                    </div>*/
-                        }
+                    
+                   {/* {!this.state.gameId ? (
+                      <div>chat</div>
+                    ) : (
+                        <div className="game-chat">
+                            <Chat
+                            gameId = {this.state.gameId}
+                            />
+                      </div>)
+                    }
+                      */
+                        
+                      }
+                      
               </div> 
           </div>
         );

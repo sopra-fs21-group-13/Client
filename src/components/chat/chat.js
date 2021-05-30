@@ -1,48 +1,43 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import {api, handleError} from "../../helpers/api"
 import Messages from './messages.js'
 import './chat.css';
 
-class Chat extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {message: ""};
-    }
+export default function Chat({gameId}){
 
-     handleSubmit = event => {
+    const [message, setMessage] = useState("");
+
+    let handleSubmit = event => {
         const requestBody = JSON.stringify({
             senderId: localStorage.getItem("userId"),
-            message: this.state.message            
+            message: message     
         });
-        api.put('/games/' + localStorage.getItem('gameId') + '/histories', requestBody).then(result => {console.log(result);}
+        api.put('/games/' + gameId + '/histories', requestBody).then(result => {console.log(result);}
         ).catch(e=>{
           alert(`Something went wrong while updating the chat: \n${handleError(e)}`);
         });
         event.preventDefault();
     };
 
-    handleChange = event => {
-        this.setState({message: event.target.value});
+    let handleChange = event => {
+        setMessage(event.target.value);
     };
-
-
-    render() {
         return (
-            <div>
-            <Messages> </Messages>
-                <form className="formulare" onSubmit={this.handleSubmit}>
+            <div className = "ChatContainer">
+                <div className = "messageContainer">
+            <Messages gameId = {gameId}/>
+                </div>
+                <form className="formulare" onSubmit={handleSubmit}>
                     <input className = 'writing'
                         placeholder="Enter your message..."
                         type="text"
-                        value={this.state.message}
-                        onChange={this.handleChange}
+                        value={message}
+                        onChange={handleChange}
                     />
-                    <button className="button" type="submit" disabled={this.handleSubmit}>Send Message</button>
+                    <button className="button" type="submit" disabled={handleSubmit}>Send Message</button>
                 </form>
             </div>
         );
-    }
+    
 }
-
-export default withRouter(Chat);

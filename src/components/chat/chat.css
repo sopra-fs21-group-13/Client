@@ -6,7 +6,21 @@ outline:none;
 resize:none;
 border:0;
 font-family:'Montserrat',sans-serif;
-transition:all .3s;border-bottom:2px solid #70F0A9
+transition:all .3s;border-bottom:2px solid #70F0A9;
+}
+
+.messageContainer{
+  height:400px;
+  width: 300px;
+  top: 30px;
+  position: relative;
+  border-radius: 10px;
+  background-color: rgba(214, 214, 214, 0.2);
+}
+
+.chatContainer{
+  display: flex;
+
 }
 
 
@@ -25,8 +39,6 @@ transition:all .3s;border-bottom:2px solid #70F0A9
     max-width:calc(100vw - 40px);
     box-sizing:border-box;
   position: absolute;
-  left: 70px;
-  top: 450px;
     font-family:'Montserrat',sans-serif;
     position:relative
 }

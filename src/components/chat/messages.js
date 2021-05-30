@@ -1,67 +1,57 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect, useRef } from 'react';
 import {Button} from '../../views/design/Button.js';
-import { withRouter } from 'react-router-dom';
+import { withRouter, useHistory } from 'react-router-dom';
 import {api, handleError} from "../../helpers/api"
 import './messages.css'
 
-class Messages extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            messages: [],
-        };
-    }
+export default function Messages ({gameId}){
+    const [messages, setMessages] = useState("");
 
-    async update() {
-    // the local storage bit needs to be changed to gameId (passed down by the game component
-        const response = await api.get("/games/" + localStorage.getItem("gameId"));
+    const history = useHistory();
+
+    const chatContainer = useRef(null);
+
+    function scrollToRef() {
+        const scroll = chatContainer.current.scrollHeight - chatContainer.current.clientHeight;
+        chatContainer.current.scrollTo(0, scroll);
+    };
+
+
+   useEffect(()=>{
+    setInterval(() => {
+        api.get("/games/" + gameId).then((response)=>{
         const data = response.data;
-        this.setState({messages: data.histories});
-        console.log(data);
-        this.scrollToRef();
-    };
+        setMessages(data.history);
+        console.log(messages);
+        scrollToRef();
+    })},1000);
 
-    scrollToRef() {
-        const scroll = this.chatContainer.current.scrollHeight - this.chatContainer.current.clientHeight;
-        this.chatContainer.current.scrollTo(0, scroll);
-    };
+    return () => {
+        clearInterval();
+    }
+   }, []);
 
-   componentDidMount() {
-      setInterval(this.update(),1000);
-   };
-
-   componentWillUnmount(){
-       clearInterval();
-   };
-
-    mapMessages() {
-        // map messages so they can be displayed
-        if (this.state.messages == []){
-            return (
-                <div>
-                    <h1> Welcome to the game!</h1>
-                </div>
-            )
-        }
-        else {
-            return(
-                <div>
-                    {this.state.messages.map((item, index)=>
-                        <div className="textContainer" ref={this.chatContainer}>
-                           <div className="id">{item.senderId} &nbsp;</div>
-                           <div className="message">{item.message} &nbsp;</div>
-                           <div className="timestamp"> {item.timeStamp}</div>
-                        </div>
-                    )}
-                </div>
-            );
-        }
-};
-    render() {
+ 
+    // map messages so they can be displayed
+    if (messages == []){
         return (
-            this.mapMessages()
+            <div>
+                <h1> Welcome to the game!</h1>
+            </div>
+        )
+    }
+    else {
+        return(
+            <div>
+                {messages.map((item, index)=>
+                    <div className="textContainer" ref={chatContainer}>
+                        <div className="id">{item.senderId} &nbsp;</div>
+                        <div className="message">{"hello"} &nbsp;</div>
+                        <div className="timestamp"> {item.timeStamp}</div>
+                    </div>
+                )}
+            </div>
         );
     }
-}
 
-export default Messages;
+}
