@@ -15,7 +15,7 @@ class Messages extends React.Component {
     async update() {
     // the local storage bit needs to be changed to gameId (passed down by the game component
         const response = await api.get("/games/" + localStorage.getItem("userId"));
-        const data = await response.json();
+        const data = response.data;
         this.setState({messages: data.histories});
         console.log(data);
         this.scrollToRef();
