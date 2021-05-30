@@ -1,5 +1,13 @@
 # FLASHY - Client Side
 
+<h1 align="center">
+  <br>
+  <a href="https://github.com/sopra-fs21-group13"><img src="src/components/shared/images/flashy_h-green.svg" alt="Flashy" width="500"></a>
+  <br>
+  Flashy-Server
+  <br>
+</h1>
+
 
 ## Introduction
 Flashy is an application with which students (and other users) can create digital fashcard stacks.
