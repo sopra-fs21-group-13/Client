@@ -13,7 +13,7 @@ class Chat extends React.Component {
      handleSubmit = event => {
         const requestBody = JSON.stringify({
             message: this.state,
-            gameID: localStorage.getItem("gameId"),
+            senderId: localStorage.getItem("userId"),
         });
         api.put('/games/' + localStorage.getItem('gameId') + '/histories').then(result => {console.log(result);}
         ).catch(e=>{
